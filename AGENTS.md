@@ -26,16 +26,17 @@ Core user value: turn finished jobs into verifiable proof, turn proof into trust
 ## Repository Structure
 
 ```
-src/
-  app/                — Next.js App Router (routes, pages, API routes)
-    api/              — REST API routes, thin wrappers over lib/services
-  components/         — UI components (Atomic Design)
-    ui/               — Base shadcn/ui components
-    shared/           — Project-specific shared components
-  lib/
-    services/         — Business logic (trust score, wage estimator, proof-of-work validation)
-    supabase/         — Supabase server + browser clients (only place clients are instantiated)
-  types/              — Shared TypeScript types/interfaces
+app/                  — Next.js App Router (routes, pages, API routes)
+  api/                — REST API routes, thin wrappers over lib/services
+components/           — UI components (Atomic Design)
+  ui/                 — Base shadcn/ui components
+  shared/             — Project-specific shared components
+lib/
+  services/           — Business logic (trust score, wage estimator, proof-of-work validation)
+  supabase/           — Supabase server + browser clients (only place clients are instantiated)
+  utils.ts            — shadcn utility (cn function)
+types/                — Shared TypeScript types/interfaces
+public/               — Static assets
 supabase/
   migrations/         — SQL migrations (always reversible)
 docs/                 — All documentation
@@ -49,7 +50,7 @@ tests/                — Unit, integration, and Playwright tests
 1. **Strict Decoupling**: UI components never call `lib/services` directly. They go through API routes or a thin `client` fetch wrapper.
 2. **Thin API**: routes in `app/api` hold minimal logic, delegating all rules to `lib/services`.
 3. **Server-Side Trust**: Trust Score and Fair Wage numbers are never computed or trusted from the client. Always recompute server-side.
-4. **Shared Source of Truth**: types live in `src/types/`, not duplicated per component.
+4. **Shared Source of Truth**: types live in `types/`, not duplicated per component.
 
 ---
 
@@ -60,9 +61,10 @@ tests/                — Unit, integration, and Playwright tests
 ```bash
 npm install
 cp .env.example .env
-npx supabase migration up
 npm run dev
 ```
+
+> Note: `supabase/` directory is for future Supabase CLI migrations. Install the CLI (`npx supabase`) when schema changes are needed.
 
 ### Environment Variables
 
@@ -88,7 +90,7 @@ npm run dev
 ## Database Conventions
 
 - Snake_case table and column names.
-- All tables have `id` (UUID, `gen_random_uuid()`), `created_at`, `updated_at`.
+- All tables have descriptive primary keys (`worker_id`, `proof_id`, `verification_id`, etc.) via `gen_random_uuid()`.
 - Foreign keys always explicit with `ON DELETE CASCADE` or `ON DELETE SET NULL`.
 - JSONB for flexible fields (`verification_sources`, `job_metadata`).
 - RLS (Row Level Security) is ON by default on every new table. No exceptions without an explicit ask-first conversation.
@@ -210,6 +212,7 @@ CREATE TABLE agreements (
 - All public functions JSDoc'd with `@param` and `@returns`.
 - Run linter before every commit.
 - **Imports**: always use absolute `@/` aliases. Never relative-path across directories (e.g. no `../../lib` from `components`).
+  > The `@/*` alias maps to `./*` (project root), so `@/components/ui/button` resolves to `./components/ui/button`.
 
 ---
 
@@ -273,8 +276,111 @@ npm run test
 
 ---
 
+## Git Conventions
+
+Commit messages follow this format:
+
+<label>: <message>
+
+Labels: feat, fix, chore, docs, refactor, test, style
+Message: imperative, lowercase, no period
+
+Examples:
+```
+feat: add trust score weighting for community verifications
+fix: return null when wage estimate data is missing
+chore: update tailwind config
+```
+
+---
+
+## Error Handling
+
+### Server-Side
+- All API routes wrap logic in try/catch.
+- Errors are logged via a structured logger (never `console.log`).
+- API responses use a consistent error shape:
+
+```typescript
+{
+  error: string;       // Human-readable message (Bahasa Indonesia for user-facing)
+  code: string;        // Machine-readable code, e.g. "PROOF_NOT_FOUND"
+  details?: unknown;   // Optional debug info (server-only in dev)
+}
+```
+
+- Unexpected errors return 500 with a generic message: "Terjadi kesalahan. Silakan coba lagi."
+
+### Client-Side
+- Use a shared `fetchClient` wrapper that parses errors and surfaces them as typed results.
+- UI shows errors in toast notifications or inline validation.
+- Network errors show a retry prompt.
+- Never show raw error codes or stack traces to the user.
+
+---
+
+## Internationalization
+
+- Primary language: Bahasa Indonesia.
+- Use `next-intl` for i18n.
+- Translation files: `messages/id.json`, `messages/en.json`.
+- Locale is detected from `Accept-Language` header, with `id` as default.
+- All user-facing strings go through translation keys — no hardcoded Indonesian text outside messages files.
+- Number/currency formatting uses `Intl.NumberFormat` with `id-ID` locale.
+
+---
+
+## Deployment
+
+### Platform
+Vercel (primary).
+
+### Pipeline
+Before every deploy:
+1. `npm run lint`
+2. `npx tsc --noEmit`
+3. `npm run build`
+
+Production is deployed from the `main` branch via Vercel Git integration.
+
+### Environment Variables
+All Supabase keys are set in Vercel Environment Variables, never committed.
+`NEXT_PUBLIC_*` keys are safe for client, `SUPABASE_SERVICE_ROLE_KEY` is server-only.
+
+---
+
+## AI-Generated Code Guardrails
+
+To keep the codebase human-natural and avoid AI-fingerprint patterns:
+
+### Naming
+- No `data`, `result`, `response`, `payload`, `value`, `item` as variable names.
+- No placeholder names: `test1`, `example`, `foo`, `bar`, `baz`.
+- Test data must use realistic Indonesian names, places, and prices.
+  Good: `"Pak Budi"`, `"Jakarta Selatan"`, `150000`
+  Bad:  `"John Doe"`, `"Test City"`, `100`
+
+### Structure
+- No unnecessary abstraction layers. Write what's needed, not what an AI might extrapolate.
+- Prefer flat files over deep directory nesting. Don't create `index.ts` barrels.
+- No premature splitting of files that could live together.
+
+### Patterns to avoid
+- Don't repeat the same guard clause pattern in every function — vary style naturally.
+- No "TODO: implement" or "// will be used later" stubs.
+- No overly defensive null checks on every parameter.
+- No wrapping every function in try/catch — catch only where recovery is possible.
+- No `console.log` (use structured logger).
+- No JSDoc on trivial getters/setters — only where the *why* is non-obvious.
+
+### Code Review
+- Treat perfectly uniform code as a red flag. Humans write with natural variation.
+- If two similar functions look copy-pasted, refactor or add a comment explaining why they differ.
+
+---
+
 ## Boundaries
 
-- ✅ **Always do:** write code in `src/`, write/update docs in `docs/`, run lint + type check before finishing, keep RLS on, recompute Trust Score server-side
+- ✅ **Always do:** write code in `app/`, `components/`, `lib/`, write/update docs in `docs/`, run lint + type check before finishing, keep RLS on, recompute Trust Score server-side
 - ⚠️ **Ask first:** before changing DB schema/migrations, before modifying auth or role logic, before changing Trust Score weighting, before major rewrites of existing docs
 - 🚫 **Never do:** commit secrets/API keys, disable RLS, trust client-submitted Trust Score or wage numbers, fabricate wage estimates when no data exists, build Growth Engine features (Career Passport, Skill Progress, Certification, Career Path) unless explicitly asked — MVP is Trust Engine + Fair Work Engine only
