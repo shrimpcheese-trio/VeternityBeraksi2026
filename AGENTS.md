@@ -272,6 +272,7 @@ npm run test
 - Be concise, specific, and value dense.
 - Write for a developer new to this codebase — don't assume they know the product context above.
 - Update relevant docs in `docs/` whenever a feature's behavior changes. Don't let docs go stale.
+- Design system decisions (colors, typography, component patterns) go in `DESIGN.md`.
 - Lint docs: `npx markdownlint docs/`
 
 ---
