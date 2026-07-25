@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Veternity Beraksi 2026 — Employment Trust Platform
+
+Platform for Indonesian informal workers to build verifiable professional reputation.
+
+## Tech
+
+| Layer | Stack |
+|-------|-------|
+| Framework | Next.js 16 (App Router) |
+| UI | shadcn/ui + Tailwind CSS v4 |
+| Auth | Supabase Auth (email, phone, Google OAuth) |
+| Database | Supabase (Postgres) |
+
+## Auth
+
+| Method | Register | Login |
+|--------|----------|-------|
+| Email | email + password | email + password |
+| Phone | phone + password → SMS OTP verify | phone + password **or** phone + OTP |
+| Google | OAuth — auto-creates account | OAuth — same flow |
+
+After registration, users complete their profile at `/profile/setup` and are redirected to their role-based dashboard (`/worker`, `/employer`, `/admin`).
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
+cp .env.example .env.local   # fill in Supabase credentials
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Configure Supabase Dashboard
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Google OAuth** — Authentication → Providers → Google: enable, add Client ID + Secret
+2. **Phone Auth** — Authentication → Settings → SMS: enable phone auth with SMS provider
+3. **Redirect URLs** — add `http://localhost:3000/auth/callback` to Auth → URL Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+app/
+  (auth)/         — login, register pages
+  auth/           — oauth callback, email confirmation routes
+  worker/         — worker dashboard (role-gated)
+  employer/       — employer dashboard (role-gated)
+  admin/          — admin dashboard (role-gated)
+  profile/setup   — post-registration profile completion
+lib/
+  actions/auth.ts — server actions for signup, login, OTP, logout
+  schemas/auth.ts — Zod validation schemas
+  supabase/       — client, server, admin, proxy session helpers
+components/shared/ — auth-layout, login-form, register-form, google-auth-button
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Commit
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint && npx tsc --noEmit
+```
