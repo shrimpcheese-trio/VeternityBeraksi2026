@@ -1,0 +1,201 @@
+{
+  "navbar": {
+    "services": "Services",
+    "plans": "Plans",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Log In",
+    "joinUs": "Join Us"
+  },
+  "hero": {
+    "headline": "Find Trusted Workers for Your Needs",
+    "subHeadline": "Professional Reputation Platform for Indonesian Informal Workers",
+    "description": "From handymen to photographers, find experienced workers with verified reputations. We help informal workers build trust and earn fair wages.",
+    "searchPlaceholder": "Search for services...",
+    "searchButtonText": "Search",
+    "searchHelperText": "Search based on service, city, or specialization"
+  },
+  "promo": {
+    "badge": "Business Offer",
+    "title": "Boost Your Business Visibility",
+    "description": "Get top spots, better matches, and premium verification for your business. Starting from Rp 150,000/month.",
+    "cta": "Learn About Business Plans"
+  },
+  "trending": {
+    "title": "Trending Services Right Now",
+    "services": [
+      { "name": "Handyman", "description": "Home renovation, roof repairs, tile installation", "workers": 245 },
+      { "name": "Car Mechanic", "description": "Routine service, engine repair, oil change", "workers": 189 },
+      { "name": "Photographer", "description": "Wedding, event, portrait, product photography", "workers": 156 }
+    ]
+  },
+  "stories": {
+    "title": "Success Stories",
+    "stories": [
+      { "name": "Budi Santoso", "role": "Handyman, Jakarta", "quote": "Thanks to this platform, I got home renovation projects across South Jakarta. My reputation is built from every completed job." },
+      { "name": "Siti Rahmawati", "role": "Mechanic, Bandung", "quote": "I used to rely only on regular customers. Now new customers come to me after seeing my work portfolio." },
+      { "name": "Ahmad Fauzi", "role": "Photographer, Surabaya", "quote": "This platform helped me prove my work quality. Now I often get orders from corporate clients." }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subheadline": "Complete answers about the platform, verification, and how Upahku works.",
+    "items": [
+      {
+        "question": "What is Upahku?",
+        "answer": "Upahku is a platform that helps Indonesian informal workers (handymen, technicians, mechanics, photographers, etc.) build verified professional reputations. We connect quality workers with customers who need their services."
+      },
+      {
+        "question": "Is the platform free?",
+        "answer": "Registration and basic platform usage are completely free. We offer paid business packages for companies that want to increase visibility and get premium features like top search spots."
+      },
+      {
+        "question": "How does reputation verification work?",
+        "answer": "Every completed job is recorded as proof of work with before/after photos and customer confirmation. Plus community verification from local leaders. All this contributes to a transparent trust score."
+      },
+      {
+        "question": "What if there's a problem with the work?",
+        "answer": "We have a transparent rating and review system. If issues arise, customers can report through our dispute resolution feature. Our team will help mediate between both parties."
+      },
+      {
+        "question": "How do I register as a worker?",
+        "answer": "Simply register with email or phone number, complete your profile, and you're ready to receive jobs. We'll help you verify your skills and experience."
+      }
+    ]
+  },
+  "about": {
+    "label": "About Us",
+    "title": "Reputation Platform for Indonesian Workers",
+    "subheadline": "Upahku helps informal workers build better careers and income through verified reputation.",
+    "description1": "Upahku was born from one simple question: how can Indonesian informal workers — handymen, AC technicians, mechanics, photographers, tutors — build better careers and income?",
+    "description2": "We believe every completed job is proof. Every proof builds trust. And trust opens doors to fairer wages and bigger projects."
+  },
+  "cta": {
+    "headline": "Ready to Build Your Professional Reputation?",
+    "subHeadline": "Join thousands of workers and customers who already trust our platform.",
+    "button": "Sign Up Free"
+  },
+  "pricing": {
+    "title": "Plans for Businesses",
+    "subheadline": "Choose the plan that fits your business needs. All plans can be cancelled anytime.",
+    "free": {
+      "name": "Free",
+      "price": "Rp 0",
+      "period": "",
+      "priceSub": "",
+      "description": "Start finding trusted workers.",
+      "features": [
+        "Browse worker profiles",
+        "Search by service & city",
+        "3 job listings per month",
+        "Email support"
+      ],
+      "cta": "Sign Up Free"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "Rp 149,000",
+      "period": "/mo",
+      "priceSub": "",
+      "description": "Recruit workers more efficiently.",
+      "features": [
+        "All Free features",
+        "Unlimited job listings",
+        "Contact workers directly",
+        "Priority verification",
+        "Priority chat support"
+      ],
+      "cta": "Get Pro"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "",
+      "priceSub": "billing",
+      "description": "Complete solution for companies with custom billing.",
+      "features": [
+        "All Pro features",
+        "Team & multi-branch management",
+        "API access",
+        "Dedicated account manager",
+        "Custom branding & SLA"
+      ],
+      "cta": "Contact Us"
+    }
+  },
+  "auth": {
+    "login": {
+      "quoteLabel": "A WISE QUOTE",
+      "quoteHeading": ["Get", "Everything", "You Want"],
+      "quoteParagraph": "Build your professional reputation and earn fair wages for every job you complete.",
+      "heading": "Welcome Back",
+      "subtext": "Sign in to your account to continue",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot Password",
+      "signIn": "Sign In",
+      "dividerText": "or",
+      "signInWithGoogle": "Sign in with Google",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "register": {
+      "quoteLabel": "START YOUR JOURNEY",
+      "quoteHeading": ["Build", "Your", "Future"],
+      "quoteParagraph": "Join thousands of workers building their professional reputation with Upahku.",
+      "heading": "Create Account",
+      "subtext": "Start building your professional reputation today",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Budi Santoso",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password (min. 8 characters)",
+      "roleLabel": "Register as",
+      "roleWorker": "Worker",
+      "roleEmployer": "Employer",
+      "createAccount": "Create Account",
+      "dividerText": "or",
+      "signUpWithGoogle": "Sign up with Google",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign In"
+    },
+    "forgotPassword": {
+      "heading": "Forgot Password",
+      "subtext": "Enter your email and we'll send you a reset link",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "sendLink": "Send Reset Link",
+      "sending": "Sending...",
+      "sentHeading": "Check Your Email",
+      "sentText": "If an account exists with that email, we've sent a password reset link.",
+      "backToLogin": "Back to Login"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "Your email address",
+    "subject": "Subject",
+    "subjectPlaceholder": "Subject of your message",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here...",
+    "send": "Send Message",
+    "orEmail": "Or send directly to:"
+  },
+  "footer": {
+    "slogan": "Building trust, earning fair wages — for every Indonesian worker.",
+    "about": "About Us",
+    "whyUs": "Why Us",
+    "forBusiness": "For Businesses",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "Copyright {year} Upahku. All rights reserved."
+  }
+}

@@ -238,6 +238,24 @@ export async function signInWithGoogle(): Promise<never> {
   redirect(data.url);
 }
 
+export async function sendPasswordResetEmail(
+  prevState: AuthState,
+  formData: FormData,
+): Promise<AuthState> {
+  const email = formData.get("email")?.toString();
+  if (!email) return { error: "Email tidak valid", success: false };
+
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?next=/auth/update-password`,
+  });
+
+  if (error) return { error: error.message, success: false };
+
+  return { error: null, success: true };
+}
+
 export async function signOut(): Promise<never> {
   const supabase = await createClient();
   await supabase.auth.signOut();

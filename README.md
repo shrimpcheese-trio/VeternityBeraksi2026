@@ -1,4 +1,4 @@
-# Veternity Beraksi 2026 — Employment Trust Platform
+# Upahku — Employment Trust Platform
 
 Platform for Indonesian informal workers to build verifiable professional reputation.
 

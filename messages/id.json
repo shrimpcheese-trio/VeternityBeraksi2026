@@ -1,0 +1,201 @@
+{
+  "navbar": {
+    "services": "Layanan",
+    "plans": "Paket",
+    "about": "Tentang",
+    "faq": "FAQ",
+    "contact": "Kontak",
+    "login": "Masuk",
+    "joinUs": "Gabung"
+  },
+  "hero": {
+    "headline": "Temukan Pekerja Terpercaya untuk Kebutuhan Anda",
+    "subHeadline": "Platform Reputasi Profesional untuk Pekerja Informal Indonesia",
+    "description": "Dari tukang hingga fotografer, temukan pekerja berpengalaman dengan reputasi yang sudah terverifikasi. Kami membantu pekerja informal membangun kepercayaan dan mendapatkan upah yang adil.",
+    "searchPlaceholder": "Cari layanan...",
+    "searchButtonText": "Cari",
+    "searchHelperText": "Cari berdasarkan layanan, kota, atau keahlian"
+  },
+  "promo": {
+    "badge": "Promo Bisnis",
+    "title": "Tingkatkan Visibilitas Bisnis Anda",
+    "description": "Dapatkan spot teratas, pencocokan yang lebih baik, dan verifikasi premium untuk bisnis Anda. Mulai dari Rp 150.000/bulan.",
+    "cta": "Pelajari Paket Bisnis"
+  },
+  "trending": {
+    "title": "Layanan Paling Dicari Saat Ini",
+    "services": [
+      { "name": "Tukang Bangunan", "description": "Renovasi rumah, perbaikan atap, pemasangan keramik", "workers": 245 },
+      { "name": "Montir Mobil", "description": "Servis rutin, perbaikan mesin, ganti oli", "workers": 189 },
+      { "name": "Fotografer", "description": "Foto pernikahan, event, portrait, produk", "workers": 156 }
+    ]
+  },
+  "stories": {
+    "title": "Kisah Sukses",
+    "stories": [
+      { "name": "Budi Santoso", "role": "Tukang Bangunan, Jakarta", "quote": "Berkat platform ini, saya mendapat proyek renovasi rumah di seluruh Jakarta Selatan. Reputasi saya terbangun dari setiap pekerjaan yang selesai." },
+      { "name": "Siti Rahmawati", "role": "Montir, Bandung", "quote": "Dulu saya hanya mengandalkan pelanggan tetap. Sekarang pelanggan baru datang sendiri setelah melihat portofolio pekerjaan saya." },
+      { "name": "Ahmad Fauzi", "role": "Fotografer, Surabaya", "quote": "Platform ini membantu saya membuktikan kualitas kerja saya. Sekarang saya sering dapat order dari klien korporat." }
+    ]
+  },
+  "faq": {
+    "title": "Pertanyaan Umum",
+    "subheadline": "Jawaban lengkap seputar platform, verifikasi, dan cara kerja Upahku.",
+    "items": [
+      {
+        "question": "Apa itu Upahku?",
+        "answer": "Upahku adalah platform yang membantu pekerja informal Indonesia (tukang, teknisi, montir, fotografer, dll) membangun reputasi profesional yang terverifikasi. Kami menghubungkan pekerja berkualitas dengan pelanggan yang membutuhkan jasa mereka."
+      },
+      {
+        "question": "Apakah platform ini gratis?",
+        "answer": "Pendaftaran dan penggunaan dasar platform sepenuhnya gratis. Kami menawarkan paket bisnis berbayar untuk perusahaan yang ingin meningkatkan visibilitas dan mendapatkan fitur premium seperti spot teratas di pencarian."
+      },
+      {
+        "question": "Bagaimana cara kerja verifikasi reputasi?",
+        "answer": "Setiap pekerjaan yang selesai dicatat sebagai bukti kerja (proof of work) dengan foto sebelum/sesudah dan konfirmasi pelanggan. Ditambah verifikasi dari komunitas seperti ketua RT atau mandor. Semua ini dihitung menjadi skor kepercayaan yang transparan."
+      },
+      {
+        "question": "Bagaimana jika ada masalah dengan pekerjaan?",
+        "answer": "Kami memiliki sistemrating dan ulasan yang transparan. Jika ada masalah, pelanggan dapat melaporkan melalui fitur dispute resolution kami. Tim kami akan membantu mediasi antara kedua belah pihak."
+      },
+      {
+        "question": "Bagaimana cara mendaftar sebagai pekerja?",
+        "answer": "Cukup daftar dengan email atau nomor telepon, lengkapi profil Anda, dan Anda siap menerima pekerjaan. Kami akan membantu Anda memverifikasi keahlian dan pengalaman Anda."
+      }
+    ]
+  },
+  "about": {
+    "label": "Tentang Kami",
+    "title": "Platform Reputasi untuk Pekerja Indonesia",
+    "subheadline": "Upahku membantu pekerja informal membangun karir dan penghasilan yang lebih baik melalui reputasi yang terverifikasi.",
+    "description1": "Upahku lahir dari satu pertanyaan sederhana: bagaimana pekerja informal Indonesia — tukang, teknisi AC, montir, fotografer, guru les — bisa membangun karir dan penghasilan yang lebih baik?",
+    "description2": "Kami percaya setiap pekerjaan yang selesai adalah bukti. Setiap bukti membangun kepercayaan. Dan kepercayaan membuka pintu ke upah yang lebih adil dan proyek yang lebih besar."
+  },
+  "cta": {
+    "headline": "Siap Membangun Reputasi Profesional Anda?",
+    "subHeadline": "Bergabunglah dengan ribuan pekerja dan pelanggan yang sudah mempercayai platform kami.",
+    "button": "Daftar Sekarang Gratis"
+  },
+  "pricing": {
+    "title": "Paket untuk Bisnis",
+    "subheadline": "Pilih paket yang sesuai dengan kebutuhan bisnis Anda. Semua paket dapat dibatalkan kapan saja.",
+    "free": {
+      "name": "Gratis",
+      "price": "Rp 0",
+      "period": "",
+      "priceSub": "",
+      "description": "Mulai mencari pekerja terpercaya.",
+      "features": [
+        "Lihat profil pekerja",
+        "Cari berdasarkan layanan & kota",
+        "3 lowongan pekerjaan per bulan",
+        "Dukungan email"
+      ],
+      "cta": "Daftar Gratis"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "Rp 149.000",
+      "period": "/bulan",
+      "priceSub": "",
+      "description": "Rekrut pekerja dengan lebih efisien.",
+      "features": [
+        "Semua fitur Gratis",
+        "Lowongan tidak terbatas",
+        "Hubungi pekerja langsung",
+        "Verifikasi prioritas",
+        "Dukungan prioritas via chat"
+      ],
+      "cta": "Mulai Pro"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "",
+      "priceSub": "billing",
+      "description": "Solusi lengkap untuk perusahaan dengan tagihan khusus.",
+      "features": [
+        "Semua fitur Pro",
+        "Manajemen tim & multi-cabang",
+        "API akses",
+        "Dedicated account manager",
+        "Kustom branding & SLA"
+      ],
+      "cta": "Hubungi Kami"
+    }
+  },
+  "auth": {
+    "login": {
+      "quoteLabel": "KATA BIJAK",
+      "quoteHeading": ["Dapatkan", "Semua", "Yang Kamu Inginkan"],
+      "quoteParagraph": "Bangun reputasi profesional dan dapatkan upah adil untuk setiap pekerjaan yang kamu selesaikan.",
+      "heading": "Selamat Datang Kembali",
+      "subtext": "Masuk ke akun Anda untuk melanjutkan",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Masukkan email Anda",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Masukkan password Anda",
+      "rememberMe": "Ingat Saya",
+      "forgotPassword": "Lupa Password",
+      "signIn": "Masuk",
+      "dividerText": "atau",
+      "signInWithGoogle": "Masuk dengan Google",
+      "noAccount": "Belum punya akun?",
+      "signUp": "Daftar"
+    },
+    "register": {
+      "quoteLabel": "MULAI PERJALANANMU",
+      "quoteHeading": ["Bangun", "Masa Depan", "Mu"],
+      "quoteParagraph": "Bergabunglah dengan ribuan pekerja yang membangun reputasi profesional bersama Upahku.",
+      "heading": "Buat Akun",
+      "subtext": "Mulai bangun reputasi profesional Anda hari ini",
+      "nameLabel": "Nama Lengkap",
+      "namePlaceholder": "Budi Santoso",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Masukkan email Anda",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Buat password (min. 8 karakter)",
+      "roleLabel": "Daftar sebagai",
+      "roleWorker": "Pekerja",
+      "roleEmployer": "Pemberi Kerja",
+      "createAccount": "Buat Akun",
+      "dividerText": "atau",
+      "signUpWithGoogle": "Daftar dengan Google",
+      "hasAccount": "Sudah punya akun?",
+      "signIn": "Masuk"
+    },
+    "forgotPassword": {
+      "heading": "Lupa Password",
+      "subtext": "Masukkan email Anda dan kami akan mengirim tautan reset",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Masukkan email Anda",
+      "sendLink": "Kirim Tautan Reset",
+      "sending": "Mengirim...",
+      "sentHeading": "Cek Email Anda",
+      "sentText": "Jika akun dengan email tersebut terdaftar, kami telah mengirim tautan reset password.",
+      "backToLogin": "Kembali ke Login"
+    }
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "name": "Nama",
+    "namePlaceholder": "Nama lengkap Anda",
+    "email": "Email",
+    "emailPlaceholder": "Alamat email Anda",
+    "subject": "Subjek",
+    "subjectPlaceholder": "Judul pesan Anda",
+    "message": "Pesan",
+    "messagePlaceholder": "Tulis pesan Anda di sini...",
+    "send": "Kirim Pesan",
+    "orEmail": "Atau kirim langsung ke:"
+  },
+  "footer": {
+    "slogan": "Membangun kepercayaan, mendapatkan upah adil — untuk setiap pekerja Indonesia.",
+    "about": "Tentang Kami",
+    "whyUs": "Mengapa Kami",
+    "forBusiness": "Untuk Bisnis",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Ketentuan Layanan",
+    "copyright": "Hak Cipta {year} Upahku. Seluruh hak dilindungi."
+  }
+}
