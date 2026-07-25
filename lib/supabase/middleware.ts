@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function updateSession(request: NextRequest) {
+export async function createSessionClient(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -25,7 +25,11 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  await supabase.auth.getUser();
+  return { supabaseResponse, supabase };
+}
 
-  return supabaseResponse;
+export async function updateSession(request: NextRequest) {
+  const { supabaseResponse, supabase } = await createSessionClient(request);
+  const { data: { user } } = await supabase.auth.getUser();
+  return { supabaseResponse, user };
 }
