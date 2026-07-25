@@ -83,7 +83,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-32 pb-44 md:pt-40 md:pb-48">
+    <section className="mx-auto max-w-6xl px-6 pt-32 pb-28 md:pt-40 md:pb-48">
       <div className="grid gap-10 md:grid-cols-[3fr_2fr] md:gap-16">
         <div ref={containerRef} className="flex flex-col gap-5">
           <h1
@@ -110,7 +110,7 @@ export function Hero() {
             />
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 text-step--1 font-medium text-primary-foreground hover:bg-primary-active"
+              className="inline-flex h-11 items-center gap-1.5 rounded-md bg-primary px-4 text-step--1 font-medium text-primary-foreground hover:bg-primary-active"
             >
               <Search className="size-4" />
               {t("searchButtonText")}

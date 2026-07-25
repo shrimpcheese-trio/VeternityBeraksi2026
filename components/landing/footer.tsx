@@ -26,7 +26,7 @@ export function Footer() {
           <div className="max-w-xs">
             <Link
               href="/"
-              className="font-heading text-step-1 font-bold tracking-tight text-on-dark"
+              className="font-heading text-step-1 font-bold tracking-tight text-primary"
             >
               Upahku
             </Link>

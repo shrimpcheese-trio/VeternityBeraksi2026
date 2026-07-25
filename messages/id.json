@@ -1,6 +1,6 @@
 {
   "navbar": {
-    "services": "Layanan",
+    "browse": "Jelajahi",
     "plans": "Paket",
     "about": "Tentang",
     "faq": "FAQ",
@@ -175,6 +175,35 @@
       "sentText": "Jika akun dengan email tersebut terdaftar, kami telah mengirim tautan reset password.",
       "backToLogin": "Kembali ke Login"
     }
+  },
+  "browse": {
+    "title": "Jelajahi",
+    "searchPlaceholder": "Cari jasa...",
+    "home": "Beranda",
+    "login": "Masuk",
+    "register": "Daftar",
+    "filter": "Filter",
+    "resetFilter": "Reset filter",
+    "statusLabel": "Tipe Layanan",
+    "statusOptions": ["Semua", "Perbaikan", "Pemasangan", "Perawatan", "Konsultasi"],
+    "specLabel": "Spesifikasi",
+    "experienceLabel": "Pengalaman",
+    "experienceOptions": ["0\u20131 tahun", "1\u20133 tahun", "3\u20135 tahun", "5+ tahun"],
+    "projectCountLabel": "Jumlah Proyek",
+    "min": "Min",
+    "max": "Maks",
+    "priceLabel": "Tarif",
+    "priceMin": "Rp Minimal tarif",
+    "priceMax": "Rp Maksimal tarif",
+    "more": "Lainnya",
+    "browseLink": "Jelajahi",
+  "allCategories": "Semua Kategori",
+    "completedProjects": "Proyek Selesai",
+    "startingPrice": "Tarif Mulai",
+    "bookedFrom": "Dipesan dari",
+    "statusAvailable": "Tersedia",
+    "statusInProgress": "Dalam Proyek",
+    "statusSoon": "Segera"
   },
   "contact": {
     "title": "Hubungi Kami",

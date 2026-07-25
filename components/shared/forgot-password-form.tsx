@@ -93,7 +93,7 @@ export function ForgotPasswordForm() {
               type="email"
               required
               placeholder={t("emailPlaceholder")}
-              className="block w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+              className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
             />
           </div>
         </div>

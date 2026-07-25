@@ -103,19 +103,36 @@ export function AuthSplitLayout({
         </div>
 
         <div ref={containerRef} className="w-full md:w-1/2">
+          <div className="mb-4 mt-4 px-10 md:hidden">
+            <div data-gsap className="flex items-center gap-3">
+              <span className="shrink-0 text-[0.625rem] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                {quoteLabel}
+              </span>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+            {quoteHeading.map((line, i) => (
+              <h2
+                key={i}
+                data-gsap
+                className="mt-3 font-heading text-xl font-bold leading-tight tracking-tight"
+              >
+                {line}
+              </h2>
+            ))}
+          </div>
           <div className="px-10 py-12">
             <div data-gsap className="flex items-center justify-between">
               {backHref && (
                 <button
                   type="button"
                   onClick={() => router.push(backHref)}
-                  className="inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                  className="inline-flex items-center gap-1.5 rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
                 >
                   <ArrowLeft size={16} />
                   Kembali
                 </button>
               )}
-              <span className="font-heading text-lg font-bold tracking-tight">
+              <span className="font-heading text-lg font-bold tracking-tight text-primary">
                 {brandName}
               </span>
             </div>

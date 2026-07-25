@@ -93,7 +93,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-md p-1.5 text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+            className="rounded-md p-3 text-muted-foreground hover:bg-surface-soft hover:text-foreground"
           >
             <X size={20} />
           </button>
@@ -161,7 +161,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
           <button
             type="submit"
             data-gsap
-            className="inline-flex w-full items-center justify-center rounded-md bg-primary px-5 py-2.5 text-step-0 font-medium text-primary-foreground hover:bg-primary-active"
+            className="inline-flex w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-step-0 font-medium text-primary-foreground hover:bg-primary-active"
           >
             {t("send")}
           </button>

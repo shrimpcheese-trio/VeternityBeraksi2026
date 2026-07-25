@@ -34,13 +34,12 @@ export function PasswordInput({
           type={visible ? "text" : "password"}
           required={required}
           placeholder={placeholder}
-          className="block w-full rounded-lg border border-input bg-background px-3 py-2 pl-9 pr-10 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+          className="block w-full rounded-lg border border-input bg-background px-3 py-3 pl-9 pr-10 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
         />
         <button
           type="button"
           onClick={() => setVisible(!visible)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-          tabIndex={-1}
+          className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center size-11 text-muted-foreground hover:text-foreground"
         >
           {visible ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>

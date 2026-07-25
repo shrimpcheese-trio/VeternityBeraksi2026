@@ -69,7 +69,7 @@ export function RegisterForm() {
                   <KeyRound size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
                   <input
                     name="token" type="text" required maxLength={6} placeholder="123456" autoFocus
-                    className="block w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+                    className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
                   />
                 </div>
               </div>
@@ -107,7 +107,7 @@ export function RegisterForm() {
             <div className="relative">
               <User size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
               <input id="fullName" name="fullName" type="text" required placeholder={t("namePlaceholder")}
-                className="block w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+                className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
               />
             </div>
           </div>
@@ -120,7 +120,7 @@ export function RegisterForm() {
               <div className="relative">
                 <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
                 <input id="email" name="email" type="email" required placeholder={t("emailPlaceholder")}
-                  className="block w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+                  className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
                 />
               </div>
             </div>
@@ -133,7 +133,7 @@ export function RegisterForm() {
                 <Phone size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
                 <input id="phone" name="phone" type="tel" required placeholder="08123456789" ref={phoneRef}
                   onChange={handlePhoneChange}
-                  className="block w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+                  className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
                 />
               </div>
             </div>
@@ -153,7 +153,7 @@ export function RegisterForm() {
               {t("roleLabel")}
             </p>
             <div className="flex gap-3">
-              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-2 text-sm transition-colors ${
+              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-3 text-sm transition-colors ${
                 role === "worker" ? "border-primary bg-primary/5 text-primary" : "border-input hover:border-muted-foreground"
               }`}>
                 <input type="radio" name="role" value="worker" checked={role === "worker"}
@@ -161,7 +161,7 @@ export function RegisterForm() {
                 />
                 {t("roleWorker")}
               </label>
-              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-2 text-sm transition-colors ${
+              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-3 text-sm transition-colors ${
                 role === "employer" ? "border-primary bg-primary/5 text-primary" : "border-input hover:border-muted-foreground"
               }`}>
                 <input type="radio" name="role" value="employer" checked={role === "employer"}
@@ -197,7 +197,7 @@ export function RegisterForm() {
 function TabButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: string }) {
   return (
     <button type="button" onClick={onClick}
-      className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+      className={`flex-1 rounded-md px-3 py-3 text-sm font-medium transition-colors ${
         active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
       }`}
     >

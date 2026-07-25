@@ -1,6 +1,6 @@
 {
   "navbar": {
-    "services": "Services",
+    "browse": "Browse",
     "plans": "Plans",
     "about": "About",
     "faq": "FAQ",
@@ -175,6 +175,35 @@
       "sentText": "If an account exists with that email, we've sent a password reset link.",
       "backToLogin": "Back to Login"
     }
+  },
+  "browse": {
+    "title": "Explore",
+    "searchPlaceholder": "Search for services...",
+    "home": "Home",
+    "login": "Log In",
+    "register": "Sign Up",
+    "filter": "Filter",
+    "resetFilter": "Reset filter",
+    "statusLabel": "Service Type",
+    "statusOptions": ["All", "Repair", "Installation", "Maintenance", "Consultation"],
+    "specLabel": "Specifications",
+    "experienceLabel": "Experience",
+    "experienceOptions": ["0\u20131 year", "1\u20133 years", "3\u20135 years", "5+ years"],
+    "projectCountLabel": "Project Count",
+    "min": "Min",
+    "max": "Max",
+    "priceLabel": "Price",
+    "priceMin": "Rp Minimum price",
+    "priceMax": "Rp Maximum price",
+    "more": "More",
+    "browseLink": "Browse",
+  "allCategories": "All Categories",
+    "completedProjects": "Projects Completed",
+    "startingPrice": "Starting from",
+    "bookedFrom": "Booked from",
+    "statusAvailable": "Available",
+    "statusInProgress": "In Progress",
+    "statusSoon": "Soon"
   },
   "contact": {
     "title": "Contact Us",
