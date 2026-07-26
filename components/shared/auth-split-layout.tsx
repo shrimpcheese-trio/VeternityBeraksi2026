@@ -6,10 +6,6 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 interface AuthSplitLayoutProps {
-  imagePlaceholder?: string;
-  quoteLabel: string;
-  quoteHeading: string[];
-  quoteParagraph: string;
   brandName: string;
   heading: string;
   subtext: string;
@@ -21,10 +17,6 @@ interface AuthSplitLayoutProps {
 }
 
 export function AuthSplitLayout({
-  imagePlaceholder = "IMAGE_PLACEHOLDER",
-  quoteLabel,
-  quoteHeading,
-  quoteParagraph,
   brandName,
   heading,
   subtext,
@@ -65,74 +57,41 @@ export function AuthSplitLayout({
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="flex w-full max-w-5xl overflow-hidden rounded-2xl border border-border shadow-lg">
         <div className="relative hidden w-1/2 md:block">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                `linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(${imagePlaceholder})`,
-            }}
-          >
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="text-xs font-medium uppercase tracking-widest text-white/30">
-                {imagePlaceholder}
-              </span>
-            </div>
-          </div>
-          <div className="relative flex h-full flex-col justify-between p-10">
-            <div data-gsap className="flex items-center gap-4">
-              <span className="shrink-0 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-                {quoteLabel}
-              </span>
-              <div className="h-px flex-1 bg-white/20" />
-            </div>
-            <div>
-              {quoteHeading.map((line, i) => (
-                <h1
-                  key={i}
-                  data-gsap
-                  className="font-heading text-4xl font-bold leading-tight text-white"
-                >
-                  {line}
-                </h1>
-              ))}
-              <p data-gsap className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-                {quoteParagraph}
-              </p>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-surface-dark to-accent-teal/20">
+            <div className="flex h-full w-full items-center justify-center p-16">
+              <div className="w-full">
+                <div className="mb-12 flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-primary/30 text-sm font-bold text-white">
+                    U
+                  </div>
+                  <span className="font-heading text-lg font-bold tracking-tight text-white">
+                    {brandName}
+                  </span>
+                </div>
+                <div className="mt-8 flex gap-2">
+                  <div className="size-2 rounded-full bg-primary" />
+                  <div className="size-2 rounded-full bg-white/20" />
+                  <div className="size-2 rounded-full bg-white/20" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div ref={containerRef} className="w-full md:w-1/2">
-          <div className="mb-4 mt-4 px-10 md:hidden">
-            <div data-gsap className="flex items-center gap-3">
-              <span className="shrink-0 text-[0.625rem] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                {quoteLabel}
-              </span>
-              <div className="h-px flex-1 bg-border" />
-            </div>
-            {quoteHeading.map((line, i) => (
-              <h2
-                key={i}
-                data-gsap
-                className="mt-3 font-heading text-xl font-bold leading-tight tracking-tight"
-              >
-                {line}
-              </h2>
-            ))}
-          </div>
           <div className="px-10 py-12">
             <div data-gsap className="flex items-center justify-between">
               {backHref && (
                 <button
                   type="button"
                   onClick={() => router.push(backHref)}
-                  className="inline-flex items-center gap-1.5 rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                  className="inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
                 >
                   <ArrowLeft size={16} />
                   Kembali
                 </button>
               )}
-              <span className="font-heading text-lg font-bold tracking-tight text-primary">
+              <span className="font-heading text-lg font-bold tracking-tight text-primary md:text-ink">
                 {brandName}
               </span>
             </div>

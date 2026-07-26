@@ -84,7 +84,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
     >
       <div
         ref={cardRef}
-        className="w-full max-w-lg rounded-xl border border-border bg-background p-8 shadow-xl"
+        className="w-full max-w-lg rounded-xl border border-border bg-background p-5 shadow-xl sm:p-8"
       >
         <div data-gsap className="mb-6 flex items-center justify-between">
           <h2 className="font-heading text-xl font-bold tracking-tight">

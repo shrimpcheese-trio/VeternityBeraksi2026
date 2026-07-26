@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-const experienceOptions = ["0–1 tahun", "1–3 tahun", "3–5 tahun", "5+ tahun"];
 
 function SelectDropdown({
   options,
@@ -70,108 +68,137 @@ export function FilterSidebar() {
   const expOptions = t.raw("experienceOptions") as string[];
   const [status, setStatus] = useState(statusOptions[0]);
   const [experience, setExperience] = useState(expOptions[0]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  return (
-    <aside className="w-full shrink-0 md:w-72">
-      <div className="rounded-xl border border-border bg-surface-soft p-5">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold">{t("filter")}</h2>
-          <button
-            type="button"
-            className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
-          >
-            {t("resetFilter")}
-          </button>
-        </div>
+  const panel = (
+    <div className="rounded-xl border border-border bg-surface-soft p-5">
+      <div className="flex items-center justify-between">
+        <h2 className="text-sm font-semibold">{t("filter")}</h2>
+        <button
+          type="button"
+          className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+        >
+          {t("resetFilter")}
+        </button>
+      </div>
 
-        <div className="mt-6 space-y-6">
-          <fieldset>
-            <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              {t("statusLabel")}
-            </legend>
-            <div className="space-y-2">
-              {statusOptions.map((opt) => (
-                <label
-                  key={opt}
-                  className="flex cursor-pointer items-center gap-2 text-sm"
-                >
-                  <input
-                    type="radio"
-                    name="status"
-                    checked={status === opt}
-                    onChange={() => setStatus(opt)}
-                    className="size-4 accent-primary"
-                  />
-                  {opt}
-                </label>
-              ))}
+      <div className="mt-6 space-y-6">
+        <fieldset>
+          <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            {t("statusLabel")}
+          </legend>
+          <div className="space-y-2">
+            {statusOptions.map((opt) => (
+              <label
+                key={opt}
+                className="flex cursor-pointer items-center gap-2 text-sm"
+              >
+                <input
+                  type="radio"
+                  name="status"
+                  checked={status === opt}
+                  onChange={() => setStatus(opt)}
+                  className="size-4 accent-primary"
+                />
+                {opt}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            {t("specLabel")}
+          </legend>
+          <div className="space-y-4">
+            <div>
+              <label className="mb-1 block text-xs text-muted-foreground">
+                {t("experienceLabel")}
+              </label>
+              <SelectDropdown
+                options={expOptions}
+                value={experience}
+                onChange={setExperience}
+              />
             </div>
-          </fieldset>
 
-          <fieldset>
-            <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              {t("specLabel")}
-            </legend>
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-xs text-muted-foreground">
-                  {t("experienceLabel")}
-                </label>
-                <SelectDropdown
-                  options={expOptions}
-                  value={experience}
-                  onChange={setExperience}
+            <div>
+              <label className="mb-1 block text-xs text-muted-foreground">
+                {t("projectCountLabel")}
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="number"
+                  placeholder={t("min")}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                />
+                <input
+                  type="number"
+                  placeholder={t("max")}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
                 />
               </div>
+            </div>
 
-              <div>
-                <label className="mb-1 block text-xs text-muted-foreground">
-                  {t("projectCountLabel")}
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder={t("min")}
-                    className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
-
-
-                  />
-                  <input
-                    type="number"
-                    placeholder={t("max")}
-                    className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
-
-
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="mb-1 block text-xs text-muted-foreground">
-                  {t("priceLabel")}
-                </label>
-                <div className="space-y-2">
-                  <input
-                    type="text"
-                    placeholder={t("priceMin")}
-                    className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
-
-
-                  />
-                  <input
-                    type="text"
-                    placeholder={t("priceMax")}
-                    className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
-
-
-                  />
-                </div>
+            <div>
+              <label className="mb-1 block text-xs text-muted-foreground">
+                {t("priceLabel")}
+              </label>
+              <div className="space-y-2">
+                <input
+                  type="text"
+                  placeholder={t("priceMin")}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                />
+                <input
+                  type="text"
+                  placeholder={t("priceMax")}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                />
               </div>
             </div>
-          </fieldset>
-        </div>
+          </div>
+        </fieldset>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setDrawerOpen(true)}
+        className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-soft px-4 py-3 text-sm font-medium text-foreground md:hidden"
+      >
+        <SlidersHorizontal size={16} />
+        {t("filter")}
+      </button>
+
+      {drawerOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setDrawerOpen(false)}
+          />
+          <div className="absolute left-0 top-0 flex h-full w-80 max-w-[85vw] flex-col overflow-y-auto border-r border-border bg-background shadow-xl">
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <span className="text-sm font-semibold">{t("filter")}</span>
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(false)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="flex-1 px-5 py-5">{panel}</div>
+          </div>
+        </div>
+      )}
+
+      <aside className="hidden shrink-0 md:block md:w-72">
+        {panel}
+      </aside>
+    </>
   );
 }
-

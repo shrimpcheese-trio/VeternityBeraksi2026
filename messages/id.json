@@ -95,7 +95,7 @@
     },
     "pro": {
       "name": "Pro",
-      "price": "Rp 149.000",
+      "price": "Rp 79.000",
       "period": "/bulan",
       "priceSub": "",
       "description": "Rekrut pekerja dengan lebih efisien.",
@@ -126,9 +126,6 @@
   },
   "auth": {
     "login": {
-      "quoteLabel": "KATA BIJAK",
-      "quoteHeading": ["Dapatkan", "Semua", "Yang Kamu Inginkan"],
-      "quoteParagraph": "Bangun reputasi profesional dan dapatkan upah adil untuk setiap pekerjaan yang kamu selesaikan.",
       "heading": "Selamat Datang Kembali",
       "subtext": "Masuk ke akun Anda untuk melanjutkan",
       "emailLabel": "Email",
@@ -144,9 +141,6 @@
       "signUp": "Daftar"
     },
     "register": {
-      "quoteLabel": "MULAI PERJALANANMU",
-      "quoteHeading": ["Bangun", "Masa Depan", "Mu"],
-      "quoteParagraph": "Bergabunglah dengan ribuan pekerja yang membangun reputasi profesional bersama Upahku.",
       "heading": "Buat Akun",
       "subtext": "Mulai bangun reputasi profesional Anda hari ini",
       "nameLabel": "Nama Lengkap",
@@ -226,5 +220,190 @@
     "privacy": "Kebijakan Privasi",
     "terms": "Ketentuan Layanan",
     "copyright": "Hak Cipta {year} Upahku. Seluruh hak dilindungi."
+  },
+  "profile": {
+    "sidebar": {
+      "editProfile": "Edit Profil",
+      "completedJobs": "Proyek Selesai",
+      "activeListings": "Listing Aktif",
+      "rating": "Rating",
+      "memberSince": "Anggota Sejak",
+      "location": "Lokasi",
+      "contact": "Kontak",
+      "website": "Website",
+      "verificationBadges": "Verifikasi",
+      "idVerified": "KTP Terverifikasi",
+      "companyVerified": "Perusahaan Terverifikasi",
+      "paymentVerified": "Pembayaran Terverifikasi",
+      "trustScore": "Skor Kepercayaan",
+      "noBio": "Belum ada deskripsi."
+    },
+    "tabs": {
+      "overview": "Ringkasan",
+      "listings": "Listing",
+      "contracts": "Kontrak",
+      "reviews": "Ulasan",
+      "documents": "Dokumen"
+    },
+    "overview": {
+      "pinnedListings": "Listing Aktif",
+      "activityChart": "Aktivitas Pekerjaan",
+      "recentActivity": "Aktivitas Terbaru",
+      "noListings": "Belum ada listing aktif.",
+      "noActivity": "Belum ada aktivitas terbaru."
+    },
+    "listings": {
+      "search": "Cari listing...",
+      "filterStatus": "Status",
+      "filterType": "Tipe",
+      "sort": "Urutkan",
+      "all": "Semua",
+      "active": "Aktif",
+      "paused": "Ditunda",
+      "completed": "Selesai",
+      "price": "Harga",
+      "quantity": "Jumlah",
+      "datePosted": "Tanggal",
+      "noListings": "Belum ada listing."
+    },
+    "contracts": {
+      "filterStatus": "Filter Status",
+      "all": "Semua",
+      "active": "Aktif",
+      "completed": "Selesai",
+      "disputed": "Sengketa",
+      "counterparty": "Mitra",
+      "type": "Tipe",
+      "value": "Nilai",
+      "date": "Tanggal",
+      "noContracts": "Belum ada kontrak."
+    },
+    "reviews": {
+      "averageRating": "Rating Rata-rata",
+      "totalReviews": "Total Ulasan",
+      "noReviews": "Belum ada ulasan.",
+      "reviewer": "Pengulas"
+    },
+    "documents": {
+      "name": "Nama",
+      "type": "Tipe",
+      "uploadDate": "Tanggal Unggah",
+      "verified": "Terverifikasi",
+      "unverified": "Belum Verifikasi",
+      "noDocuments": "Belum ada dokumen."
+    },
+    "notFound": "Profil tidak ditemukan."
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "description": "Kelola pengaturan akun, keamanan, dan preferensi Anda.",
+    "sidebar": {
+      "account": "Akun",
+      "company": "Profil Perusahaan",
+      "verification": "Verifikasi & Kepercayaan",
+      "payment": "Pembayaran & Pencairan",
+      "notifications": "Notifikasi",
+      "security": "Keamanan",
+      "dangerZone": "Zona Berbahaya"
+    },
+    "account": {
+      "title": "Akun",
+      "description": "Informasi dasar akun Anda.",
+      "name": "Nama Lengkap",
+      "email": "Email",
+      "emailHelper": "Email digunakan untuk login dan notifikasi.",
+      "phone": "Nomor Telepon",
+      "avatar": "Foto Profil",
+      "upload": "Unggah Foto",
+      "remove": "Hapus",
+      "userType": "Tipe Akun"
+    },
+    "company": {
+      "title": "Profil Perusahaan",
+      "description": "Informasi bisnis dan perusahaan Anda.",
+      "companyName": "Nama Perusahaan",
+      "regNumber": "Nomor Registrasi",
+      "address": "Alamat",
+      "uploadDocument": "Unggah Dokumen",
+      "industry": "Industri/Sektor",
+      "industryPlaceholder": "Pilih industri..."
+    },
+    "verification": {
+      "title": "Verifikasi & Kepercayaan",
+      "description": "Status verifikasi akun Anda.",
+      "id": "Verifikasi Identitas",
+      "company": "Verifikasi Perusahaan",
+      "bank": "Verifikasi Bank",
+      "trustExplainer": "Skor kepercayaan Anda dihitung berdasarkan jumlah verifikasi yang lengkap, riwayat pekerjaan, dan konfirmasi pelanggan. Semakin lengkap verifikasi Anda, semakin tinggi skor kepercayaan Anda."
+    },
+    "payment": {
+      "title": "Pembayaran & Pencairan",
+      "description": "Kelola metode pembayaran dan jadwal pencairan dana.",
+      "addBank": "Tambah Rekening Baru",
+      "payoutSchedule": "Jadwal Pencairan"
+    },
+    "notifications": {
+      "title": "Notifikasi",
+      "description": "Atur notifikasi yang ingin Anda terima.",
+      "offers": "Kontrak baru",
+      "offersHelper": "Notifikasi saat ada kontrak baru masuk",
+      "payments": "Pembayaran diterima",
+      "paymentsHelper": "Notifikasi saat pembayaran berhasil",
+      "listingExpiry": "Masa berlaku habis",
+      "listingExpiryHelper": "Notifikasi saat listing akan kedaluwarsa",
+      "messages": "Pesan",
+      "messagesHelper": "Notifikasi saat ada pesan baru"
+    },
+    "security": {
+      "title": "Keamanan",
+      "description": "Kelola keamanan akun Anda.",
+      "currentPassword": "Kata Sandi Saat Ini",
+      "newPassword": "Kata Sandi Baru",
+      "confirmPassword": "Konfirmasi Kata Sandi",
+      "updatePassword": "Perbarui Kata Sandi",
+      "twoFactor": "Autentikasi Dua Faktor",
+      "twoFactorHelper": "Tingkatkan keamanan dengan kode verifikasi tambahan",
+      "sessions": "Sesi Aktif",
+      "revoke": "Cabut"
+    },
+    "dangerZone": {
+      "title": "Zona Berbahaya",
+      "description": "Tindakan ini tidak dapat dibatalkan. Tindakan ini akan menghapus semua data akun Anda secara permanen termasuk profil, riwayat pekerjaan, dan dokumen.",
+      "deleteAccount": "Hapus Akun"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "menuLabel": "MENU",
+      "generalLabel": "UMUM",
+      "menu": {
+        "dashboard": "Dashboard",
+        "tasks": "Tugas",
+        "calendar": "Kalender",
+        "analytics": "Analitik",
+        "team": "Tim",
+        "browse": "Jelajahi"
+      },
+      "general": {
+        "settings": "Pengaturan",
+        "help": "Bantuan",
+        "logout": "Keluar"
+      },
+      "promo": {
+        "worker": {
+          "title": "Tingkatkan Profil Anda",
+          "subtitle": "Dapatkan lebih banyak proyek dengan paket bisnis",
+          "cta": "Pelajari"
+        },
+        "employer": {
+          "title": "Cari Pekerja Terbaik",
+          "subtitle": "Temukan pekerja terverifikasi untuk proyek Anda",
+          "cta": "Pasang Pekerjaan"
+        }
+      }
+    },
+    "header": {
+      "searchPlaceholder": "Cari di dashboard..."
+    }
   }
 }

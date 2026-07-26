@@ -1,5 +1,24 @@
 import { createClient } from "@/lib/supabase/server";
-import { SignOutButton } from "@/components/shared/sign-out-button";
+import { Button } from "@/components/ui/button";
+import { Plus, List } from "lucide-react";
+import { KpiCard } from "@/components/dashboard/kpi-card";
+import { ChartWidget } from "@/components/dashboard/chart-widget";
+import { ReminderCard } from "@/components/dashboard/reminder-card";
+
+const monthlyJobs = [
+  { label: "Jan", value: 4 },
+  { label: "Feb", value: 3 },
+  { label: "Mar", value: 6 },
+  { label: "Apr", value: 5 },
+  { label: "Mei", value: 7 },
+  { label: "Jun", value: 5 },
+];
+
+const reminders = [
+  { title: "Servis AC - Pak Budi", subtitle: "Besok, 09:00 - Jl. Merdeka No. 12" },
+  { title: "Renovasi Kamar Mandi", subtitle: "3 hari lagi - Perumahan Griya Asri" },
+  { title: "Konfirmasi Pelanggan", subtitle: "Menunggu konfirmasi 2 pekerjaan" },
+];
 
 export default async function WorkerDashboard() {
   const supabase = await createClient();
@@ -7,17 +26,60 @@ export default async function WorkerDashboard() {
   const fullName = user?.user_metadata?.full_name ?? "Pekerja";
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <h1 className="font-heading text-lg font-semibold">Dashboard Pekerja</h1>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">{fullName}</span>
-          <SignOutButton />
+    <div className="space-y-6">
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="font-heading text-2xl font-medium tracking-tight">
+            Selamat datang, {fullName.split(" ")[0]}!
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Ringkasan aktivitas dan performa pekerjaan Anda.
+          </p>
         </div>
-      </header>
-      <main className="flex-1 p-6">
-        <p className="text-muted-foreground">Selamat datang, {fullName}!</p>
-      </main>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" className="gap-1.5">
+            <List className="size-4" />
+            Lihat Semua
+          </Button>
+          <Button size="sm" className="gap-1.5">
+            <Plus className="size-4" />
+            Buat Pekerjaan Baru
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <KpiCard
+          label="Skor Kepercayaan"
+          value="4.2/5.0"
+          trendDirection="up"
+          trendText="+0.3 dari bulan lalu"
+          variant="highlighted"
+        />
+        <KpiCard
+          label="Proyek Selesai"
+          value="24"
+          trendDirection="up"
+          trendText="+12% dari bulan lalu"
+        />
+        <KpiCard
+          label="Total Pendapatan"
+          value="Rp 48,5 Jt"
+          trendDirection="up"
+          trendText="+18% dari bulan lalu"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <ChartWidget title="Pekerjaan per Bulan" data={monthlyJobs} />
+        </div>
+        <ReminderCard
+          title="Aktivitas Terbaru"
+          items={reminders}
+          actionLabel="Lihat Semua"
+        />
+      </div>
     </div>
   );
 }

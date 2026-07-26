@@ -11,7 +11,7 @@ export default async function AdminDashboard() {
       <header className="flex items-center justify-between border-b border-border px-6 py-4">
         <h1 className="font-heading text-lg font-semibold">Dashboard Admin</h1>
         <div className="flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">{fullName}</span>
+          <span className="max-w-[160px] truncate text-sm text-muted-foreground" title={fullName}>{fullName}</span>
           <SignOutButton />
         </div>
       </header>

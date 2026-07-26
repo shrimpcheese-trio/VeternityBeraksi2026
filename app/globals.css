@@ -179,6 +179,11 @@
   }
 }
 
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 @utility underline-hover {
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
@@ -195,6 +200,19 @@ button.underline-hover:hover {
 
 [data-gsap] {
   opacity: 0;
+}
+
+@utility animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+@utility animate-slideDown {
+  animation: slideDown 0.25s ease-out;
 }
 
 @utility fade-in-section {

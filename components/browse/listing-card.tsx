@@ -50,7 +50,7 @@ export function ListingCard({ listing }: { listing: BrowseListing }) {
           </button>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-surface-soft px-3 py-2.5">
+        <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg bg-surface-soft px-2 py-2 sm:gap-3 sm:px-3 sm:py-2.5">
           <div>
             <p className="text-[0.625rem] font-medium uppercase tracking-wider text-muted-foreground">
               {t("completedProjects")}

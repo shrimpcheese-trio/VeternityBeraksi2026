@@ -7,26 +7,9 @@ export const signUpEmailSchema = z.object({
   role: z.enum(["worker", "employer"]),
 });
 
-export const signUpPhoneSchema = z.object({
-  fullName: z.string().min(2, "Nama minimal 2 karakter"),
-  phone: z.string().min(10, "Nomor telepon minimal 10 digit"),
-  password: z.string().min(8, "Password minimal 8 karakter"),
-  role: z.enum(["worker", "employer"]),
-});
-
 export const signInEmailSchema = z.object({
   email: z.string().email("Email tidak valid"),
   password: z.string().min(1, "Password harus diisi"),
-});
-
-export const signInPhoneSchema = z.object({
-  phone: z.string().min(10, "Nomor telepon minimal 10 digit"),
-  password: z.string().min(1, "Password harus diisi"),
-});
-
-export const otpSchema = z.object({
-  phone: z.string().min(10, "Nomor telepon minimal 10 digit"),
-  token: z.string().length(6, "Kode OTP harus 6 digit"),
 });
 
 export const profileSetupSchema = z.object({

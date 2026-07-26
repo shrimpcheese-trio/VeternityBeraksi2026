@@ -1,106 +1,77 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { useRouter } from "next/navigation";
+import { User, MapPin, Briefcase, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
-import { profileSetupSchema } from "@/lib/schemas/auth";
-import { AuthLayout } from "@/components/shared/auth-layout";
+import { AuthSplitLayout } from "@/components/shared/auth-split-layout";
+import { completeProfileSetup } from "@/lib/actions/auth";
+import type { AuthState } from "@/types/auth";
 
-interface ProfileSetupState {
-  error: string | null;
-  success: boolean;
-}
-
-const initialState: ProfileSetupState = { error: null, success: false };
+const initialState: AuthState = { error: null, success: false };
 
 export default function ProfileSetupPage() {
   const [role, setRole] = useState<"worker" | "employer">("worker");
-  const [state, submitAction, isPending] = useActionState(handleSubmit, initialState);
-  const router = useRouter();
-
-  async function handleSubmit(prevState: ProfileSetupState, formData: FormData): Promise<ProfileSetupState> {
-    const parsed = profileSetupSchema.safeParse({
-      fullName: formData.get("fullName"),
-      city: formData.get("city"),
-      jobCategory: formData.get("jobCategory"),
-      yearsExperience: formData.get("yearsExperience"),
-      role: formData.get("role"),
-    });
-
-    if (!parsed.success) {
-      return { error: parsed.error.issues[0]?.message ?? "Data tidak valid", success: false };
-    }
-
-    const { fullName, city, jobCategory, yearsExperience } = parsed.data;
-
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (!user) {
-      return { error: "Sesi tidak ditemukan", success: false };
-    }
-
-    await supabase.auth.updateUser({
-      data: { full_name: fullName, role },
-    });
-
-    if (role === "worker") {
-      const { error } = await supabase.from("worker_profiles").insert({
-        worker_id: user.id,
-        full_name: fullName,
-        city,
-        job_category: jobCategory,
-        years_experience: yearsExperience,
-      });
-
-      if (error) return { error: error.message, success: false };
-    }
-
-    router.push(`/${role}/dashboard`);
-    return { error: null, success: true };
-  }
+  const [state, action, pending] = useActionState(completeProfileSetup, initialState);
 
   return (
-    <AuthLayout title="Lengkapi Profil" description="Isi data diri Anda untuk melanjutkan">
-      <form action={submitAction}>
-        <div className="space-y-4">
+    <AuthSplitLayout
+      brandName="Upahku"
+      heading="Lengkapi Profil"
+      subtext="Isi data diri Anda untuk melanjutkan"
+      bottomText=""
+      bottomLinkText="Kembali ke Beranda"
+      bottomLinkHref="/"
+    >
+      <form action={action}>
+        <div className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Nama Lengkap</label>
-            <input
-              name="fullName" type="text" required placeholder="Budi Santoso"
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
-            />
+            <div className="relative">
+              <User size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+              <input
+                name="fullName" type="text" required placeholder="Budi Santoso"
+                className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Kota</label>
-            <input
-              name="city" type="text" required placeholder="Jakarta Selatan"
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
-            />
+            <div className="relative">
+              <MapPin size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+              <input
+                name="city" type="text" required placeholder="Jakarta Selatan"
+                className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Kategori Pekerjaan</label>
-            <input
-              name="jobCategory" type="text" required placeholder="Tukang, Montir, Fotografer, dll"
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
-            />
+            <div className="relative">
+              <Briefcase size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+              <input
+                name="jobCategory" type="text" required placeholder="Tukang, Montir, Fotografer, dll"
+                className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Pengalaman (tahun)</label>
-            <input
-              name="yearsExperience" type="number" min="0" required placeholder="0"
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
-            />
+            <div className="relative">
+              <Clock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+              <input
+                name="yearsExperience" type="number" min="0" required placeholder="0"
+                className="block w-full rounded-lg border border-input bg-background py-3 pl-9 pr-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+              />
+            </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Saya adalah</label>
+            <p className="block text-sm font-medium text-foreground mb-2">Saya adalah</p>
             <div className="flex gap-3">
-              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-2 text-sm transition-colors ${
+              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-3 text-sm transition-colors ${
                 role === "worker" ? "border-primary bg-primary/5 text-primary" : "border-input hover:border-muted-foreground"
               }`}>
                 <input type="radio" name="role" value="worker" checked={role === "worker"}
@@ -108,7 +79,7 @@ export default function ProfileSetupPage() {
                 />
                 Pekerja
               </label>
-              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-2 text-sm transition-colors ${
+              <label className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 py-3 text-sm transition-colors ${
                 role === "employer" ? "border-primary bg-primary/5 text-primary" : "border-input hover:border-muted-foreground"
               }`}>
                 <input type="radio" name="role" value="employer" checked={role === "employer"}
@@ -121,11 +92,11 @@ export default function ProfileSetupPage() {
 
           {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
-          <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? "Menyimpan..." : "Simpan & Lanjutkan"}
+          <Button type="submit" className="w-full" disabled={pending}>
+            {pending ? "Menyimpan..." : "Simpan & Lanjutkan"}
           </Button>
         </div>
       </form>
-    </AuthLayout>
+    </AuthSplitLayout>
   );
 }

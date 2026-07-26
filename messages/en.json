@@ -95,7 +95,7 @@
     },
     "pro": {
       "name": "Pro",
-      "price": "Rp 149,000",
+      "price": "Rp 79,000",
       "period": "/mo",
       "priceSub": "",
       "description": "Recruit workers more efficiently.",
@@ -126,9 +126,6 @@
   },
   "auth": {
     "login": {
-      "quoteLabel": "A WISE QUOTE",
-      "quoteHeading": ["Get", "Everything", "You Want"],
-      "quoteParagraph": "Build your professional reputation and earn fair wages for every job you complete.",
       "heading": "Welcome Back",
       "subtext": "Sign in to your account to continue",
       "emailLabel": "Email",
@@ -144,9 +141,6 @@
       "signUp": "Sign Up"
     },
     "register": {
-      "quoteLabel": "START YOUR JOURNEY",
-      "quoteHeading": ["Build", "Your", "Future"],
-      "quoteParagraph": "Join thousands of workers building their professional reputation with Upahku.",
       "heading": "Create Account",
       "subtext": "Start building your professional reputation today",
       "nameLabel": "Full Name",
@@ -226,5 +220,190 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "copyright": "Copyright {year} Upahku. All rights reserved."
+  },
+  "profile": {
+    "sidebar": {
+      "editProfile": "Edit Profile",
+      "completedJobs": "Completed Jobs",
+      "activeListings": "Active Listings",
+      "rating": "Rating",
+      "memberSince": "Member Since",
+      "location": "Location",
+      "contact": "Contact",
+      "website": "Website",
+      "verificationBadges": "Verification",
+      "idVerified": "ID Verified",
+      "companyVerified": "Company Verified",
+      "paymentVerified": "Payment Verified",
+      "trustScore": "Trust Score",
+      "noBio": "No description yet."
+    },
+    "tabs": {
+      "overview": "Overview",
+      "listings": "Listings",
+      "contracts": "Contracts",
+      "reviews": "Reviews",
+      "documents": "Documents"
+    },
+    "overview": {
+      "pinnedListings": "Active Listings",
+      "activityChart": "Job Activity",
+      "recentActivity": "Recent Activity",
+      "noListings": "No active listings yet.",
+      "noActivity": "No recent activity."
+    },
+    "listings": {
+      "search": "Search listings...",
+      "filterStatus": "Status",
+      "filterType": "Type",
+      "sort": "Sort",
+      "all": "All",
+      "active": "Active",
+      "paused": "Paused",
+      "completed": "Completed",
+      "price": "Price",
+      "quantity": "Qty",
+      "datePosted": "Date",
+      "noListings": "No listings yet."
+    },
+    "contracts": {
+      "filterStatus": "Filter Status",
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed",
+      "disputed": "Disputed",
+      "counterparty": "Counterparty",
+      "type": "Type",
+      "value": "Value",
+      "date": "Date",
+      "noContracts": "No contracts yet."
+    },
+    "reviews": {
+      "averageRating": "Average Rating",
+      "totalReviews": "Total Reviews",
+      "noReviews": "No reviews yet.",
+      "reviewer": "Reviewer"
+    },
+    "documents": {
+      "name": "Name",
+      "type": "Type",
+      "uploadDate": "Upload Date",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "noDocuments": "No documents yet."
+    },
+    "notFound": "Profile not found."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your account settings, security, and preferences.",
+    "sidebar": {
+      "account": "Account",
+      "company": "Company Profile",
+      "verification": "Verification & Trust",
+      "payment": "Payment & Payout",
+      "notifications": "Notifications",
+      "security": "Security",
+      "dangerZone": "Danger Zone"
+    },
+    "account": {
+      "title": "Account",
+      "description": "Your basic account information.",
+      "name": "Full Name",
+      "email": "Email",
+      "emailHelper": "Email is used for login and notifications.",
+      "phone": "Phone Number",
+      "avatar": "Profile Photo",
+      "upload": "Upload Photo",
+      "remove": "Remove",
+      "userType": "Account Type"
+    },
+    "company": {
+      "title": "Company Profile",
+      "description": "Your business and company information.",
+      "companyName": "Company Name",
+      "regNumber": "Registration Number",
+      "address": "Address",
+      "uploadDocument": "Upload Document",
+      "industry": "Industry/Sector",
+      "industryPlaceholder": "Select industry..."
+    },
+    "verification": {
+      "title": "Verification & Trust",
+      "description": "Your account verification status.",
+      "id": "Identity Verification",
+      "company": "Company Verification",
+      "bank": "Bank Verification",
+      "trustExplainer": "Your trust score is calculated based on completed verifications, work history, and customer confirmations. The more complete your verifications, the higher your trust score."
+    },
+    "payment": {
+      "title": "Payment & Payout",
+      "description": "Manage payment methods and payout schedules.",
+      "addBank": "Add New Bank Account",
+      "payoutSchedule": "Payout Schedule"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Configure which notifications you receive.",
+      "offers": "New contract offer",
+      "offersHelper": "Notify when a new contract is offered",
+      "payments": "Payment received",
+      "paymentsHelper": "Notify when a payment is received",
+      "listingExpiry": "Listing expiry",
+      "listingExpiryHelper": "Notify when a listing is about to expire",
+      "messages": "Messages",
+      "messagesHelper": "Notify when you receive a new message"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage your account security.",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updatePassword": "Update Password",
+      "twoFactor": "Two-Factor Authentication",
+      "twoFactorHelper": "Add an extra layer of security with a verification code",
+      "sessions": "Active Sessions",
+      "revoke": "Revoke"
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "description": "This action cannot be undone. This will permanently delete your account data including profile, work history, and documents.",
+      "deleteAccount": "Delete Account"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "menuLabel": "MENU",
+      "generalLabel": "GENERAL",
+      "menu": {
+        "dashboard": "Dashboard",
+        "tasks": "Tasks",
+        "calendar": "Calendar",
+        "analytics": "Analytics",
+        "team": "Team",
+        "browse": "Browse"
+      },
+      "general": {
+        "settings": "Settings",
+        "help": "Help",
+        "logout": "Logout"
+      },
+      "promo": {
+        "worker": {
+          "title": "Upgrade Your Profile",
+          "subtitle": "Get more projects with a business plan",
+          "cta": "Learn More"
+        },
+        "employer": {
+          "title": "Find Top Workers",
+          "subtitle": "Find verified workers for your project",
+          "cta": "Post a Job"
+        }
+      }
+    },
+    "header": {
+      "searchPlaceholder": "Search dashboard..."
+    }
   }
 }

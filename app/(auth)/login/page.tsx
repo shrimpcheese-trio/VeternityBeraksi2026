@@ -10,10 +10,6 @@ export default async function LoginPage() {
   return (
     <AuthSplitLayout
       backHref="/"
-      imagePlaceholder="IMAGE_PLACEHOLDER"
-      quoteLabel={t.quoteLabel}
-      quoteHeading={t.quoteHeading}
-      quoteParagraph={t.quoteParagraph}
       brandName="Upahku"
       heading={t.heading}
       subtext={t.subtext}

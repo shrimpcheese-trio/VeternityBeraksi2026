@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { I18nProvider } from "@/lib/i18n-provider";
 import { getLocale } from "@/lib/i18n";
+import { NavigationLoader } from "@/components/shared/navigation-loader";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <I18nProvider locale={locale} messages={messages}>
+          <NavigationLoader />
           {children}
         </I18nProvider>
       </body>

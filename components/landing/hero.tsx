@@ -88,7 +88,7 @@ export function Hero() {
         <div ref={containerRef} className="flex flex-col gap-5">
           <h1
             data-gsap
-            className="font-heading text-step-5 font-bold leading-[1.15] tracking-tight md:text-step-6 md:leading-[1.05] md:tracking-tighter"
+            className="font-heading text-step-4 font-bold leading-[1.15] tracking-tight sm:text-step-5 md:text-step-6 md:leading-[1.05] md:tracking-tighter"
           >
             {t("headline")}
           </h1>
@@ -110,10 +110,11 @@ export function Hero() {
             />
             <button
               type="button"
-              className="inline-flex h-11 items-center gap-1.5 rounded-md bg-primary px-4 text-step--1 font-medium text-primary-foreground hover:bg-primary-active"
+              className="inline-flex h-11 items-center gap-1.5 rounded-md bg-primary px-3 sm:px-4 text-step--1 font-medium text-primary-foreground hover:bg-primary-active"
+              aria-label={t("searchButtonText")}
             >
               <Search className="size-4" />
-              {t("searchButtonText")}
+              <span className="hidden sm:inline">{t("searchButtonText")}</span>
             </button>
           </div>
 
