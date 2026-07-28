@@ -240,7 +240,8 @@ Write a comment only when:
 - No placeholder text.
 - No generic button labels: "Submit", "OK", "Next". Use: "Submit proof of work", "Send verification request", "Get wage estimate".
 - No generic notifications: "Saved!" → "Proof of work submitted."
-- No "Coming soon" — either ship it or hide it.
+- No "Coming soon" - either ship it or hide it.
+- No em dashes. Use hyphens or plain dashes instead.
 
 ---
 
