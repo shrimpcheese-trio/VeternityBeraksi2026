@@ -6,9 +6,35 @@ import { CategoryTabs } from "@/components/browse/category-tabs";
 import { SearchBar } from "@/components/browse/search-bar";
 import { FilterSidebar } from "@/components/browse/filter-sidebar";
 import { ListingGrid } from "@/components/browse/listing-grid";
-import { categories, listings } from "@/lib/browse/mock-data";
+import { getListings } from "@/lib/services/listings";
 
-function BrowseContent({ t }: { t: (key: string) => string }) {
+const CATEGORY_LABELS: Record<string, string> = {
+  tukang: "Tukang",
+  ac: "Teknisi AC",
+  montir: "Montir",
+  fotografer: "Fotografer",
+  guru: "Guru Les",
+  tata_rias: "Tata Rias",
+  tukang_kayu: "Tukang Kayu",
+  tukang_cat: "Tukang Cat",
+};
+
+function deriveCategories(listings: { category: string }[]) {
+  const counts: Record<string, number> = {};
+  for (const l of listings) {
+    counts[l.category] = (counts[l.category] ?? 0) + 1;
+  }
+  return Object.entries(CATEGORY_LABELS).map(([id, label]) => ({
+    id,
+    label,
+    count: counts[id] ?? 0,
+  }));
+}
+
+async function BrowseContent({ t }: { t: (key: string) => string }) {
+  const { listings } = await getListings({ limit: 50 });
+  const categories = deriveCategories(listings);
+
   return (
     <>
       <h1 className="font-heading text-4xl font-bold tracking-tight">

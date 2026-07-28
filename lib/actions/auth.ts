@@ -163,6 +163,18 @@ export async function completeProfileSetup(
     if (error) return { error: error.message, success: false };
   }
 
+  if (role === "employer") {
+    const admin = createAdminClient();
+    const { error } = await admin.from("employer_profiles").insert({
+      employer_id: user.id,
+      company_name: fullName,
+      city,
+      phone: null,
+    });
+
+    if (error) return { error: error.message, success: false };
+  }
+
   if (role === "worker") redirect("/worker/dashboard");
   if (role === "employer") redirect("/employer/dashboard");
   return { error: null, success: true };
