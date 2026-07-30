@@ -19,6 +19,8 @@ export async function createService(client: Client, workerId: string, input: Wor
       price: input.price,
       price_unit: input.priceUnit,
       category: input.category ?? null,
+      thumbnail_url: input.thumbnailUrl ?? null,
+      image_urls: input.imageUrls ?? [],
     })
     .select()
     .single();
@@ -46,6 +48,8 @@ export async function updateService(client: Client, serviceId: string, input: Wo
       ...(input.priceUnit !== undefined && { price_unit: input.priceUnit }),
       ...(input.category !== undefined && { category: input.category }),
       ...(input.isActive !== undefined && { is_active: input.isActive }),
+      ...(input.thumbnailUrl !== undefined && { thumbnail_url: input.thumbnailUrl }),
+      ...(input.imageUrls !== undefined && { image_urls: input.imageUrls }),
     })
     .eq("service_id", serviceId)
     .select()
