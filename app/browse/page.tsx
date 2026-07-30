@@ -19,6 +19,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   tukang_cat: "Tukang Cat",
 };
 
+const CATEGORY_KEYS = Object.keys(CATEGORY_LABELS);
+
 function deriveCategories(listings: { category: string }[]) {
   const counts: Record<string, number> = {};
   for (const l of listings) {
@@ -31,8 +33,25 @@ function deriveCategories(listings: { category: string }[]) {
   }));
 }
 
-async function BrowseContent({ t }: { t: (key: string) => string }) {
-  const { listings } = await getListings({ limit: 50 });
+async function BrowseContent({
+  t,
+  searchParams,
+}: {
+  t: (key: string) => string;
+  searchParams: { q?: string; category?: string; sort?: string; city?: string };
+}) {
+  const query = searchParams.q;
+  const category = CATEGORY_KEYS.includes(searchParams.category ?? "") ? searchParams.category : undefined;
+  const sort = ["experience", "trust_score", "projects"].includes(searchParams.sort ?? "") ? searchParams.sort : undefined;
+  const city = searchParams.city || undefined;
+
+  const { listings } = await getListings({
+    search: query,
+    category,
+    sort,
+    city,
+    limit: 50,
+  });
   const categories = deriveCategories(listings);
 
   return (
@@ -42,12 +61,12 @@ async function BrowseContent({ t }: { t: (key: string) => string }) {
       </h1>
 
       <div className="mt-8 flex flex-col gap-6">
-        <SearchBar placeholder={t("browse.searchPlaceholder")} />
-        <CategoryTabs categories={categories} />
+        <SearchBar placeholder={t("browse.searchPlaceholder")} defaultQuery={query ?? ""} />
+        <CategoryTabs categories={categories} activeCategory={category ?? ""} baseUrl="/browse" />
       </div>
 
       <div className="mt-8 flex flex-col gap-8 md:flex-row">
-        <FilterSidebar />
+        <FilterSidebar currentSort={sort ?? ""} baseUrl="/browse" />
 
         <div className="flex-1">
           <ListingGrid listings={listings} />
@@ -57,7 +76,12 @@ async function BrowseContent({ t }: { t: (key: string) => string }) {
   );
 }
 
-export default async function BrowsePage() {
+export default async function BrowsePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; category?: string; sort?: string; city?: string }>;
+}) {
+  const sp = await searchParams;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   const user = data?.user;
@@ -80,7 +104,7 @@ export default async function BrowsePage() {
     return (
       <DashboardLayout userName={fullName} userEmail={userEmail} avatarUrl={avatarUrl} role={role}>
         <div className="mx-auto max-w-[90rem]">
-          <BrowseContent t={t} />
+          <BrowseContent t={t} searchParams={sp} />
         </div>
       </DashboardLayout>
     );
@@ -89,7 +113,7 @@ export default async function BrowsePage() {
   return (
     <main className="mx-auto w-full max-w-[90rem] px-6 py-10">
       <SiteNav user={false} />
-      <BrowseContent t={t} />
+      <BrowseContent t={t} searchParams={sp} />
     </main>
   );
 }

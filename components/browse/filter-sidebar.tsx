@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function SelectDropdown({
   options,
@@ -62,13 +63,34 @@ function SelectDropdown({
   );
 }
 
-export function FilterSidebar() {
+const SORT_OPTIONS = [
+  { label: "Default", value: "" },
+  { label: "Pengalaman", value: "experience" },
+  { label: "Skor Kepercayaan", value: "trust_score" },
+  { label: "Jumlah Proyek", value: "projects" },
+];
+
+export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; baseUrl: string }) {
   const t = useTranslations("browse");
-  const statusOptions = t.raw("statusOptions") as string[];
-  const expOptions = t.raw("experienceOptions") as string[];
-  const [status, setStatus] = useState(statusOptions[0]);
-  const [experience, setExperience] = useState(expOptions[0]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  function setParam(key: string, value: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    router.push(`${baseUrl}?${params.toString()}`);
+  }
+
+  function reset() {
+    router.push(baseUrl);
+  }
+
+  const currentSortLabel = SORT_OPTIONS.find((o) => o.value === currentSort)?.label ?? "Default";
 
   const panel = (
     <div className="rounded-xl border border-border bg-surface-soft p-5">
@@ -76,6 +98,7 @@ export function FilterSidebar() {
         <h2 className="text-sm font-semibold">{t("filter")}</h2>
         <button
           type="button"
+          onClick={reset}
           className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
         >
           {t("resetFilter")}
@@ -85,25 +108,38 @@ export function FilterSidebar() {
       <div className="mt-6 space-y-6">
         <fieldset>
           <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            {t("statusLabel")}
+            Urutkan
           </legend>
-          <div className="space-y-2">
-            {statusOptions.map((opt) => (
-              <label
-                key={opt}
-                className="flex cursor-pointer items-center gap-2 text-sm"
-              >
-                <input
-                  type="radio"
-                  name="status"
-                  checked={status === opt}
-                  onChange={() => setStatus(opt)}
-                  className="size-4 accent-primary"
-                />
-                {opt}
-              </label>
-            ))}
-          </div>
+          <SelectDropdown
+            options={SORT_OPTIONS.map((o) => o.label)}
+            value={currentSortLabel}
+            onChange={(label) => {
+              const opt = SORT_OPTIONS.find((o) => o.label === label);
+              setParam("sort", opt?.value ?? "");
+            }}
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Kota
+          </legend>
+          <input
+            type="text"
+            defaultValue={searchParams.get("city") ?? ""}
+            placeholder="Cari kota..."
+            onBlur={(e) => {
+              const val = e.currentTarget.value.trim();
+              setParam("city", val);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const val = e.currentTarget.value.trim();
+                setParam("city", val);
+              }
+            }}
+            className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+          />
         </fieldset>
 
         <fieldset>
@@ -116,9 +152,11 @@ export function FilterSidebar() {
                 {t("experienceLabel")}
               </label>
               <SelectDropdown
-                options={expOptions}
-                value={experience}
-                onChange={setExperience}
+                options={t.raw("experienceOptions") as string[]}
+                value={(t.raw("experienceOptions") as string[])[0]}
+                onChange={() => {
+                  setParam("sort", "experience");
+                }}
               />
             </div>
 
