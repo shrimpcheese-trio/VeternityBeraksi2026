@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, MoreHorizontal } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import type { BrowseListing } from "@/lib/browse/mock-data";
+import { useRouter } from "next/navigation";
+import type { ListingResult } from "@/lib/services/listings";
 
 const statusConfig: Record<
-  BrowseListing["status"],
+  ListingResult["status"],
   { key: string; dot: string }
 > = {
   tersedia: { key: "statusAvailable", dot: "bg-green-500" },
@@ -14,22 +15,33 @@ const statusConfig: Record<
   segera: { key: "statusSoon", dot: "bg-blue-500" },
 };
 
-export function ListingCard({ listing }: { listing: BrowseListing }) {
+export function ListingCard({ listing }: { listing: ListingResult }) {
   const t = useTranslations("browse");
   const locale = useLocale();
+  const router = useRouter();
   const [liked, setLiked] = useState(listing.isFavorite);
   const cfg = statusConfig[listing.status];
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card">
+    <div
+      className="flex flex-col overflow-hidden rounded-xl border border-border bg-card cursor-pointer transition-shadow hover:shadow-md"
+      onClick={() => router.push(`/browse/${listing.id}?service=${listing.serviceId}`)}
+    >
       <div className="relative aspect-[4/3] bg-surface-soft">
+        {listing.imageUrl ? (
+          <img
+            src={listing.imageUrl}
+            alt={listing.title}
+            className="size-full object-cover"
+          />
+        ) : null}
         <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-wider text-ink shadow-sm backdrop-blur-sm">
           <span className={`size-1.5 rounded-full ${cfg.dot}`} />
           {t(cfg.key)}
         </div>
         <button
           type="button"
-          onClick={() => setLiked(!liked)}
+          onClick={(e) => { e.stopPropagation(); setLiked(!liked); }}
           className="absolute right-3 top-3 z-10 flex size-10 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm"
         >
           <Heart
@@ -45,9 +57,9 @@ export function ListingCard({ listing }: { listing: BrowseListing }) {
             <h3 className="text-sm font-semibold">{listing.title}</h3>
             <p className="text-xs text-muted-foreground">{listing.code}</p>
           </div>
-          <button type="button" className="text-muted-foreground">
-            <MoreHorizontal size={18} />
-          </button>
+          <span className="rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-medium text-green-700">
+            {listing.trustScore.toFixed(1)}
+          </span>
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg bg-surface-soft px-2 py-2 sm:gap-3 sm:px-3 sm:py-2.5">

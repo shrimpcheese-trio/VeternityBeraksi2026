@@ -5,6 +5,13 @@ import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const EXPERIENCE_BANDS = [
+  { min: 0, max: 1 },
+  { min: 1, max: 3 },
+  { min: 3, max: 5 },
+  { min: 5, max: undefined },
+];
+
 function SelectDropdown({
   options,
   value,
@@ -92,6 +99,14 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
 
   const currentSortLabel = SORT_OPTIONS.find((o) => o.value === currentSort)?.label ?? "Default";
 
+  const experienceLabels = t.raw("experienceOptions") as string[];
+  const currentExpMin = searchParams.get("exp_min");
+  const currentExpMax = searchParams.get("exp_max");
+  const currentExpIndex = EXPERIENCE_BANDS.findIndex(
+    (b) => String(b.min) === currentExpMin && String(b.max ?? "") === (currentExpMax ?? ""),
+  );
+  const currentExpLabel = currentExpIndex >= 0 ? experienceLabels[currentExpIndex] : experienceLabels[0];
+
   const panel = (
     <div className="rounded-xl border border-border bg-surface-soft p-5">
       <div className="flex items-center justify-between">
@@ -152,10 +167,20 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                 {t("experienceLabel")}
               </label>
               <SelectDropdown
-                options={t.raw("experienceOptions") as string[]}
-                value={(t.raw("experienceOptions") as string[])[0]}
-                onChange={() => {
-                  setParam("sort", "experience");
+                options={experienceLabels}
+                value={currentExpLabel}
+                onChange={(label) => {
+                  const idx = experienceLabels.indexOf(label);
+                  if (idx < 0) return;
+                  const band = EXPERIENCE_BANDS[idx];
+                  const params = new URLSearchParams(searchParams.toString());
+                  params.set("exp_min", String(band.min));
+                  if (band.max != null) {
+                    params.set("exp_max", String(band.max));
+                  } else {
+                    params.delete("exp_max");
+                  }
+                  router.push(`${baseUrl}?${params.toString()}`);
                 }}
               />
             </div>
@@ -168,11 +193,21 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                 <input
                   type="number"
                   placeholder={t("min")}
+                  defaultValue={searchParams.get("projects_min") ?? ""}
+                  onBlur={(e) => setParam("projects_min", e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") setParam("projects_min", e.currentTarget.value);
+                  }}
                   className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
                 />
                 <input
                   type="number"
                   placeholder={t("max")}
+                  defaultValue={searchParams.get("projects_max") ?? ""}
+                  onBlur={(e) => setParam("projects_max", e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") setParam("projects_max", e.currentTarget.value);
+                  }}
                   className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
                 />
               </div>
@@ -184,13 +219,23 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
               </label>
               <div className="space-y-2">
                 <input
-                  type="text"
+                  type="number"
                   placeholder={t("priceMin")}
+                  defaultValue={searchParams.get("price_min") ?? ""}
+                  onBlur={(e) => setParam("price_min", e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") setParam("price_min", e.currentTarget.value);
+                  }}
                   className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
                 />
                 <input
-                  type="text"
+                  type="number"
                   placeholder={t("priceMax")}
+                  defaultValue={searchParams.get("price_max") ?? ""}
+                  onBlur={(e) => setParam("price_max", e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") setParam("price_max", e.currentTarget.value);
+                  }}
                   className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
                 />
               </div>
