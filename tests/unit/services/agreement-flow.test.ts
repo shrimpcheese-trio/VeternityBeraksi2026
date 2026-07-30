@@ -1,0 +1,166 @@
+import { transitionAgreement } from "@/lib/services/agreement-flow";
+
+jest.mock("@/lib/supabase/server", () => ({
+  createClient: jest.fn(),
+}));
+
+jest.mock("@/lib/supabase/admin", () => ({
+  createAdminClient: jest.fn(),
+}));
+
+jest.mock("@/lib/repositories/agreement.repo", () => ({
+  getAgreementById: jest.fn(),
+  updateAgreement: jest.fn(),
+}));
+
+jest.mock("@/lib/services/trust-engine", () => ({
+  computeTrustScore: jest.fn(),
+}));
+
+const mockCreateClient = jest.mocked(
+  (jest.requireMock("@/lib/supabase/server") as { createClient: jest.Mock }).createClient,
+);
+const mockCreateAdminClient = jest.mocked(
+  (jest.requireMock("@/lib/supabase/admin") as { createAdminClient: jest.Mock }).createAdminClient,
+);
+const mockGetAgreementById = jest.mocked(
+  (jest.requireMock("@/lib/repositories/agreement.repo") as { getAgreementById: jest.Mock }).getAgreementById,
+);
+const mockUpdateAgreement = jest.mocked(
+  (jest.requireMock("@/lib/repositories/agreement.repo") as { updateAgreement: jest.Mock }).updateAgreement,
+);
+const mockComputeTrustScore = jest.mocked(
+  (jest.requireMock("@/lib/services/trust-engine") as { computeTrustScore: jest.Mock }).computeTrustScore,
+);
+
+const agreementId = "ag-001";
+const workerId = "w-001";
+const employerId = "e-001";
+const outsiderId = "o-999";
+
+function baseAgreement(overrides?: Record<string, unknown>) {
+  return {
+    agreement_id: agreementId,
+    worker_id: workerId,
+    employer_id: employerId,
+    price: 500000,
+    status: "draft",
+    location: "Jakarta",
+    work_hours: "8",
+    job_description: "AC service",
+    created_at: "2026-07-01T00:00:00Z",
+    ...overrides,
+  };
+}
+
+describe("transitionAgreement", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockCreateClient.mockResolvedValue({ from: jest.fn() });
+    mockCreateAdminClient.mockReturnValue({ from: jest.fn() });
+  });
+
+  it("throws NotFoundError when agreement does not exist", async () => {
+    mockGetAgreementById.mockResolvedValue(null);
+
+    await expect(
+      transitionAgreement(agreementId, "active", workerId),
+    ).rejects.toThrow("Agreement not found");
+  });
+
+  it("throws ForbiddenError when actor is not a party", async () => {
+    mockGetAgreementById.mockResolvedValue(baseAgreement());
+
+    await expect(
+      transitionAgreement(agreementId, "active", outsiderId),
+    ).rejects.toThrow("Actor is not a party to this agreement");
+  });
+
+  it("throws Error on invalid transition (draft -> completed)", async () => {
+    mockGetAgreementById.mockResolvedValue(baseAgreement());
+
+    await expect(
+      transitionAgreement(agreementId, "completed", workerId),
+    ).rejects.toThrow("Invalid transition from draft to completed");
+  });
+
+  it("throws Error on invalid transition (completed -> active)", async () => {
+    mockGetAgreementById.mockResolvedValue(baseAgreement({ status: "completed" }));
+
+    await expect(
+      transitionAgreement(agreementId, "active", workerId),
+    ).rejects.toThrow("Invalid transition from completed to active");
+  });
+
+  it("transitions draft -> active (worker as actor)", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "active" });
+
+    const result = await transitionAgreement(agreementId, "active", workerId);
+
+    expect(mockUpdateAgreement).toHaveBeenCalledWith(
+      expect.any(Object),
+      agreementId,
+      { status: "active" },
+    );
+    expect(mockComputeTrustScore).not.toHaveBeenCalled();
+    expect(result.status).toBe("active");
+  });
+
+  it("transitions draft -> active (employer as actor)", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "active" });
+
+    const result = await transitionAgreement(agreementId, "active", employerId);
+
+    expect(mockUpdateAgreement).toHaveBeenCalled();
+    expect(mockComputeTrustScore).not.toHaveBeenCalled();
+    expect(result.status).toBe("active");
+  });
+
+  it("recomputes trust score on active -> completed", async () => {
+    const agreement = baseAgreement({ status: "active" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "completed" });
+
+    const result = await transitionAgreement(agreementId, "completed", workerId);
+
+    expect(mockComputeTrustScore).toHaveBeenCalledWith(workerId);
+    expect(result.status).toBe("completed");
+  });
+
+  it("recomputes trust score on active -> disputed", async () => {
+    const agreement = baseAgreement({ status: "active" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "disputed" });
+
+    const result = await transitionAgreement(agreementId, "disputed", workerId);
+
+    expect(mockComputeTrustScore).toHaveBeenCalledWith(workerId);
+    expect(result.status).toBe("disputed");
+  });
+
+  it("recomputes trust score on disputed -> completed", async () => {
+    const agreement = baseAgreement({ status: "disputed" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "completed" });
+
+    const result = await transitionAgreement(agreementId, "completed", workerId);
+
+    expect(mockComputeTrustScore).toHaveBeenCalledWith(workerId);
+    expect(result.status).toBe("completed");
+  });
+
+  it("uses admin client to perform the update", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "active" });
+
+    await transitionAgreement(agreementId, "active", workerId);
+
+    expect(mockCreateAdminClient).toHaveBeenCalled();
+    expect(mockCreateClient).toHaveBeenCalled();
+  });
+});

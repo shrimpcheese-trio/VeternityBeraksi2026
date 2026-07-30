@@ -4,12 +4,14 @@ import { ChevronDown } from "lucide-react"
 type Option = { value: string; label: string }
 
 export function Select({
+  name,
   options,
   value,
   onValueChange,
   placeholder,
   className,
 }: {
+  name?: string
   options: Option[]
   value: string
   onValueChange: (v: string) => void
@@ -19,6 +21,7 @@ export function Select({
   return (
     <div className="relative">
       <select
+        name={name}
         value={value}
         onChange={(e) => onValueChange(e.target.value)}
         className={cn(

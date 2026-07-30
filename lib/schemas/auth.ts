@@ -12,10 +12,19 @@ export const signInEmailSchema = z.object({
   password: z.string().min(1, "Password harus diisi"),
 });
 
-export const profileSetupSchema = z.object({
-  fullName: z.string().min(2, "Nama minimal 2 karakter"),
-  city: z.string().min(3, "Kota harus diisi"),
-  jobCategory: z.string().min(3, "Kategori pekerjaan harus diisi"),
-  yearsExperience: z.coerce.number().min(0, "Tahun pengalaman tidak valid"),
-  role: z.enum(["worker", "employer"]),
-});
+export const profileSetupSchema = z.discriminatedUnion("role", [
+  z.object({
+    role: z.literal("worker"),
+    fullName: z.string().min(2, "Nama minimal 2 karakter"),
+    city: z.string().min(3, "Kota harus diisi"),
+    jobCategory: z.string().min(3, "Kategori pekerjaan harus diisi"),
+    yearsExperience: z.coerce.number().min(0, "Tahun pengalaman tidak valid"),
+  }),
+  z.object({
+    role: z.literal("employer"),
+    fullName: z.string().min(2, "Nama minimal 2 karakter"),
+    city: z.string().min(3, "Kota harus diisi"),
+    companyName: z.string().min(2, "Nama perusahaan minimal 2 karakter").optional(),
+    phone: z.string().optional(),
+  }),
+]);

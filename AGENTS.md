@@ -39,6 +39,7 @@ types/                — Shared TypeScript types/interfaces
 public/               — Static assets
 supabase/
   migrations/         — SQL migrations (always reversible)
+proxy.ts              — Next.js middleware (named proxy.ts, not middleware.ts)
 docs/                 — All documentation
 tests/                — Unit, integration, and Playwright tests
 ```
@@ -240,7 +241,8 @@ Write a comment only when:
 - No placeholder text.
 - No generic button labels: "Submit", "OK", "Next". Use: "Submit proof of work", "Send verification request", "Get wage estimate".
 - No generic notifications: "Saved!" → "Proof of work submitted."
-- No "Coming soon" — either ship it or hide it.
+- No "Coming soon" - either ship it or hide it.
+- No em dashes. Use hyphens or plain dashes instead.
 
 ---
 

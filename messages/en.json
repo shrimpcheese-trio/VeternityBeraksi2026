@@ -194,10 +194,43 @@
   "allCategories": "All Categories",
     "completedProjects": "Projects Completed",
     "startingPrice": "Starting from",
+    "noImage": "No image",
     "bookedFrom": "Booked from",
     "statusAvailable": "Available",
     "statusInProgress": "In Progress",
-    "statusSoon": "Soon"
+    "statusSoon": "Soon",
+    "commissionModal": {
+      "title": "Order Service",
+      "workerInfo": "Worker Info",
+      "trustScore": "Trust Score",
+      "gallery": "Gallery",
+      "noGallery": "No gallery photos yet.",
+      "jobDescription": "Job Description",
+      "jobDescriptionPlaceholder": "Describe the work needed...",
+      "offerPrice": "Offer Price",
+      "location": "Location",
+      "locationPlaceholder": "Enter the work location address",
+      "workHours": "Work Hours",
+      "workHoursPlaceholder": "E.g. 08:00 - 17:00",
+      "submit": "Submit Order",
+      "submitting": "Submitting...",
+      "success": "Order submitted!",
+      "successDescription": "The worker will review your order.",
+      "viewAgreements": "View My Orders",
+      "loginPrompt": "Log in as an employer to order this service",
+      "loginLink": "Log In"
+    },
+    "serviceImages": {
+      "tabLabel": "Service Photos",
+      "thumbnailLabel": "Thumbnail",
+      "thumbnailDesc": "Upload a main photo for this service",
+      "galleryLabel": "Gallery",
+      "galleryDesc": "Upload up to 5 additional photos",
+      "addPhoto": "Add Photo",
+      "maxPhotos": "Maximum 5 photos",
+      "changePhoto": "Change",
+      "required": "Required"
+    }
   },
   "contact": {
     "title": "Contact Us",
@@ -236,7 +269,9 @@
       "companyVerified": "Company Verified",
       "paymentVerified": "Payment Verified",
       "trustScore": "Trust Score",
-      "noBio": "No description yet."
+      "noBio": "No description yet.",
+      "jobsPosted": "Jobs Posted",
+      "totalSpending": "Total Spending"
     },
     "tabs": {
       "overview": "Overview",
@@ -361,8 +396,6 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
       "updatePassword": "Update Password",
-      "twoFactor": "Two-Factor Authentication",
-      "twoFactorHelper": "Add an extra layer of security with a verification code",
       "sessions": "Active Sessions",
       "revoke": "Revoke"
     },
@@ -378,10 +411,9 @@
       "generalLabel": "GENERAL",
       "menu": {
         "dashboard": "Dashboard",
-        "tasks": "Tasks",
+        "jobs": "Jobs",
+        "services": "Services",
         "calendar": "Calendar",
-        "analytics": "Analytics",
-        "team": "Team",
         "browse": "Browse"
       },
       "general": {

@@ -194,10 +194,43 @@
   "allCategories": "Semua Kategori",
     "completedProjects": "Proyek Selesai",
     "startingPrice": "Tarif Mulai",
+    "noImage": "Tidak ada foto",
     "bookedFrom": "Dipesan dari",
     "statusAvailable": "Tersedia",
     "statusInProgress": "Dalam Proyek",
-    "statusSoon": "Segera"
+    "statusSoon": "Segera",
+    "commissionModal": {
+      "title": "Pesan Jasa",
+      "workerInfo": "Informasi Pekerja",
+      "trustScore": "Skor Kepercayaan",
+      "gallery": "Galeri",
+      "noGallery": "Belum ada foto galeri.",
+      "jobDescription": "Deskripsi Pekerjaan",
+      "jobDescriptionPlaceholder": "Jelaskan pekerjaan yang perlu dilakukan...",
+      "offerPrice": "Harga Penawaran",
+      "location": "Lokasi",
+      "locationPlaceholder": "Masukkan alamat lokasi pekerjaan",
+      "workHours": "Jam Kerja",
+      "workHoursPlaceholder": "Misal: 08:00 - 17:00",
+      "submit": "Ajukan Pesanan",
+      "submitting": "Mengirim...",
+      "success": "Pesanan berhasil diajukan!",
+      "successDescription": "Pekerja akan meninjau pesanan Anda.",
+      "viewAgreements": "Lihat Pesanan Saya",
+      "loginPrompt": "Masuk sebagai pemberi kerja untuk memesan jasa ini",
+      "loginLink": "Masuk"
+    },
+    "serviceImages": {
+      "tabLabel": "Foto Layanan",
+      "thumbnailLabel": "Thumbnail",
+      "thumbnailDesc": "Upload foto utama untuk layanan ini",
+      "galleryLabel": "Galeri",
+      "galleryDesc": "Upload hingga 5 foto tambahan",
+      "addPhoto": "Tambah Foto",
+      "maxPhotos": "Maksimal 5 foto",
+      "changePhoto": "Ganti",
+      "required": "Wajib diisi"
+    }
   },
   "contact": {
     "title": "Hubungi Kami",
@@ -236,7 +269,9 @@
       "companyVerified": "Perusahaan Terverifikasi",
       "paymentVerified": "Pembayaran Terverifikasi",
       "trustScore": "Skor Kepercayaan",
-      "noBio": "Belum ada deskripsi."
+      "noBio": "Belum ada deskripsi.",
+      "jobsPosted": "Pekerjaan Dipasang",
+      "totalSpending": "Total Pengeluaran"
     },
     "tabs": {
       "overview": "Ringkasan",
@@ -361,8 +396,6 @@
       "newPassword": "Kata Sandi Baru",
       "confirmPassword": "Konfirmasi Kata Sandi",
       "updatePassword": "Perbarui Kata Sandi",
-      "twoFactor": "Autentikasi Dua Faktor",
-      "twoFactorHelper": "Tingkatkan keamanan dengan kode verifikasi tambahan",
       "sessions": "Sesi Aktif",
       "revoke": "Cabut"
     },
@@ -378,10 +411,9 @@
       "generalLabel": "UMUM",
       "menu": {
         "dashboard": "Dashboard",
-        "tasks": "Tugas",
+        "jobs": "Pekerjaan",
+        "services": "Layanan",
         "calendar": "Kalender",
-        "analytics": "Analitik",
-        "team": "Tim",
         "browse": "Jelajahi"
       },
       "general": {

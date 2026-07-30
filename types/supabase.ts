@@ -11,6 +11,8 @@ export interface Database {
           job_category: string;
           years_experience: number;
           trust_score: number;
+          bio: string;
+          location_visible: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -21,6 +23,8 @@ export interface Database {
           job_category: string;
           years_experience?: number;
           trust_score?: number;
+          bio?: string;
+          location_visible?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -31,9 +35,39 @@ export interface Database {
           job_category?: string;
           years_experience?: number;
           trust_score?: number;
+          bio?: string;
+          location_visible?: boolean;
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
+      };
+      employer_profiles: {
+        Row: {
+          employer_id: string;
+          company_name: string;
+          city: string;
+          phone: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          employer_id: string;
+          company_name: string;
+          city: string;
+          phone?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          employer_id?: string;
+          company_name?: string;
+          city?: string;
+          phone?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
       community_verifications: {
         Row: {
@@ -42,6 +76,7 @@ export interface Database {
           verifier_name: string;
           verifier_role: string;
           statement: string | null;
+          rating: number | null;
           created_at: string;
         };
         Insert: {
@@ -50,6 +85,7 @@ export interface Database {
           verifier_name: string;
           verifier_role: string;
           statement?: string | null;
+          rating?: number | null;
           created_at?: string;
         };
         Update: {
@@ -58,8 +94,10 @@ export interface Database {
           verifier_name?: string;
           verifier_role?: string;
           statement?: string | null;
+          rating?: number | null;
           created_at?: string;
         };
+        Relationships: [];
       };
       proof_of_work: {
         Row: {
@@ -72,6 +110,7 @@ export interface Database {
           location_lat: number | null;
           location_lng: number | null;
           customer_confirmed: boolean;
+          verified: boolean;
           job_date: string;
           created_at: string;
         };
@@ -85,6 +124,7 @@ export interface Database {
           location_lat?: number | null;
           location_lng?: number | null;
           customer_confirmed?: boolean;
+          verified?: boolean;
           job_date: string;
           created_at?: string;
         };
@@ -98,9 +138,11 @@ export interface Database {
           location_lat?: number | null;
           location_lng?: number | null;
           customer_confirmed?: boolean;
+          verified?: boolean;
           job_date?: string;
           created_at?: string;
         };
+        Relationships: [];
       };
       wage_estimates: {
         Row: {
@@ -130,6 +172,7 @@ export interface Database {
           max_wage?: number;
           updated_at?: string;
         };
+        Relationships: [];
       };
       agreements: {
         Row: {
@@ -140,6 +183,7 @@ export interface Database {
           location: string | null;
           work_hours: string | null;
           job_description: string | null;
+          status: string;
           created_at: string;
         };
         Insert: {
@@ -150,6 +194,7 @@ export interface Database {
           location?: string | null;
           work_hours?: string | null;
           job_description?: string | null;
+          status?: string;
           created_at?: string;
         };
         Update: {
@@ -160,9 +205,79 @@ export interface Database {
           location?: string | null;
           work_hours?: string | null;
           job_description?: string | null;
+          status?: string;
           created_at?: string;
         };
+        Relationships: [];
+      };
+      worker_services: {
+        Row: {
+          service_id: string;
+          worker_id: string;
+          name: string;
+          description: string | null;
+          price: number;
+          price_unit: string;
+          category: string | null;
+          is_active: boolean;
+          thumbnail_url: string | null;
+          image_urls: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          service_id?: string;
+          worker_id: string;
+          name: string;
+          description?: string | null;
+          price: number;
+          price_unit?: string;
+          category?: string | null;
+          is_active?: boolean;
+          thumbnail_url?: string | null;
+          image_urls?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          service_id?: string;
+          worker_id?: string;
+          name?: string;
+          description?: string | null;
+          price?: number;
+          price_unit?: string;
+          category?: string | null;
+          is_active?: boolean;
+          thumbnail_url?: string | null;
+          image_urls?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      trust_score: {
+        Row: {
+          worker_id: string;
+          score: number;
+          breakdown: Json;
+          updated_at: string;
+        };
+        Insert: {
+          worker_id: string;
+          score?: number;
+          breakdown?: Json;
+          updated_at?: string;
+        };
+        Update: {
+          worker_id?: string;
+          score?: number;
+          breakdown?: Json;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
   };
 }

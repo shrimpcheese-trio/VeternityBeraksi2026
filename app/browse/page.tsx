@@ -6,9 +6,66 @@ import { CategoryTabs } from "@/components/browse/category-tabs";
 import { SearchBar } from "@/components/browse/search-bar";
 import { FilterSidebar } from "@/components/browse/filter-sidebar";
 import { ListingGrid } from "@/components/browse/listing-grid";
-import { categories, listings } from "@/lib/browse/mock-data";
+import { getListings } from "@/lib/services/listings";
 
-function BrowseContent({ t }: { t: (key: string) => string }) {
+const CATEGORY_LABELS: Record<string, string> = {
+  tukang: "Tukang",
+  ac: "Teknisi AC",
+  montir: "Montir",
+  fotografer: "Fotografer",
+  guru: "Guru Les",
+  tata_rias: "Tata Rias",
+  tukang_kayu: "Tukang Kayu",
+  tukang_cat: "Tukang Cat",
+};
+
+const CATEGORY_KEYS = Object.keys(CATEGORY_LABELS);
+
+function deriveCategories(listings: { category: string }[]) {
+  const counts: Record<string, number> = {};
+  for (const l of listings) {
+    counts[l.category] = (counts[l.category] ?? 0) + 1;
+  }
+  return Object.entries(CATEGORY_LABELS).map(([id, label]) => ({
+    id,
+    label,
+    count: counts[id] ?? 0,
+  }));
+}
+
+async function BrowseContent({
+  t,
+  searchParams,
+}: {
+  t: (key: string) => string;
+  searchParams: { q?: string; category?: string; sort?: string; city?: string; exp_min?: string; exp_max?: string; projects_min?: string; projects_max?: string; price_min?: string; price_max?: string };
+}) {
+  const query = searchParams.q;
+  const category = CATEGORY_KEYS.includes(searchParams.category ?? "") ? searchParams.category : undefined;
+  const sort = ["experience", "trust_score", "projects"].includes(searchParams.sort ?? "") ? searchParams.sort : undefined;
+  const city = searchParams.city || undefined;
+  const expMin = searchParams.exp_min ? parseInt(searchParams.exp_min, 10) : undefined;
+  const expMax = searchParams.exp_max ? parseInt(searchParams.exp_max, 10) : undefined;
+  const projectsMin = searchParams.projects_min ? parseInt(searchParams.projects_min, 10) : undefined;
+  const projectsMax = searchParams.projects_max ? parseInt(searchParams.projects_max, 10) : undefined;
+  const priceMin = searchParams.price_min ? parseInt(searchParams.price_min, 10) : undefined;
+  const priceMax = searchParams.price_max ? parseInt(searchParams.price_max, 10) : undefined;
+
+  const { listings } = await getListings({
+    search: query,
+    category,
+    sort,
+    city,
+    experience_min: expMin,
+    experience_max: expMax,
+    projects_min: projectsMin,
+    projects_max: projectsMax,
+    price_min: priceMin,
+    price_max: priceMax,
+    limit: 50,
+  });
+  const categories = deriveCategories(listings);
+
   return (
     <>
       <h1 className="font-heading text-4xl font-bold tracking-tight">
@@ -16,12 +73,12 @@ function BrowseContent({ t }: { t: (key: string) => string }) {
       </h1>
 
       <div className="mt-8 flex flex-col gap-6">
-        <SearchBar placeholder={t("browse.searchPlaceholder")} />
-        <CategoryTabs categories={categories} />
+        <SearchBar placeholder={t("browse.searchPlaceholder")} defaultQuery={query ?? ""} />
+        <CategoryTabs categories={categories} activeCategory={category ?? ""} baseUrl="/browse" />
       </div>
 
       <div className="mt-8 flex flex-col gap-8 md:flex-row">
-        <FilterSidebar />
+        <FilterSidebar currentSort={sort ?? ""} baseUrl="/browse" />
 
         <div className="flex-1">
           <ListingGrid listings={listings} />
@@ -31,7 +88,12 @@ function BrowseContent({ t }: { t: (key: string) => string }) {
   );
 }
 
-export default async function BrowsePage() {
+export default async function BrowsePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; category?: string; sort?: string; city?: string; exp_min?: string; exp_max?: string; projects_min?: string; projects_max?: string; price_min?: string; price_max?: string }>;
+}) {
+  const sp = await searchParams;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   const user = data?.user;
@@ -54,7 +116,7 @@ export default async function BrowsePage() {
     return (
       <DashboardLayout userName={fullName} userEmail={userEmail} avatarUrl={avatarUrl} role={role}>
         <div className="mx-auto max-w-[90rem]">
-          <BrowseContent t={t} />
+          <BrowseContent t={t} searchParams={sp} />
         </div>
       </DashboardLayout>
     );
@@ -63,7 +125,7 @@ export default async function BrowsePage() {
   return (
     <main className="mx-auto w-full max-w-[90rem] px-6 py-10">
       <SiteNav user={false} />
-      <BrowseContent t={t} />
+      <BrowseContent t={t} searchParams={sp} />
     </main>
   );
 }

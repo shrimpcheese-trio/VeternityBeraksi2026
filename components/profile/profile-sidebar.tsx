@@ -29,10 +29,14 @@ export function ProfileSidebar({
   profile,
   sessionAvatarUrl,
   sessionName,
+  userRole,
+  totalSpending,
 }: {
   profile: ProfileData;
   sessionAvatarUrl?: string;
   sessionName?: string;
+  userRole?: "worker" | "employer";
+  totalSpending?: number;
 }) {
   const t = useTranslations("profile.sidebar");
   const displayName = sessionName ?? profile.name;
@@ -67,22 +71,45 @@ export function ProfileSidebar({
       </p>
 
       <div className="flex justify-around rounded-xl bg-surface-card py-3">
-        <div className="text-center">
-          <p className="text-lg font-semibold">{profile.completedJobs}</p>
-          <p className="text-xs text-muted-foreground">{t("completedJobs")}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-lg font-semibold">{profile.activeListings}</p>
-          <p className="text-xs text-muted-foreground">{t("activeListings")}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-lg font-semibold">{profile.rating.toFixed(1)}</p>
-          <p className="text-xs text-muted-foreground">{t("rating")}</p>
-        </div>
+        {userRole === "employer" ? (
+          <>
+            <div className="text-center">
+              <p className="text-lg font-semibold">{profile.activeListings}</p>
+              <p className="text-xs text-muted-foreground">{t("jobsPosted")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-semibold">{profile.completedJobs}</p>
+              <p className="text-xs text-muted-foreground">{t("completedJobs")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-semibold">
+                {totalSpending !== undefined
+                  ? `Rp ${(totalSpending / 1_000_000).toFixed(1)} Jt`
+                  : "Rp 0"}
+              </p>
+              <p className="text-xs text-muted-foreground">{t("totalSpending")}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-center">
+              <p className="text-lg font-semibold">{profile.completedJobs}</p>
+              <p className="text-xs text-muted-foreground">{t("completedJobs")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-semibold">{profile.activeListings}</p>
+              <p className="text-xs text-muted-foreground">{t("activeListings")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-semibold">{profile.rating.toFixed(1)}</p>
+              <p className="text-xs text-muted-foreground">{t("rating")}</p>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="grid gap-2.5">
-        {profile.location && (
+        {profile.location && profile.locationVisible !== false && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <MapPin className="size-4 shrink-0" />
             <span className="truncate">{profile.location}</span>
