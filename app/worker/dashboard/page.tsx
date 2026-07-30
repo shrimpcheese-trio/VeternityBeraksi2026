@@ -5,25 +5,100 @@ import { KpiCard } from "@/components/dashboard/kpi-card";
 import { ChartWidget } from "@/components/dashboard/chart-widget";
 import { ReminderCard } from "@/components/dashboard/reminder-card";
 
-const monthlyJobs = [
-  { label: "Jan", value: 4 },
-  { label: "Feb", value: 3 },
-  { label: "Mar", value: 6 },
-  { label: "Apr", value: 5 },
-  { label: "Mei", value: 7 },
-  { label: "Jun", value: 5 },
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
+  "Jul", "Agu", "Sep", "Okt", "Nov", "Des",
 ];
 
-const reminders = [
-  { title: "Servis AC - Pak Budi", subtitle: "Besok, 09:00 - Jl. Merdeka No. 12" },
-  { title: "Renovasi Kamar Mandi", subtitle: "3 hari lagi - Perumahan Griya Asri" },
-  { title: "Konfirmasi Pelanggan", subtitle: "Menunggu konfirmasi 2 pekerjaan" },
-];
+function buildMonthlyChart(agreements: { status: string; created_at: string }[]) {
+  const now = new Date();
+  const months: { label: string; value: number }[] = [];
+
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const next = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    const count = agreements.filter((a) => {
+      const c = new Date(a.created_at);
+      return c >= d && c < next;
+    }).length;
+    months.push({ label: MONTH_NAMES[d.getMonth()], value: count });
+  }
+
+  return months;
+}
+
+function computeTrend(current: number, previous: number): { direction: "up" | "down"; text: string } {
+  if (previous === 0 && current === 0) return { direction: "up", text: "Belum ada data" };
+  if (previous === 0) return { direction: "up", text: "Data baru tersedia" };
+  const pct = Math.round(((current - previous) / previous) * 100);
+  if (pct >= 0) return { direction: "up", text: `+${pct}% dari periode lalu` };
+  return { direction: "down", text: `${pct}% dari periode lalu` };
+}
 
 export default async function WorkerDashboard() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   const fullName = user?.user_metadata?.full_name ?? "Pekerja";
+
+  const [trustResult, agreementsResult, proofsResult] = await Promise.all([
+    supabase
+      .from("trust_score")
+      .select("score")
+      .eq("worker_id", user?.id ?? "")
+      .maybeSingle(),
+    supabase
+      .from("agreements")
+      .select("status, price, created_at")
+      .eq("worker_id", user?.id ?? ""),
+    supabase
+      .from("proof_of_work")
+      .select("job_type, job_date")
+      .eq("worker_id", user?.id ?? "")
+      .order("created_at", { ascending: false })
+      .limit(3),
+  ]);
+
+  const agreements = agreementsResult.data ?? [];
+  const completed = agreements.filter((a) => a.status === "completed");
+  const totalCompleted = completed.length;
+  const revenue = completed.reduce((sum, a) => sum + (a.price ?? 0), 0);
+
+  const score = trustResult.data?.score ?? null;
+  const scoreDisplay = score !== null ? `${score.toFixed(1)}/5.0` : "--/5.0";
+
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
+
+  const recentCompleted = completed.filter((a) => new Date(a.created_at) >= thirtyDaysAgo).length;
+  const priorCompleted = completed.filter(
+    (a) => new Date(a.created_at) >= sixtyDaysAgo && new Date(a.created_at) < thirtyDaysAgo,
+  ).length;
+
+  const recentRevenue = completed
+    .filter((a) => new Date(a.created_at) >= thirtyDaysAgo)
+    .reduce((s, a) => s + (a.price ?? 0), 0);
+  const priorRevenue = completed
+    .filter((a) => new Date(a.created_at) >= sixtyDaysAgo && new Date(a.created_at) < thirtyDaysAgo)
+    .reduce((s, a) => s + (a.price ?? 0), 0);
+
+  const chartData = buildMonthlyChart(agreements);
+
+  const reminders = (proofsResult.data ?? []).map((p) => ({
+    title: p.job_type,
+    subtitle: new Date(p.job_date).toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+  }));
+
+  if (agreements.filter((a) => a.status === "draft").length > 0) {
+    reminders.unshift({
+      title: "Penawaran Pekerjaan Baru",
+      subtitle: `${agreements.filter((a) => a.status === "draft").length} penawaran menunggu`,
+    });
+  }
 
   return (
     <div className="space-y-6">
@@ -51,32 +126,32 @@ export default async function WorkerDashboard() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <KpiCard
           label="Skor Kepercayaan"
-          value="4.2/5.0"
-          trendDirection="up"
-          trendText="+0.3 dari bulan lalu"
+          value={scoreDisplay}
+          trendDirection={computeTrend(0, 0).direction as "up" | "down"}
+          trendText={score !== null ? `${score.toFixed(1)} dari 5.0` : "Belum dihitung"}
           variant="highlighted"
         />
         <KpiCard
           label="Proyek Selesai"
-          value="24"
-          trendDirection="up"
-          trendText="+12% dari bulan lalu"
+          value={String(totalCompleted)}
+          trendDirection={computeTrend(recentCompleted, priorCompleted).direction}
+          trendText={computeTrend(recentCompleted, priorCompleted).text}
         />
         <KpiCard
           label="Total Pendapatan"
-          value="Rp 48,5 Jt"
-          trendDirection="up"
-          trendText="+18% dari bulan lalu"
+          value={`Rp ${(revenue / 1_000_000).toFixed(1)} Jt`}
+          trendDirection={computeTrend(recentRevenue, priorRevenue).direction}
+          trendText={computeTrend(recentRevenue, priorRevenue).text}
         />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <ChartWidget title="Pekerjaan per Bulan" data={monthlyJobs} />
+          <ChartWidget title="Pekerjaan per Bulan" data={chartData} />
         </div>
         <ReminderCard
           title="Aktivitas Terbaru"
-          items={reminders}
+          items={reminders.slice(0, 3)}
           actionLabel="Lihat Semua"
         />
       </div>

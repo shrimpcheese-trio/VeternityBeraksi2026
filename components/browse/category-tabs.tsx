@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Category {
   id: string;
@@ -10,10 +11,21 @@ interface Category {
   count: number;
 }
 
-export function CategoryTabs({ categories }: { categories: Category[] }) {
+function navigate(router: ReturnType<typeof useRouter>, searchParams: URLSearchParams, baseUrl: string, categoryId: string) {
+  const params = new URLSearchParams(searchParams.toString());
+  if (categoryId) {
+    params.set("category", categoryId);
+  } else {
+    params.delete("category");
+  }
+  router.push(`${baseUrl}?${params.toString()}`);
+}
+
+export function CategoryTabs({ categories, activeCategory, baseUrl }: { categories: Category[]; activeCategory: string; baseUrl: string }) {
   const t = useTranslations("browse");
   const locale = useLocale();
-  const [active, setActive] = useState(categories[2]?.id ?? "");
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [show, setShow] = useState(false);
   const [animatingOut, setAnimatingOut] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -85,12 +97,12 @@ export function CategoryTabs({ categories }: { categories: Category[] }) {
     <>
       <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
         {categories.slice(0, 4).map((cat) => {
-          const isActive = cat.id === active;
+          const isActive = cat.id === activeCategory;
           return (
             <button
               key={cat.id}
               type="button"
-              onClick={() => setActive(cat.id)}
+              onClick={() => navigate(router, searchParams, baseUrl, cat.id)}
               className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-3 text-sm font-medium transition-colors ${
                 isActive
                   ? "bg-primary text-on-primary"
@@ -145,13 +157,13 @@ export function CategoryTabs({ categories }: { categories: Category[] }) {
 
             <div className="mt-5 grid grid-cols-2 gap-3">
               {categories.map((cat) => {
-                const isActive = cat.id === active;
+                const isActive = cat.id === activeCategory;
                 return (
                   <button
                     key={cat.id}
                     type="button"
                     onClick={() => {
-                      setActive(cat.id);
+                      navigate(router, searchParams, baseUrl, cat.id);
                       close();
                     }}
                     className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors ${

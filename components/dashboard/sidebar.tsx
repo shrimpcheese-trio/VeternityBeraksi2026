@@ -5,11 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  ListChecks,
   Calendar,
-  BarChart3,
-  Users,
   Search,
+  Briefcase,
+  Package,
   Trophy,
   Sparkles,
   ArrowRight,
@@ -26,14 +25,30 @@ type MenuItem = {
 };
 
 function getMenuItems(role: "worker" | "employer"): MenuItem[] {
-  return [
+  const items: MenuItem[] = [
     { key: "dashboard", icon: LayoutDashboard, href: `/${role}/dashboard` },
     { key: "browse", icon: Search, href: "/browse" },
-    { key: "tasks", icon: ListChecks, href: "#", badge: "12" },
-    { key: "calendar", icon: Calendar, href: "#" },
-    { key: "analytics", icon: BarChart3, href: "#" },
-    { key: "team", icon: Users, href: "#" },
   ];
+
+  items.push({
+    key: "jobs",
+    icon: Briefcase,
+    href: `/${role === "worker" ? "worker" : "employer"}/agreements`,
+  });
+
+  if (role === "worker") {
+    items.push({
+      key: "services",
+      icon: Package,
+      href: "/worker/services",
+    });
+  }
+
+  items.push(
+    { key: "calendar", icon: Calendar, href: `/${role}/calendar` },
+  );
+
+  return items;
 }
 
 export function Sidebar({ role }: { role: "worker" | "employer" }) {

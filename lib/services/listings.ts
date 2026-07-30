@@ -81,7 +81,9 @@ export async function getListings(filters: ListingsFilters): Promise<ListingsRes
     query = query.ilike("full_name", `%${filters.search}%`);
   }
 
-  const sortField = filters.sort === "experience" ? "years_experience" : "created_at";
+  const sortField = filters.sort === "experience" ? "years_experience"
+    : filters.sort === "trust_score" ? "trust_score"
+    : "created_at";
   query = query.order(sortField, { ascending: false });
 
   query = query.range(offset, offset + limit - 1);
@@ -137,26 +139,46 @@ export async function getListings(filters: ListingsFilters): Promise<ListingsRes
     }
   }
 
+  const { data: workerServices } = await admin
+    .from("worker_services")
+    .select("*")
+    .in("worker_id", workerIds)
+    .eq("is_active", true);
+
+  const serviceMap: Record<string, { name: string; price: number }> = {};
+  if (workerServices) {
+    for (const s of workerServices) {
+      if (!serviceMap[s.worker_id]) {
+        serviceMap[s.worker_id] = { name: s.name, price: s.price };
+      }
+    }
+  }
+
   const listings: ListingResult[] = workers.map((worker, idx) => {
     const verifiedCount = proofCounts[worker.worker_id] ?? 0;
     const activeCount = activeCounts[worker.worker_id] ?? 0;
     const wageKey = `${worker.city}|${worker.job_category}`;
     const estimatedPrice = wageMap[wageKey] ?? 0;
+    const service = serviceMap[worker.worker_id];
 
     return {
       id: worker.worker_id,
-      title: deriveTitle(worker.job_category),
+      title: service?.name ?? deriveTitle(worker.job_category),
       code: deriveCode(worker.full_name, idx),
       category: worker.job_category,
       status: deriveStatus(activeCount, verifiedCount),
       imageUrl: "",
       projectCount: verifiedCount,
-      price: estimatedPrice,
+      price: service?.price ?? estimatedPrice,
       workerName: worker.full_name,
       workerRole: STATUS_LABELS[worker.job_category] ?? worker.job_category,
       isFavorite: false,
     };
   });
+
+  if (filters.sort === "projects") {
+    listings.sort((a, b) => b.projectCount - a.projectCount);
+  }
 
   return { listings, total: count ?? 0 };
 }
