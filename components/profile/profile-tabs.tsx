@@ -21,6 +21,8 @@ export function ProfileTabs({
   chartData,
   activity,
   isOwn,
+  userRole,
+  recentAgreements,
 }: {
   profile: ProfileData
   listings: Listing[]
@@ -30,17 +32,27 @@ export function ProfileTabs({
   chartData: ChartData[]
   activity: ActivityGroup[]
   isOwn: boolean
+  userRole?: "worker" | "employer"
+  recentAgreements?: Array<{ job_description: string | null; price: number | null; status: string; created_at: string }>
 }) {
   const t = useTranslations("profile.tabs")
   const [activeTab, setActiveTab] = useState<TabId>("overview")
 
-  const tabs: { id: TabId; label: string; count?: number }[] = [
-    { id: "overview", label: t("overview") },
-    { id: "listings", label: t("listings"), count: listings.length },
-    { id: "contracts", label: t("contracts"), count: contracts.length },
-    { id: "reviews", label: t("reviews"), count: reviews.length },
-    { id: "documents", label: t("documents"), count: documents.length },
-  ]
+  const isEmployer = userRole === "employer"
+
+  const tabs: { id: TabId; label: string; count?: number }[] = isEmployer
+    ? [
+        { id: "overview", label: t("overview") },
+        { id: "listings", label: t("listings"), count: listings.length },
+        { id: "reviews", label: t("reviews"), count: reviews.length },
+      ]
+    : [
+        { id: "overview", label: t("overview") },
+        { id: "listings", label: t("listings"), count: listings.length },
+        { id: "contracts", label: t("contracts"), count: contracts.length },
+        { id: "reviews", label: t("reviews"), count: reviews.length },
+        { id: "documents", label: t("documents"), count: documents.length },
+      ]
 
   const visibleTabs = isOwn ? tabs : tabs.filter((tb) => tb.id !== "contracts")
 
@@ -84,6 +96,9 @@ export function ProfileTabs({
           listings={listings}
           chartData={chartData}
           activity={activity}
+          userRole={userRole}
+          profile={profile}
+          recentAgreements={recentAgreements}
         />
       )}
       {activeTab === "listings" && <ListingsTab listings={listings} />}
