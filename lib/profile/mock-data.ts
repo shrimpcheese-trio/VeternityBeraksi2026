@@ -6,6 +6,7 @@ export type ProfileData = {
   bio: string
   company?: string
   location: string
+  locationVisible?: boolean
   memberSince: string
   contact?: string
   website?: string
