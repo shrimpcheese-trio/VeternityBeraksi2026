@@ -7,6 +7,7 @@ import {
   signInEmailSchema,
   profileSetupSchema,
 } from "@/lib/schemas/auth";
+import { createWorker } from "@/lib/repositories/worker.repo";
 import { redirect } from "next/navigation";
 import type { AuthState } from "@/types/auth";
 
@@ -126,19 +127,24 @@ export async function completeProfileSetup(
   prevState: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
-  const parsed = profileSetupSchema.safeParse({
+  const raw: Record<string, unknown> = {
     fullName: formData.get("fullName"),
     city: formData.get("city"),
     jobCategory: formData.get("jobCategory"),
     yearsExperience: formData.get("yearsExperience"),
     role: formData.get("role"),
-  });
+  };
+
+  if (formData.has("companyName")) raw.companyName = formData.get("companyName");
+  if (formData.has("phone")) raw.phone = formData.get("phone");
+
+  const parsed = profileSetupSchema.safeParse(raw);
 
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Data tidak valid", success: false };
   }
 
-  const { fullName, city, jobCategory, yearsExperience, role } = parsed.data;
+  const data = parsed.data;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -147,36 +153,37 @@ export async function completeProfileSetup(
   }
 
   await supabase.auth.updateUser({
-    data: { full_name: fullName, role },
+    data: { full_name: data.fullName, role: data.role },
   });
 
-  if (role === "worker") {
-    const admin = createAdminClient();
-    const { error } = await admin.from("worker_profiles").insert({
-      worker_id: user.id,
-      full_name: fullName,
-      city,
-      job_category: jobCategory,
-      years_experience: yearsExperience,
-    });
-
-    if (error) return { error: error.message, success: false };
+  if (data.role === "worker") {
+    try {
+      await createWorker(supabase, {
+        workerId: user.id,
+        fullName: data.fullName,
+        city: data.city,
+        jobCategory: data.jobCategory,
+        yearsExperience: data.yearsExperience,
+      });
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : "Gagal membuat profil", success: false };
+    }
   }
 
-  if (role === "employer") {
+  if (data.role === "employer") {
     const admin = createAdminClient();
     const { error } = await admin.from("employer_profiles").insert({
       employer_id: user.id,
-      company_name: fullName,
-      city,
-      phone: null,
+      company_name: data.companyName || data.fullName,
+      city: data.city,
+      phone: data.phone || null,
     });
 
     if (error) return { error: error.message, success: false };
   }
 
-  if (role === "worker") redirect("/worker/dashboard");
-  if (role === "employer") redirect("/employer/dashboard");
+  if (data.role === "worker") redirect("/worker/dashboard");
+  if (data.role === "employer") redirect("/employer/dashboard");
   return { error: null, success: true };
 }
 
