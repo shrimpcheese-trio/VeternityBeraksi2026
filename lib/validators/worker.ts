@@ -6,6 +6,8 @@ export const workerInputSchema = z.object({
   city: z.string().min(3),
   jobCategory: z.string().min(3),
   yearsExperience: z.coerce.number().int().min(0).default(0),
+  bio: z.string().optional(),
+  locationVisible: z.boolean().optional(),
 });
 
 export const workerUpdateSchema = workerInputSchema.partial().omit({ workerId: true });

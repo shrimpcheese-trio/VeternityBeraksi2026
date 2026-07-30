@@ -11,6 +11,8 @@ export interface Database {
           job_category: string;
           years_experience: number;
           trust_score: number;
+          bio: string;
+          location_visible: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -21,6 +23,8 @@ export interface Database {
           job_category: string;
           years_experience?: number;
           trust_score?: number;
+          bio?: string;
+          location_visible?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -31,6 +35,8 @@ export interface Database {
           job_category?: string;
           years_experience?: number;
           trust_score?: number;
+          bio?: string;
+          location_visible?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -201,6 +207,45 @@ export interface Database {
           job_description?: string | null;
           status?: string;
           created_at?: string;
+        };
+        Relationships: [];
+      };
+      worker_services: {
+        Row: {
+          service_id: string;
+          worker_id: string;
+          name: string;
+          description: string | null;
+          price: number;
+          price_unit: string;
+          category: string | null;
+          is_active: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          service_id?: string;
+          worker_id: string;
+          name: string;
+          description?: string | null;
+          price: number;
+          price_unit?: string;
+          category?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          service_id?: string;
+          worker_id?: string;
+          name?: string;
+          description?: string | null;
+          price?: number;
+          price_unit?: string;
+          category?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
         };
         Relationships: [];
       };
