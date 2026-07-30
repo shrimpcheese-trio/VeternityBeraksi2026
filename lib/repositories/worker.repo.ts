@@ -16,6 +16,8 @@ export async function createWorker(client: Client, input: WorkerInput) {
       city: input.city,
       job_category: input.jobCategory,
       years_experience: input.yearsExperience,
+      ...(input.bio !== undefined && { bio: input.bio }),
+      ...(input.locationVisible !== undefined && { location_visible: input.locationVisible }),
     })
     .select()
     .single();
@@ -41,6 +43,8 @@ export async function updateWorker(client: Client, workerId: string, input: Work
       ...(input.city !== undefined && { city: input.city }),
       ...(input.jobCategory !== undefined && { job_category: input.jobCategory }),
       ...(input.yearsExperience !== undefined && { years_experience: input.yearsExperience }),
+      ...(input.bio !== undefined && { bio: input.bio }),
+      ...(input.locationVisible !== undefined && { location_visible: input.locationVisible }),
     })
     .eq("worker_id", workerId)
     .select()

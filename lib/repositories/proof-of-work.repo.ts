@@ -79,3 +79,20 @@ export async function listProofsOfWork(client: Client, filters?: Partial<ProofOf
   if (error) throw error;
   return data;
 }
+
+export async function listProofsByDateRange(
+  client: Client,
+  workerId: string,
+  fromDate: string,
+  toDate: string,
+) {
+  const { data, error } = await from(client)
+    .select("*")
+    .eq("worker_id", workerId)
+    .gte("job_date", fromDate)
+    .lte("job_date", toDate)
+    .order("job_date", { ascending: true });
+
+  if (error) throw error;
+  return data;
+}
