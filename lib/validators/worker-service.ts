@@ -6,6 +6,8 @@ export const workerServiceInputSchema = z.object({
   price: z.coerce.number().positive("Harga harus lebih dari 0"),
   priceUnit: z.enum(["fixed", "hourly", "daily"]).default("fixed"),
   category: z.string().optional().nullable(),
+  thumbnailUrl: z.string().optional().nullable(),
+  imageUrls: z.array(z.string()).optional().default([]),
 });
 
 export const workerServiceUpdateSchema = workerServiceInputSchema.partial().extend({

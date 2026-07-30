@@ -220,6 +220,8 @@ export interface Database {
           price_unit: string;
           category: string | null;
           is_active: boolean;
+          thumbnail_url: string | null;
+          image_urls: Json;
           created_at: string;
           updated_at: string;
         };
@@ -232,6 +234,8 @@ export interface Database {
           price_unit?: string;
           category?: string | null;
           is_active?: boolean;
+          thumbnail_url?: string | null;
+          image_urls?: Json;
           created_at?: string;
           updated_at?: string;
         };
@@ -244,6 +248,8 @@ export interface Database {
           price_unit?: string;
           category?: string | null;
           is_active?: boolean;
+          thumbnail_url?: string | null;
+          image_urls?: Json;
           created_at?: string;
           updated_at?: string;
         };
