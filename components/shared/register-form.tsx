@@ -78,25 +78,7 @@ export function RegisterForm() {
             />
           </div>
 
-          <div>
-            <p className="block text-sm font-medium text-foreground mb-2">
-              {t("roleLabel")}
-            </p>
-            <div className="flex gap-3">
-              <label className="flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-primary bg-primary/5 px-3 py-3 text-sm text-primary transition-colors">
-                <input type="radio" name="role" value="worker" defaultChecked
-                  className="sr-only"
-                />
-                {t("roleWorker")}
-              </label>
-              <label className="flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-input px-3 py-3 text-sm transition-colors hover:border-muted-foreground">
-                <input type="radio" name="role" value="employer"
-                  className="sr-only"
-                />
-                {t("roleEmployer")}
-              </label>
-            </div>
-          </div>
+          <input type="hidden" name="role" value="worker" />
 
           {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
