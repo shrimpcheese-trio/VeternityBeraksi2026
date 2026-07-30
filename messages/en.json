@@ -236,7 +236,9 @@
       "companyVerified": "Company Verified",
       "paymentVerified": "Payment Verified",
       "trustScore": "Trust Score",
-      "noBio": "No description yet."
+      "noBio": "No description yet.",
+      "jobsPosted": "Jobs Posted",
+      "totalSpending": "Total Spending"
     },
     "tabs": {
       "overview": "Overview",
@@ -361,8 +363,6 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
       "updatePassword": "Update Password",
-      "twoFactor": "Two-Factor Authentication",
-      "twoFactorHelper": "Add an extra layer of security with a verification code",
       "sessions": "Active Sessions",
       "revoke": "Revoke"
     },
@@ -378,10 +378,9 @@
       "generalLabel": "GENERAL",
       "menu": {
         "dashboard": "Dashboard",
-        "tasks": "Tasks",
+        "jobs": "Jobs",
+        "services": "Services",
         "calendar": "Calendar",
-        "analytics": "Analytics",
-        "team": "Team",
         "browse": "Browse"
       },
       "general": {
