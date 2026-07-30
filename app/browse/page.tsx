@@ -38,18 +38,30 @@ async function BrowseContent({
   searchParams,
 }: {
   t: (key: string) => string;
-  searchParams: { q?: string; category?: string; sort?: string; city?: string };
+  searchParams: { q?: string; category?: string; sort?: string; city?: string; exp_min?: string; exp_max?: string; projects_min?: string; projects_max?: string; price_min?: string; price_max?: string };
 }) {
   const query = searchParams.q;
   const category = CATEGORY_KEYS.includes(searchParams.category ?? "") ? searchParams.category : undefined;
   const sort = ["experience", "trust_score", "projects"].includes(searchParams.sort ?? "") ? searchParams.sort : undefined;
   const city = searchParams.city || undefined;
+  const expMin = searchParams.exp_min ? parseInt(searchParams.exp_min, 10) : undefined;
+  const expMax = searchParams.exp_max ? parseInt(searchParams.exp_max, 10) : undefined;
+  const projectsMin = searchParams.projects_min ? parseInt(searchParams.projects_min, 10) : undefined;
+  const projectsMax = searchParams.projects_max ? parseInt(searchParams.projects_max, 10) : undefined;
+  const priceMin = searchParams.price_min ? parseInt(searchParams.price_min, 10) : undefined;
+  const priceMax = searchParams.price_max ? parseInt(searchParams.price_max, 10) : undefined;
 
   const { listings } = await getListings({
     search: query,
     category,
     sort,
     city,
+    experience_min: expMin,
+    experience_max: expMax,
+    projects_min: projectsMin,
+    projects_max: projectsMax,
+    price_min: priceMin,
+    price_max: priceMax,
     limit: 50,
   });
   const categories = deriveCategories(listings);
@@ -79,7 +91,7 @@ async function BrowseContent({
 export default async function BrowsePage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; category?: string; sort?: string; city?: string }>;
+  searchParams: Promise<{ q?: string; category?: string; sort?: string; city?: string; exp_min?: string; exp_max?: string; projects_min?: string; projects_max?: string; price_min?: string; price_max?: string }>;
 }) {
   const sp = await searchParams;
   const supabase = await createClient();
