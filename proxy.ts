@@ -37,11 +37,13 @@ export async function proxy(request: NextRequest) {
   const isAuthPage =
     pathname.startsWith("/login") || pathname.startsWith("/register");
   const isProfileSetup = pathname.startsWith("/profile/setup");
+  const isOwnProfile = pathname === "/profile";
+  const isSettings = pathname === "/settings";
   const isWorkerRoute = pathname.startsWith("/worker");
   const isEmployerRoute = pathname.startsWith("/employer");
   const isAdminRoute = pathname.startsWith("/admin");
   const isProtectedRoute =
-    isWorkerRoute || isEmployerRoute || isAdminRoute || isProfileSetup;
+    isWorkerRoute || isEmployerRoute || isAdminRoute || isProfileSetup || isOwnProfile || isSettings;
 
   if (!isProtectedRoute && !isAuthPage) {
     return NextResponse.next();
@@ -74,6 +76,10 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(
         new URL(`/${role}/dashboard`, request.url),
       );
+    }
+
+    if (!role && isProtectedRoute && !isProfileSetup) {
+      return NextResponse.redirect(new URL("/profile/setup", request.url));
     }
 
     if (isWorkerRoute && role !== "worker")

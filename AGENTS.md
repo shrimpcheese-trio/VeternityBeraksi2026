@@ -39,6 +39,7 @@ types/                — Shared TypeScript types/interfaces
 public/               — Static assets
 supabase/
   migrations/         — SQL migrations (always reversible)
+proxy.ts              — Next.js middleware (named proxy.ts, not middleware.ts)
 docs/                 — All documentation
 tests/                — Unit, integration, and Playwright tests
 ```

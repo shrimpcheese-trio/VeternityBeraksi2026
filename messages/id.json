@@ -236,7 +236,9 @@
       "companyVerified": "Perusahaan Terverifikasi",
       "paymentVerified": "Pembayaran Terverifikasi",
       "trustScore": "Skor Kepercayaan",
-      "noBio": "Belum ada deskripsi."
+      "noBio": "Belum ada deskripsi.",
+      "jobsPosted": "Pekerjaan Dipasang",
+      "totalSpending": "Total Pengeluaran"
     },
     "tabs": {
       "overview": "Ringkasan",
@@ -361,8 +363,6 @@
       "newPassword": "Kata Sandi Baru",
       "confirmPassword": "Konfirmasi Kata Sandi",
       "updatePassword": "Perbarui Kata Sandi",
-      "twoFactor": "Autentikasi Dua Faktor",
-      "twoFactorHelper": "Tingkatkan keamanan dengan kode verifikasi tambahan",
       "sessions": "Sesi Aktif",
       "revoke": "Cabut"
     },
@@ -378,10 +378,9 @@
       "generalLabel": "UMUM",
       "menu": {
         "dashboard": "Dashboard",
-        "tasks": "Tugas",
+        "jobs": "Pekerjaan",
+        "services": "Layanan",
         "calendar": "Kalender",
-        "analytics": "Analitik",
-        "team": "Tim",
         "browse": "Jelajahi"
       },
       "general": {
