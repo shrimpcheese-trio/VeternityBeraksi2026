@@ -249,6 +249,36 @@ export interface Database {
         };
         Relationships: [];
       };
+      negotiations: {
+        Row: {
+          negotiation_id: string;
+          agreement_id: string;
+          actor_id: string;
+          role: string;
+          price: number;
+          reason: string | null;
+          created_at: string;
+        };
+        Insert: {
+          negotiation_id?: string;
+          agreement_id: string;
+          actor_id: string;
+          role: string;
+          price: number;
+          reason?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          negotiation_id?: string;
+          agreement_id?: string;
+          actor_id?: string;
+          role?: string;
+          price?: number;
+          reason?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       worker_services: {
         Row: {
           service_id: string;

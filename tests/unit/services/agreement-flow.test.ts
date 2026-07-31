@@ -17,6 +17,10 @@ jest.mock("@/lib/repositories/proof-of-work.repo", () => ({
   getProofOfWorkByAgreement: jest.fn(),
 }));
 
+jest.mock("@/lib/repositories/negotiation.repo", () => ({
+  getLatestNegotiation: jest.fn(),
+}));
+
 jest.mock("@/lib/services/trust-engine", () => ({
   computeTrustScore: jest.fn(),
 }));
@@ -35,6 +39,9 @@ const mockUpdateAgreement = jest.mocked(
 );
 const mockGetProofOfWorkByAgreement = jest.mocked(
   (jest.requireMock("@/lib/repositories/proof-of-work.repo") as { getProofOfWorkByAgreement: jest.Mock }).getProofOfWorkByAgreement,
+);
+const mockGetLatestNegotiation = jest.mocked(
+  (jest.requireMock("@/lib/repositories/negotiation.repo") as { getLatestNegotiation: jest.Mock }).getLatestNegotiation,
 );
 const mockComputeTrustScore = jest.mocked(
   (jest.requireMock("@/lib/services/trust-engine") as { computeTrustScore: jest.Mock }).computeTrustScore,
@@ -65,6 +72,7 @@ describe("transitionAgreement", () => {
     jest.clearAllMocks();
     mockCreateClient.mockResolvedValue({ from: jest.fn() });
     mockCreateAdminClient.mockReturnValue({ from: jest.fn() });
+    mockGetLatestNegotiation.mockResolvedValue(null);
     mockGetProofOfWorkByAgreement.mockResolvedValue({
       proof_id: "proof-001",
       worker_id: workerId,
@@ -227,5 +235,71 @@ describe("transitionAgreement", () => {
 
     expect(mockCreateAdminClient).toHaveBeenCalled();
     expect(mockCreateClient).toHaveBeenCalled();
+  });
+
+  it("blocks a worker from accepting their own pending counter", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetLatestNegotiation.mockResolvedValue({
+      negotiation_id: "neg-001",
+      agreement_id: agreementId,
+      actor_id: workerId,
+      role: "worker",
+      price: 600000,
+      reason: "Harga terlalu rendah",
+      created_at: "2026-07-31T01:00:00Z",
+    });
+
+    await expect(
+      transitionAgreement(agreementId, "active", workerId),
+    ).rejects.toThrow("Worker cannot accept while a counter-offer is pending");
+    expect(mockUpdateAgreement).not.toHaveBeenCalled();
+  });
+
+  it("adopts the worker counter price when the employer accepts", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetLatestNegotiation.mockResolvedValue({
+      negotiation_id: "neg-002",
+      agreement_id: agreementId,
+      actor_id: workerId,
+      role: "worker",
+      price: 600000,
+      reason: "Harga terlalu rendah",
+      created_at: "2026-07-31T01:00:00Z",
+    });
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "active", price: 600000 });
+
+    const result = await transitionAgreement(agreementId, "active", employerId);
+
+    expect(mockUpdateAgreement).toHaveBeenCalledWith(
+      expect.any(Object),
+      agreementId,
+      { status: "active", price: 600000 },
+    );
+    expect(result.status).toBe("active");
+  });
+
+  it("accepts without a price override when no counter is pending", async () => {
+    const agreement = baseAgreement();
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetLatestNegotiation.mockResolvedValue({
+      negotiation_id: "neg-003",
+      agreement_id: agreementId,
+      actor_id: employerId,
+      role: "employer",
+      price: 500000,
+      reason: null,
+      created_at: "2026-07-30T00:00:00Z",
+    });
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "active" });
+
+    await transitionAgreement(agreementId, "active", workerId);
+
+    expect(mockUpdateAgreement).toHaveBeenCalledWith(
+      expect.any(Object),
+      agreementId,
+      { status: "active" },
+    );
   });
 });

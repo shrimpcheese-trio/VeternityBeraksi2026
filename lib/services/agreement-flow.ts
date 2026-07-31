@@ -1,8 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAgreementById, updateAgreement } from "@/lib/repositories/agreement.repo";
+import { getLatestNegotiation } from "@/lib/repositories/negotiation.repo";
 import { getProofOfWorkByAgreement } from "@/lib/repositories/proof-of-work.repo";
 import { computeTrustScore } from "@/lib/services/trust-engine";
+import type { AgreementUpdate } from "@/lib/validators/agreement";
 
 export const VALID_TRANSITIONS: Record<string, string[]> = {
   draft: ["active"],
@@ -45,7 +47,21 @@ export async function transitionAgreement(
     }
   }
 
-  await updateAgreement(admin, agreementId, { status: newStatus as "draft" | "active" | "completed" | "disputed" });
+  const updateFields: AgreementUpdate = {
+    status: newStatus as "draft" | "active" | "completed" | "disputed",
+  };
+
+  if (newStatus === "active" && agreement.status === "draft") {
+    const latest = await getLatestNegotiation(admin, agreementId);
+    if (latest?.role === "worker") {
+      if (actorUserId === agreement.worker_id) {
+        throw new ForbiddenError("Worker cannot accept while a counter-offer is pending");
+      }
+      updateFields.price = latest.price;
+    }
+  }
+
+  await updateAgreement(admin, agreementId, updateFields);
 
   if (newStatus === "completed" || newStatus === "disputed") {
     await computeTrustScore(agreement.worker_id);

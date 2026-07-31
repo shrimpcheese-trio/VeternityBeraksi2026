@@ -3,16 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/agreements/status-badge";
 import { AgreementActions } from "@/components/agreements/agreement-actions";
 import { ProofUpload } from "@/components/agreements/proof-upload";
+import { NegotiationHistory } from "@/components/agreements/negotiation-history";
 import type { AgreementWithEmployer } from "@/lib/repositories/agreement.repo";
+import type { NegotiationRowType } from "@/lib/repositories/negotiation.repo";
 
 export function AgreementDetail({
   agreement,
   proofComplete,
   showProofUpload,
+  negotiations,
 }: {
   agreement: AgreementWithEmployer;
   proofComplete?: boolean;
   showProofUpload?: boolean;
+  negotiations?: NegotiationRowType[];
 }) {
   const employer = agreement.employer_profiles;
 
@@ -91,6 +95,12 @@ export function AgreementDetail({
         </CardContent>
       </Card>
 
+      <NegotiationHistory
+        negotiations={negotiations ?? []}
+        employerName={employer?.company_name ?? "Pemberi Kerja"}
+        viewerRole="worker"
+      />
+
       <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle className="font-heading text-lg font-medium">Tindakan</CardTitle>
@@ -101,8 +111,10 @@ export function AgreementDetail({
           )}
           <AgreementActions
             agreementId={agreement.agreement_id}
+            agreementPrice={agreement.price}
             status={agreement.status}
             proofComplete={proofComplete}
+            negotiations={negotiations ?? []}
           />
         </CardContent>
       </Card>

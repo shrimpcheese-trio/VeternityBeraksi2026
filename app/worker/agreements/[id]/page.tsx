@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { getAgreementById } from "@/lib/repositories/agreement.repo";
 import { getProofOfWorkByAgreement } from "@/lib/repositories/proof-of-work.repo";
 import { getReviewByAgreement } from "@/lib/repositories/review.repo";
+import { listNegotiationsByAgreement } from "@/lib/repositories/negotiation.repo";
 import { AgreementDetail } from "@/components/agreements/agreement-detail";
 import { ReceivedReview } from "@/components/reviews/received-review";
 import { ArrowLeft } from "lucide-react";
@@ -32,6 +33,7 @@ export default async function WorkerAgreementDetailPage({
   const showProofUpload = agreement.status === "active";
 
   const review = await getReviewByAgreement(admin, id);
+  const negotiations = await listNegotiationsByAgreement(admin, id);
 
   return (
     <div className="space-y-6">
@@ -47,6 +49,7 @@ export default async function WorkerAgreementDetailPage({
         agreement={agreement}
         proofComplete={proofComplete}
         showProofUpload={showProofUpload}
+        negotiations={negotiations}
       />
 
       {review && (
