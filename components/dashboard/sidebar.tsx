@@ -44,33 +44,58 @@ function getMenuItems(role: "worker" | "employer"): MenuItem[] {
     });
   }
 
-  items.push(
-    { key: "calendar", icon: Calendar, href: `/${role}/calendar` },
-  );
+  items.push({ key: "calendar", icon: Calendar, href: `/${role}/calendar` });
 
   return items;
 }
 
-export function Sidebar({ role, isOpen = true, setIsOpen }: { role: "worker" | "employer", isOpen?: boolean, setIsOpen?: (v: boolean) => void }) {
+export function Sidebar({
+  role,
+  isOpen = true,
+  setIsOpen,
+}: {
+  role: "worker" | "employer";
+  isOpen?: boolean;
+  setIsOpen?: (v: boolean) => void;
+}) {
   const t = useTranslations("dashboard.sidebar");
   const pathname = usePathname();
   const menuItems = getMenuItems(role);
 
   return (
-    <aside className={cn(
-      "sticky top-0 flex h-screen flex-col border-r border-slate-200 bg-slate-50/50 backdrop-blur-xl transition-all duration-300",
-      isOpen ? "w-64" : "w-20 items-center"
-    )}>
-      <div className={cn("flex items-center border-b border-slate-200 py-5 transition-all duration-300", isOpen ? "gap-2.5 px-6" : "justify-center px-0")}>
+    <aside
+      className={cn(
+        "sticky top-0 flex h-screen flex-col border-r border-slate-200 bg-slate-50/50 backdrop-blur-xl transition-all duration-300",
+        isOpen ? "w-64" : "w-20 items-center",
+      )}
+    >
+      <div
+        className={cn(
+          "flex items-center border-b border-slate-200 py-5 transition-all duration-300",
+          isOpen ? "gap-2.5 px-6" : "justify-center px-0",
+        )}
+      >
         <div className="flex size-8 shrink-0 items-center justify-center rounded-[8px] bg-sky text-navy text-sm font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]">
           U
         </div>
-        <span className={cn("font-heading text-lg font-bold text-navy whitespace-nowrap overflow-hidden transition-all duration-300", !isOpen && "w-0 opacity-0")}>Upahku</span>
+        <span
+          className={cn(
+            "font-heading text-lg font-bold text-navy whitespace-nowrap overflow-hidden transition-all duration-300",
+            !isOpen && "w-0 opacity-0",
+          )}
+        >
+          Upahku
+        </span>
       </div>
 
       <nav className="flex-1 overflow-y-auto py-6 px-3">
         <div className="mb-6">
-          <div className={cn("mb-3 px-3 transition-all duration-300", !isOpen && "hidden")}>
+          <div
+            className={cn(
+              "mb-3 px-3 transition-all duration-300",
+              !isOpen && "hidden",
+            )}
+          >
             <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase">
               {t("menuLabel")}
             </span>
@@ -92,8 +117,20 @@ export function Sidebar({ role, isOpen = true, setIsOpen }: { role: "worker" | "
                         : "font-medium text-slate-500 hover:bg-white hover:text-navy hover:shadow-sm",
                     )}
                   >
-                    <Icon className={cn("size-4.5 shrink-0 transition-colors", isActive ? "text-sky" : "text-slate-400")} />
-                    <span className={cn("flex-1 whitespace-nowrap overflow-hidden transition-all duration-300", !isOpen && "w-0 opacity-0 hidden")}>{t(`menu.${item.key}`)}</span>
+                    <Icon
+                      className={cn(
+                        "size-4.5 shrink-0 transition-colors",
+                        isActive ? "text-sky" : "text-slate-400",
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "flex-1 whitespace-nowrap overflow-hidden transition-all duration-300",
+                        !isOpen && "w-0 opacity-0 hidden",
+                      )}
+                    >
+                      {t(`menu.${item.key}`)}
+                    </span>
                     {item.badge && isOpen && (
                       <Badge
                         variant="secondary"
@@ -110,10 +147,12 @@ export function Sidebar({ role, isOpen = true, setIsOpen }: { role: "worker" | "
         </div>
       </nav>
 
-      <div className={cn(
-        "mx-4 mb-6 rounded-2xl bg-white border border-slate-100 p-5 shadow-sm relative overflow-hidden transition-all duration-300",
-        !isOpen && "opacity-0 h-0 mb-0 p-0 border-none scale-0"
-      )}>
+      <div
+        className={cn(
+          "mx-4 mb-6 rounded-2xl bg-white border border-slate-100 p-5 shadow-sm relative overflow-hidden transition-all duration-300",
+          !isOpen && "opacity-0 h-0 mb-0 p-0 border-none scale-0",
+        )}
+      >
         <div className="absolute -right-4 -top-4 size-20 rounded-full bg-sky/5 blur-xl" />
         <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-sky/10 border border-sky/20 shadow-[0_0_15px_rgba(56,189,248,0.1)] relative z-10">
           {role === "employer" ? (
@@ -132,7 +171,11 @@ export function Sidebar({ role, isOpen = true, setIsOpen }: { role: "worker" | "
             ? t("promo.employer.subtitle")
             : t("promo.worker.subtitle")}
         </p>
-        <Button variant="outline" size="sm" className="w-full gap-1.5 text-xs font-semibold rounded-full border-slate-200 text-navy hover:bg-slate-50 transition-colors relative z-10">
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full gap-1.5 text-xs font-semibold rounded-full border-slate-200 text-navy hover:bg-slate-50 transition-colors relative z-10"
+        >
           {role === "employer"
             ? t("promo.employer.cta")
             : t("promo.worker.cta")}

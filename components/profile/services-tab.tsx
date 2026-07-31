@@ -56,7 +56,7 @@ export function ServicesTab({
               className="flex flex-col overflow-hidden rounded-xl border border-border bg-background"
             >
               {thumbnail && (
-                <div className="aspect-[4/3] bg-surface-soft">
+                <div className="aspect-[4/3] bg-bg-alt">
                   <img
                     src={thumbnail}
                     alt={service.name}
@@ -91,7 +91,7 @@ export function ServicesTab({
                     {images.slice(0, 4).map((url) => (
                       <div
                         key={url}
-                        className="size-10 overflow-hidden rounded-md bg-surface-soft"
+                        className="size-10 overflow-hidden rounded-md bg-bg-alt"
                       >
                         <img src={url} alt="" className="size-full object-cover" />
                       </div>

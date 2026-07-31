@@ -105,15 +105,15 @@ export function CategoryTabs({ categories, activeCategory, baseUrl }: { categori
               onClick={() => navigate(router, searchParams, baseUrl, cat.id)}
               className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-3 text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-primary text-on-primary"
-                  : "bg-surface-soft text-muted-foreground hover:bg-surface-card hover:text-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-bg-alt text-muted-foreground hover:bg-bg-card hover:text-foreground"
               }`}
             >
               {cat.label}
               <span
                 className={`rounded-full px-1.5 py-0.5 text-[0.625rem] font-semibold ${
                   isActive
-                    ? "bg-white/20 text-on-primary"
+                    ? "bg-white/20 text-primary-foreground"
                     : "bg-background text-muted-foreground"
                 }`}
               >
@@ -168,15 +168,15 @@ export function CategoryTabs({ categories, activeCategory, baseUrl }: { categori
                     }}
                     className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-primary text-on-primary"
-                        : "bg-surface-soft text-muted-foreground hover:bg-surface-card hover:text-foreground"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-bg-alt text-muted-foreground hover:bg-bg-card hover:text-foreground"
                     }`}
                   >
                     {cat.label}
                     <span
                       className={`rounded-full px-1.5 py-0.5 text-[0.625rem] font-semibold ${
                         isActive
-                          ? "bg-white/20 text-on-primary"
+                          ? "bg-white/20 text-primary-foreground"
                           : "bg-background text-muted-foreground"
                       }`}
                     >

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Upload, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type ProofState = {
   photoBeforeUrl: string | null;
@@ -17,6 +18,7 @@ export function ProofUpload({
   initialProof: ProofState | null;
 }) {
   const router = useRouter();
+  const t = useTranslations("agreement.proof");
   const [proof, setProof] = useState<ProofState>(
     initialProof ?? { photoBeforeUrl: null, photoAfterUrl: null },
   );
@@ -46,7 +48,7 @@ export function ProofUpload({
 
       if (!res.ok) {
         const body = await res.json();
-        setError(body.error ?? "Gagal mengunggah foto. Silakan coba lagi.");
+        setError(body.error ?? t("uploadFailed"));
         return;
       }
 
@@ -57,7 +59,7 @@ export function ProofUpload({
       });
       router.refresh();
     } catch {
-      setError("Terjadi kesalahan. Silakan coba lagi.");
+      setError(t("genericError"));
     } finally {
       setUploading(null);
     }
@@ -81,14 +83,14 @@ export function ProofUpload({
 
     if (photoUrl) {
       return (
-        <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-bg-alt">
           <img src={photoUrl} alt={label} className="size-full object-cover" />
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
             className="absolute bottom-2 right-2 rounded-lg bg-white/80 px-3 py-1.5 text-xs font-medium hover:bg-white"
           >
-            Ganti
+            {t("replace")}
           </button>
           {input}
         </div>
@@ -101,10 +103,10 @@ export function ProofUpload({
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={uploading !== null}
-          className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-surface-soft text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-50"
+          className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-bg-alt text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-50"
         >
           {uploading === fileType ? (
-            <span className="text-xs">Mengupload...</span>
+            <span className="text-xs">{t("uploading")}</span>
           ) : (
             <>
               <Upload className="size-6" />
@@ -120,33 +122,32 @@ export function ProofUpload({
   return (
     <div className="space-y-5">
       <div>
-        <p className="text-sm font-medium">Foto Bukti Pekerjaan</p>
+        <p className="text-sm font-medium">{t("heading")}</p>
         <p className="mt-1 text-xs text-muted-foreground">
-          Unggah foto sebelum dan sesudah pekerjaan untuk menyelesaikan
-          pekerjaan ini.
+          {t("helper")}
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="block text-xs font-medium text-muted-foreground">
-            Foto Sebelum
+            {t("beforeLabel")}
           </label>
           {renderSlot(
             "before",
             proof.photoBeforeUrl,
-            "Unggah foto sebelum pekerjaan",
+            t("beforeUpload"),
             beforeInputRef,
           )}
         </div>
         <div className="space-y-2">
           <label className="block text-xs font-medium text-muted-foreground">
-            Foto Sesudah
+            {t("afterLabel")}
           </label>
           {renderSlot(
             "after",
             proof.photoAfterUrl,
-            "Unggah foto sesudah pekerjaan",
+            t("afterUpload"),
             afterInputRef,
           )}
         </div>
@@ -160,8 +161,8 @@ export function ProofUpload({
       )}
 
       {proof.photoBeforeUrl && proof.photoAfterUrl && (
-        <p className="text-xs font-medium text-green-600">
-          Foto sebelum dan sesudah sudah lengkap.
+        <p className="text-xs font-medium text-sky-active">
+          {t("complete")}
         </p>
       )}
     </div>

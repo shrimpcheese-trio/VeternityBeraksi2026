@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { MapPin, Building2, Calendar } from "lucide-react";
 import { StatusBadge } from "@/components/agreements/status-badge";
+import { getServerTranslator } from "@/lib/i18n-server";
 import type { AgreementWithEmployer } from "@/lib/repositories/agreement.repo";
 
-export function AgreementCard({ agreement }: { agreement: AgreementWithEmployer }) {
-  const employerName = agreement.employer_profiles?.company_name ?? "Pemberi Kerja";
+export async function AgreementCard({ agreement }: { agreement: AgreementWithEmployer }) {
+  const t = await getServerTranslator("agreement");
+  const employerName = agreement.employer_profiles?.company_name ?? t("detail.employerFallback");
 
   return (
     <Link

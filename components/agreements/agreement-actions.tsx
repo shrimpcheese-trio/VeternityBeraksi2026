@@ -13,29 +13,6 @@ function formatPrice(price: number): string {
   return `Rp ${price.toLocaleString("id-ID")}`;
 }
 
-async function transitionAgreement(prev: { error: string | null } | null, formData: FormData) {
-  const agreementId = formData.get("agreementId") as string;
-  const newStatus = formData.get("newStatus") as string;
-
-  try {
-    const res = await fetch(`/api/agreement/${agreementId}/transition`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newStatus }),
-    });
-
-    if (!res.ok) {
-      const body = await res.json();
-      return { error: body.error ?? "Gagal mengubah status" };
-    }
-
-    window.location.href = "/worker/agreements";
-    return { error: null };
-  } catch {
-    return { error: "Terjadi kesalahan. Silakan coba lagi." };
-  }
-}
-
 export function AgreementActions({
   agreementId,
   agreementPrice,
@@ -51,6 +28,30 @@ export function AgreementActions({
 }) {
   const t = useTranslations("agreement.negotiation");
   const router = useRouter();
+
+  async function transitionAgreement(prev: { error: string | null } | null, formData: FormData) {
+    const agreementId = formData.get("agreementId") as string;
+    const newStatus = formData.get("newStatus") as string;
+
+    try {
+      const res = await fetch(`/api/agreement/${agreementId}/transition`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newStatus }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json();
+        return { error: body.error ?? t("transitionFailed") };
+      }
+
+      window.location.href = "/worker/agreements";
+      return { error: null };
+    } catch {
+      return { error: t("genericError") };
+    }
+  }
+
   const [state, formAction, isPending] = useActionState(transitionAgreement, null);
   const [showCounter, setShowCounter] = useState(false);
 
@@ -139,12 +140,12 @@ export function AgreementActions({
             className="w-full gap-2"
           >
             <CheckCircle className="size-4" />
-            {isPending ? "Memproses..." : "Tandai Selesai"}
+            {isPending ? t("processing") : t("markComplete")}
           </Button>
         </form>
         {!canComplete && (
           <p className="text-xs text-muted-foreground">
-            Unggah foto sebelum dan sesudah untuk menandai pekerjaan selesai.
+            {t("completeHint")}
           </p>
         )}
         <form action={formAction}>
@@ -157,7 +158,7 @@ export function AgreementActions({
             className="w-full gap-2 text-red-600"
           >
             <AlertTriangle className="size-4" />
-            {isPending ? "Memproses..." : "Laporkan Masalah"}
+            {isPending ? t("processing") : t("reportIssue")}
           </Button>
         </form>
         {state?.error && (
@@ -171,8 +172,8 @@ export function AgreementActions({
     return (
       <div className="rounded-lg bg-muted p-4 text-center text-sm text-muted-foreground">
         {status === "completed"
-          ? "Pekerjaan ini sudah selesai."
-          : "Pekerjaan ini dalam status sengketa."}
+          ? t("alreadyCompleted")
+          : t("inDispute")}
       </div>
     );
   }

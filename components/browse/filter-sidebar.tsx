@@ -57,8 +57,8 @@ function SelectDropdown({
               }}
               className={`flex w-full rounded-md px-3 py-2 text-left text-sm ${
                 opt === value
-                  ? "bg-surface-soft font-medium text-foreground"
-                  : "text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                  ? "bg-bg-alt font-medium text-foreground"
+                  : "text-muted-foreground hover:bg-bg-alt hover:text-foreground"
               }`}
             >
               {opt}
@@ -108,7 +108,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
   const currentExpLabel = currentExpIndex >= 0 ? experienceLabels[currentExpIndex] : experienceLabels[0];
 
   const panel = (
-    <div className="rounded-xl border border-border bg-surface-soft p-5">
+    <div className="rounded-xl border border-border bg-bg-alt p-5">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold">{t("filter")}</h2>
         <button
@@ -153,7 +153,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                 setParam("city", val);
               }
             }}
-            className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+            className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
           />
         </fieldset>
 
@@ -198,7 +198,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                   onKeyDown={(e) => {
                     if (e.key === "Enter") setParam("projects_min", e.currentTarget.value);
                   }}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
                 />
                 <input
                   type="number"
@@ -208,7 +208,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                   onKeyDown={(e) => {
                     if (e.key === "Enter") setParam("projects_max", e.currentTarget.value);
                   }}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
                 />
               </div>
             </div>
@@ -226,7 +226,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                   onKeyDown={(e) => {
                     if (e.key === "Enter") setParam("price_min", e.currentTarget.value);
                   }}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
                 />
                 <input
                   type="number"
@@ -236,7 +236,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
                   onKeyDown={(e) => {
                     if (e.key === "Enter") setParam("price_max", e.currentTarget.value);
                   }}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-soft focus:ring-1 focus:ring-primary"
+                  className="w-full rounded-lg border border-border bg-background px-3 py-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ export function FilterSidebar({ currentSort, baseUrl }: { currentSort: string; b
       <button
         type="button"
         onClick={() => setDrawerOpen(true)}
-        className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-soft px-4 py-3 text-sm font-medium text-foreground md:hidden"
+        className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-alt px-4 py-3 text-sm font-medium text-foreground md:hidden"
       >
         <SlidersHorizontal size={16} />
         {t("filter")}

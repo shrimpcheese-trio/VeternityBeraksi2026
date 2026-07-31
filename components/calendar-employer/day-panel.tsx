@@ -2,10 +2,14 @@ import { XCircle, User } from "lucide-react";
 import type { AgreementWithProfiles } from "@/lib/repositories/agreement.repo";
 import { StatusBadge } from "@/components/agreements/status-badge";
 import Link from "next/link";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
-export function DayPanel({ day, agreements }: { day: string; agreements: AgreementWithProfiles[] }) {
+export async function DayPanel({ day, agreements }: { day: string; agreements: AgreementWithProfiles[] }) {
+  const t = await getServerTranslator("calendarEmployer");
+  const locale = await getLocale();
   const date = new Date(day + "T00:00:00");
-  const formatted = date.toLocaleDateString("id-ID", {
+  const formatted = date.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -19,12 +23,12 @@ export function DayPanel({ day, agreements }: { day: string; agreements: Agreeme
       {agreements.length > 0 ? (
         <div className="space-y-3">
           {agreements.map((agreement) => {
-            const workerName = agreement.worker_profiles?.full_name ?? "Pekerja";
+            const workerName = agreement.worker_profiles?.full_name ?? t("dayPanel.fallbackWorkerName");
             return (
               <Link
                 key={agreement.agreement_id}
                 href={`/employer/agreements/${agreement.agreement_id}`}
-                className="flex items-center justify-between rounded-xl border border-border bg-surface-card p-3 transition-colors hover:bg-muted/50"
+                className="flex items-center justify-between rounded-xl border border-border bg-bg-card p-3 transition-colors hover:bg-muted/50"
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
@@ -48,7 +52,7 @@ export function DayPanel({ day, agreements }: { day: string; agreements: Agreeme
       ) : (
         <div className="flex flex-col items-center justify-center py-8 text-center">
           <XCircle className="mb-2 size-8 text-muted-foreground/40" />
-          <p className="text-sm text-muted-foreground">Tidak ada pekerjaan pada hari ini.</p>
+          <p className="text-sm text-muted-foreground">{t("dayPanel.emptyState")}</p>
         </div>
       )}
     </div>

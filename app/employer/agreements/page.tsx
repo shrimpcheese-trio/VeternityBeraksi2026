@@ -5,13 +5,14 @@ import { listAgreements } from "@/lib/repositories/agreement.repo";
 import { listLatestNegotiationsByAgreementIds } from "@/lib/repositories/negotiation.repo";
 import { AgreementCardEmployer } from "@/components/agreements/agreement-card-employer";
 import { Briefcase, CheckCircle, AlertTriangle, MessageSquare } from "lucide-react";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 const tabs = [
-  { key: "all", label: "Semua", icon: Briefcase },
-  { key: "draft", label: "Penawaran", icon: MessageSquare },
-  { key: "active", label: "Aktif", icon: CheckCircle },
-  { key: "completed", label: "Selesai", icon: CheckCircle },
-  { key: "disputed", label: "Sengketa", icon: AlertTriangle },
+  { key: "all", icon: Briefcase },
+  { key: "draft", icon: MessageSquare },
+  { key: "active", icon: CheckCircle },
+  { key: "completed", icon: CheckCircle },
+  { key: "disputed", icon: AlertTriangle },
 ] as const;
 
 export default async function EmployerAgreementsPage({
@@ -20,12 +21,29 @@ export default async function EmployerAgreementsPage({
   searchParams: Promise<{ status?: string }>;
 }) {
   const { status } = await searchParams;
+  const t = await getServerTranslator("agreement");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) notFound();
 
-  const activeTab = tabs.find((t) => t.key === status)?.key ?? "all";
+  const activeTab = tabs.find((tab) => tab.key === status)?.key ?? "all";
+
+  const tabLabels: Record<string, string> = {
+    all: t("list.tabAll"),
+    draft: t("list.tabDraft"),
+    active: t("list.tabActive"),
+    completed: t("list.tabCompleted"),
+    disputed: t("list.tabDisputed"),
+  };
+
+  const emptyState: Record<string, string> = {
+    all: t("list.emptyAll"),
+    draft: t("list.emptyDraftEmployer"),
+    active: t("list.emptyActive"),
+    completed: t("list.emptyCompleted"),
+    disputed: t("list.emptyDisputed"),
+  };
 
   const allAgreements = await listAgreements(supabase, { employerId: user.id });
   const agreements =
@@ -47,10 +65,10 @@ export default async function EmployerAgreementsPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-heading text-2xl font-medium tracking-tight">
-          Pekerjaan Saya
+          {t("list.title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Daftar pekerjaan yang Anda pasang.
+          {t("list.employerSubtitle")}
         </p>
       </div>
 
@@ -71,7 +89,7 @@ export default async function EmployerAgreementsPage({
               }`}
             >
               <Icon className="size-4" />
-              {tab.label}
+              {tabLabels[tab.key]}
               {tab.key === "draft" && draftCount > 0 && (
                 <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">
                   {draftCount}
@@ -96,14 +114,10 @@ export default async function EmployerAgreementsPage({
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <Briefcase className="mb-4 size-12 text-muted-foreground/40" />
           <p className="text-sm font-medium text-muted-foreground">
-            {activeTab === "all" && "Belum ada pekerjaan."}
-            {activeTab === "draft" && "Tidak ada penawaran baru."}
-            {activeTab === "active" && "Tidak ada pekerjaan aktif."}
-            {activeTab === "completed" && "Belum ada pekerjaan selesai."}
-            {activeTab === "disputed" && "Tidak ada sengketa."}
+            {emptyState[activeTab]}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Perubahan status akan muncul secara otomatis.
+            {t("list.emptyGenericHint")}
           </p>
         </div>
       )}

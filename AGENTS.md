@@ -247,6 +247,76 @@ Write a comment only when:
 
 ---
 
+## UI & Visual Style
+
+The landing page (`app/page.tsx` + `components/sections/*`) defines the visual language for the whole product. App surfaces (auth, dashboard, browse, profile, agreements) share the same tokens, typography, and radius - they are denser but never a different design language. `DESIGN.md` is the detailed visual source of truth; `content.md` is the copy source of truth.
+
+### Design Tokens
+
+Single source of truth: `design-tokens.css` (duplicated in `app/globals.css` via `@import`). Never hardcode hex values in components - use token class names so palette changes propagate.
+
+| Token | Value |
+|---|---|
+| `navy` | `#094067` |
+| `navy-active` | `#062c47` |
+| `sky` | `#3da9fc` |
+| `sky-active` | `#1c8ee0` |
+| `coral` | `#ef4565` |
+| `coral-active` | `#c92e4c` |
+| `bg` | `#fffffe` |
+| `bg-alt` | `#d8eefe` |
+| `bg-card` | `#f4faff` |
+| `border` | `#c7e3fb` |
+| `text-heading` / `text-body` / `text-muted` / `text-on-accent` | see `design-tokens.css` |
+| `status-pending` / `status-confirmed` / `status-warning` | semantic, see `design-tokens.css` |
+
+Usage ratios (from DESIGN.md): neutral `bg`/`bg-alt` dominate ~60%, heading text ~30%, sky+coral accents ~10%. Coral is reserved for badges, one highlight word, and destructive actions - never large sections or repeated primary buttons.
+
+### Typography
+
+- Headings: `font-heading` = Bricolage Grotesque (loaded via Google Fonts in `app/layout.tsx` as `--font-heading`).
+- Body/UI: Inter (`--font-inter`).
+- Utility classes (defined in `app/globals.css`): `text-display-lg` (40px), `text-display-md` (32px), `text-display-sm` (24px), `text-title` (18px), `text-body` (16px), `text-caption` (13px), `text-button` (14px).
+- Base layer gives `body` `bg-bg text-text-body font-sans` and `h1-h6` `font-heading text-text-heading`.
+- Headline weight: 600, never 700+ on display text.
+
+### Component Language
+
+- **Buttons** (`components/ui/button.tsx`): default = `bg-primary hover:bg-accent`; secondary = `bg-bg text-navy border-border`; `cta-coral` for high-emphasis calls; `text-link` for inline text actions. Landing hero CTAs are `rounded-full h-14 px-8 font-bold` - reserve pill radius for landing CTAs and prominent app actions, keep `rounded-md` elsewhere.
+- **Cards** (`components/ui/card.tsx`): variants `flat`, `hairline`, `card` (`bg-bg-card border-border`), `elevated` (subtle shadow, rare). Shadows are uncommon; prefer borders.
+- **Badges** (`components/ui/badge.tsx`): `pending` = `bg-status-pending`, `confirmed` = `bg-status-confirmed` (this is `sky`, never green), `trust-score` = `bg-navy rounded-pill`.
+- **Motion** (`components/ui/motion.tsx`): BlurReveal, MaskReveal, StaggerContainer/StaggerItem, CardReveal, ImageReveal, PopReveal, HorizontalReveal, StaggerTextContainer, SplitText. Use the shared `easings` (e.g. `easeOutExpo`). GSAP is used only for the signature `ScrollHighlightStatement` (pinned scroll colorize, colors read from CSS vars via `getComputedStyle`).
+
+### Landing vs App Chrome
+
+- **Landing** (`components/sections/*`): marketing sections (Navbar, HeroSection, InsightSection, ScrollHighlightStatement, HowItWorksSection, CommunityVerificationSection, CoreFeaturesSection, TestimonialsSection, EmployersSection, FaqSection, CtaSection, Footer). Renders via `app/page.tsx`.
+- **App**: logged-in and guest tooling wraps content in `DashboardLayout` (Sidebar + TopHeader) or `SiteNav`. Same tokens, typography, and buttons; layout is denser (tables, cards, forms) and uses `rounded-xl`/`rounded-lg` surfaces with `border-border` hairlines.
+
+### Forbidden Token Namespace
+
+The following classes are **undefined** - Tailwind silently renders them unstyled. Never use them; use the replacement instead:
+
+| Broken class | Use instead |
+|---|---|
+| `bg-surface-soft` / `hover:bg-surface-soft` | `bg-bg-alt` / `hover:bg-bg-alt` |
+| `bg-surface-card` | `bg-bg-card` |
+| `text-muted-soft` | `text-muted-foreground` |
+| `text-on-primary` | `text-primary-foreground` |
+| `text-ink` | `text-navy` |
+| `text-primary-active` | `text-sky-active` |
+| `text-step-1` | `text-xl md:text-2xl` (logo sizing) |
+| `surface-dark` / `accent-teal` | navy / sky |
+| `bg-bg-soft` | `bg-sky/10` |
+| `body-strong`, `text-on-dark` | `font-semibold`, `text-text-on-accent` |
+
+### Color Semantics
+
+- Confirmed/verified status = `sky` (via `status-confirmed`). **Never green** for confirmed/verified states.
+- Warnings and attention = `coral` (`status-warning`).
+- Green is reserved only for literal success feedback on forms (e.g. "Data berhasil disimpan."), never for status badges or trust signals.
+
+---
+
 ## Performance Targets
 
 | Metric | Target |

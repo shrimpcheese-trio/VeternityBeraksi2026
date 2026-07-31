@@ -1,11 +1,13 @@
 "use client";
 import * as React from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { setCookie } from "@/lib/cookie";
 
 export function Navbar() {
+  const t = useTranslations("navbar");
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [langOpen, setLangOpen] = React.useState(false);
@@ -74,18 +76,18 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-5 relative z-10">
             {/* Lang Switcher */}
             <div className="relative">
-              <button onClick={() => setLangOpen(!langOpen)} className="flex items-center gap-1.5 text-sm font-semibold text-text-body hover:text-navy transition-colors bg-bg-soft/50 hover:bg-bg-soft px-3 py-1.5 rounded-full border border-transparent hover:border-border">
+              <button onClick={() => setLangOpen(!langOpen)} className="flex items-center gap-1.5 text-sm font-semibold text-text-body hover:text-navy transition-colors bg-sky/10 hover:bg-sky/10 px-3 py-1.5 rounded-full border border-transparent hover:border-border">
                 <Globe className="w-4 h-4" />
                 {lang}
                 <ChevronDown className={`w-3 h-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
               </button>
               {langOpen && (
                 <div className="absolute top-full mt-3 right-0 w-36 bg-white/95 backdrop-blur-xl border border-border shadow-2xl rounded-2xl p-1.5 flex flex-col gap-1 animate-in fade-in zoom-in-95 origin-top-right">
-                  <button onClick={() => switchLanguage("ID")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "ID" ? "bg-bg-soft text-navy font-bold" : "text-text-body hover:bg-bg-soft font-medium"}`}>
+                  <button onClick={() => switchLanguage("ID")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "ID" ? "bg-sky/10 text-navy font-bold" : "text-text-body hover:bg-sky/10 font-medium"}`}>
                     <span>Indonesian</span>
                     {lang === "ID" && <span className="w-1.5 h-1.5 rounded-full bg-navy"></span>}
                   </button>
-                  <button onClick={() => switchLanguage("EN")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "EN" ? "bg-bg-soft text-navy font-bold" : "text-text-body hover:bg-bg-soft font-medium"}`}>
+                  <button onClick={() => switchLanguage("EN")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "EN" ? "bg-sky/10 text-navy font-bold" : "text-text-body hover:bg-sky/10 font-medium"}`}>
                     <span>English</span>
                     {lang === "EN" && <span className="w-1.5 h-1.5 rounded-full bg-navy"></span>}
                   </button>
@@ -96,7 +98,7 @@ export function Navbar() {
             <div className="h-5 w-px bg-border/80"></div>
 
             <div className="flex items-center gap-2 md:gap-3">
-              <Link href="/login" className="text-sm font-semibold text-text-body hover:text-navy px-3 py-2 rounded-xl hover:bg-bg-soft transition-colors">
+              <Link href="/login" className="text-sm font-semibold text-text-body hover:text-navy px-3 py-2 rounded-xl hover:bg-sky/10 transition-colors">
                 Masuk
               </Link>
               <Button asChild className="rounded-full hover:-translate-y-0.5 transition-all bg-sky text-white hover:bg-sky-active px-6 font-semibold shadow-md border border-sky-active/20">
@@ -106,7 +108,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden text-navy p-2 bg-bg-soft/50 rounded-full border border-border relative z-10" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="lg:hidden text-navy p-2 bg-sky/10 rounded-full border border-border relative z-10" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={20} strokeWidth={2.5} /> : <Menu size={20} strokeWidth={2.5} />}
           </button>
         </div>
@@ -117,17 +119,17 @@ export function Navbar() {
         <div className="lg:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full px-4">
           <div className="w-full bg-white/95 backdrop-blur-3xl border border-border shadow-2xl p-6 flex flex-col gap-5 rounded-3xl animate-in fade-in slide-in-from-top-2">
             <div className="flex flex-col gap-1">
-              <Link href="#tentang" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-bg-soft transition-colors">Tentang</Link>
-              <Link href="#cara-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-bg-soft transition-colors">Cara Kerja</Link>
-              <Link href="#untuk-pekerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-bg-soft transition-colors">Untuk Pekerja</Link>
-              <Link href="#untuk-pemberi-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-bg-soft transition-colors">Untuk Pemberi Kerja</Link>
+              <Link href="#tentang" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Tentang</Link>
+              <Link href="#cara-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Cara Kerja</Link>
+              <Link href="#untuk-pekerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Untuk Pekerja</Link>
+              <Link href="#untuk-pemberi-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Untuk Pemberi Kerja</Link>
             </div>
 
             <div className="h-px bg-border w-full"></div>
 
             <div className="flex items-center justify-between px-3">
               <span className="text-sm font-medium text-text-muted">Bahasa</span>
-              <div className="flex bg-bg-soft rounded-lg p-1">
+              <div className="flex bg-sky/10 rounded-lg p-1">
                 <button onClick={() => switchLanguage("ID")} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${lang === "ID" ? "bg-white text-navy shadow-sm" : "text-text-muted"}`}>ID</button>
                 <button onClick={() => switchLanguage("EN")} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${lang === "EN" ? "bg-white text-navy shadow-sm" : "text-text-muted"}`}>EN</button>
               </div>

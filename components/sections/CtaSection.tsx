@@ -8,9 +8,9 @@ import { StaggerContainer, StaggerItem, StaggerTextContainer, SplitText } from "
 export function CtaSection() {
   const cards = [
     { icon: <ShieldCheck className="w-5 h-5 text-sky" />, text: "Trust Score Server-Side" },
-    { icon: <Users className="w-5 h-5 text-teal-500" />, text: "Community Verified" },
-    { icon: <CheckCircle2 className="w-5 h-5 text-blue-500" />, text: "Bukti Kerja Tervalidasi" },
-    { icon: <BadgeDollarSign className="w-5 h-5 text-emerald-500" />, text: "Estimasi Upah Regional" },
+    { icon: <Users className="w-5 h-5 text-sky-active" />, text: "Community Verified" },
+    { icon: <CheckCircle2 className="w-5 h-5 text-navy" />, text: "Bukti Kerja Tervalidasi" },
+    { icon: <BadgeDollarSign className="w-5 h-5 text-sky" />, text: "Estimasi Upah Regional" },
   ];
 
   const mouseX = useMotionValue(0);

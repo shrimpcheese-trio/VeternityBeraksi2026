@@ -1,20 +1,22 @@
 import { cn } from "@/lib/utils";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 const statusStyles: Record<string, string> = {
-  draft: "bg-amber-500/10 text-amber-600 border-amber-200",
-  active: "bg-green-500/10 text-green-600 border-green-200",
-  completed: "bg-blue-500/10 text-blue-600 border-blue-200",
-  disputed: "bg-red-500/10 text-red-600 border-red-200",
+  draft: "bg-bg-alt text-navy border-border",
+  active: "bg-sky/10 text-sky border-sky/20",
+  completed: "bg-sky/10 text-sky-active border-sky/30",
+  disputed: "bg-coral/10 text-coral border-coral/20",
 };
 
-const statusLabels: Record<string, string> = {
-  draft: "Penawaran",
-  active: "Aktif",
-  completed: "Selesai",
-  disputed: "Sengketa",
-};
+export async function StatusBadge({ status }: { status: string }) {
+  const t = await getServerTranslator("agreement");
+  const labelByStatus: Record<string, string> = {
+    draft: t("status.draft"),
+    active: t("status.active"),
+    completed: t("status.completed"),
+    disputed: t("status.disputed"),
+  };
 
-export function StatusBadge({ status }: { status: string }) {
   return (
     <span
       className={cn(
@@ -22,7 +24,7 @@ export function StatusBadge({ status }: { status: string }) {
         statusStyles[status] ?? "bg-gray-500/10 text-gray-600 border-gray-200",
       )}
     >
-      {statusLabels[status] ?? status}
+      {labelByStatus[status] ?? status}
     </span>
   );
 }

@@ -2,8 +2,6 @@
 @import "tw-animate-css";
 @import "../design-tokens.css";
 
-@plugin "tailwindcss-animate";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -34,9 +32,10 @@
   --color-status-warning: var(--color-status-warning);
 
   /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-pill: 9999px;
 
   /* Typography Fonts */
@@ -62,7 +61,7 @@
   --color-card-foreground: var(--color-text-body);
   --color-input: var(--color-border);
   --color-ring: var(--color-sky);
-  --radius: 8px;
+  --radius: 12px;
 }
 
 @layer base {

@@ -5,13 +5,15 @@ import { Plus, List } from "lucide-react";
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { ChartWidget } from "@/components/dashboard/chart-widget";
 import { ReminderCard } from "@/components/dashboard/reminder-card";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
-const MONTH_NAMES = [
-  "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
-  "Jul", "Agu", "Sep", "Okt", "Nov", "Des",
-];
+type DashboardTranslator = Awaited<ReturnType<typeof getServerTranslator<"employerDashboard">>>;
 
-function buildMonthlyChart(agreements: { status: string; created_at: string }[]) {
+function buildMonthlyChart(
+  agreements: { status: string; created_at: string }[],
+  monthNames: string[],
+) {
   const now = new Date();
   const months: { label: string; value: number }[] = [];
 
@@ -22,24 +24,28 @@ function buildMonthlyChart(agreements: { status: string; created_at: string }[])
       const c = new Date(a.created_at);
       return c >= d && c < next;
     }).length;
-    months.push({ label: MONTH_NAMES[d.getMonth()], value: count });
+    months.push({ label: monthNames[d.getMonth()], value: count });
   }
 
   return months;
 }
 
-function computeTrend(current: number, previous: number): { direction: "up" | "down"; text: string } {
-  if (previous === 0 && current === 0) return { direction: "up", text: "Belum ada data" };
-  if (previous === 0) return { direction: "up", text: "Data baru tersedia" };
+function computeTrend(current: number, previous: number, t: DashboardTranslator): { direction: "up" | "down"; text: string } {
+  if (previous === 0 && current === 0) return { direction: "up", text: t("trends.noData") };
+  if (previous === 0) return { direction: "up", text: t("trends.newData") };
   const pct = Math.round(((current - previous) / previous) * 100);
-  if (pct >= 0) return { direction: "up", text: `+${pct}% dari periode lalu` };
-  return { direction: "down", text: `${pct}% dari periode lalu` };
+  if (pct >= 0) return { direction: "up", text: t("trends.up", { pct }) };
+  return { direction: "down", text: t("trends.down", { pct }) };
 }
 
 export default async function EmployerDashboard() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const fullName = user?.user_metadata?.full_name ?? "Pemberi Kerja";
+  const t = await getServerTranslator("employerDashboard");
+  const common = await getServerTranslator("common");
+  const locale = await getLocale();
+  const monthNames = common.raw("monthsShort") as string[];
+  const fullName = user?.user_metadata?.full_name ?? t("fallbackName");
 
   const { data: agreementsData } = await supabase
     .from("agreements")
@@ -74,17 +80,22 @@ export default async function EmployerDashboard() {
     .filter((a) => new Date(a.created_at) >= sixtyDaysAgo && new Date(a.created_at) < thirtyDaysAgo)
     .reduce((s, a) => s + (a.price ?? 0), 0);
 
-  const chartData = buildMonthlyChart(agreements);
+  const chartData = buildMonthlyChart(agreements, monthNames);
 
   const reminders = agreements.slice(0, 3).map((a) => ({
-    title: a.job_description ?? "Pekerjaan",
-    subtitle: `${statusLabel(a.status)} - ${new Date(a.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long" })}`,
+    title: a.job_description ?? t("reminders.jobFallback"),
+    subtitle: t("reminders.dateSubtitle", {
+      status: statusLabel(a.status, t),
+      date: new Date(a.created_at).toLocaleDateString(locale === "id" ? "id-ID" : "en-US", { day: "numeric", month: "long" }),
+    }),
   }));
 
   if (agreements.filter((a) => a.status === "draft").length > 0) {
     reminders.unshift({
-      title: "Ada penawaran baru untuk ditinjau",
-      subtitle: `${agreements.filter((a) => a.status === "draft").length} pekerjaan menunggu dikonfirmasi`,
+      title: t("reminders.newOfferTitle"),
+      subtitle: t("reminders.newOfferSubtitle", {
+        count: agreements.filter((a) => a.status === "draft").length,
+      }),
     });
   }
 
@@ -93,23 +104,23 @@ export default async function EmployerDashboard() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="font-heading text-2xl font-medium tracking-tight">
-            Selamat datang, {fullName.split(" ")[0]}!
+            {t("greeting", { firstName: fullName.split(" ")[0] })}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Ringkasan aktivitas dan daftar pekerjaan Anda.
+            {t("subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="gap-1.5" asChild>
             <Link href="/employer/agreements">
               <List className="size-4" />
-              Lihat Semua
+              {t("viewAll")}
             </Link>
           </Button>
           <Button size="sm" className="gap-1.5" asChild>
             <Link href="/browse">
               <Plus className="size-4" />
-              Cari Pekerja
+              {t("findWorker")}
             </Link>
           </Button>
         </div>
@@ -117,46 +128,46 @@ export default async function EmployerDashboard() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <KpiCard
-          label="Pekerjaan Dipasang"
+          label={t("kpis.jobsPosted")}
           value={String(totalJobs)}
-          trendDirection={computeTrend(recentTotal, priorTotal).direction}
-          trendText={computeTrend(recentTotal, priorTotal).text}
+          trendDirection={computeTrend(recentTotal, priorTotal, t).direction}
+          trendText={computeTrend(recentTotal, priorTotal, t).text}
           variant="highlighted"
         />
         <KpiCard
-          label="Pekerjaan Selesai"
+          label={t("kpis.jobsCompleted")}
           value={String(totalCompleted)}
-          trendDirection={computeTrend(recentCompleted, priorCompleted).direction}
-          trendText={computeTrend(recentCompleted, priorCompleted).text}
+          trendDirection={computeTrend(recentCompleted, priorCompleted, t).direction}
+          trendText={computeTrend(recentCompleted, priorCompleted, t).text}
         />
         <KpiCard
-          label="Total Pengeluaran"
-          value={`Rp ${(totalSpend / 1_000_000).toFixed(1)} Jt`}
-          trendDirection={computeTrend(recentSpend, priorSpend).direction}
-          trendText={computeTrend(recentSpend, priorSpend).text}
+          label={t("kpis.totalSpend")}
+          value={t("kpis.totalSpendValue", { million: (totalSpend / 1_000_000).toFixed(1) })}
+          trendDirection={computeTrend(recentSpend, priorSpend, t).direction}
+          trendText={computeTrend(recentSpend, priorSpend, t).text}
         />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <ChartWidget title="Pekerjaan per Bulan" data={chartData} />
+          <ChartWidget title={t("chartTitle")} data={chartData} />
         </div>
         <ReminderCard
-          title="Perlu Ditindaklanjuti"
+          title={t("reminders.title")}
           items={reminders.slice(0, 3)}
-          actionLabel="Lihat Semua"
+          actionLabel={t("reminders.actionLabel")}
         />
       </div>
     </div>
   );
 }
 
-function statusLabel(status: string) {
+function statusLabel(status: string, t: DashboardTranslator) {
   const labels: Record<string, string> = {
-    draft: "Penawaran",
-    active: "Aktif",
-    completed: "Selesai",
-    disputed: "Sengketa",
+    draft: t("status.draft"),
+    active: t("status.active"),
+    completed: t("status.completed"),
+    disputed: t("status.disputed"),
   };
   return labels[status] ?? status;
 }

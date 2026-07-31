@@ -3,6 +3,7 @@ import * as React from "react";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
 import { Search, ArrowRight, ShieldCheck, MapPin, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BlurReveal, StaggerTextContainer, SplitText } from "@/components/ui/motion";
 
 function AnimatedCounter({ value, active, prefix = "", suffix = "", duration = 1.5 }: { value: number, active: boolean, prefix?: string, suffix?: string, duration?: number }) {
@@ -28,11 +29,12 @@ const PointerCursor = () => (
   </svg>
 );
 
-const candidates = [
-  { name: "Wawan Subianto", role: "Tukang Kayu", score: 98, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop" },
-  { name: "Rizky Pratama", role: "Montir", score: 85, img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&h=150&auto=format&fit=crop" },
-  { name: "Ahmad Fauzi", role: "Tukang Cat", score: 79, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop" }
+const candidateImages = [
+  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&h=150&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop"
 ];
+const candidateScores = [98, 85, 79];
 
 function getWorkflowStep(phase: number) {
   if (phase >= 1 && phase <= 6) return 1;
@@ -66,6 +68,10 @@ function getCursorStyle(phase: number) {
 }
 
 export function EmployersSection() {
+  const t = useTranslations("employers");
+  const rawCandidates = t.raw("candidates") as { name: string; role: string }[];
+  const candidates = rawCandidates.map((candidate, index) => ({ ...candidate, img: candidateImages[index], score: candidateScores[index] }));
+  const steps = t.raw("steps") as string[];
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: "-10%" });
   const [phase, setPhase] = useState(0);
@@ -202,21 +208,21 @@ export function EmployersSection() {
             {/* Header Content */}
             <div className="flex flex-col gap-6">
               <div className="inline-flex self-start items-center px-3.5 py-1.5 rounded-full bg-sky/10 border border-sky/20 text-[10px] font-bold uppercase tracking-widest text-sky">
-                Untuk Pemberi Kerja
+                {t("eyebrow")}
               </div>
               
               <StaggerTextContainer delayChildren={0.1} className="text-[2.5rem] md:text-[3.25rem] font-heading font-semibold text-bg leading-[1.15] tracking-tight">
-                <SplitText text="Temukan pekerja berdasarkan" /> <span className="text-sky font-medium"><SplitText text="bukti" /></span><SplitText text=", bukan sekadar janji." />
+                <SplitText text={t("heading1")} /> <span className="text-sky font-medium"><SplitText text={t("headingHighlight")} /></span><SplitText text={t("heading2")} />
               </StaggerTextContainer>
               
               <p className="text-lg text-bg/70 leading-relaxed font-light mt-2">
-                Setiap pekerja di Upahku memiliki riwayat proyek terverifikasi. Anda tidak perlu lagi menebak-nebak kualitas hasil kerja mereka.
+                {t("description")}
               </p>
             </div>
             
             {/* Workflow Indicator */}
             <div className="flex flex-col gap-8 border-t border-white/10 pt-10">
-              <span className="text-[11px] uppercase font-bold tracking-widest text-text-muted">Cara Kerja Upahku</span>
+              <span className="text-[11px] uppercase font-bold tracking-widest text-text-muted">{t("workflowLabel")}</span>
               
               <div className="flex flex-col gap-0 relative">
                  {/* Progress Line */}
@@ -233,7 +239,7 @@ export function EmployersSection() {
                  <div className={`relative flex items-start gap-5 py-4 transition-all duration-500 ${activeStep >= 1 ? 'opacity-100' : 'opacity-40'}`}>
                    <div className={`relative z-10 w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold transition-colors duration-500 ${activeStep >= 1 ? 'bg-sky text-navy border-sky shadow-[0_0_15px_rgba(56,189,248,0.4)]' : 'bg-navy border-white/20 text-white/50'}`}>1</div>
                    <div className="flex flex-col pt-1">
-                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 1 ? 'text-white' : 'text-white/60'}`}>Cari Kandidat</span>
+                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 1 ? 'text-white' : 'text-white/60'}`}>{steps[0]}</span>
                    </div>
                  </div>
                  
@@ -241,7 +247,7 @@ export function EmployersSection() {
                  <div className={`relative flex items-start gap-5 py-4 transition-all duration-500 ${activeStep >= 2 ? 'opacity-100' : 'opacity-40'}`}>
                    <div className={`relative z-10 w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold transition-colors duration-500 ${activeStep >= 2 ? 'bg-sky text-navy border-sky shadow-[0_0_15px_rgba(56,189,248,0.4)]' : 'bg-navy border-white/20 text-white/50'}`}>2</div>
                    <div className="flex flex-col pt-1">
-                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 2 ? 'text-white' : 'text-white/60'}`}>Lihat Bukti Nyata</span>
+                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 2 ? 'text-white' : 'text-white/60'}`}>{steps[1]}</span>
                    </div>
                  </div>
 
@@ -249,17 +255,17 @@ export function EmployersSection() {
                  <div className={`relative flex items-start gap-5 py-4 transition-all duration-500 ${activeStep >= 3 ? 'opacity-100' : 'opacity-40'}`}>
                    <div className={`relative z-10 w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold transition-colors duration-500 ${activeStep >= 3 ? 'bg-sky text-navy border-sky shadow-[0_0_15px_rgba(56,189,248,0.4)]' : 'bg-navy border-white/20 text-white/50'}`}>3</div>
                    <div className="flex flex-col pt-1">
-                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 3 ? 'text-white' : 'text-white/60'}`}>Rekrut dengan Percaya Diri</span>
+                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 3 ? 'text-white' : 'text-white/60'}`}>{steps[2]}</span>
                    </div>
                  </div>
 
                  {/* Step 4 */}
                  <div className={`relative flex items-start gap-5 py-4 transition-all duration-500 ${activeStep >= 4 ? 'opacity-100' : 'opacity-40'}`}>
-                   <div className={`relative z-10 w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold transition-colors duration-500 ${activeStep >= 4 ? 'bg-green-400 text-navy border-green-400 shadow-[0_0_15px_rgba(74,222,128,0.4)]' : 'bg-navy border-white/20 text-white/50'}`}>
+                   <div className={`relative z-10 w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold transition-colors duration-500 ${activeStep >= 4 ? 'bg-sky text-navy border-sky shadow-[0_0_15px_rgba(61,169,252,0.4)]' : 'bg-navy border-white/20 text-white/50'}`}>
                      <Check className="w-4 h-4" />
                    </div>
                    <div className="flex flex-col pt-1">
-                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 4 ? 'text-white' : 'text-white/60'}`}>Selesai</span>
+                     <span className={`text-lg font-medium transition-colors duration-500 ${activeStep >= 4 ? 'text-white' : 'text-white/60'}`}>{steps[3]}</span>
                    </div>
                  </div>
               </div>
@@ -299,7 +305,7 @@ export function EmployersSection() {
                     <div className="w-full h-16 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl flex items-center px-6 shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
                       <Search className="text-white/50 w-5 h-5" />
                       <span className="ml-4 text-white/70 font-medium text-lg tracking-wide">
-                        {phase >= 4 ? "Tukang Kayu, Jakarta..." : <span className="opacity-50">Ketik jenis pekerja...</span>}
+                        {phase >= 4 ? t("searchValue") : <span className="opacity-50">{t("searchPlaceholder")}</span>}
                       </span>
                     </div>
 
@@ -336,7 +342,7 @@ export function EmployersSection() {
                               </div>
                               <div className="flex flex-col items-end">
                                 <span className="text-white font-bold">{c.score}</span>
-                                <span className="text-white/40 text-[10px] uppercase font-bold tracking-wider">Score</span>
+                                <span className="text-white/40 text-[10px] uppercase font-bold tracking-wider">{t("scoreLabel")}</span>
                               </div>
                             </motion.div>
                           ))}
@@ -365,7 +371,7 @@ export function EmployersSection() {
                       <div className="flex flex-col">
                         <span className="font-heading font-semibold text-lg text-navy">{candidates[0].name}</span>
                         <span className="text-sm font-medium text-text-muted mt-0.5 flex items-center gap-1.5">
-                          {candidates[0].role} <span className="text-border">•</span> <MapPin className="w-3.5 h-3.5" /> Jakarta
+                          {candidates[0].role} <span className="text-border">•</span> <MapPin className="w-3.5 h-3.5" /> {t("city")}
                         </span>
                       </div>
                     </motion.div>
@@ -391,7 +397,7 @@ export function EmployersSection() {
                           className="flex items-center justify-between"
                         >
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">Trust Score</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">{t("trustScoreLabel")}</span>
                             <div className="flex items-end gap-1">
                               <span className="text-[2.5rem] font-heading font-bold text-navy leading-none tracking-tight">
                                 <AnimatedCounter value={98} active={phase >= 8} />
@@ -405,10 +411,10 @@ export function EmployersSection() {
                               initial={{ scale: 0, opacity: 0 }}
                               animate={{ scale: 1, opacity: 1 }}
                               transition={{ type: "spring", bounce: 0.5 }}
-                              className="flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1.5 rounded-full border border-green-200 shadow-sm"
+                              className="flex items-center gap-1.5 bg-sky/10 text-sky-active px-3 py-1.5 rounded-full border border-sky/20 shadow-sm"
                             >
                               <ShieldCheck className="w-4 h-4" />
-                              <span className="text-[11px] font-bold tracking-wide">Warga Verified</span>
+                              <span className="text-[11px] font-bold tracking-wide">{t("verifiedBadge")}</span>
                             </motion.div>
                           )}
                         </motion.div>
@@ -441,13 +447,13 @@ export function EmployersSection() {
                               initial={{ opacity: 1 }}
                               animate={{ opacity: 0 }}
                               transition={{ delay: 1.5, duration: 0.5 }}
-                            >SEBELUM</motion.div>
+                            >{t("beforeLabel")}</motion.div>
                             <motion.div 
                               className="absolute top-3 left-3 bg-sky/90 backdrop-blur-md text-navy text-[10px] font-bold px-2 py-1 rounded-md"
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               transition={{ delay: 1.5, duration: 0.5 }}
-                            >SESUDAH</motion.div>
+                            >{t("afterLabel")}</motion.div>
                           </div>
                         </motion.div>
                       )}
@@ -461,9 +467,9 @@ export function EmployersSection() {
                           className="mt-6 pt-6 border-t border-border/50 flex items-center justify-between"
                         >
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-0.5">Est. Upah</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-0.5">{t("wageLabel")}</span>
                             <span className="text-xl font-heading font-semibold text-sky tracking-tight">
-                              <AnimatedCounter value={250000} active={phase >= 11} prefix="Rp " /> /hr
+                              <AnimatedCounter value={250000} active={phase >= 11} prefix="Rp " /> {t("wagePerHour")}
                             </span>
                           </div>
                           
@@ -474,7 +480,7 @@ export function EmployersSection() {
                               transition={{ duration: 0.2 }}
                               className="text-navy px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 shadow-[0_10px_20px_-5px_rgba(56,189,248,0.4)]"
                             >
-                              Pilih Pekerja <ArrowRight className="w-4 h-4" />
+                              {t("selectCta")} <ArrowRight className="w-4 h-4" />
                             </motion.button>
                           )}
                         </motion.div>
@@ -502,13 +508,13 @@ export function EmployersSection() {
                            initial={{ scale: 0.5, opacity: 0 }}
                            animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
                            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-                           className="absolute inset-0 bg-green-400 rounded-full"
+                           className="absolute inset-0 bg-sky rounded-full"
                          />
                          <motion.div 
                            initial={{ scale: 0 }}
                            animate={{ scale: 1 }}
                            transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
-                           className="relative z-10 w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center shadow-inner border border-green-100"
+                           className="relative z-10 w-16 h-16 bg-sky/10 text-sky rounded-full flex items-center justify-center shadow-inner border border-sky/20"
                          >
                            <Check className="w-8 h-8" strokeWidth={3} />
                          </motion.div>
@@ -519,7 +525,7 @@ export function EmployersSection() {
                         transition={{ delay: 0.4 }}
                         className="text-2xl font-heading font-bold text-navy mb-2"
                       >
-                        Pekerja Berhasil Dipilih!
+                        {t("successHeading")}
                       </motion.h3>
                       <motion.p 
                         initial={{ opacity: 0, y: 10 }}
@@ -527,7 +533,7 @@ export function EmployersSection() {
                         transition={{ delay: 0.5 }}
                         className="text-text-muted text-sm px-4"
                       >
-                        Permintaan Anda telah disetujui secara instan oleh <strong>Wawan Subianto</strong>.
+                        {t.rich("successDescription", { name: candidates[0].name, strong: (chunks) => <strong>{chunks}</strong> })}
                       </motion.p>
                     </div>
                   
@@ -549,19 +555,19 @@ export function EmployersSection() {
                            </div>
                          </div>
                          <div className="bg-sky/10 text-sky px-3 py-1 rounded-full text-[10px] font-bold border border-sky/20">
-                           Disewa
+                           {t("hiredBadge")}
                          </div>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-3">
                          <div className="bg-bg-alt/50 border border-border/50 p-3 rounded-2xl flex flex-col">
-                           <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">Upah Harian</span>
-                           <span className="text-sm font-semibold text-navy">Rp 250.000</span>
-                         </div>
-                         <div className="bg-bg-alt/50 border border-border/50 p-3 rounded-2xl flex flex-col">
-                           <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">Jadwal</span>
-                           <span className="text-sm font-semibold text-navy">Mulai Besok</span>
-                         </div>
+                           <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">{t("summary.dailyWageLabel")}</span>
+                           <span className="text-sm font-semibold text-navy">{t("summary.dailyWageValue")}</span>
+                          </div>
+                          <div className="bg-bg-alt/50 border border-border/50 p-3 rounded-2xl flex flex-col">
+                           <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">{t("summary.scheduleLabel")}</span>
+                           <span className="text-sm font-semibold text-navy">{t("summary.scheduleValue")}</span>
+                          </div>
                       </div>
                     </motion.div>
                     
@@ -572,7 +578,7 @@ export function EmployersSection() {
                       className="mt-6 flex justify-center"
                     >
                       <span className="text-xs text-sky font-medium flex items-center gap-1.5 bg-sky/5 px-4 py-2 rounded-full border border-sky/10 transition-colors">
-                        Lihat Detail Kontrak <ArrowRight className="w-3.5 h-3.5" />
+                        {t("contractLink")} <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </motion.div>
                   

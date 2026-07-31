@@ -10,7 +10,7 @@ export function ListingGrid({ listings }: { listings: ListingResult[] }) {
         <p className="text-sm font-medium text-muted-foreground">
           Tidak ada pekerja ditemukan
         </p>
-        <p className="text-xs text-muted-soft">
+        <p className="text-xs text-muted-foreground">
           Coba ubah filter atau kata kunci pencarian
         </p>
       </div>

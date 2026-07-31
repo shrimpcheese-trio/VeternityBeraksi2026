@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
 function buildWeeks(year: number, month: number): (number | null)[][] {
   const firstDay = new Date(year, month, 1);
@@ -26,12 +28,15 @@ function buildWeeks(year: number, month: number): (number | null)[][] {
   return weeks;
 }
 
-function formatMonth(year: number, month: number): string {
+function formatMonth(year: number, month: number, locale: string): string {
   const date = new Date(year, month);
-  return date.toLocaleDateString("id-ID", { month: "long", year: "numeric" });
+  return date.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+    month: "long",
+    year: "numeric",
+  });
 }
 
-export function MonthGrid({
+export async function MonthGrid({
   year,
   month,
   agreementDateSet,
@@ -42,6 +47,8 @@ export function MonthGrid({
   agreementDateSet: Set<string>;
   selectedDay: string | null;
 }) {
+  const t = await getServerTranslator("calendarEmployer");
+  const locale = await getLocale();
   const weeks = buildWeeks(year, month);
   const todayStr = new Date().toISOString().slice(0, 10);
 
@@ -49,22 +56,24 @@ export function MonthGrid({
   const prevMonth = month === 0 ? `${year - 1}-12` : `${year}-${String(month).padStart(2, "0")}`;
   const nextMonth = month === 11 ? `${year + 1}-01` : `${year}-${String(month + 2).padStart(2, "0")}`;
 
-  const dayNames = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+  const dayNames = t.raw("monthGrid.dayNames") as string[];
 
   return (
     <div className="rounded-2xl border border-border bg-background p-5">
       <div className="mb-4 flex items-center justify-between">
         <a
           href={`/employer/calendar?month=${prevMonth}`}
+          aria-label={t("monthGrid.prevMonthAria")}
           className="flex size-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <ChevronLeft className="size-4" />
         </a>
         <h2 className="font-heading text-base font-medium">
-          {formatMonth(year, month)}
+          {formatMonth(year, month, locale)}
         </h2>
         <a
           href={`/employer/calendar?month=${nextMonth}`}
+          aria-label={t("monthGrid.nextMonthAria")}
           className="flex size-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <ChevronRight className="size-4" />

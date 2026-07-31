@@ -69,7 +69,7 @@ export function ReviewsTab({
                     "size-4",
                     i < Math.round(avg)
                       ? "fill-amber-400 text-amber-400"
-                      : "text-muted-soft"
+                      : "text-muted-foreground"
                   )}
                 />
               ))}
@@ -127,7 +127,7 @@ export function ReviewsTab({
                           "size-3",
                           i < r.rating
                             ? "fill-amber-400 text-amber-400"
-                            : "text-muted-soft"
+                            : "text-muted-foreground"
                         )}
                       />
                     ))}

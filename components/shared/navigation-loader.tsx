@@ -50,7 +50,7 @@ export function NavigationLoader() {
     <div className="fixed left-0 right-0 top-0 z-50 animate-slideDown">
       <div className="flex h-[3px]">
         <div className="flex size-5 shrink-0 items-center justify-center bg-primary">
-          <span className="text-[10px] font-bold leading-none text-on-primary">U</span>
+          <span className="text-[10px] font-bold leading-none text-primary-foreground">U</span>
         </div>
         <div className="h-full flex-1 bg-primary">
           <div

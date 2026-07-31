@@ -41,7 +41,7 @@ export function SiteNav({ user }: { user: boolean }) {
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="font-heading text-step-1 font-bold tracking-tight text-primary hover:text-primary-active"
+          className="font-heading text-xl font-bold tracking-tight text-navy hover:text-sky-active md:text-2xl"
         >
           Upahku
         </Link>
@@ -51,7 +51,7 @@ export function SiteNav({ user }: { user: boolean }) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              className="text-sm font-semibold text-text-body transition-all hover:-translate-y-0.5 hover:text-navy"
             >
               {link.label}
             </Link>
@@ -89,12 +89,12 @@ export function SiteNav({ user }: { user: boolean }) {
                     onClick={() => switchLocale(l.code)}
                     className={`flex w-full items-center rounded-md px-3 py-2 text-left text-sm ${
                       locale === l.code
-                        ? "bg-surface-soft font-medium text-foreground"
-                        : "text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                        ? "bg-bg-alt font-medium text-foreground"
+                        : "text-muted-foreground hover:bg-bg-alt hover:text-foreground"
                     }`}
                   >
                     <span className="mr-2">{l.label}</span>
-                    <span className="text-muted-soft">{l.name}</span>
+                    <span className="text-muted-foreground">{l.name}</span>
                   </button>
                 ))}
               </div>
@@ -105,13 +105,13 @@ export function SiteNav({ user }: { user: boolean }) {
             <>
               <Link
                 href="/login"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                className="text-sm font-semibold text-text-body hover:text-navy"
               >
                 {t("login")}
               </Link>
               <Link
                 href="/register"
-                className="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-on-primary hover:bg-primary-active"
+                className="inline-flex h-9 items-center gap-1.5 rounded-full bg-sky px-6 text-sm font-semibold text-white shadow-md hover:bg-sky-active"
               >
                 {t("register")}
               </Link>
@@ -152,8 +152,8 @@ export function SiteNav({ user }: { user: boolean }) {
                   onClick={() => switchLocale(l.code)}
                   className={`flex-1 rounded-md px-3 py-2 text-center text-sm font-medium ${
                     locale === l.code
-                      ? "bg-surface-soft text-foreground"
-                      : "text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                      ? "bg-bg-alt text-foreground"
+                      : "text-muted-foreground hover:bg-bg-alt hover:text-foreground"
                   }`}
                 >
                   {l.label}
@@ -173,7 +173,7 @@ export function SiteNav({ user }: { user: boolean }) {
                 <Link
                   href="/register"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-2 block w-full rounded-md bg-primary px-4 py-3 text-center text-sm font-medium text-on-primary"
+                  className="mt-2 block w-full rounded-full bg-sky px-4 py-3 text-center text-sm font-semibold text-white"
                 >
                   {t("register")}
                 </Link>

@@ -103,7 +103,7 @@ Jangan pakai geometric rounded sans (Poppins/Quicksand/Baloo) — itu font yang 
 
 | Peran | Font | Catatan |
 |---|---|---|
-| Display (H1, headline hero, angka besar) | `Fraunces` | Serif berkarakter, dipakai dengan restraint — hanya di headline besar, bukan di body |
+| Display (H1, headline hero, angka besar) | `Bricolage Grotesque` | Grotesque berkarakter, dipakai dengan restraint — hanya di headline besar, bukan di body |
 | Body & UI | `Inter` | Netral, sangat legible untuk teks panjang dan UI berbahasa Indonesia |
 | Angka/data (Trust Score, estimasi upah) | `Inter` dengan `font-variant-numeric: tabular-nums` | Supaya angka tidak "melompat" saat berubah |
 
@@ -111,15 +111,15 @@ Jangan pakai geometric rounded sans (Poppins/Quicksand/Baloo) — itu font yang 
 
 | Token | Ukuran (mobile/desktop) | Weight | Line height | Font | Dipakai untuk |
 |---|---|---|---|---|---|
-| `--text-display-lg` | 32px / 40px | 600 | 1.1 | Fraunces | H1 hero |
-| `--text-display-md` | 24px / 32px | 600 | 1.15 | Fraunces | H2 judul section |
-| `--text-display-sm` | 20px / 24px | 600 | 1.2 | Fraunces | Angka Trust Score, angka estimasi upah |
+| `--text-display-lg` | 32px / 40px | 600 | 1.1 | Bricolage Grotesque | H1 hero |
+| `--text-display-md` | 24px / 32px | 600 | 1.15 | Bricolage Grotesque | H2 judul section |
+| `--text-display-sm` | 20px / 24px | 600 | 1.2 | Bricolage Grotesque | Angka Trust Score, angka estimasi upah |
 | `--text-title` | 16px / 18px | 500 | 1.4 | Inter | Judul kartu (Kartu Pekerja, Kartu Verifikasi) |
 | `--text-body` | 16px | 400 | 1.6 | Inter | Paragraf default |
 | `--text-caption` | 13px | 500 | 1.4 | Inter | Label, badge, metadata kartu |
 | `--text-button` | 14px | 500 | 1.0 | Inter | Label tombol |
 
-**Prinsip:** display size selalu weight 600 (bukan 400 polos — Fraunces di 400 terasa terlalu tipis untuk headline pendek Bahasa Indonesia). Jangan pernah bold (700+) di display.
+**Prinsip:** display size selalu weight 600 (bukan 400 polos — Bricolage Grotesque di 400 terasa terlalu tipis untuk headline pendek Bahasa Indonesia). Jangan pernah bold (700+) di display.
 
 Tipografi **tidak** dipisah ke file config terpisah seperti warna, karena font-pairing adalah keputusan identitas brand yang jauh lebih jarang berubah dibanding warna/referensi layout — kalau memang mau diganti, edit langsung di sini dan diskusikan dulu, jangan diam-diam diganti developer lain.
 
@@ -409,7 +409,7 @@ Basis: shadcn `Card`. Berbeda bentuk dari kartu testimoni biasa:
 - Grid section ini 2 kolom lebar di desktop (bukan 3 kolom sempit)
 
 ### 8.6 Kartu Estimasi Upah
-Basis: shadcn `Card`. Baris atas: kota + jenis pekerjaan + band pengalaman, `--text-caption`, `--color-text-muted`. Baris bawah: angka range besar, `--text-display-sm`, Fraunces, `--color-navy`. State kosong (wajib): italic `--color-text-muted` — *"Belum ada cukup data upah untuk kombinasi ini."*
+Basis: shadcn `Card`. Baris atas: kota + jenis pekerjaan + band pengalaman, `--text-caption`, `--color-text-muted`. Baris bawah: angka range besar, `--text-display-sm`, Bricolage Grotesque, `--color-navy`. State kosong (wajib): italic `--color-text-muted` — *"Belum ada cukup data upah untuk kombinasi ini."*
 
 ### 8.7 Testimoni
 Basis: shadcn `Card` + `Avatar` (override `rounded-lg`, bukan `rounded-full`). Foto asli 1:1, nama (`--text-title`), peran (`--text-caption`, `--color-text-muted`) — termasuk peran non-pekerja. Tidak pakai avatar inisial.
@@ -477,7 +477,7 @@ export function FaqSection() {
 
 ### 9.3 Do's & Don'ts Ringkas
 
-**Do:** anchor section di `--color-bg`/`--color-bg-alt` selang-seling · Fraunces hanya untuk display besar · foto asli di semua titik trust · daftarkan komponen baru ke Bagian 8 dulu.
+**Do:** anchor section di `--color-bg`/`--color-bg-alt` selang-seling · Bricolage Grotesque hanya untuk display besar · foto asli di semua titik trust · daftarkan komponen baru ke Bagian 8 dulu.
 
 **Don't:** jangan tambah warna keempat di luar navy/sky/coral · jangan pakai `button-cta-coral` di lebih dari 1 tempat · jangan dokumentasikan hover selain default+active · jangan ulangi surface mode yang sama 2 band berturut-turut.
 
@@ -501,7 +501,7 @@ export function FaqSection() {
 ## 11. Known Gaps
 
 - **Stats-bar di bawah hero** (pola dari `LAYOUT-B`, mis. "120+ Trusted") — ditunda sampai ada data pekerja terverifikasi nyata; jangan diimplementasikan dengan angka contoh/dummy yang terlihat seperti data asli.
-- Font-loading Fraunces (Google Fonts vs self-hosted) belum diputuskan.
+- Font-loading Bricolage Grotesque (Google Fonts vs self-hosted) belum diputuskan.
 - State error network di kartu Proof of Work (gagal upload foto) belum punya desain spesifik — pakai `text-input-error` sebagai acuan sementara.
 - Halaman detail profil pekerja penuh belum masuk scope dokumen ini (baru landing page).
 - Dark mode belum masuk scope.
