@@ -20,6 +20,11 @@ function isPublicApiGet(request: NextRequest): boolean {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  const isServerAction = request.headers.has("next-action");
+  if (isServerAction) {
+    return NextResponse.next();
+  }
+
   if (pathname.startsWith("/api/")) {
     if (isPublicApiGet(request)) {
       return NextResponse.next();

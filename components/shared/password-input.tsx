@@ -22,24 +22,24 @@ export function PasswordInput({
     <div>
       <label
         htmlFor={name}
-        className="block text-sm font-medium text-foreground mb-1.5"
+        className="block text-sm font-semibold text-navy mb-2"
       >
         {label}
       </label>
       <div className="relative">
-        <Lock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+        <Lock size={18} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
         <input
           id={name}
           name={name}
           type={visible ? "text" : "password"}
           required={required}
           placeholder={placeholder}
-          className="block w-full rounded-lg border border-input bg-background px-3 py-3 pl-9 pr-10 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+          className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-3.5 pl-11 pr-10 text-sm text-navy outline-none transition-all focus:border-sky focus:bg-white focus:ring-4 focus:ring-sky/10"
         />
         <button
           type="button"
           onClick={() => setVisible(!visible)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center size-11 text-muted-foreground hover:text-foreground"
+          className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center size-11 text-slate-400 hover:text-navy transition-colors"
         >
           {visible ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
