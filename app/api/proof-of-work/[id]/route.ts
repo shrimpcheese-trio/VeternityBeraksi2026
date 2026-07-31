@@ -44,14 +44,22 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     if (!existing) {
       return NextResponse.json({ error: "Proof of work not found", code: "NOT_FOUND" }, { status: 404 });
     }
-    if (user.id !== existing.worker_id) {
+
+    const isAdmin = user.user_metadata?.role === "admin";
+    if (user.id !== existing.worker_id && !isAdmin) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN" }, { status: 403 });
+    }
+    if (parsed.data.verified !== undefined && !isAdmin) {
+      return NextResponse.json(
+        { error: "Hanya admin yang dapat memverifikasi bukti pekerjaan", code: "FORBIDDEN" },
+        { status: 403 },
+      );
     }
 
     const wasVerified = existing.verified;
     const proof = await updateProofOfWork(supabase, id, parsed.data);
 
-    if (!wasVerified && parsed.data.verified) {
+    if (wasVerified !== parsed.data.verified) {
       await computeTrustScore(existing.worker_id);
     }
 

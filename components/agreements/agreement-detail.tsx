@@ -2,9 +2,18 @@ import { Building2, MapPin, Clock, Calendar, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/agreements/status-badge";
 import { AgreementActions } from "@/components/agreements/agreement-actions";
+import { ProofUpload } from "@/components/agreements/proof-upload";
 import type { AgreementWithEmployer } from "@/lib/repositories/agreement.repo";
 
-export function AgreementDetail({ agreement }: { agreement: AgreementWithEmployer }) {
+export function AgreementDetail({
+  agreement,
+  proofComplete,
+  showProofUpload,
+}: {
+  agreement: AgreementWithEmployer;
+  proofComplete?: boolean;
+  showProofUpload?: boolean;
+}) {
   const employer = agreement.employer_profiles;
 
   return (
@@ -86,10 +95,14 @@ export function AgreementDetail({ agreement }: { agreement: AgreementWithEmploye
         <CardHeader>
           <CardTitle className="font-heading text-lg font-medium">Tindakan</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-5">
+          {showProofUpload && (
+            <ProofUpload agreementId={agreement.agreement_id} initialProof={null} />
+          )}
           <AgreementActions
             agreementId={agreement.agreement_id}
             status={agreement.status}
+            proofComplete={proofComplete}
           />
         </CardContent>
       </Card>

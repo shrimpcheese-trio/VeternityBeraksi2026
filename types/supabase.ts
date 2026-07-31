@@ -103,6 +103,7 @@ export interface Database {
         Row: {
           proof_id: string;
           worker_id: string;
+          agreement_id: string | null;
           job_type: string;
           job_value: number | null;
           photo_before_url: string | null;
@@ -117,6 +118,7 @@ export interface Database {
         Insert: {
           proof_id?: string;
           worker_id: string;
+          agreement_id?: string | null;
           job_type: string;
           job_value?: number | null;
           photo_before_url?: string | null;
@@ -131,6 +133,7 @@ export interface Database {
         Update: {
           proof_id?: string;
           worker_id?: string;
+          agreement_id?: string | null;
           job_type?: string;
           job_value?: number | null;
           photo_before_url?: string | null;
@@ -141,6 +144,42 @@ export interface Database {
           verified?: boolean;
           job_date?: string;
           created_at?: string;
+        };
+        Relationships: [];
+      };
+      reviews: {
+        Row: {
+          review_id: string;
+          agreement_id: string;
+          employer_id: string;
+          worker_id: string;
+          rating: number;
+          comment: string | null;
+          photo_urls: string[];
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          review_id?: string;
+          agreement_id: string;
+          employer_id: string;
+          worker_id: string;
+          rating: number;
+          comment?: string | null;
+          photo_urls?: string[];
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          review_id?: string;
+          agreement_id?: string;
+          employer_id?: string;
+          worker_id?: string;
+          rating?: number;
+          comment?: string | null;
+          photo_urls?: string[];
+          created_at?: string;
+          updated_at?: string;
         };
         Relationships: [];
       };

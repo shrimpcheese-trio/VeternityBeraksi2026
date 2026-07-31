@@ -1,4 +1,4 @@
-import { transitionAgreement } from "@/lib/services/agreement-flow";
+import { transitionAgreement, ProofOfWorkRequiredError } from "@/lib/services/agreement-flow";
 
 jest.mock("@/lib/supabase/server", () => ({
   createClient: jest.fn(),
@@ -11,6 +11,10 @@ jest.mock("@/lib/supabase/admin", () => ({
 jest.mock("@/lib/repositories/agreement.repo", () => ({
   getAgreementById: jest.fn(),
   updateAgreement: jest.fn(),
+}));
+
+jest.mock("@/lib/repositories/proof-of-work.repo", () => ({
+  getProofOfWorkByAgreement: jest.fn(),
 }));
 
 jest.mock("@/lib/services/trust-engine", () => ({
@@ -28,6 +32,9 @@ const mockGetAgreementById = jest.mocked(
 );
 const mockUpdateAgreement = jest.mocked(
   (jest.requireMock("@/lib/repositories/agreement.repo") as { updateAgreement: jest.Mock }).updateAgreement,
+);
+const mockGetProofOfWorkByAgreement = jest.mocked(
+  (jest.requireMock("@/lib/repositories/proof-of-work.repo") as { getProofOfWorkByAgreement: jest.Mock }).getProofOfWorkByAgreement,
 );
 const mockComputeTrustScore = jest.mocked(
   (jest.requireMock("@/lib/services/trust-engine") as { computeTrustScore: jest.Mock }).computeTrustScore,
@@ -58,6 +65,18 @@ describe("transitionAgreement", () => {
     jest.clearAllMocks();
     mockCreateClient.mockResolvedValue({ from: jest.fn() });
     mockCreateAdminClient.mockReturnValue({ from: jest.fn() });
+    mockGetProofOfWorkByAgreement.mockResolvedValue({
+      proof_id: "proof-001",
+      worker_id: workerId,
+      agreement_id: agreementId,
+      job_type: "Perbaikan AC",
+      job_value: 500000,
+      photo_before_url: "https://storage.example.com/before.jpg",
+      photo_after_url: "https://storage.example.com/after.jpg",
+      customer_confirmed: false,
+      verified: false,
+      job_date: "2026-07-30",
+    });
   });
 
   it("throws NotFoundError when agreement does not exist", async () => {
@@ -127,8 +146,54 @@ describe("transitionAgreement", () => {
 
     const result = await transitionAgreement(agreementId, "completed", workerId);
 
+    expect(mockGetProofOfWorkByAgreement).toHaveBeenCalled();
     expect(mockComputeTrustScore).toHaveBeenCalledWith(workerId);
     expect(result.status).toBe("completed");
+  });
+
+  it("throws ProofOfWorkRequiredError on active -> completed without proof", async () => {
+    const agreement = baseAgreement({ status: "active" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetProofOfWorkByAgreement.mockResolvedValue(null);
+
+    await expect(
+      transitionAgreement(agreementId, "completed", workerId),
+    ).rejects.toThrow(ProofOfWorkRequiredError);
+    expect(mockUpdateAgreement).not.toHaveBeenCalled();
+    expect(mockComputeTrustScore).not.toHaveBeenCalled();
+  });
+
+  it("throws ProofOfWorkRequiredError when only one photo is uploaded", async () => {
+    const agreement = baseAgreement({ status: "active" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetProofOfWorkByAgreement.mockResolvedValue({
+      proof_id: "proof-001",
+      worker_id: workerId,
+      agreement_id: agreementId,
+      job_type: "Perbaikan AC",
+      job_value: 500000,
+      photo_before_url: "https://storage.example.com/before.jpg",
+      photo_after_url: null,
+      customer_confirmed: false,
+      verified: false,
+      job_date: "2026-07-30",
+    });
+
+    await expect(
+      transitionAgreement(agreementId, "completed", workerId),
+    ).rejects.toThrow(ProofOfWorkRequiredError);
+  });
+
+  it("allows active -> disputed without a proof", async () => {
+    const agreement = baseAgreement({ status: "active" });
+    mockGetAgreementById.mockResolvedValue(agreement);
+    mockGetProofOfWorkByAgreement.mockResolvedValue(null);
+    mockUpdateAgreement.mockResolvedValue({ ...agreement, status: "disputed" });
+
+    const result = await transitionAgreement(agreementId, "disputed", workerId);
+
+    expect(result.status).toBe("disputed");
+    expect(mockGetProofOfWorkByAgreement).not.toHaveBeenCalled();
   });
 
   it("recomputes trust score on active -> disputed", async () => {

@@ -43,7 +43,6 @@ export function ProfileTabs({
   const tabs: { id: TabId; label: string; count?: number }[] = isEmployer
     ? [
         { id: "overview", label: t("overview") },
-        { id: "listings", label: t("listings"), count: listings.length },
         { id: "reviews", label: t("reviews"), count: reviews.length },
       ]
     : [
@@ -103,7 +102,12 @@ export function ProfileTabs({
       )}
       {activeTab === "listings" && <ListingsTab listings={listings} />}
       {activeTab === "contracts" && <ContractsTab contracts={contracts} />}
-      {activeTab === "reviews" && <ReviewsTab reviews={reviews} />}
+      {activeTab === "reviews" && (
+        <ReviewsTab
+          reviews={reviews}
+          direction={userRole === "employer" ? "given" : "received"}
+        />
+      )}
       {activeTab === "documents" && <DocumentsTab documents={documents} />}
     </div>
   )

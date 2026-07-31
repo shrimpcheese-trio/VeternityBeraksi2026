@@ -12,6 +12,7 @@ export async function createProofOfWork(client: Client, input: ProofOfWorkInput)
   const { data, error } = await from(client)
     .insert({
       worker_id: input.workerId,
+      agreement_id: input.agreementId ?? null,
       job_type: input.jobType,
       job_value: input.jobValue ?? null,
       photo_before_url: input.photoBeforeUrl ?? null,
@@ -36,6 +37,18 @@ export async function getProofOfWorkById(client: Client, proofId: string) {
     .single();
 
   if (error) return null;
+  return data;
+}
+
+export async function getProofOfWorkByAgreement(client: Client, agreementId: string) {
+  const { data, error } = await from(client)
+    .select("*")
+    .eq("agreement_id", agreementId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
   return data;
 }
 

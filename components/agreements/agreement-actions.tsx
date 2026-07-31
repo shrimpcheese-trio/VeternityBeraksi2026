@@ -30,9 +30,11 @@ async function transitionAgreement(prev: { error: string | null } | null, formDa
 export function AgreementActions({
   agreementId,
   status,
+  proofComplete,
 }: {
   agreementId: string;
   status: string;
+  proofComplete?: boolean;
 }) {
   const [state, formAction, isPending] = useActionState(transitionAgreement, null);
 
@@ -59,6 +61,7 @@ export function AgreementActions({
   }
 
   if (status === "active") {
+    const canComplete = proofComplete ?? true;
     return (
       <div className="space-y-2">
         <form action={formAction}>
@@ -66,7 +69,7 @@ export function AgreementActions({
           <input type="hidden" name="newStatus" value="completed" />
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || !canComplete}
             variant="default"
             className="w-full gap-2"
           >
@@ -74,6 +77,11 @@ export function AgreementActions({
             {isPending ? "Memproses..." : "Tandai Selesai"}
           </Button>
         </form>
+        {!canComplete && (
+          <p className="text-xs text-muted-foreground">
+            Unggah foto sebelum dan sesudah untuk menandai pekerjaan selesai.
+          </p>
+        )}
         <form action={formAction}>
           <input type="hidden" name="agreementId" value={agreementId} />
           <input type="hidden" name="newStatus" value="disputed" />

@@ -317,7 +317,8 @@
       "averageRating": "Average Rating",
       "totalReviews": "Total Reviews",
       "noReviews": "No reviews yet.",
-      "reviewer": "Reviewer"
+      "reviewer": "Reviewer",
+      "givenTitle": "Reviews Given"
     },
     "documents": {
       "name": "Name",
