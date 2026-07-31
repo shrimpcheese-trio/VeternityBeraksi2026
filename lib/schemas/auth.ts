@@ -4,7 +4,6 @@ export const signUpEmailSchema = z.object({
   fullName: z.string().min(2, "Nama minimal 2 karakter"),
   email: z.string().email("Email tidak valid"),
   password: z.string().min(8, "Password minimal 8 karakter"),
-  role: z.enum(["worker", "employer"]),
 });
 
 export const signInEmailSchema = z.object({
