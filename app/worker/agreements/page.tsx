@@ -88,7 +88,7 @@ export default async function WorkerAgreementsPage({
       </div>
 
       {agreements.length > 0 ? (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {agreements.map((agreement) => (
             <AgreementCard key={agreement.agreement_id} agreement={agreement} />
           ))}

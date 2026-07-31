@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Search,
   Bell,
@@ -45,6 +46,8 @@ export function TopHeader({
 }) {
   const t = useTranslations("dashboard.header");
   const locale = useLocale();
+  const router = useRouter();
+  const searchRef = useRef<HTMLInputElement>(null);
   const [localeOpen, setLocaleOpen] = useState(false);
   const localeRef = useRef<HTMLDivElement>(null);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -66,6 +69,30 @@ export function TopHeader({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  useEffect(() => {
+    function handleKeydown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", handleKeydown);
+    return () => document.removeEventListener("keydown", handleKeydown);
+  }, []);
+
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const value = (formData.get("query") as string).trim();
+    const params = new URLSearchParams(window.location.search);
+    if (value) {
+      params.set("q", value);
+    } else {
+      params.delete("q");
+    }
+    router.push(`/browse?${params.toString()}`);
+  }
+
   function switchLocale(next: string) {
     setCookie("locale", next, 365);
     window.location.reload();
@@ -82,17 +109,25 @@ export function TopHeader({
         </button>
       )}
 
-      <div className="flex max-w-md flex-1 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 shadow-sm transition-all focus-within:bg-white focus-within:border-sky focus-within:ring-4 focus-within:ring-sky/10">
+      <form
+        onSubmit={handleSearch}
+        className="flex max-w-md flex-1 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 shadow-sm transition-all focus-within:bg-white focus-within:border-sky focus-within:ring-4 focus-within:ring-sky/10"
+      >
         <Search className="size-4.5 shrink-0 text-slate-400" />
         <input
+          ref={searchRef}
+          name="query"
           type="text"
           placeholder={t("searchPlaceholder")}
           className="flex-1 bg-transparent text-sm font-medium text-navy outline-none placeholder:text-slate-400 min-w-0"
         />
-        <kbd className="hidden shrink-0 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest shadow-sm sm:block">
+        <button
+          type="submit"
+          className="hidden shrink-0 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest shadow-sm sm:block"
+        >
           ⌘K
-        </kbd>
-      </div>
+        </button>
+      </form>
 
       <div className="flex-1" />
 

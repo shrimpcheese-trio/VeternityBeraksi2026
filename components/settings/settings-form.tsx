@@ -224,7 +224,7 @@ export function SettingsForm({
     }
   }
 
-  const [verifications] = useState<VerificationItem[]>([
+  const [verifications, setVerifications] = useState<VerificationItem[]>([
     {
       key: "id",
       icon: <ShieldCheck className="size-4" />,
@@ -242,7 +242,7 @@ export function SettingsForm({
     },
   ])
 
-  const [bankAccounts] = useState<BankAccount[]>([
+  const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([
     { id: "1", bank: "BCA", name: "Budi Santoso", number: "****1234", status: "active" },
     { id: "2", bank: "Mandiri", name: "Budi Santoso", number: "****5678", status: "active" },
   ])
@@ -324,6 +324,19 @@ export function SettingsForm({
       delete next[key]
       return next
     })
+  }
+
+  function addDummyBank() {
+    setBankAccounts((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), bank: "BNI", name: form.name, number: "****8765", status: "active" },
+    ])
+  }
+
+  function verifyDummy(key: string) {
+    setVerifications((prev) =>
+      prev.map((v) => (v.key === key ? { ...v, status: "verified" } : v))
+    )
   }
 
   const statusLabel = (s: VerificationItem["status"]) => {
@@ -526,7 +539,7 @@ export function SettingsForm({
                   </div>
                   <span className="flex-1 text-sm font-medium">{t(`verification.${v.key}`)}</span>
                   <Badge variant={statusVariant(v.status)}>{statusLabel(v.status)}</Badge>
-                  <Button variant="outline" size="xs">{actionLabel(v.status)}</Button>
+                  <Button variant="outline" size="xs" onClick={() => verifyDummy(v.key)}>{actionLabel(v.status)}</Button>
                 </div>
               ))}
             </div>
@@ -560,7 +573,7 @@ export function SettingsForm({
                   </div>
                 </div>
               ))}
-              <Button variant="outline" className="w-full gap-2">
+              <Button variant="outline" className="w-full gap-2" onClick={addDummyBank}>
                 <Plus className="size-4" />
                 {t("payment.addBank")}
               </Button>
