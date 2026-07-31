@@ -3,14 +3,18 @@
 import * as React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, ShieldCheck, Users, CheckCircle2, BadgeDollarSign } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { StaggerContainer, StaggerItem, StaggerTextContainer, SplitText } from "@/components/ui/motion";
 
 export function CtaSection() {
+  const t = useTranslations("cta");
+  const cardTexts = t.raw("cards") as string[];
+
   const cards = [
-    { icon: <ShieldCheck className="w-5 h-5 text-sky" />, text: "Trust Score Server-Side" },
-    { icon: <Users className="w-5 h-5 text-sky-active" />, text: "Community Verified" },
-    { icon: <CheckCircle2 className="w-5 h-5 text-navy" />, text: "Bukti Kerja Tervalidasi" },
-    { icon: <BadgeDollarSign className="w-5 h-5 text-sky" />, text: "Estimasi Upah Regional" },
+    { icon: <ShieldCheck className="w-5 h-5 text-sky" />, text: cardTexts[0] },
+    { icon: <Users className="w-5 h-5 text-sky-active" />, text: cardTexts[1] },
+    { icon: <CheckCircle2 className="w-5 h-5 text-navy" />, text: cardTexts[2] },
+    { icon: <BadgeDollarSign className="w-5 h-5 text-sky" />, text: cardTexts[3] },
   ];
 
   const mouseX = useMotionValue(0);
@@ -57,23 +61,23 @@ export function CtaSection() {
             <div className="flex flex-col gap-8 lg:pr-8">
               <StaggerItem>
                 <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-navy/[0.03] border border-navy/5 text-[11px] font-bold uppercase tracking-[0.2em] text-navy">
-                  Mulai Sekarang
+                  {t("badge")}
                 </div>
               </StaggerItem>
               
               <StaggerItem className="flex flex-col gap-4">
                 <StaggerTextContainer delayChildren={0.1} className="text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] font-heading font-semibold text-navy leading-[1.05] tracking-tight">
-                  <SplitText text="Bangun reputasi." /><br/>
-                  <span className="text-sky"><SplitText text="Dapatkan peluang." /></span>
+                  <SplitText text={t("headlinePart1")} /><br/>
+                  <span className="text-sky"><SplitText text={t("headlinePart2")} /></span>
                 </StaggerTextContainer>
                 <p className="text-lg text-text-muted leading-relaxed font-light max-w-[420px]">
-                  Bergabunglah dengan ribuan pekerja informal yang telah mengubah hasil kerja keras mereka menjadi karir yang terpercaya.
+                  {t("subHeadline")}
                 </p>
               </StaggerItem>
               
               <StaggerItem>
                 <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-navy text-white rounded-full font-medium text-base transition-all duration-300 hover:shadow-[0_12px_24px_-6px_rgba(10,37,64,0.3)] hover:-translate-y-0.5">
-                  Coba Upahku Gratis
+                  {t("button")}
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </StaggerItem>

@@ -4,9 +4,11 @@ import * as React from "react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { Mail, ArrowUp } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BlurReveal, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export function Footer() {
+  const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -46,49 +48,49 @@ export function Footer() {
             </Link>
 
             <p className="text-[16px] text-slate-500 font-light leading-relaxed max-w-[280px]">
-              Platform reputasi yang mengubah bukti kerja nyata menjadi kepercayaan bernilai.
+              {t("tagline")}
             </p>
           </StaggerItem>
 
           {/* Column 2: Produk */}
           <StaggerItem className="flex flex-col gap-5">
-            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">Produk</h4>
+            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">{t("productTitle")}</h4>
             <nav className="flex flex-col gap-3">
-              <FooterLink href="#cara-kerja">Cara Kerja</FooterLink>
-              <FooterLink href="#untuk-pekerja">Untuk Pekerja</FooterLink>
-              <FooterLink href="#untuk-pemberi-kerja">Untuk Pemberi Kerja</FooterLink>
-              <FooterLink href="#estimasi">Estimasi Upah</FooterLink>
+              <FooterLink href="#cara-kerja">{t("productHowItWorks")}</FooterLink>
+              <FooterLink href="#untuk-pekerja">{t("productWorkers")}</FooterLink>
+              <FooterLink href="#untuk-pemberi-kerja">{t("productEmployers")}</FooterLink>
+              <FooterLink href="#estimasi">{t("productWageEstimate")}</FooterLink>
             </nav>
           </StaggerItem>
 
           {/* Column 3: Perusahaan */}
           <StaggerItem className="flex flex-col gap-5">
-            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">Perusahaan</h4>
+            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">{t("companyTitle")}</h4>
             <nav className="flex flex-col gap-3">
-              <FooterLink href="#tentang">Tentang Kami</FooterLink>
-              <FooterLink href="#blog">Blog</FooterLink>
-              <FooterLink href="#karier">Karier</FooterLink>
+              <FooterLink href="#tentang">{t("companyAbout")}</FooterLink>
+              <FooterLink href="#blog">{t("companyBlog")}</FooterLink>
+              <FooterLink href="#karier">{t("companyCareers")}</FooterLink>
             </nav>
           </StaggerItem>
 
           {/* Column 4: Legal */}
           <StaggerItem className="flex flex-col gap-5">
-            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">Legal</h4>
+            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">{t("legalTitle")}</h4>
             <nav className="flex flex-col gap-3">
-              <FooterLink href="/privacy">Kebijakan Privasi</FooterLink>
-              <FooterLink href="/terms">Syarat & Ketentuan</FooterLink>
-              <FooterLink href="/cookies">Kebijakan Kuki</FooterLink>
-              <FooterLink href="/faq">FAQ</FooterLink>
+              <FooterLink href="/privacy">{t("legalPrivacy")}</FooterLink>
+              <FooterLink href="/terms">{t("legalTerms")}</FooterLink>
+              <FooterLink href="/cookies">{t("legalCookies")}</FooterLink>
+              <FooterLink href="/faq">{t("legalFaq")}</FooterLink>
             </nav>
           </StaggerItem>
 
           {/* Column 5: Kontak */}
           <StaggerItem className="flex flex-col gap-5">
-            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">Kontak</h4>
+            <h4 className="text-[12px] font-semibold text-navy uppercase tracking-widest">{t("contactTitle")}</h4>
             <nav className="flex flex-col gap-3">
-              <FooterLink href="mailto:halo@upahku.id">halo@upahku.id</FooterLink>
-              <FooterLink href="#bantuan">Pusat Bantuan</FooterLink>
-              <span className="text-[16px] text-slate-500 font-light mt-1">Jakarta, Indonesia</span>
+              <FooterLink href="mailto:halo@upahku.id">{t("contactEmail")}</FooterLink>
+              <FooterLink href="#bantuan">{t("contactHelpCenter")}</FooterLink>
+              <span className="text-[16px] text-slate-500 font-light mt-1">{t("location")}</span>
             </nav>
           </StaggerItem>
 
@@ -101,7 +103,7 @@ export function Footer() {
         >
           {/* Copyright */}
           <div className="text-[14px] text-slate-500 font-light order-3 md:order-1">
-            &copy; {currentYear} Upahku. Built in Indonesia.
+            {t("copyright", { year: currentYear })}
           </div>
 
           {/* Social Media Icons - Dihapus sementara */}
@@ -114,7 +116,7 @@ export function Footer() {
             <button
               onClick={scrollToTop}
               className="group flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 text-slate-500 hover:bg-navy hover:border-navy hover:text-white transition-all duration-300 hover:-translate-y-1"
-              aria-label="Kembali ke atas"
+              aria-label={t("backToTop")}
             >
               <ArrowUp className="w-[18px] h-[18px] transition-transform duration-300 group-hover:-translate-y-0.5" />
             </button>

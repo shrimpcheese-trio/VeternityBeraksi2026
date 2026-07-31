@@ -10,6 +10,8 @@
     "mobileWorkers": "For Workers",
     "mobileEmployers": "For Employers",
     "languageLabel": "Language",
+    "languageIndonesian": "Indonesian",
+    "languageEnglish": "English",
     "login": "Log In",
     "register": "Sign Up",
     "registerNow": "Sign Up Now"
@@ -27,6 +29,9 @@
       "recentProofsTitle": "Latest Proof of Work",
       "viewDetails": "View Details",
       "jobTitle": "Split AC Cleaning & Pipe Repair",
+      "jobValue": "Rp 150.000",
+      "photoBefore": "BEFORE",
+      "photoAfter": "AFTER",
       "jobMeta": "Completed 2 days ago in South Jakarta",
       "statusConfirmed": "Confirmed by Customer",
       "statusDetail": "5/5 rating & verified positive reviews.",

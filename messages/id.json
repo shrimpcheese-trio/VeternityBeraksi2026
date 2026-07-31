@@ -10,6 +10,8 @@
     "mobileWorkers": "Untuk Pekerja",
     "mobileEmployers": "Untuk Pemberi Kerja",
     "languageLabel": "Bahasa",
+    "languageIndonesian": "Bahasa Indonesia",
+    "languageEnglish": "English",
     "login": "Masuk",
     "register": "Daftar",
     "registerNow": "Daftar Sekarang"
@@ -27,6 +29,9 @@
       "recentProofsTitle": "Bukti Kerja Terbaru",
       "viewDetails": "Lihat Detail",
       "jobTitle": "Cuci AC Split & Perbaikan Pipa",
+      "jobValue": "Rp 150.000",
+      "photoBefore": "SEBELUM",
+      "photoAfter": "SESUDAH",
       "jobMeta": "Diselesaikan 2 hari lalu di Jakarta Selatan",
       "statusConfirmed": "Dikonfirmasi Pelanggan",
       "statusDetail": "Rating 5/5 & Ulasan positif diverifikasi.",

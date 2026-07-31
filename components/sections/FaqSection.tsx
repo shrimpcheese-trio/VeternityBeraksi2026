@@ -4,37 +4,14 @@ import * as React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BlurReveal, StaggerContainer, StaggerItem, StaggerTextContainer, SplitText } from "@/components/ui/motion";
 
 export function FaqSection() {
+  const t = useTranslations("faq");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = [
-    {
-      question: "Apa itu Upahku?",
-      answer: "Platform yang membantu pekerja informal Indonesia mengubah pekerjaan yang sudah selesai menjadi reputasi yang bisa diverifikasi, supaya upahnya lebih adil dan pekerjaannya lebih besar."
-    },
-    {
-      question: "Bagaimana bukti kerja diverifikasi agar tidak bisa dipalsukan?",
-      answer: "Setiap bukti kerja butuh foto sebelum/sesudah, tanggal, jenis pekerjaan, dan konfirmasi langsung dari pelanggan. Sistem juga menandai pola mencurigakan seperti foto yang dipakai berulang."
-    },
-    {
-      question: "Siapa yang bisa memberi Community Verification?",
-      answer: "Mandor, ketua RT, ketua banjar, pemilik toko, atau pihak lain yang mengenal langsung riwayat kerja seseorang di lingkungannya."
-    },
-    {
-      question: "Kenapa estimasi upah saya tidak muncul?",
-      answer: "Estimasi upah hanya ditampilkan kalau tersedia cukup data untuk kombinasi kota, jenis pekerjaan, dan pengalamanmu. Kami tidak menampilkan angka perkiraan tanpa data nyata."
-    },
-    {
-      question: "Apakah Trust Score bisa didongkrak dengan satu ulasan bagus?",
-      answer: "Tidak. Trust Score dirancang supaya tidak ada satu sumber — satu ulasan, satu verifikator, atau satu pelanggan — yang bisa mendominasi angkanya sendirian."
-    },
-    {
-      question: "Bagaimana cara mendaftar sebagai pekerja?",
-      answer: "Buat akun, lengkapi profil dasar (nama, kota, jenis pekerjaan), lalu mulai catat pekerjaan pertamamu sebagai bukti kerja."
-    }
-  ];
+  const faqs = t.raw("items") as { question: string; answer: string }[];
 
   // Stagger animation variants
   const containerVariants = {
@@ -70,21 +47,21 @@ export function FaqSection() {
             className="lg:col-span-5 flex flex-col gap-6"
           >
             <div className="inline-flex self-start items-center px-3.5 py-1.5 rounded-full bg-navy/5 border border-navy/10 text-[10px] font-bold uppercase tracking-widest text-navy">
-              Pertanyaan Umum
+              {t("badge")}
             </div>
 
             <StaggerTextContainer delayChildren={0.1} className="text-[2.5rem] md:text-[3.25rem] font-heading font-semibold text-navy leading-[1.15] tracking-tight">
-              <SplitText text="Masih punya" /> <span className="text-sky"><SplitText text="pertanyaan?" /></span>
+              <SplitText text={t("titleStart")} /> <span className="text-sky"><SplitText text={t("titleAccent")} /></span>
             </StaggerTextContainer>
 
             <p className="text-lg text-text-muted leading-relaxed font-light mt-2 max-w-[400px]">
-              Kami sudah menyiapkan jawaban untuk hal-hal yang paling sering ditanyakan oleh pengguna kami.
+              {t("subheadline")}
             </p>
 
             <div className="mt-8 flex flex-col gap-3">
-              <span className="text-sm font-medium text-navy">Masih belum menemukan jawaban?</span>
+              <span className="text-sm font-medium text-navy">{t("helpPrompt")}</span>
               <a href="#" className="inline-flex items-center gap-2 text-sky font-semibold hover:text-navy transition-colors w-fit group">
-                Hubungi tim Upahku <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                {t("contactLink")} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           </BlurReveal>

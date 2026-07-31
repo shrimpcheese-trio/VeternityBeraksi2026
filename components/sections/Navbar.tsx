@@ -66,10 +66,10 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            <Link href="#tentang" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">Tentang</Link>
-            <Link href="#cara-kerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">Cara Kerja</Link>
-            <Link href="#untuk-pekerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">Pekerja</Link>
-            <Link href="#untuk-pemberi-kerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">Pemberi Kerja</Link>
+            <Link href="#tentang" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">{t("about")}</Link>
+            <Link href="#cara-kerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">{t("howItWorks")}</Link>
+            <Link href="#untuk-pekerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">{t("workers")}</Link>
+            <Link href="#untuk-pemberi-kerja" className="text-sm font-semibold text-text-body hover:text-navy hover:-translate-y-0.5 transition-all">{t("employers")}</Link>
           </nav>
 
           {/* Right side Actions */}
@@ -84,11 +84,11 @@ export function Navbar() {
               {langOpen && (
                 <div className="absolute top-full mt-3 right-0 w-36 bg-white/95 backdrop-blur-xl border border-border shadow-2xl rounded-2xl p-1.5 flex flex-col gap-1 animate-in fade-in zoom-in-95 origin-top-right">
                   <button onClick={() => switchLanguage("ID")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "ID" ? "bg-sky/10 text-navy font-bold" : "text-text-body hover:bg-sky/10 font-medium"}`}>
-                    <span>Indonesian</span>
+                    <span>{t("languageIndonesian")}</span>
                     {lang === "ID" && <span className="w-1.5 h-1.5 rounded-full bg-navy"></span>}
                   </button>
                   <button onClick={() => switchLanguage("EN")} className={`flex items-center justify-between text-sm px-3 py-2.5 rounded-xl transition-all ${lang === "EN" ? "bg-sky/10 text-navy font-bold" : "text-text-body hover:bg-sky/10 font-medium"}`}>
-                    <span>English</span>
+                    <span>{t("languageEnglish")}</span>
                     {lang === "EN" && <span className="w-1.5 h-1.5 rounded-full bg-navy"></span>}
                   </button>
                 </div>
@@ -99,10 +99,10 @@ export function Navbar() {
 
             <div className="flex items-center gap-2 md:gap-3">
               <Link href="/login" className="text-sm font-semibold text-text-body hover:text-navy px-3 py-2 rounded-xl hover:bg-sky/10 transition-colors">
-                Masuk
+                {t("login")}
               </Link>
               <Button asChild className="rounded-full hover:-translate-y-0.5 transition-all bg-sky text-white hover:bg-sky-active px-6 font-semibold shadow-md border border-sky-active/20">
-                <Link href="/register">Daftar</Link>
+                <Link href="/register">{t("register")}</Link>
               </Button>
             </div>
           </div>
@@ -119,16 +119,16 @@ export function Navbar() {
         <div className="lg:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full px-4">
           <div className="w-full bg-white/95 backdrop-blur-3xl border border-border shadow-2xl p-6 flex flex-col gap-5 rounded-3xl animate-in fade-in slide-in-from-top-2">
             <div className="flex flex-col gap-1">
-              <Link href="#tentang" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Tentang</Link>
-              <Link href="#cara-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Cara Kerja</Link>
-              <Link href="#untuk-pekerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Untuk Pekerja</Link>
-              <Link href="#untuk-pemberi-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">Untuk Pemberi Kerja</Link>
+              <Link href="#tentang" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">{t("about")}</Link>
+              <Link href="#cara-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">{t("howItWorks")}</Link>
+              <Link href="#untuk-pekerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">{t("mobileWorkers")}</Link>
+              <Link href="#untuk-pemberi-kerja" onClick={() => setMobileOpen(false)} className="text-base font-semibold text-navy p-3 rounded-xl hover:bg-sky/10 transition-colors">{t("mobileEmployers")}</Link>
             </div>
 
             <div className="h-px bg-border w-full"></div>
 
             <div className="flex items-center justify-between px-3">
-              <span className="text-sm font-medium text-text-muted">Bahasa</span>
+              <span className="text-sm font-medium text-text-muted">{t("languageLabel")}</span>
               <div className="flex bg-sky/10 rounded-lg p-1">
                 <button onClick={() => switchLanguage("ID")} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${lang === "ID" ? "bg-white text-navy shadow-sm" : "text-text-muted"}`}>ID</button>
                 <button onClick={() => switchLanguage("EN")} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${lang === "EN" ? "bg-white text-navy shadow-sm" : "text-text-muted"}`}>EN</button>
@@ -137,10 +137,10 @@ export function Navbar() {
 
             <div className="flex flex-col gap-3 mt-2">
               <Link href="/login" onClick={() => setMobileOpen(false)}>
-                <Button variant="outline" className="w-full rounded-xl border-border text-navy h-12 font-bold text-base">Masuk</Button>
+                <Button variant="outline" className="w-full rounded-xl border-border text-navy h-12 font-bold text-base">{t("login")}</Button>
               </Link>
               <Link href="/register" onClick={() => setMobileOpen(false)}>
-                <Button className="w-full rounded-xl bg-navy text-white h-12 font-bold text-base shadow-lg">Daftar Sekarang</Button>
+                <Button className="w-full rounded-xl bg-navy text-white h-12 font-bold text-base shadow-lg">{t("registerNow")}</Button>
               </Link>
             </div>
           </div>

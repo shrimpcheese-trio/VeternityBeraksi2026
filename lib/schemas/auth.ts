@@ -23,7 +23,11 @@ export const profileSetupSchema = z.discriminatedUnion("role", [
     role: z.literal("employer"),
     fullName: z.string().min(2, "Nama minimal 2 karakter"),
     city: z.string().min(3, "Kota harus diisi"),
-    companyName: z.string().min(2, "Nama perusahaan minimal 2 karakter").optional(),
+    companyName: z
+      .string()
+      .min(2, "Nama perusahaan minimal 2 karakter")
+      .or(z.literal(""))
+      .optional(),
     phone: z.string().optional(),
   }),
 ]);

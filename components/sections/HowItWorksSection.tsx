@@ -7,7 +7,9 @@ import { useTranslations } from "next-intl";
 
 // --- High-End SaaS Mockup Previews ---
 
-const Preview0 = () => (
+const Preview0 = () => {
+  const t = useTranslations("howItWorks");
+  return (
   <div className="absolute inset-0 w-full h-full flex items-end justify-center px-6 md:px-16 pt-16 overflow-hidden bg-[#F3F4F6]">
     <div className="w-full max-w-3xl bg-white rounded-t-2xl shadow-[0_-10px_40px_rgb(0,0,0,0.06)] border border-border border-b-0 h-[350px] md:h-[420px] flex overflow-hidden">
 
@@ -35,13 +37,13 @@ const Preview0 = () => (
             <div className="w-48 h-5 rounded-md bg-navy/80"></div>
             <div className="w-32 h-3 rounded-md bg-text-muted/40"></div>
           </div>
-          <div className="w-28 h-9 rounded-lg bg-navy text-white text-[11px] font-bold flex items-center justify-center shadow-md">Unggah Bukti</div>
+          <div className="w-28 h-9 rounded-lg bg-navy text-white text-[11px] font-bold flex items-center justify-center shadow-md">{t("preview0.uploadButton")}</div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 md:gap-8 flex-1">
           <div className="border-2 border-dashed border-border rounded-2xl bg-[#F9FAFB] flex flex-col items-center justify-center text-text-muted/50 group hover:border-navy/30 transition-colors">
             <Camera className="w-8 h-8 mb-3 text-border group-hover:text-navy/40 transition-colors" />
-            <span className="text-xs font-bold uppercase tracking-widest text-border group-hover:text-navy/50 transition-colors">Foto Sebelum</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-border group-hover:text-navy/50 transition-colors">{t("preview0.photoBefore")}</span>
           </div>
           <div className="border-2 border-dashed border-border rounded-2xl bg-[#F9FAFB] flex flex-col items-center justify-center text-text-muted/50 relative overflow-hidden group hover:border-navy/30 transition-colors">
             <motion.div
@@ -51,16 +53,19 @@ const Preview0 = () => (
               className="absolute bottom-0 w-full bg-[#0ea5e9]/10"
             ></motion.div>
             <Camera className="w-8 h-8 mb-3 text-border relative z-10 group-hover:text-navy/40 transition-colors" />
-            <span className="text-xs font-bold uppercase tracking-widest text-border relative z-10 group-hover:text-navy/50 transition-colors">Foto Sesudah</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-border relative z-10 group-hover:text-navy/50 transition-colors">{t("preview0.photoAfter")}</span>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-);
+  );
+};
 
-const Preview1 = () => (
+const Preview1 = () => {
+  const t = useTranslations("howItWorks");
+  return (
   <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-[#F9FAFB] to-[#F3F4F6]">
     <motion.div
       initial={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -74,42 +79,45 @@ const Preview1 = () => (
           <CheckCircle2 className="w-8 h-8" />
         </div>
       </div>
-      <h4 className="font-heading font-bold text-navy text-2xl mb-3">Pekerjaan Disetujui</h4>
+      <h4 className="font-heading font-bold text-navy text-2xl mb-3">{t("preview1.title")}</h4>
       <p className="text-sm text-text-muted text-center mb-8 leading-relaxed px-4">
-        Pelanggan telah memverifikasi bukti kerja Anda. Hasil ini akan dicatat secara permanen ke dalam reputasi Anda.
+        {t("preview1.description")}
       </p>
 
       <div className="w-full flex flex-col gap-3">
         <div className="w-full p-4 bg-[#F9FAFB] border border-border/60 rounded-2xl flex justify-between items-center">
-          <span className="text-xs font-bold text-text-muted uppercase tracking-wider">Status Validasi</span>
+          <span className="text-xs font-bold text-text-muted uppercase tracking-wider">{t("preview1.statusLabel")}</span>
           <div className="flex items-center gap-1.5 bg-[#10B981]/10 px-2.5 py-1 rounded-md">
             <div className="w-1.5 h-1.5 rounded-full bg-[#10B981]"></div>
-            <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">Terverifikasi</span>
+            <span className="text-xs font-bold text-[#10B981] uppercase tracking-wider">{t("preview1.statusVerified")}</span>
           </div>
         </div>
         <div className="w-full p-4 bg-[#F9FAFB] border border-border/60 rounded-2xl flex justify-between items-center">
-          <span className="text-xs font-bold text-text-muted uppercase tracking-wider">Poin Reputasi</span>
-          <span className="text-sm font-bold text-navy">+15 Poin</span>
+          <span className="text-xs font-bold text-text-muted uppercase tracking-wider">{t("preview1.pointsLabel")}</span>
+          <span className="text-sm font-bold text-navy">{t("preview1.pointsValue")}</span>
         </div>
       </div>
     </motion.div>
   </div>
-);
+  );
+};
 
-const Preview2 = () => (
+const Preview2 = () => {
+  const t = useTranslations("howItWorks");
+  return (
   <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-end px-6 md:px-16 pt-16 overflow-hidden bg-[#F3F4F6]">
     <div className="w-full max-w-4xl bg-white rounded-t-3xl shadow-[0_-10px_40px_rgb(0,0,0,0.06)] border border-border border-b-0 p-8 md:p-12 pb-0 flex flex-col h-[350px] md:h-[420px]">
 
       <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-6">
         <div>
-          <p className="text-xs font-bold text-text-muted uppercase tracking-widest mb-3">Trust Score Global</p>
+          <p className="text-xs font-bold text-text-muted uppercase tracking-widest mb-3">{t("preview2.scoreLabel")}</p>
           <h3 className="text-6xl md:text-7xl font-heading font-bold text-navy leading-none">
             98<span className="text-4xl md:text-5xl text-border">.5</span>
           </h3>
         </div>
         <div className="flex gap-2 text-[#10B981] items-center bg-[#10B981]/10 px-4 py-2 rounded-xl border border-[#10B981]/20">
           <Star className="w-4 h-4 fill-[#10B981]" />
-          <span className="text-sm font-bold uppercase tracking-wider">Top 5% Pekerja</span>
+          <span className="text-sm font-bold uppercase tracking-wider">{t("preview2.topBadge")}</span>
         </div>
       </div>
 
@@ -164,7 +172,8 @@ const Preview2 = () => (
 
     </div>
   </div>
-);
+  );
+};
 
 export function HowItWorksSection() {
   const t = useTranslations("howItWorks");

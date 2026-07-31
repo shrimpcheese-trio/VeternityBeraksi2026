@@ -2,6 +2,7 @@
 import * as React from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import { CheckCircle2, ShieldCheck, Clock, FileText, Star, MapPin, Briefcase, Award, Database, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BlurReveal, StaggerTextContainer, SplitText } from "@/components/ui/motion";
 
 // ==========================================
@@ -38,6 +39,7 @@ const FactorCard = ({ icon: Icon, text, delay, phase, index }: { icon: React.Ele
 };
 
 const AnimatedScoreAndCircle = ({ phase }: { phase: number }) => {
+  const t = useTranslations("coreFeatures");
   const count = useMotionValue(0);
   const rounded = useTransform(count, Math.round);
   const pathLength = useTransform(count, [0, 100], [0, 1]);
@@ -68,13 +70,15 @@ const AnimatedScoreAndCircle = ({ phase }: { phase: number }) => {
         <motion.span className="text-[2.75rem] font-heading font-bold text-navy tabular-nums leading-none tracking-tight">
           {rounded}
         </motion.span>
-        <span className="text-[10px] uppercase font-bold tracking-widest text-text-muted mt-2">Trust Score</span>
+        <span className="text-[10px] uppercase font-bold tracking-widest text-text-muted mt-2">{t("trustScore.scoreCaption")}</span>
       </div>
     </div>
   );
 };
 
 const TrustScoreBlock = () => {
+  const t = useTranslations("coreFeatures");
+  const factors = t.raw("trustScore.factors") as string[];
   const [phase, setPhase] = React.useState(0);
 
   React.useEffect(() => {
@@ -104,16 +108,16 @@ const TrustScoreBlock = () => {
         className="flex flex-col gap-6 order-2 lg:order-1 max-w-[560px]"
       >
         <StaggerTextContainer delayChildren={0.1} className="text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-heading font-medium text-bg leading-[1.05] tracking-tight">
-          <SplitText text="Sistem Penilaian" /> <br /> 
+          <SplitText text={t("trustScore.heading1")} /> <br /> 
           <span className="text-sky relative inline-block mt-2">
-            <SplitText text="Anti-Manipulasi" />
+            <SplitText text={t("trustScore.heading2")} />
             <svg className="absolute -bottom-3 left-0 w-full h-3 text-sky/40" viewBox="0 0 100 10" preserveAspectRatio="none">
               <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
             </svg>
           </span>
         </StaggerTextContainer>
         <p className="text-lg md:text-xl text-bg-alt/90 leading-relaxed mb-2 max-w-[520px] font-light">
-          Trust Score dibangun dari berbagai faktor yang tervalidasi, bukan berasal dari satu ulasan fiktif. Sistem kami memastikan reputasimu terbangun secara adil dan akurat.
+          {t("trustScore.description")}
         </p>
       </BlurReveal>
 
@@ -138,11 +142,11 @@ const TrustScoreBlock = () => {
 
             <div className="flex flex-col sm:flex-row w-full gap-5 sm:gap-6 md:gap-10 relative z-10">
               <div className="flex flex-col justify-center gap-2.5 sm:gap-3 w-full sm:flex-1">
-                <FactorCard icon={FileText} text="Bukti Kerja" delay={0.1} phase={phase} index={0} />
-                <FactorCard icon={ShieldCheck} text="Verifikasi" delay={0.2} phase={phase} index={1} />
-                <FactorCard icon={Clock} text="On-Time" delay={0.3} phase={phase} index={2} />
-                <FactorCard icon={CheckCircle2} text="Selesai" delay={0.4} phase={phase} index={3} />
-                <FactorCard icon={Star} text="Ulasan" delay={0.5} phase={phase} index={4} />
+                <FactorCard icon={FileText} text={factors[0]} delay={0.1} phase={phase} index={0} />
+                <FactorCard icon={ShieldCheck} text={factors[1]} delay={0.2} phase={phase} index={1} />
+                <FactorCard icon={Clock} text={factors[2]} delay={0.3} phase={phase} index={2} />
+                <FactorCard icon={CheckCircle2} text={factors[3]} delay={0.4} phase={phase} index={3} />
+                <FactorCard icon={Star} text={factors[4]} delay={0.5} phase={phase} index={4} />
               </div>
               <div className="w-full sm:flex-1 flex flex-col items-center justify-center mt-2 sm:mt-0">
                 <motion.div 
@@ -164,7 +168,7 @@ const TrustScoreBlock = () => {
                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
                          className="absolute -bottom-4 bg-navy text-bg text-[10px] sm:text-[11px] font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full flex items-center gap-1.5 shadow-lg whitespace-nowrap"
                        >
-                          <ShieldCheck className="w-3.5 h-3.5 text-sky" /> Terverifikasi
+                          <ShieldCheck className="w-3.5 h-3.5 text-sky" /> {t("trustScore.verifiedBadge")}
                        </motion.div>
                     )}
                   </AnimatePresence>
@@ -258,6 +262,8 @@ const ScanningAnimation = () => (
 );
 
 const WageEstimatorBlock = () => {
+  const t = useTranslations("coreFeatures");
+  const inputs = t.raw("wageEstimator.inputs") as { label: string; value: string }[];
   const [phase, setPhase] = React.useState(0);
 
   React.useEffect(() => {
@@ -289,9 +295,9 @@ const WageEstimatorBlock = () => {
          <div className="bg-bg-alt/5 border border-white/10 rounded-[32px] p-8 md:p-12 w-full max-w-[520px] backdrop-blur-md shadow-2xl relative flex flex-col items-center justify-center min-h-[460px]">
             <div className="flex flex-col w-full max-w-[340px] relative z-10">
               <div className="flex flex-col gap-3">
-                <InputCard icon={Briefcase} label="Kategori Pekerjaan" text="Teknisi AC" delay={0.1} phase={phase} index={0} />
-                <InputCard icon={MapPin} label="Area Layanan" text="Jakarta Selatan" delay={0.2} phase={phase} index={1} />
-                <InputCard icon={Award} label="Tingkat Pengalaman" text="3-5 Tahun" delay={0.3} phase={phase} index={2} />
+                <InputCard icon={Briefcase} label={inputs[0].label} text={inputs[0].value} delay={0.1} phase={phase} index={0} />
+                <InputCard icon={MapPin} label={inputs[1].label} text={inputs[1].value} delay={0.2} phase={phase} index={1} />
+                <InputCard icon={Award} label={inputs[2].label} text={inputs[2].value} delay={0.3} phase={phase} index={2} />
               </div>
               <div className="flex justify-center h-10 w-full">
                  <AnimatePresence>
@@ -300,7 +306,7 @@ const WageEstimatorBlock = () => {
                         <ScanningAnimation />
                         <div className="absolute left-1/2 ml-4 flex items-center gap-1.5 text-sky opacity-80">
                            <Database className="w-3 h-3 animate-pulse" />
-                           <span className="text-[10px] uppercase font-bold tracking-widest">Querying...</span>
+                           <span className="text-[10px] uppercase font-bold tracking-widest">{t("wageEstimator.querying")}</span>
                         </div>
                      </motion.div>
                    )}
@@ -316,10 +322,10 @@ const WageEstimatorBlock = () => {
                 transition={{ duration: 0.6 }}
               >
                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-3 flex items-center gap-1.5">
-                   <Sparkles className="w-3 h-3 text-sky" /> Estimasi Upah Wajar
+                   <Sparkles className="w-3 h-3 text-sky" /> {t("wageEstimator.resultLabel")}
                  </span>
                  <AnimatedResult phase={phase} />
-                 <span className="text-xs font-medium text-text-muted mt-3">per kunjungan rata-rata</span>
+                 <span className="text-xs font-medium text-text-muted mt-3">{t("wageEstimator.resultCaption")}</span>
                  <AnimatePresence>
                    {phase >= 4 && (
                      <motion.div 
@@ -328,7 +334,7 @@ const WageEstimatorBlock = () => {
                        exit={{ opacity: 0, scale: 0.8 }}
                        className="absolute top-2 right-2 bg-sky/10 text-sky text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1"
                      >
-                       <CheckCircle2 className="w-3 h-3" /> Data Akurat
+                        <CheckCircle2 className="w-3 h-3" /> {t("wageEstimator.accurateBadge")}
                      </motion.div>
                    )}
                  </AnimatePresence>
@@ -343,16 +349,16 @@ const WageEstimatorBlock = () => {
         className="flex flex-col gap-6 order-1 lg:order-2 max-w-[560px] lg:pl-4"
       >
         <StaggerTextContainer delayChildren={0.1} className="text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-heading font-medium text-bg leading-[1.05] tracking-tight">
-          <SplitText text="Fair Wage" /> <br /> 
+          <SplitText text={t("wageEstimator.heading1")} /> <br /> 
           <span className="text-sky relative inline-block mt-2">
-            <SplitText text="Estimator" />
+            <SplitText text={t("wageEstimator.heading2")} />
             <svg className="absolute -bottom-3 left-0 w-full h-3 text-sky/40" viewBox="0 0 100 10" preserveAspectRatio="none">
               <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
             </svg>
           </span>
         </StaggerTextContainer>
         <p className="text-lg md:text-xl text-bg-alt/90 leading-relaxed mb-2 max-w-[520px] font-light">
-          Ketahui standar harga layananmu di pasaran. Analitik data nyata membantu kamu menentukan tarif yang adil tanpa takut kemurahan.
+          {t("wageEstimator.description")}
         </p>
       </BlurReveal>
     </div>
@@ -364,6 +370,8 @@ const WageEstimatorBlock = () => {
 // MAIN COMBINED SECTION
 // ==========================================
 export function CoreFeaturesSection() {
+  const t = useTranslations("coreFeatures");
+
   return (
     <section id="fitur-utama" className="bg-navy py-24 md:py-32 lg:py-40 relative overflow-hidden">
       {/* Background Orbs */}
@@ -378,13 +386,13 @@ export function CoreFeaturesSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-32 flex flex-col items-center">
            <BlurReveal>
-             <span className="text-sky font-bold tracking-widest uppercase text-xs mb-4 inline-block bg-sky/10 px-4 py-2 rounded-full">
-               Mesin Penggerak Keadilan
-             </span>
+              <span className="text-sky font-bold tracking-widest uppercase text-xs mb-4 inline-block bg-sky/10 px-4 py-2 rounded-full">
+                {t("eyebrow")}
+              </span>
            </BlurReveal>
            <StaggerTextContainer className="text-[2rem] md:text-[3rem] font-heading font-semibold text-bg leading-[1.2] tracking-tight">
-              <SplitText text="Dirancang untuk membangun" /> <br className="hidden md:block" /> 
-              <span className="text-bg-alt font-light"><SplitText text="reputasi dan pendapatanmu." /></span>
+              <SplitText text={t("heading1")} /> <br className="hidden md:block" /> 
+              <span className="text-bg-alt font-light"><SplitText text={t("heading2")} /></span>
            </StaggerTextContainer>
         </div>
 

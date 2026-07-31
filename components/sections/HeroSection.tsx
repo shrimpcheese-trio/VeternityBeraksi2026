@@ -255,7 +255,7 @@ export function HeroSection() {
                            <span className="text-xs font-semibold text-text-muted">{t("dashboard.jobMeta")}</span>
                         </div>
                         <div className="text-right">
-                           <span className="font-bold text-navy text-lg">Rp 150.000</span>
+                           <span className="font-bold text-navy text-lg">{t("dashboard.jobValue")}</span>
                         </div>
                      </div>
 
@@ -263,11 +263,11 @@ export function HeroSection() {
                      <div className="grid grid-cols-2 gap-3 h-[140px]">
                         <div className="relative rounded-2xl bg-bg overflow-hidden border border-border group/photo">
                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=300&h=200&auto=format&fit=crop" className="w-full h-full object-cover grayscale opacity-70 group-hover/photo:scale-105 transition-transform duration-700" />
-                           <div className="absolute top-2 left-2 bg-white/90 backdrop-blur text-navy text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">SEBELUM</div>
+                           <div className="absolute top-2 left-2 bg-white/90 backdrop-blur text-navy text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">{t("dashboard.photoBefore")}</div>
                         </div>
                         <div className="relative rounded-2xl bg-bg overflow-hidden border border-border group/photo">
                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=300&h=200&auto=format&fit=crop" className="w-full h-full object-cover grayscale opacity-90 group-hover/photo:scale-105 transition-transform duration-700" />
-                           <div className="absolute top-2 left-2 bg-sky text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">SESUDAH</div>
+                           <div className="absolute top-2 left-2 bg-sky text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">{t("dashboard.photoAfter")}</div>
                         </div>
                      </div>
 

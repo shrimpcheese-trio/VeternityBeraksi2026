@@ -7,57 +7,24 @@ import { BlurReveal, PopReveal, StaggerContainer, StaggerItem, StaggerTextContai
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards, Autoplay } from "swiper/modules";
+import { useTranslations } from "next-intl";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
 
-const testimonials = [
-  {
-    quote: "Made sudah bekerja sebagai tukang listrik di lingkungan kami selama 4 tahun. Jujur, tepat waktu, dan hasil kerjanya rapi. Sangat direkomendasikan.",
-    name: "Pak Wayan",
-    role: "Ketua Banjar",
-    location: "Ubud",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop"
-  },
-  {
-    quote: "Kadek selalu mengerjakan perbaikan pipa dengan sangat profesional. Harga transparan dan hasil memuaskan. Warga selalu memanggilnya.",
-    name: "Bu Nyoman",
-    role: "Pemilik Usaha Lokal",
-    location: "Denpasar",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&auto=format&fit=crop"
-  },
-  {
-    quote: "Budi adalah mandor yang sangat bisa diandalkan. Koordinasi dengan pekerja lain selalu lancar, proyek selesai tepat waktu tanpa masalah.",
-    name: "Pak Surya",
-    role: "Ketua RT",
-    location: "Kuta",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&h=150&auto=format&fit=crop"
-  },
-  {
-    quote: "Berkat endorsement dari Ketua RT, sekarang saya lebih sering dipercaya warga kompleks sebelah. Benar-benar fitur yang mengubah karir saya.",
-    name: "Bu Siti",
-    role: "Guru Les Privat",
-    location: "Jakarta",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop"
-  },
-  {
-    quote: "Dulu susah cari pelanggan baru. Setelah divalidasi oleh pemilik bengkel tempat saya mangkal, pesanan masuk hampir tiap hari.",
-    name: "Pak Agus",
-    role: "Montir Keliling",
-    location: "Surabaya",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop"
-  }
-];
-
-const benefits = [
-  "Endorsement dari RT",
-  "Verifikasi Mandor",
-  "Pemilik Usaha Lokal",
-  "Riwayat kerja terpercaya",
-];
+type CommunityTestimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  location: string;
+  image: string;
+};
 
 export function CommunityVerificationSection() {
+  const t = useTranslations("community");
+  const testimonials = t.raw("testimonials") as CommunityTestimonial[];
+  const benefits = t.raw("benefits") as string[];
   return (
     <section id="untuk-pekerja" className="bg-white py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1200px]">
@@ -96,7 +63,7 @@ export function CommunityVerificationSection() {
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#10B981]/5 border border-[#10B981]/10 mb-6 sm:mb-8">
                         <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#10B981]" />
                         <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-widest text-navy">
-                          Verified Community
+                          {t("badge")}
                         </span>
                       </div>
 
@@ -111,7 +78,7 @@ export function CommunityVerificationSection() {
                       <div className="relative">
                         <img
                           src={testi.image}
-                          alt={`Foto ${testi.name}`}
+                          alt={t("photoAlt", { name: testi.name })}
                           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shrink-0 grayscale contrast-125 opacity-90"
                         />
                         <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
@@ -135,20 +102,20 @@ export function CommunityVerificationSection() {
             {/* Label */}
             <PopReveal delay={0.1} className="mb-8">
               <div className="inline-flex self-start items-center px-3.5 py-1.5 rounded-full bg-navy/5 border border-navy/10 text-[10px] font-bold uppercase tracking-widest text-navy">
-                Fitur Khas Upahku
+                {t("label")}
               </div>
             </PopReveal>
 
             {/* Heading */}
             <StaggerTextContainer delayChildren={0.2} className="text-[3rem] md:text-[3.5rem] lg:text-[4rem] font-heading text-navy leading-[1.1] tracking-tight mb-8">
-              <span className="font-bold"><SplitText text="Diakui oleh" /></span><br />
-              <span className="font-medium text-sky"><SplitText text="komunitasmu." /></span>
+              <span className="font-bold"><SplitText text={t("heading1")} /></span><br />
+              <span className="font-medium text-sky"><SplitText text={t("heading2")} /></span>
             </StaggerTextContainer>
 
             {/* Description */}
             <BlurReveal delay={0.3}>
               <p className="text-lg text-text-muted leading-relaxed mb-10">
-                Ubah kepercayaan sosial dunia nyata menjadi reputasi digital permanen yang bisa dilihat oleh seluruh calon pemberi kerja.
+                {t("description")}
               </p>
             </BlurReveal>
 
@@ -167,7 +134,7 @@ export function CommunityVerificationSection() {
             {/* CTA Button */}
             <BlurReveal delay={0.6}>
               <Button size="lg" className="rounded-full font-bold bg-navy text-white hover:bg-navy/90 px-8 py-6 flex items-center gap-2 group shadow-xl shadow-navy/10 transition-all duration-300 hover:-translate-y-1 w-fit">
-                Minta Verifikasi Komunitas
+                {t("cta")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </BlurReveal>
