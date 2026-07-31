@@ -64,7 +64,7 @@ export default async function WorkerDashboard() {
   const revenue = completed.reduce((sum, a) => sum + (a.price ?? 0), 0);
 
   const score = trustResult.data?.score ?? null;
-  const scoreDisplay = score !== null ? `${score.toFixed(1)}/5.0` : "--/5.0";
+  const scoreDisplay = score !== null ? `${score.toFixed(1)}/100` : "--/100";
 
   const now = new Date();
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -128,7 +128,7 @@ export default async function WorkerDashboard() {
           label="Skor Kepercayaan"
           value={scoreDisplay}
           trendDirection={computeTrend(0, 0).direction as "up" | "down"}
-          trendText={score !== null ? `${score.toFixed(1)} dari 5.0` : "Belum dihitung"}
+          trendText={score !== null ? `${score.toFixed(1)} dari 100` : "Belum dihitung"}
           variant="highlighted"
         />
         <KpiCard

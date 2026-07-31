@@ -3,19 +3,12 @@ import { workerInputSchema } from "@/lib/validators/worker";
 import { proofOfWorkInputSchema } from "@/lib/validators/proof-of-work";
 import { verificationInputSchema } from "@/lib/validators/verification";
 import { agreementInputSchema } from "@/lib/validators/agreement";
-import { createMockBuilder, createMockAdminClient } from "../mocks/supabase";
-
-jest.mock("@/lib/supabase/server", () => ({
-  createClient: jest.fn(),
-}));
+import { createMockBuilder } from "../mocks/supabase";
 
 jest.mock("@/lib/supabase/admin", () => ({
   createAdminClient: jest.fn(),
 }));
 
-const mockCreateClient = jest.mocked(
-  (jest.requireMock("@/lib/supabase/server") as { createClient: jest.Mock }).createClient,
-);
 const mockCreateAdminClient = jest.mocked(
   (jest.requireMock("@/lib/supabase/admin") as { createAdminClient: jest.Mock }).createAdminClient,
 );
@@ -84,14 +77,12 @@ describe("Core Loop: Profile → Proof of Work → Trust Score", () => {
   });
 
   it("computeTrustScore produces non-negative score with complete data", async () => {
-    const mockSupabase = { from: jest.fn() };
-    const mockAdminClient = createMockAdminClient();
+    const adminClient = { from: jest.fn() };
+    mockCreateAdminClient.mockReturnValue(adminClient);
 
-    mockCreateClient.mockResolvedValue(mockSupabase);
-    mockCreateAdminClient.mockReturnValue(mockAdminClient);
-
-    mockSupabase.from
+    adminClient.from
       .mockReturnValueOnce(createMockBuilder([{ rating: 9 }, { rating: 8 }]))
+      .mockReturnValueOnce(createMockBuilder([{ rating: 5 }, { rating: 4 }]))
       .mockReturnValueOnce(createMockBuilder([], 4))
       .mockReturnValueOnce(createMockBuilder([{ created_at: "2024-01-10T00:00:00Z" }]))
       .mockReturnValueOnce(
@@ -104,15 +95,21 @@ describe("Core Loop: Profile → Proof of Work → Trust Score", () => {
         ]),
       );
 
+    const upsert = jest.fn().mockResolvedValue({ error: null });
+    adminClient.from.mockReturnValueOnce({ upsert });
+
+    const mirrorUpdate = { eq: jest.fn().mockResolvedValue({ error: null }) };
+    adminClient.from.mockReturnValueOnce({ update: jest.fn().mockReturnValue(mirrorUpdate) });
+
     await computeTrustScore(WORKER_ID);
 
-    const upsertArg = (mockAdminClient.from("trust_score").upsert as jest.Mock).mock
-      .calls[0][0];
+    const upsertArg = upsert.mock.calls[0][0];
     expect(upsertArg.score).toBeGreaterThan(0);
     expect(upsertArg.score).toBeLessThanOrEqual(100);
 
     const breakdown = upsertArg.breakdown as Record<string, number>;
     expect(breakdown.verificationScore).toBeGreaterThan(0);
+    expect(breakdown.reviewScore).toBeGreaterThan(0);
     expect(breakdown.proofScore).toBeGreaterThan(0);
     expect(breakdown.completionScore).toBeGreaterThan(0);
     expect(breakdown.tenureScore).toBeGreaterThan(0);
