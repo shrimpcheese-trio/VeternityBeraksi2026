@@ -5,6 +5,7 @@ import { SiteNav } from "@/components/shared/site-nav";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { CommissionForm } from "@/components/browse/commission-form";
 import { getListingById } from "@/lib/services/listings";
+import { resolveAvatarUrl } from "@/lib/avatar";
 
 const statusConfig: Record<string, { key: string; dot: string }> = {
   tersedia: { key: "browse.statusAvailable", dot: "bg-green-500" },
@@ -137,7 +138,7 @@ export default async function BrowseDetailPage({
   if (user) {
     const fullName = user.user_metadata?.full_name ?? (user.email ?? "User");
     const userEmail = user.email ?? "";
-    const avatarUrl = user.user_metadata?.avatar_url;
+    const avatarUrl = resolveAvatarUrl(user);
     const role = userRole === "employer" ? "employer" : "worker";
 
     return (

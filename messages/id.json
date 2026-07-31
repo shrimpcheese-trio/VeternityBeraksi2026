@@ -385,6 +385,10 @@
       "avatar": "Foto Profil",
       "upload": "Unggah Foto",
       "remove": "Hapus",
+      "avatarUploading": "Mengunggah...",
+      "avatarError": "Gagal mengunggah foto. Gunakan file PNG, JPG, atau WebP.",
+      "avatarSizeError": "Ukuran foto maksimal 2MB.",
+      "avatarRemoveError": "Gagal menghapus foto.",
       "userType": "Tipe Akun"
     },
     "company": {
