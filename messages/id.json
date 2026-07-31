@@ -317,7 +317,8 @@
       "averageRating": "Rating Rata-rata",
       "totalReviews": "Total Ulasan",
       "noReviews": "Belum ada ulasan.",
-      "reviewer": "Pengulas"
+      "reviewer": "Pengulas",
+      "givenTitle": "Ulasan yang Diberikan"
     },
     "documents": {
       "name": "Nama",

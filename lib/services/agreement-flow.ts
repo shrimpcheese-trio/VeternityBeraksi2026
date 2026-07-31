@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAgreementById, updateAgreement } from "@/lib/repositories/agreement.repo";
+import { getProofOfWorkByAgreement } from "@/lib/repositories/proof-of-work.repo";
 import { computeTrustScore } from "@/lib/services/trust-engine";
 
 export const VALID_TRANSITIONS: Record<string, string[]> = {
@@ -36,6 +37,14 @@ export async function transitionAgreement(
   }
 
   const admin = createAdminClient();
+
+  if (newStatus === "completed") {
+    const proof = await getProofOfWorkByAgreement(admin, agreementId);
+    if (!proof || !proof.photo_before_url || !proof.photo_after_url) {
+      throw new ProofOfWorkRequiredError();
+    }
+  }
+
   await updateAgreement(admin, agreementId, { status: newStatus as "draft" | "active" | "completed" | "disputed" });
 
   if (newStatus === "completed" || newStatus === "disputed") {
@@ -43,6 +52,13 @@ export async function transitionAgreement(
   }
 
   return { ...agreement, status: newStatus };
+}
+
+export class ProofOfWorkRequiredError extends Error {
+  constructor() {
+    super("Proof of work with before and after photos is required to complete this agreement");
+    this.name = "ProofOfWorkRequiredError";
+  }
 }
 
 class NotFoundError extends Error {

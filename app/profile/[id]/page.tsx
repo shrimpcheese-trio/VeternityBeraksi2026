@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createHash } from "crypto";
 import { getLocale } from "@/lib/i18n";
+import { getWorkerReviews } from "@/lib/services/profile";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { SiteNav } from "@/components/shared/site-nav";
 import { ProfileLayout } from "@/components/profile/profile-layout";
@@ -44,6 +45,12 @@ export default async function PublicProfilePage({
 
   const emailHash = createHash("md5").update((user?.email ?? "").trim().toLowerCase()).digest("hex");
 
+  const reviews = await getWorkerReviews(id);
+  const avgRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+      : 0;
+
   const profile = {
     id,
     name: workerProfile.full_name,
@@ -56,8 +63,8 @@ export default async function PublicProfilePage({
     contact: user?.email ?? undefined,
     completedJobs: completedJobs ?? 0,
     activeListings: 0,
-    rating: 0,
-    reviewCount: 0,
+    rating: Math.round(avgRating * 10) / 10,
+    reviewCount: reviews.length,
     avatarUrl: user?.user_metadata?.avatar_url ?? user?.user_metadata?.picture ?? `https://gravatar.com/avatar/${emailHash}?s=256&d=retro`,
     verifications: {
       idVerified: false,
@@ -81,7 +88,7 @@ export default async function PublicProfilePage({
             profile={profile}
             listings={[]}
             contracts={[]}
-            reviews={[]}
+            reviews={reviews}
             documents={[]}
             chartData={[]}
             activity={[]}
@@ -102,7 +109,7 @@ export default async function PublicProfilePage({
               profile={profile}
               listings={[]}
               contracts={[]}
-              reviews={[]}
+              reviews={reviews}
               documents={[]}
               chartData={[]}
               activity={[]}

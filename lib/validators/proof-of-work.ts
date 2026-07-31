@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const proofOfWorkInputSchema = z.object({
   workerId: z.string().uuid(),
+  agreementId: z.string().uuid().optional().nullable(),
   jobType: z.string().min(3),
   jobValue: z.coerce.number().positive().optional().nullable(),
   photoBeforeUrl: z.string().url().optional().nullable(),

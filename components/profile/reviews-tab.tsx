@@ -41,7 +41,13 @@ function RatingBreakdown({ reviews }: { reviews: Review[] }) {
   )
 }
 
-export function ReviewsTab({ reviews }: { reviews: Review[] }) {
+export function ReviewsTab({
+  reviews,
+  direction = "received",
+}: {
+  reviews: Review[]
+  direction?: "received" | "given"
+}) {
   const t = useTranslations("profile.reviews")
 
   const avg =
@@ -51,30 +57,41 @@ export function ReviewsTab({ reviews }: { reviews: Review[] }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start gap-8 rounded-xl border border-border bg-background p-5">
-        <div className="text-center">
-          <p className="text-3xl font-bold">{avg.toFixed(1)}</p>
-          <div className="mt-1 flex items-center justify-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={cn(
-                  "size-4",
-                  i < Math.round(avg)
-                    ? "fill-amber-400 text-amber-400"
-                    : "text-muted-soft"
-                )}
-              />
-            ))}
+      {direction === "received" ? (
+        <div className="flex items-start gap-8 rounded-xl border border-border bg-background p-5">
+          <div className="text-center">
+            <p className="text-3xl font-bold">{avg.toFixed(1)}</p>
+            <div className="mt-1 flex items-center justify-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className={cn(
+                    "size-4",
+                    i < Math.round(avg)
+                      ? "fill-amber-400 text-amber-400"
+                      : "text-muted-soft"
+                  )}
+                />
+              ))}
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {reviews.length} {t("totalReviews")}
+            </p>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {reviews.length} {t("totalReviews")}
+          <div className="flex-1">
+            <RatingBreakdown reviews={reviews} />
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-2">
+          <p className="text-sm font-medium text-muted-foreground">
+            {t("givenTitle")}
           </p>
+          <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-[11px] text-muted-foreground">
+            {reviews.length}
+          </span>
         </div>
-        <div className="flex-1">
-          <RatingBreakdown reviews={reviews} />
-        </div>
-      </div>
+      )}
 
       {reviews.length > 0 ? (
         <div className="space-y-3">
@@ -115,6 +132,11 @@ export function ReviewsTab({ reviews }: { reviews: Review[] }) {
                       />
                     ))}
                   </div>
+                  {r.service && (
+                    <span className="mt-1.5 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+                      {r.service}
+                    </span>
+                  )}
                   <p className="mt-1.5 text-sm text-muted-foreground">
                     {r.comment}
                   </p>

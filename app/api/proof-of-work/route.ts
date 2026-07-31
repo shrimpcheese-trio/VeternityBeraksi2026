@@ -24,7 +24,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN" }, { status: 403 });
     }
 
-    const proof = await createProofOfWork(supabase, parsed.data);
+    const isAdmin = user.user_metadata?.role === "admin";
+    const input = isAdmin ? parsed.data : { ...parsed.data, verified: false };
+
+    const proof = await createProofOfWork(supabase, input);
     return NextResponse.json(proof, { status: 201 });
   } catch (error) {
     console.error(error);
