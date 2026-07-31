@@ -4,6 +4,7 @@ import { listAgreements } from "@/lib/repositories/agreement.repo";
 import { MonthGrid } from "@/components/calendar-employer/month-grid";
 import { DayPanel } from "@/components/calendar-employer/day-panel";
 import { ActivePanel } from "@/components/calendar-employer/active-panel";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 export default async function EmployerCalendarPage({
   searchParams,
@@ -11,6 +12,7 @@ export default async function EmployerCalendarPage({
   searchParams: Promise<{ month?: string; day?: string }>;
 }) {
   const { month, day } = await searchParams;
+  const t = await getServerTranslator("employerCalendar");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -50,10 +52,10 @@ export default async function EmployerCalendarPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-heading text-2xl font-medium tracking-tight">
-          Kalender
+          {t("title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Riwayat pekerjaan yang Anda pasang.
+          {t("subtitle")}
         </p>
       </div>
 

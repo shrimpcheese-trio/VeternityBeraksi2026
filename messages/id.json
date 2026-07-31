@@ -1,128 +1,388 @@
 {
+  "common": {
+    "monthsShort": ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+  },
   "navbar": {
-    "browse": "Jelajahi",
-    "plans": "Paket",
     "about": "Tentang",
-    "faq": "FAQ",
-    "contact": "Kontak",
+    "howItWorks": "Cara Kerja",
+    "workers": "Pekerja",
+    "employers": "Pemberi Kerja",
+    "mobileWorkers": "Untuk Pekerja",
+    "mobileEmployers": "Untuk Pemberi Kerja",
+    "languageLabel": "Bahasa",
     "login": "Masuk",
-    "joinUs": "Gabung"
+    "register": "Daftar",
+    "registerNow": "Daftar Sekarang"
   },
   "hero": {
-    "headline": "Temukan Pekerja Terpercaya untuk Kebutuhan Anda",
-    "subHeadline": "Platform Reputasi Profesional untuk Pekerja Informal Indonesia",
-    "description": "Dari tukang hingga fotografer, temukan pekerja berpengalaman dengan reputasi yang sudah terverifikasi. Kami membantu pekerja informal membangun kepercayaan dan mendapatkan upah yang adil.",
-    "searchPlaceholder": "Cari layanan...",
-    "searchButtonText": "Cari",
-    "searchHelperText": "Cari berdasarkan layanan, kota, atau keahlian"
+    "headlinePart1": "Ubah Setiap Pekerjaan Menjadi",
+    "headlinePart2": "Reputasi Permanen.",
+    "subHeadline": "Tinggalkan cara lama. Upahku mendokumentasikan kerja keras Anda menjadi Trust Score terverifikasi - membuka jalan untuk upah yang lebih adil dan pekerjaan yang lebih besar.",
+    "primaryCta": "Mulai Catat Pekerjaan",
+    "secondaryCta": "Cari Pekerja",
+    "dashboard": {
+      "workerName": "Budi Santoso",
+      "workerBadge": "Top 5% Pekerja",
+      "trustScoreLabel": "Trust Score Global",
+      "recentProofsTitle": "Bukti Kerja Terbaru",
+      "viewDetails": "Lihat Detail",
+      "jobTitle": "Cuci AC Split & Perbaikan Pipa",
+      "jobMeta": "Diselesaikan 2 hari lalu di Jakarta Selatan",
+      "statusConfirmed": "Dikonfirmasi Pelanggan",
+      "statusDetail": "Rating 5/5 & Ulasan positif diverifikasi.",
+      "wageLabel": "Estimasi Upah",
+      "wageValue": "Sesuai Standar",
+      "workerStatusLabel": "Status Pekerja",
+      "workerStatusValue": "Terverifikasi"
+    }
   },
-  "promo": {
-    "badge": "Promo Bisnis",
-    "title": "Tingkatkan Visibilitas Bisnis Anda",
-    "description": "Dapatkan spot teratas, pencocokan yang lebih baik, dan verifikasi premium untuk bisnis Anda. Mulai dari Rp 150.000/bulan.",
-    "cta": "Pelajari Paket Bisnis"
+  "insight": {
+    "headline": "Reputasimu Tidak Boleh Hilang Bersama Nomor WhatsApp yang Berganti.",
+    "description": "Selama ini, kepercayaan pekerja informal disimpan di ingatan pelanggan lama, grup Facebook, atau chat WhatsApp yang bisa hilang kapan saja. Tidak ada yang mencatat kerja kerasmu.",
+    "cards": {
+      "hardWork": {
+        "badge": "Kerja Keras",
+        "value": "120+",
+        "description": "Pekerjaan yang telah diselesaikan dengan baik, tepat waktu, dan jujur selama kamu bekerja, namun tidak ada buktinya."
+      },
+      "reputation": {
+        "badge": "Reputasi",
+        "value": "0",
+        "description": "Catatan permanen yang bisa dibuktikan ke pelanggan baru. Saat mencari kerja baru, kamu selalu mulai dari nol lagi."
+      },
+      "risk": {
+        "badge": "Risiko",
+        "value": "100%",
+        "description": "Bergantung penuh pada chat WhatsApp atau Facebook Group yang sangat rawan hilang, terhapus, atau berganti akun."
+      }
+    }
   },
-  "trending": {
-    "title": "Layanan Paling Dicari Saat Ini",
-    "services": [
-      { "name": "Tukang Bangunan", "description": "Renovasi rumah, perbaikan atap, pemasangan keramik", "workers": 245 },
-      { "name": "Montir Mobil", "description": "Servis rutin, perbaikan mesin, ganti oli", "workers": 189 },
-      { "name": "Fotografer", "description": "Foto pernikahan, event, portrait, produk", "workers": 156 }
-    ]
+  "scrollStatement": {
+    "headline": "Upahku menyatukan <w1>bukti kerja</w1>, <w2>verifikasi komunitas</w2>, dan <w3>upah yang adil</w3> menjadi satu reputasi yang bisa dipercaya.",
+    "photoBeforeAlt": "Before",
+    "photoAfterAlt": "After",
+    "workerAlt": "Worker",
+    "avatarAlt": "Avatar",
+    "photoCountBadge": "120 Foto Hasil",
+    "completionBadge": "100% Selesai",
+    "projectLocationLabel": "Lokasi Proyek",
+    "projectLocationValue": "Kebayoran Baru",
+    "verifier1Name": "Pak RT Budi",
+    "verifier1Role": "Ketua Lingkungan",
+    "verifier2Name": "Bu Siti",
+    "verifier2Role": "Pemilik Warung",
+    "mandorBadge": "Terverifikasi Mandor",
+    "trustedResidentsBadge": "Dipercaya 50+ Warga",
+    "wageValue": "Rp 250k",
+    "wageCaption": "Estimasi upah wajar sesuai standar kota Anda",
+    "wageDeltaBadge": "12% dari rata-rata",
+    "transparentSchemeTitle": "Skema Transparan",
+    "transparentSchemeSubtitle": "Tanpa potongan tersembunyi",
+    "regionalStandardBadge": "Sesuai Standar Regional",
+    "securePaymentLabel": "Pembayaran Aman"
   },
-  "stories": {
-    "title": "Kisah Sukses",
-    "stories": [
-      { "name": "Budi Santoso", "role": "Tukang Bangunan, Jakarta", "quote": "Berkat platform ini, saya mendapat proyek renovasi rumah di seluruh Jakarta Selatan. Reputasi saya terbangun dari setiap pekerjaan yang selesai." },
-      { "name": "Siti Rahmawati", "role": "Montir, Bandung", "quote": "Dulu saya hanya mengandalkan pelanggan tetap. Sekarang pelanggan baru datang sendiri setelah melihat portofolio pekerjaan saya." },
-      { "name": "Ahmad Fauzi", "role": "Fotografer, Surabaya", "quote": "Platform ini membantu saya membuktikan kualitas kerja saya. Sekarang saya sering dapat order dari klien korporat." }
-    ]
-  },
-  "faq": {
-    "title": "Pertanyaan Umum",
-    "subheadline": "Jawaban lengkap seputar platform, verifikasi, dan cara kerja Upahku.",
-    "items": [
+  "howItWorks": {
+    "title": "Bagaimana bukti kerja diubah menjadi sebuah kepercayaan permanen.",
+    "steps": [
       {
-        "question": "Apa itu Upahku?",
-        "answer": "Upahku adalah platform yang membantu pekerja informal Indonesia (tukang, teknisi, montir, fotografer, dll) membangun reputasi profesional yang terverifikasi. Kami menghubungkan pekerja berkualitas dengan pelanggan yang membutuhkan jasa mereka."
+        "title": "Kerjakan & Dokumentasikan",
+        "desc": "Selesaikan pekerjaan seperti biasa. Ambil foto sebelum dan sesudah, catat jenis pekerjaan dan tanggalnya langsung dari aplikasi."
       },
       {
-        "question": "Apakah platform ini gratis?",
-        "answer": "Pendaftaran dan penggunaan dasar platform sepenuhnya gratis. Kami menawarkan paket bisnis berbayar untuk perusahaan yang ingin meningkatkan visibilitas dan mendapatkan fitur premium seperti spot teratas di pencarian."
+        "title": "Pelanggan Konfirmasi",
+        "desc": "Pekerjaan baru terhitung sebagai bukti kerja setelah pelanggan mengonfirmasinya. Ini melindungi Trust Score dari klaim sepihak."
       },
       {
-        "question": "Bagaimana cara kerja verifikasi reputasi?",
-        "answer": "Setiap pekerjaan yang selesai dicatat sebagai bukti kerja (proof of work) dengan foto sebelum/sesudah dan konfirmasi pelanggan. Ditambah verifikasi dari komunitas seperti ketua RT atau mandor. Semua ini dihitung menjadi skor kepercayaan yang transparan."
+        "title": "Trust Score Terbentuk",
+        "desc": "Sistem menghitung Trust Score dari histori pekerjaan terkonfirmasi, verifikasi komunitas, dan ulasan secara komprehensif."
+      }
+    ],
+    "preview0": {
+      "uploadButton": "Unggah Bukti",
+      "photoBefore": "Foto Sebelum",
+      "photoAfter": "Foto Sesudah"
+    },
+    "preview1": {
+      "title": "Pekerjaan Disetujui",
+      "description": "Pelanggan telah memverifikasi bukti kerja Anda. Hasil ini akan dicatat secara permanen ke dalam reputasi Anda.",
+      "statusLabel": "Status Validasi",
+      "statusVerified": "Terverifikasi",
+      "pointsLabel": "Poin Reputasi",
+      "pointsValue": "+15 Poin"
+    },
+    "preview2": {
+      "scoreLabel": "Trust Score Global",
+      "topBadge": "Top 5% Pekerja"
+    }
+  },
+  "community": {
+    "badge": "Verified Community",
+    "label": "Fitur Khas Upahku",
+    "heading1": "Diakui oleh",
+    "heading2": "komunitasmu.",
+    "description": "Ubah kepercayaan sosial dunia nyata menjadi reputasi digital permanen yang bisa dilihat oleh seluruh calon pemberi kerja.",
+    "photoAlt": "Foto {name}",
+    "cta": "Minta Verifikasi Komunitas",
+    "benefits": [
+      "Endorsement dari RT",
+      "Verifikasi Mandor",
+      "Pemilik Usaha Lokal",
+      "Riwayat kerja terpercaya"
+    ],
+    "testimonials": [
+      {
+        "quote": "Made sudah bekerja sebagai tukang listrik di lingkungan kami selama 4 tahun. Jujur, tepat waktu, dan hasil kerjanya rapi. Sangat direkomendasikan.",
+        "name": "Pak Wayan",
+        "role": "Ketua Banjar",
+        "location": "Ubud",
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop"
       },
       {
-        "question": "Bagaimana jika ada masalah dengan pekerjaan?",
-        "answer": "Kami memiliki sistemrating dan ulasan yang transparan. Jika ada masalah, pelanggan dapat melaporkan melalui fitur dispute resolution kami. Tim kami akan membantu mediasi antara kedua belah pihak."
+        "quote": "Kadek selalu mengerjakan perbaikan pipa dengan sangat profesional. Harga transparan dan hasil memuaskan. Warga selalu memanggilnya.",
+        "name": "Bu Nyoman",
+        "role": "Pemilik Usaha Lokal",
+        "location": "Denpasar",
+        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&auto=format&fit=crop"
       },
       {
-        "question": "Bagaimana cara mendaftar sebagai pekerja?",
-        "answer": "Cukup daftar dengan email atau nomor telepon, lengkapi profil Anda, dan Anda siap menerima pekerjaan. Kami akan membantu Anda memverifikasi keahlian dan pengalaman Anda."
+        "quote": "Budi adalah mandor yang sangat bisa diandalkan. Koordinasi dengan pekerja lain selalu lancar, proyek selesai tepat waktu tanpa masalah.",
+        "name": "Pak Surya",
+        "role": "Ketua RT",
+        "location": "Kuta",
+        "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&h=150&auto=format&fit=crop"
+      },
+      {
+        "quote": "Berkat endorsement dari Ketua RT, sekarang saya lebih sering dipercaya warga kompleks sebelah. Benar-benar fitur yang mengubah karir saya.",
+        "name": "Bu Siti",
+        "role": "Guru Les Privat",
+        "location": "Jakarta",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop"
+      },
+      {
+        "quote": "Dulu susah cari pelanggan baru. Setelah divalidasi oleh pemilik bengkel tempat saya mangkal, pesanan masuk hampir tiap hari.",
+        "name": "Pak Agus",
+        "role": "Montir Keliling",
+        "location": "Surabaya",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop"
       }
     ]
   },
-  "about": {
-    "label": "Tentang Kami",
-    "title": "Platform Reputasi untuk Pekerja Indonesia",
-    "subheadline": "Upahku membantu pekerja informal membangun karir dan penghasilan yang lebih baik melalui reputasi yang terverifikasi.",
-    "description1": "Upahku lahir dari satu pertanyaan sederhana: bagaimana pekerja informal Indonesia — tukang, teknisi AC, montir, fotografer, guru les — bisa membangun karir dan penghasilan yang lebih baik?",
-    "description2": "Kami percaya setiap pekerjaan yang selesai adalah bukti. Setiap bukti membangun kepercayaan. Dan kepercayaan membuka pintu ke upah yang lebih adil dan proyek yang lebih besar."
+  "coreFeatures": {
+    "eyebrow": "Mesin Penggerak Keadilan",
+    "heading1": "Dirancang untuk membangun",
+    "heading2": "reputasi dan pendapatanmu.",
+    "trustScore": {
+      "heading1": "Sistem Penilaian",
+      "heading2": "Anti-Manipulasi",
+      "description": "Trust Score dibangun dari berbagai faktor yang tervalidasi, bukan berasal dari satu ulasan fiktif. Sistem kami memastikan reputasimu terbangun secara adil dan akurat.",
+      "scoreCaption": "Trust Score",
+      "verifiedBadge": "Terverifikasi",
+      "factors": ["Bukti Kerja", "Verifikasi", "Tepat Waktu", "Selesai", "Ulasan"]
+    },
+    "wageEstimator": {
+      "heading1": "Upah Wajar",
+      "heading2": "Estimator",
+      "description": "Ketahui standar harga layananmu di pasaran. Analitik data nyata membantu kamu menentukan tarif yang adil tanpa takut kemurahan.",
+      "inputs": [
+        { "label": "Kategori Pekerjaan", "value": "Teknisi AC" },
+        { "label": "Area Layanan", "value": "Jakarta Selatan" },
+        { "label": "Tingkat Pengalaman", "value": "3-5 Tahun" }
+      ],
+      "querying": "Memeriksa...",
+      "resultLabel": "Estimasi Upah Wajar",
+      "resultCaption": "per kunjungan rata-rata",
+      "accurateBadge": "Data Akurat"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Testimonial",
+    "heading1": "Cerita nyata",
+    "heading2": "dari para pengguna.",
+    "description": "Dengarkan langsung bagaimana Upahku membangun ekosistem kerja informal yang lebih adil dan transparan.",
+    "items": [
+      {
+        "type": "Pemberi Kerja",
+        "before": "Sebelumnya saya kesulitan menemukan tukang yang benar-benar terpercaya. Dengan Upahku, proses pencarian menjadi ",
+        "highlight": "jauh lebih mudah",
+        "after": " karena setiap pekerja memiliki riwayat yang jelas.",
+        "name": "Rudi Hartono",
+        "role": "Pemilik UMKM",
+        "location": "Denpasar",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Pengguna sejak 2024", "Profil terverifikasi"]
+      },
+      {
+        "type": "Pekerja",
+        "before": "Dulu kalau ganti nomor HP, saya harus mulai dari nol lagi cari pelanggan. Sekarang, profil Upahku jadi modal utama saya ",
+        "highlight": "membangun karir jangka panjang.",
+        "after": "",
+        "name": "Siti Aminah",
+        "role": "Guru Les Privat",
+        "location": "Surabaya",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["45 pekerjaan selesai", "Rating 4.9/5"]
+      },
+      {
+        "type": "Pekerja",
+        "before": "Estimator upah sangat membantu. Saya jadi tahu kalau harga pasaran pasang keramik di Bandung itu berapa, ",
+        "highlight": "tidak asal tebak atau kemurahan.",
+        "after": "",
+        "name": "Asep Mulyana",
+        "role": "Tukang Bangunan",
+        "location": "Bandung",
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Pengguna sejak 2023", "128 pekerjaan selesai"]
+      },
+      {
+        "type": "Pemberi Kerja",
+        "before": "Platform ini mengubah cara kami beroperasi. Verifikasi komunitas dari RT atau mandor ",
+        "highlight": "benar-benar menyeleksi pekerja",
+        "after": " dengan sangat baik.",
+        "name": "Budi Santoso",
+        "role": "Kontraktor Sipil",
+        "location": "Jakarta",
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Verified Employer", "Mempekerjakan 30+ orang"]
+      },
+      {
+        "type": "Pekerja",
+        "before": "Saya merasa lebih dihargai secara profesional. Ulasan dari pelanggan dan sistem anti-manipulasi ",
+        "highlight": "membuat saya tenang bekerja",
+        "after": " dengan standar tinggi.",
+        "name": "Dian Pratama",
+        "role": "Teknisi",
+        "location": "Medan",
+        "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Rating 5.0/5", "Profil terverifikasi"]
+      }
+    ]
+  },
+  "employers": {
+    "eyebrow": "Untuk Pemberi Kerja",
+    "heading1": "Temukan pekerja berdasarkan",
+    "headingHighlight": "bukti",
+    "heading2": ", bukan sekadar janji.",
+    "description": "Setiap pekerja di Upahku memiliki riwayat proyek terverifikasi. Anda tidak perlu lagi menebak-nebak kualitas hasil kerja mereka.",
+    "workflowLabel": "Cara Kerja Upahku",
+    "steps": ["Cari Kandidat", "Lihat Bukti Nyata", "Rekrut dengan Percaya Diri", "Selesai"],
+    "searchPlaceholder": "Ketik jenis pekerja...",
+    "searchValue": "Tukang Kayu, Jakarta...",
+    "candidates": [
+      { "name": "Wawan Subianto", "role": "Tukang Kayu" },
+      { "name": "Rizky Pratama", "role": "Montir" },
+      { "name": "Ahmad Fauzi", "role": "Tukang Cat" }
+    ],
+    "scoreLabel": "Skor",
+    "city": "Jakarta",
+    "trustScoreLabel": "Trust Score",
+    "verifiedBadge": "Warga Verified",
+    "beforeLabel": "SEBELUM",
+    "afterLabel": "SESUDAH",
+    "wageLabel": "Est. Upah",
+    "wagePerHour": "/jam",
+    "selectCta": "Pilih Pekerja",
+    "successHeading": "Pekerja Berhasil Dipilih!",
+    "successDescription": "Permintaan Anda telah disetujui secara instan oleh <strong>{name}</strong>.",
+    "hiredBadge": "Disewa",
+    "summary": {
+      "dailyWageLabel": "Upah Harian",
+      "dailyWageValue": "Rp 250.000",
+      "scheduleLabel": "Jadwal",
+      "scheduleValue": "Mulai Besok"
+    },
+    "contractLink": "Lihat Detail Kontrak"
+  },
+  "faq": {
+    "badge": "Pertanyaan Umum",
+    "titleStart": "Masih punya",
+    "titleAccent": "pertanyaan?",
+    "subheadline": "Kami sudah menyiapkan jawaban untuk hal-hal yang paling sering ditanyakan oleh pengguna kami.",
+    "helpPrompt": "Masih belum menemukan jawaban?",
+    "contactLink": "Hubungi tim Upahku",
+    "items": [
+      {
+        "question": "Apa itu Upahku?",
+        "answer": "Platform yang membantu pekerja informal Indonesia mengubah pekerjaan yang sudah selesai menjadi reputasi yang bisa diverifikasi, supaya upahnya lebih adil dan pekerjaannya lebih besar."
+      },
+      {
+        "question": "Bagaimana bukti kerja diverifikasi agar tidak bisa dipalsukan?",
+        "answer": "Setiap bukti kerja butuh foto sebelum/sesudah, tanggal, jenis pekerjaan, dan konfirmasi langsung dari pelanggan. Sistem juga menandai pola mencurigakan seperti foto yang dipakai berulang."
+      },
+      {
+        "question": "Siapa yang bisa memberi Community Verification?",
+        "answer": "Mandor, ketua RT, ketua banjar, pemilik toko, atau pihak lain yang mengenal langsung riwayat kerja seseorang di lingkungannya."
+      },
+      {
+        "question": "Kenapa estimasi upah saya tidak muncul?",
+        "answer": "Estimasi upah hanya ditampilkan kalau tersedia cukup data untuk kombinasi kota, jenis pekerjaan, dan pengalamanmu. Kami tidak menampilkan angka perkiraan tanpa data nyata."
+      },
+      {
+        "question": "Apakah Trust Score bisa didongkrak dengan satu ulasan bagus?",
+        "answer": "Tidak. Trust Score dirancang supaya tidak ada satu sumber - satu ulasan, satu verifikator, atau satu pelanggan - yang bisa mendominasi angkanya sendirian."
+      },
+      {
+        "question": "Bagaimana cara mendaftar sebagai pekerja?",
+        "answer": "Buat akun, lengkapi profil dasar (nama, kota, jenis pekerjaan), lalu mulai catat pekerjaan pertamamu sebagai bukti kerja."
+      }
+    ]
   },
   "cta": {
-    "headline": "Siap Membangun Reputasi Profesional Anda?",
-    "subHeadline": "Bergabunglah dengan ribuan pekerja dan pelanggan yang sudah mempercayai platform kami.",
-    "button": "Daftar Sekarang Gratis"
+    "badge": "Mulai Sekarang",
+    "headlinePart1": "Bangun reputasi.",
+    "headlinePart2": "Dapatkan peluang.",
+    "subHeadline": "Bergabunglah dengan ribuan pekerja informal yang telah mengubah hasil kerja keras mereka menjadi karir yang terpercaya.",
+    "button": "Coba Upahku Gratis",
+    "cards": [
+      "Trust Score Sisi Server",
+      "Komunitas Terverifikasi",
+      "Bukti Kerja Tervalidasi",
+      "Estimasi Upah Regional"
+    ]
   },
-  "pricing": {
-    "title": "Paket untuk Bisnis",
-    "subheadline": "Pilih paket yang sesuai dengan kebutuhan bisnis Anda. Semua paket dapat dibatalkan kapan saja.",
-    "free": {
-      "name": "Gratis",
-      "price": "Rp 0",
-      "period": "",
-      "priceSub": "",
-      "description": "Mulai mencari pekerja terpercaya.",
-      "features": [
-        "Lihat profil pekerja",
-        "Cari berdasarkan layanan & kota",
-        "3 lowongan pekerjaan per bulan",
-        "Dukungan email"
-      ],
-      "cta": "Daftar Gratis"
-    },
-    "pro": {
-      "name": "Pro",
-      "price": "Rp 79.000",
-      "period": "/bulan",
-      "priceSub": "",
-      "description": "Rekrut pekerja dengan lebih efisien.",
-      "features": [
-        "Semua fitur Gratis",
-        "Lowongan tidak terbatas",
-        "Hubungi pekerja langsung",
-        "Verifikasi prioritas",
-        "Dukungan prioritas via chat"
-      ],
-      "cta": "Mulai Pro"
-    },
-    "enterprise": {
-      "name": "Enterprise",
-      "price": "Custom",
-      "period": "",
-      "priceSub": "billing",
-      "description": "Solusi lengkap untuk perusahaan dengan tagihan khusus.",
-      "features": [
-        "Semua fitur Pro",
-        "Manajemen tim & multi-cabang",
-        "API akses",
-        "Dedicated account manager",
-        "Kustom branding & SLA"
-      ],
-      "cta": "Hubungi Kami"
-    }
+  "trustScore": {
+    "heading1": "Sistem Penilaian",
+    "heading2": "Anti-Manipulasi",
+    "description": "Trust Score dibangun dari berbagai faktor yang tervalidasi, bukan berasal dari satu ulasan fiktif. Sistem kami memastikan reputasimu terbangun secara adil dan akurat.",
+    "scoreLabel": "Trust Score",
+    "verifiedBadge": "Terverifikasi",
+    "factors": ["Bukti Kerja", "Verifikasi", "Tepat Waktu", "Selesai", "Ulasan"]
+  },
+  "wageEstimator": {
+    "heading1": "Upah Wajar",
+    "heading2": "Estimator",
+    "description": "Ketahui standar harga layananmu di pasaran. Analitik data nyata membantu kamu menentukan tarif yang adil tanpa takut kemurahan.",
+    "inputs": [
+      { "label": "Kategori Pekerjaan", "value": "Teknisi AC" },
+      { "label": "Area Layanan", "value": "Jakarta Selatan" },
+      { "label": "Tingkat Pengalaman", "value": "3-5 Tahun" }
+    ],
+    "querying": "Memeriksa...",
+    "resultLabel": "Estimasi Upah Wajar",
+    "resultCaption": "per kunjungan rata-rata",
+    "accurateBadge": "Data Akurat"
+  },
+  "footer": {
+    "tagline": "Platform reputasi yang mengubah bukti kerja nyata menjadi kepercayaan bernilai.",
+    "productTitle": "Produk",
+    "companyTitle": "Perusahaan",
+    "legalTitle": "Legal",
+    "contactTitle": "Kontak",
+    "productHowItWorks": "Cara Kerja",
+    "productWorkers": "Untuk Pekerja",
+    "productEmployers": "Untuk Pemberi Kerja",
+    "productWageEstimate": "Estimasi Upah",
+    "companyAbout": "Tentang Kami",
+    "companyBlog": "Blog",
+    "companyCareers": "Karier",
+    "legalPrivacy": "Kebijakan Privasi",
+    "legalTerms": "Syarat & Ketentuan",
+    "legalCookies": "Kebijakan Kuki",
+    "legalFaq": "FAQ",
+    "contactEmail": "halo@upahku.id",
+    "contactHelpCenter": "Pusat Bantuan",
+    "location": "Jakarta, Indonesia",
+    "copyright": "© {year} Upahku. Built in Indonesia.",
+    "backToTop": "Kembali ke atas"
   },
   "auth": {
     "login": {
@@ -191,7 +451,7 @@
     "priceMax": "Rp Maksimal tarif",
     "more": "Lainnya",
     "browseLink": "Jelajahi",
-  "allCategories": "Semua Kategori",
+    "allCategories": "Semua Kategori",
     "completedProjects": "Proyek Selesai",
     "startingPrice": "Tarif Mulai",
     "noImage": "Tidak ada foto",
@@ -221,7 +481,8 @@
       "successDescription": "Pekerja akan meninjau pesanan Anda.",
       "viewAgreements": "Lihat Pesanan Saya",
       "loginPrompt": "Masuk sebagai pemberi kerja untuk memesan jasa ini",
-      "loginLink": "Masuk"
+      "loginLink": "Masuk",
+      "submitError": "Gagal mengirim pesanan."
     },
     "serviceImages": {
       "tabLabel": "Foto Layanan",
@@ -262,30 +523,70 @@
       "submitting": "Mengirim...",
       "submitCounter": "Kirim Penawaran",
       "submitRevise": "Kirim Harga Baru",
-      "submitError": "Gagal mengirim penawaran."
+      "submitError": "Gagal mengirim penawaran.",
+      "markComplete": "Tandai Selesai",
+      "reportIssue": "Laporkan Masalah",
+      "completeHint": "Unggah foto sebelum dan sesudah untuk menandai pekerjaan selesai.",
+      "alreadyCompleted": "Pekerjaan ini sudah selesai.",
+      "inDispute": "Pekerjaan ini dalam status sengketa.",
+      "transitionFailed": "Gagal mengubah status",
+      "genericError": "Terjadi kesalahan. Silakan coba lagi."
+    },
+    "proof": {
+      "uploadFailed": "Gagal mengunggah foto. Silakan coba lagi.",
+      "genericError": "Terjadi kesalahan. Silakan coba lagi.",
+      "replace": "Ganti",
+      "uploading": "Mengupload...",
+      "heading": "Foto Bukti Pekerjaan",
+      "helper": "Unggah foto sebelum dan sesudah pekerjaan untuk menyelesaikan pekerjaan ini.",
+      "beforeLabel": "Foto Sebelum",
+      "beforeUpload": "Unggah foto sebelum pekerjaan",
+      "afterLabel": "Foto Sesudah",
+      "afterUpload": "Unggah foto sesudah pekerjaan",
+      "complete": "Foto sebelum dan sesudah sudah lengkap."
+    },
+    "detail": {
+      "title": "Detail Pekerjaan",
+      "subtitle": "Informasi lengkap tentang perjanjian kerja ini.",
+      "employerFallback": "Pemberi Kerja",
+      "workerFallback": "Pekerja",
+      "trustScore": "Skor Kepercayaan: {score}",
+      "createdAt": "Dibuat:",
+      "proofPhotosTitle": "Foto Bukti Pekerjaan",
+      "photoBefore": "Foto Sebelum",
+      "photoAfter": "Foto Sesudah",
+      "photoBeforeAlt": "Foto sebelum pekerjaan",
+      "photoAfterAlt": "Foto sesudah pekerjaan",
+      "yourReview": "Ulasan Anda",
+      "rateJob": "Nilai Pekerjaan",
+      "actionsTitle": "Tindakan"
+    },
+    "status": {
+      "draft": "Penawaran",
+      "active": "Aktif",
+      "completed": "Selesai",
+      "disputed": "Sengketa"
+    },
+    "list": {
+      "title": "Pekerjaan Saya",
+      "workerSubtitle": "Kelola penawaran pekerjaan dan perjanjian aktif Anda.",
+      "employerSubtitle": "Daftar pekerjaan yang Anda pasang.",
+      "tabAll": "Semua",
+      "tabDraft": "Penawaran",
+      "tabActive": "Aktif",
+      "tabCompleted": "Selesai",
+      "tabDisputed": "Sengketa",
+      "emptyAll": "Belum ada pekerjaan.",
+      "emptyDraftWorker": "Belum ada penawaran pekerjaan.",
+      "emptyDraftEmployer": "Tidak ada penawaran baru.",
+      "emptyActive": "Tidak ada pekerjaan aktif.",
+      "emptyCompleted": "Belum ada pekerjaan selesai.",
+      "emptyDisputed": "Tidak ada sengketa.",
+      "emptyDraftHintWorker": "Penawaran dari pemberi kerja akan muncul di sini.",
+      "emptyGenericHint": "Perubahan status akan muncul secara otomatis.",
+      "backToList": "Kembali ke daftar",
+      "counterBadge": "Menawar {price}"
     }
-  },
-  "contact": {
-    "title": "Hubungi Kami",
-    "name": "Nama",
-    "namePlaceholder": "Nama lengkap Anda",
-    "email": "Email",
-    "emailPlaceholder": "Alamat email Anda",
-    "subject": "Subjek",
-    "subjectPlaceholder": "Judul pesan Anda",
-    "message": "Pesan",
-    "messagePlaceholder": "Tulis pesan Anda di sini...",
-    "send": "Kirim Pesan",
-    "orEmail": "Atau kirim langsung ke:"
-  },
-  "footer": {
-    "slogan": "Membangun kepercayaan, mendapatkan upah adil — untuk setiap pekerja Indonesia.",
-    "about": "Tentang Kami",
-    "whyUs": "Mengapa Kami",
-    "forBusiness": "Untuk Bisnis",
-    "privacy": "Kebijakan Privasi",
-    "terms": "Ketentuan Layanan",
-    "copyright": "Hak Cipta {year} Upahku. Seluruh hak dilindungi."
   },
   "profile": {
     "sidebar": {
@@ -314,7 +615,24 @@
     "overview": {
       "activityChart": "Aktivitas Pekerjaan",
       "recentActivity": "Aktivitas Terbaru",
-      "noActivity": "Belum ada aktivitas terbaru."
+      "noActivity": "Belum ada aktivitas terbaru.",
+      "companyInfo": "Informasi Perusahaan",
+      "employerRole": "Pemberi Kerja",
+      "memberSince": "Bergabung {date}",
+      "jobSummary": "Ringkasan Pekerjaan",
+      "posted": "Dipasang",
+      "completed": "Selesai",
+      "spending": "Pengeluaran",
+      "recentJobs": "Pekerjaan Terbaru",
+      "jobFallback": "Pekerjaan",
+      "noJobs": "Belum ada pekerjaan.",
+      "statusDraft": "Penawaran",
+      "statusActive": "Aktif",
+      "statusCompleted": "Selesai",
+      "statusDisputed": "Sengketa",
+      "legendHigh": "Tinggi",
+      "legendMedium": "Sedang",
+      "legendLow": "Rendah"
     },
     "services": {
       "price": "Rp {price}",
@@ -332,6 +650,8 @@
       "reviewer": "Pengulas",
       "givenTitle": "Ulasan yang Diberikan"
     },
+    "nameFallback": "User",
+    "roleEmployer": "Pemberi Kerja",
     "notFound": "Profil tidak ditemukan."
   },
   "settings": {
@@ -353,6 +673,18 @@
       "email": "Email",
       "emailHelper": "Email digunakan untuk login dan notifikasi.",
       "phone": "Nomor Telepon",
+      "phonePlaceholder": "+62 xxx xxxx xxxx",
+      "city": "Kota",
+      "cityPlaceholder": "Jakarta Selatan",
+      "bio": "Bio",
+      "bioPlaceholder": "Ceritakan tentang diri Anda...",
+      "locationVisible": "Tampilkan lokasi",
+      "locationVisibleHelper": "Biarkan pelanggan melihat kota Anda di profil publik",
+      "saved": "Data berhasil disimpan.",
+      "saving": "Menyimpan...",
+      "save": "Simpan Perubahan",
+      "viewPublicProfile": "Lihat profil publik",
+      "saveError": "Terjadi kesalahan. Silakan coba lagi.",
       "avatar": "Foto Profil",
       "upload": "Unggah Foto",
       "remove": "Hapus",
@@ -370,7 +702,16 @@
       "address": "Alamat",
       "uploadDocument": "Unggah Dokumen",
       "industry": "Industri/Sektor",
-      "industryPlaceholder": "Pilih industri..."
+      "industryPlaceholder": "Pilih industri...",
+      "industryOptions": {
+        "construction": "Konstruksi & Bangunan",
+        "automotive": "Otomotif",
+        "photography": "Fotografi",
+        "education": "Pendidikan",
+        "technology": "Teknologi",
+        "cleaning": "Kebersihan",
+        "other": "Lainnya"
+      }
     },
     "verification": {
       "title": "Verifikasi & Kepercayaan",
@@ -378,13 +719,29 @@
       "id": "Verifikasi Identitas",
       "company": "Verifikasi Perusahaan",
       "bank": "Verifikasi Bank",
-      "trustExplainer": "Skor kepercayaan Anda dihitung berdasarkan jumlah verifikasi yang lengkap, riwayat pekerjaan, dan konfirmasi pelanggan. Semakin lengkap verifikasi Anda, semakin tinggi skor kepercayaan Anda."
+      "trustExplainer": "Skor kepercayaan Anda dihitung berdasarkan jumlah verifikasi yang lengkap, riwayat pekerjaan, dan konfirmasi pelanggan. Semakin lengkap verifikasi Anda, semakin tinggi skor kepercayaan Anda.",
+      "statusVerified": "Terverifikasi",
+      "statusPending": "Menunggu",
+      "statusNone": "Belum",
+      "actionView": "Lihat",
+      "actionResend": "Kirim Ulang",
+      "actionVerify": "Verifikasi",
+      "docLicense": "Surat Izin Usaha",
+      "docTaxId": "NPWP"
     },
     "payment": {
       "title": "Pembayaran & Pencairan",
       "description": "Kelola metode pembayaran dan jadwal pencairan dana.",
       "addBank": "Tambah Rekening Baru",
-      "payoutSchedule": "Jadwal Pencairan"
+      "payoutSchedule": "Jadwal Pencairan",
+      "payoutOptions": {
+        "manual": "Manual - Cairkan manual",
+        "weekly": "Mingguan - Setiap hari Senin",
+        "biweekly": "Dua Mingguan - Tanggal 1 & 15",
+        "monthly": "Bulanan - Tanggal 1"
+      },
+      "active": "Aktif",
+      "inactive": "Nonaktif"
     },
     "notifications": {
       "title": "Notifikasi",
@@ -406,12 +763,22 @@
       "confirmPassword": "Konfirmasi Kata Sandi",
       "updatePassword": "Perbarui Kata Sandi",
       "sessions": "Sesi Aktif",
-      "revoke": "Cabut"
+      "revoke": "Cabut",
+      "googleAccountInfo": "Akun ini masuk menggunakan Google. Kata sandi dikelola oleh Google dan tidak dapat diubah di sini.",
+      "passwordUpdated": "Kata sandi berhasil diperbarui.",
+      "updating": "Memperbarui...",
+      "passwordError": "Terjadi kesalahan. Silakan coba lagi.",
+      "noSessions": "Tidak ada sesi aktif.",
+      "currentSession": "Saat ini"
     },
     "dangerZone": {
       "title": "Zona Berbahaya",
       "description": "Tindakan ini tidak dapat dibatalkan. Tindakan ini akan menghapus semua data akun Anda secara permanen termasuk profil, riwayat pekerjaan, dan dokumen.",
-      "deleteAccount": "Hapus Akun"
+      "deleteAccount": "Hapus Akun",
+      "confirmText": "Apakah Anda yakin ingin menghapus akun? Semua data akan hilang dan tidak dapat dikembalikan.",
+      "confirming": "Menghapus...",
+      "confirm": "Ya, hapus akun",
+      "cancel": "Batal"
     }
   },
   "dashboard": {
@@ -445,6 +812,269 @@
     },
     "header": {
       "searchPlaceholder": "Cari di dashboard..."
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "workers": "Pekerja",
+      "title": "Admin Panel",
+      "backToHome": "Kembali ke beranda"
+    },
+    "workerForm": {
+      "fullName": "Nama Lengkap",
+      "city": "Kota",
+      "jobCategory": "Kategori Pekerjaan",
+      "yearsExperience": "Pengalaman (tahun)",
+      "bio": "Bio",
+      "locationVisible": "Tampilkan lokasi di profil",
+      "save": "Simpan"
+    },
+    "workers": {
+      "title": "Kelola Pekerja",
+      "subtitle": "{count} pekerja terdaftar",
+      "filterCity": "Filter kota...",
+      "filterCategory": "Filter kategori...",
+      "search": "Cari",
+      "reset": "Reset",
+      "listTitle": "Daftar Pekerja",
+      "tableName": "Nama",
+      "tableCity": "Kota",
+      "tableCategory": "Kategori",
+      "tableExperience": "Pengalaman",
+      "tableScore": "Skor",
+      "yearsShort": "{years} thn",
+      "detail": "Detail",
+      "empty": "Tidak ada pekerja ditemukan"
+    },
+    "workerDetail": {
+      "editProfile": "Edit Profil",
+      "summary": "Ringkasan",
+      "trustScore": "Skor Kepercayaan",
+      "experience": "{years} tahun",
+      "locationVisible": "Lokasi Terlihat",
+      "yes": "Ya",
+      "no": "Tidak",
+      "memberSince": "Bergabung"
+    }
+  },
+  "reviews": {
+    "form": {
+      "maxPhotos": "Maksimal 3 foto untuk satu ulasan.",
+      "uploadFailed": "Gagal mengunggah foto. Silakan coba lagi.",
+      "genericError": "Terjadi kesalahan. Silakan coba lagi.",
+      "submitFailed": "Gagal mengirim ulasan. Silakan coba lagi.",
+      "updated": "Ulasan diperbarui.",
+      "submitted": "Ulasan terkirim.",
+      "editTitle": "Ubah Ulasan Anda",
+      "newTitle": "Berikan Ulasan",
+      "helper": "Nilai hasil pekerjaan pekerja ini setelah pekerjaan selesai.",
+      "rating": "Rating",
+      "starAria": "{star} bintang",
+      "score": "{rating} dari 5",
+      "notRated": "Belum dinilai",
+      "commentLabel": "Komentar (opsional)",
+      "commentPlaceholder": "Ceritakan pengalaman Anda dengan pekerja ini...",
+      "photoLabel": "Foto (maksimal 3)",
+      "photoAlt": "Foto ulasan",
+      "removePhoto": "Hapus foto",
+      "uploading": "Mengupload...",
+      "addPhoto": "Tambah foto",
+      "submitting": "Mengirim...",
+      "updateButton": "Perbarui Ulasan",
+      "submitButton": "Kirim Ulasan"
+    },
+    "received": {
+      "title": "Ulasan Pemberi Kerja",
+      "score": "{rating} dari 5",
+      "photoAlt": "Foto ulasan"
+    }
+  },
+  "workerDashboard": {
+    "greeting": "Selamat datang, {name}!",
+    "subtitle": "Ringkasan aktivitas dan performa pekerjaan Anda.",
+    "seeAll": "Lihat Semua",
+    "newJob": "Buat Pekerjaan Baru",
+    "fallbackName": "Pekerja",
+    "trendNoData": "Belum ada data",
+    "trendNewData": "Data baru tersedia",
+    "trendUp": "+{pct}% dari periode lalu",
+    "trendDown": "{pct}% dari periode lalu",
+    "newOfferReminder": "Penawaran Pekerjaan Baru",
+    "newOfferCount": "{count} penawaran menunggu",
+    "kpiTrustScore": "Skor Kepercayaan",
+    "trustScoreValue": "{score} dari 100",
+    "trustScoreNotComputed": "Belum dihitung",
+    "kpiCompleted": "Proyek Selesai",
+    "kpiRevenue": "Total Pendapatan",
+    "revenueValue": "Rp {million} Jt",
+    "chartTitle": "Pekerjaan per Bulan",
+    "recentActivity": "Aktivitas Terbaru"
+  },
+  "workerCalendar": {
+    "title": "Kalender",
+    "subtitle": "Riwayat pekerjaan dan jadwal aktif Anda."
+  },
+  "workerServices": {
+    "title": "Layanan Saya",
+    "subtitle": "Kelola layanan yang Anda tawarkan kepada pemberi kerja.",
+    "addService": "Tambah Layanan",
+    "editService": "Edit Layanan",
+    "loading": "Memuat...",
+    "emptyTitle": "Belum ada layanan.",
+    "emptyDescription": "Tambah layanan pertama Anda agar pemberi kerja dapat melihatnya.",
+    "active": "Aktif",
+    "inactive": "Nonaktif",
+    "activate": "Aktifkan",
+    "deactivate": "Nonaktifkan",
+    "priceError": "Harga harus berupa angka bulat lebih dari 0",
+    "tabs": {
+      "details": "Detil Layanan",
+      "photos": "Foto Layanan"
+    },
+    "form": {
+      "nameLabel": "Nama Layanan",
+      "namePlaceholder": "Misal: Service AC, Pasang AC Baru",
+      "descriptionLabel": "Deskripsi",
+      "descriptionPlaceholder": "Jelaskan layanan yang Anda tawarkan...",
+      "priceLabel": "Harga",
+      "pricePlaceholder": "Rp 150.000",
+      "unitLabel": "Satuan",
+      "categoryLabel": "Kategori",
+      "categoryPlaceholder": "Pilih kategori...",
+      "save": "Simpan",
+      "saving": "Menyimpan..."
+    },
+    "priceUnits": {
+      "fixed": "Harga Tetap",
+      "hourly": "Per Jam",
+      "daily": "Per Hari"
+    },
+    "categories": {
+      "tukang": "Tukang",
+      "ac": "Teknisi AC",
+      "montir": "Montir",
+      "fotografer": "Fotografer",
+      "guru": "Guru Les",
+      "tata_rias": "Tata Rias",
+      "tukang_kayu": "Tukang Kayu",
+      "tukang_cat": "Tukang Cat"
+    },
+    "photos": {
+      "thumbnailLabel": "Thumbnail",
+      "thumbnailHelper": "Upload foto utama untuk layanan ini.",
+      "thumbnailAlt": "Thumbnail",
+      "replace": "Ganti",
+      "clickToUpload": "Klik untuk upload",
+      "galleryLabel": "Galeri",
+      "galleryHelper": "Upload hingga 5 foto tambahan.",
+      "galleryAlt": "Gallery",
+      "add": "Tambah",
+      "uploading": "Mengupload..."
+    },
+    "cancel": "Batal",
+    "deleteTitle": "Hapus Layanan",
+    "deleteConfirm": "Apakah Anda yakin ingin menghapus layanan ini? Tindakan ini tidak dapat dibatalkan.",
+    "delete": "Hapus"
+  },
+  "profileSetup": {
+    "nameHeading": "Siapa nama Anda?",
+    "nameHelper": "Nama sesuai KTP atau identitas resmi",
+    "nameLabel": "Nama Lengkap",
+    "namePlaceholder": "Budi Santoso",
+    "cityLabel": "Kota",
+    "cityPlaceholder": "Jakarta Selatan",
+    "cityHelper": "Kota tempat Anda bekerja atau berdomisili",
+    "roleHeading": "Anda ingin mendaftar sebagai?",
+    "roleHelper": "Pilih peran yang sesuai",
+    "roleWorker": "Pekerja",
+    "roleWorkerDesc": "Saya mencari proyek dan ingin membangun reputasi",
+    "roleEmployer": "Pemberi Kerja",
+    "roleEmployerDesc": "Saya mencari pekerja terpercaya untuk proyek saya",
+    "skillHeading": "Apa bidang keahlian Anda?",
+    "skillHelper": "Pilih kategori yang sesuai dengan keahlian Anda",
+    "categoryLabel": "Kategori Pekerjaan",
+    "categoryExamples": ["Tukang Bangunan", "Montir Mobil", "Fotografer", "Teknisi AC", "Guru Les"],
+    "categoryExampleText": "Contoh: {examples}",
+    "experienceLabel": "Pengalaman",
+    "experiencePlaceholder": "5",
+    "experienceHelper": "Lama pengalaman dalam tahun",
+    "companyHeading": "Informasi perusahaan Anda?",
+    "companyHelper": "Data ini akan ditampilkan di profil Anda",
+    "companyNameLabel": "Nama Perusahaan",
+    "companyNamePlaceholder": "CV. Karya Mandiri",
+    "companyNameHelper": "Nama bisnis atau perusahaan Anda (opsional)",
+    "phoneLabel": "No Telepon",
+    "phonePlaceholder": "+62 812-3456-7890",
+    "phoneHelper": "Nomor yang bisa dihubungi pelanggan (opsional)",
+    "back": "Kembali",
+    "continue": "Lanjutkan",
+    "saving": "Menyimpan...",
+    "save": "Simpan"
+  },
+  "calendar": {
+    "dayNames": ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+    "verified": "Terverifikasi",
+    "pending": "Menunggu",
+    "emptyDay": "Tidak ada pekerjaan pada hari ini.",
+    "activeJobs": "Pekerjaan Aktif",
+    "emptyActive": "Tidak ada pekerjaan aktif.",
+    "employerFallback": "Pemberi Kerja",
+    "prevMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya"
+  },
+  "employerDashboard": {
+    "greeting": "Selamat datang, {firstName}!",
+    "subtitle": "Ringkasan aktivitas dan daftar pekerjaan Anda.",
+    "fallbackName": "Pemberi Kerja",
+    "viewAll": "Lihat Semua",
+    "findWorker": "Cari Pekerja",
+    "kpis": {
+      "jobsPosted": "Pekerjaan Dipasang",
+      "jobsCompleted": "Pekerjaan Selesai",
+      "totalSpend": "Total Pengeluaran",
+      "totalSpendValue": "Rp {million} Jt"
+    },
+    "chartTitle": "Pekerjaan per Bulan",
+    "reminders": {
+      "title": "Perlu Ditindaklanjuti",
+      "actionLabel": "Lihat Semua",
+      "jobFallback": "Pekerjaan",
+      "newOfferTitle": "Ada penawaran baru untuk ditinjau",
+      "newOfferSubtitle": "{count} pekerjaan menunggu dikonfirmasi",
+      "dateSubtitle": "{status} - {date}"
+    },
+    "trends": {
+      "noData": "Belum ada data",
+      "newData": "Data baru tersedia",
+      "up": "+{pct}% dari periode lalu",
+      "down": "{pct}% dari periode lalu"
+    },
+    "status": {
+      "draft": "Penawaran",
+      "active": "Aktif",
+      "completed": "Selesai",
+      "disputed": "Sengketa"
+    }
+  },
+  "employerCalendar": {
+    "title": "Kalender",
+    "subtitle": "Riwayat pekerjaan yang Anda pasang."
+  },
+  "calendarEmployer": {
+    "dayPanel": {
+      "fallbackWorkerName": "Pekerja",
+      "emptyState": "Tidak ada pekerjaan pada hari ini."
+    },
+    "activePanel": {
+      "title": "Pekerjaan Aktif",
+      "fallbackWorkerName": "Pekerja",
+      "emptyState": "Tidak ada pekerjaan aktif."
+    },
+    "monthGrid": {
+      "dayNames": ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+      "prevMonthAria": "Bulan sebelumnya",
+      "nextMonthAria": "Bulan berikutnya"
     }
   }
 }

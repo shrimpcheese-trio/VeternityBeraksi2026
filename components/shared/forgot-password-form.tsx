@@ -86,7 +86,7 @@ export function ForgotPasswordForm() {
             {t("emailLabel")}
           </label>
           <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-soft" />
+            <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               id="email"
               name="email"

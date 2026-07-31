@@ -78,7 +78,7 @@ export function CommissionForm({ workerId, price, userId, userRole }: Commission
 
   if (success) {
     return (
-      <div className="rounded-xl border border-border bg-surface-card p-6 text-center">
+      <div className="rounded-xl border border-border bg-bg-card p-6 text-center">
         <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-green-100">
           <span className="text-2xl text-green-600">&#10003;</span>
         </div>
@@ -90,7 +90,7 @@ export function CommissionForm({ workerId, price, userId, userRole }: Commission
 
   if (!userId || userRole !== "employer") {
     return (
-      <div className="rounded-xl border border-border bg-surface-card p-6 text-center">
+      <div className="rounded-xl border border-border bg-bg-card p-6 text-center">
         <p className="text-sm text-muted-foreground">{t("commissionModal.loginPrompt")}</p>
         <a
           href={`/login?redirect=/browse/${workerId}`}

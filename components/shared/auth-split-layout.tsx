@@ -32,7 +32,6 @@ export function AuthSplitLayout({
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4 md:p-8">
-
       {/* Background Soft Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-sky/10 rounded-full blur-[100px]" />
@@ -54,7 +53,11 @@ export function AuthSplitLayout({
             {/* Subtle Grid Pattern */}
             <div
               className="absolute inset-0 opacity-[0.03]"
-              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
+              }}
             />
           </div>
 
@@ -72,10 +75,13 @@ export function AuthSplitLayout({
 
             <div className="mb-8">
               <h3 className="text-3xl font-heading font-semibold text-white leading-tight mb-4">
-                Ubah Pekerjaan<br />Menjadi <span className="text-sky">Reputasi.</span>
+                Ubah Pekerjaan
+                <br />
+                Menjadi <span className="text-sky">Reputasi.</span>
               </h3>
               <p className="text-white/60 text-sm leading-relaxed max-w-[300px]">
-                Platform terpercaya bagi pekerja informal Indonesia untuk mendapatkan upah yang adil dan pekerjaan yang lebih baik.
+                Platform terpercaya bagi pekerja informal Indonesia untuk
+                mendapatkan upah yang adil dan pekerjaan yang lebih baik.
               </p>
             </div>
           </div>
@@ -83,7 +89,11 @@ export function AuthSplitLayout({
 
         {/* Right Panel (Form) */}
         <div className="w-full lg:w-1/2 p-8 sm:p-12 md:p-16 relative bg-white">
-          <StaggerContainer delayChildren={0.1} staggerChildren={0.08} className="w-full h-full flex flex-col justify-center max-w-[400px] mx-auto">
+          <StaggerContainer
+            delayChildren={0.1}
+            staggerChildren={0.08}
+            className="w-full h-full flex flex-col justify-center max-w-[400px] mx-auto"
+          >
             <StaggerItem className="w-full">
               <div className="flex items-center justify-between mb-10">
                 {backHref ? (
@@ -108,12 +118,12 @@ export function AuthSplitLayout({
               <h2 className="font-heading text-3xl font-bold tracking-tight text-navy">
                 {heading}
               </h2>
-              <p className="mt-2 text-sm text-slate-500 font-medium">{subtext}</p>
+              <p className="mt-2 text-sm text-slate-500 font-medium">
+                {subtext}
+              </p>
             </StaggerItem>
 
-            <StaggerItem className="mt-8 w-full">
-              {children}
-            </StaggerItem>
+            <StaggerItem className="mt-8 w-full">{children}</StaggerItem>
 
             <StaggerItem className="mt-8 w-full">
               <p className="text-center text-sm text-slate-500">

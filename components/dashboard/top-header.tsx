@@ -115,12 +115,12 @@ export function TopHeader({
                   onClick={() => switchLocale(l.code)}
                   className={`flex w-full items-center rounded-md px-3 py-2 text-left text-sm ${
                     locale === l.code
-                      ? "bg-surface-soft font-medium text-foreground"
-                      : "text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                      ? "bg-bg-alt font-medium text-foreground"
+                      : "text-muted-foreground hover:bg-bg-alt hover:text-foreground"
                   }`}
                 >
                   <span className="mr-2">{l.label}</span>
-                  <span className="text-muted-soft">{l.name}</span>
+                  <span className="text-muted-foreground">{l.name}</span>
                 </button>
               ))}
             </div>
@@ -173,14 +173,14 @@ export function TopHeader({
               </div>
               <Link
                 href="/profile"
-                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-bg-alt hover:text-foreground"
               >
                 <User className="size-4" />
                 View Profile
               </Link>
               <Link
                 href="/settings"
-                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-bg-alt hover:text-foreground"
               >
                 <Settings className="size-4" />
                 Settings
@@ -191,7 +191,7 @@ export function TopHeader({
                 onClick={async () => {
                   await signOut();
                 }}
-                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-bg-alt hover:text-foreground"
               >
                 <LogOut className="size-4" />
                 Logout

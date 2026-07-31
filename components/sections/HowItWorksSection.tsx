@@ -3,21 +3,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Camera, CheckCircle2, Star } from "lucide-react";
 import { BlurReveal, StaggerContainer, StaggerItem, StaggerTextContainer, SplitText } from "@/components/ui/motion";
-
-const steps = [
-  {
-    title: "Kerjakan & Dokumentasikan",
-    desc: "Selesaikan pekerjaan seperti biasa. Ambil foto sebelum dan sesudah, catat jenis pekerjaan dan tanggalnya langsung dari aplikasi.",
-  },
-  {
-    title: "Pelanggan Konfirmasi",
-    desc: "Pekerjaan baru terhitung sebagai bukti kerja setelah pelanggan mengonfirmasinya. Ini melindungi Trust Score dari klaim sepihak.",
-  },
-  {
-    title: "Trust Score Terbentuk",
-    desc: "Sistem menghitung Trust Score dari histori pekerjaan terkonfirmasi, verifikasi komunitas, dan ulasan secara komprehensif.",
-  },
-];
+import { useTranslations } from "next-intl";
 
 // --- High-End SaaS Mockup Previews ---
 
@@ -181,6 +167,8 @@ const Preview2 = () => (
 );
 
 export function HowItWorksSection() {
+  const t = useTranslations("howItWorks");
+  const steps = t.raw("steps") as Array<{ title: string; desc: string }>;
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [progress, setProgress] = React.useState(0);
   const DURATION = 5000;
@@ -226,7 +214,7 @@ export function HowItWorksSection() {
         {/* Header Section (Centered) */}
         <div className="flex flex-col items-center text-center mb-16 max-w-3xl mx-auto">
           <StaggerTextContainer className="text-[2.5rem] md:text-[3.5rem] font-heading font-semibold text-navy leading-[1.1] tracking-tight">
-             <SplitText text="Bagaimana bukti kerja diubah menjadi sebuah kepercayaan permanen." />
+             <SplitText text={t("title")} />
           </StaggerTextContainer>
         </div>
 

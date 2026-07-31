@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 
 // Premium Easing Curves
 export const easings = {
-  easeOutQuart: [0.25, 1, 0.5, 1],
-  easeOutExpo: [0.16, 1, 0.3, 1], // Very smooth, used in Ordina/Linear
-  easeInOut: [0.65, 0, 0.35, 1],
-  springPop: { type: "spring", stiffness: 400, damping: 25 },
-  springSmooth: { type: "spring", stiffness: 300, damping: 30 },
-  springHover: { type: "spring", stiffness: 400, damping: 30 },
+  easeOutQuart: [0.25, 1, 0.5, 1] as const,
+  easeOutExpo: [0.16, 1, 0.3, 1] as const, // Very smooth, used in Ordina/Linear
+  easeInOut: [0.65, 0, 0.35, 1] as const,
+  springPop: { type: "spring", stiffness: 400, damping: 25 } as const,
+  springSmooth: { type: "spring", stiffness: 300, damping: 30 } as const,
+  springHover: { type: "spring", stiffness: 400, damping: 30 } as const,
 };
 
 type RevealProps = HTMLMotionProps<"div"> & {

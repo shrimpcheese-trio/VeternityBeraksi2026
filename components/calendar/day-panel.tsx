@@ -1,11 +1,15 @@
 import { CheckCircle, Clock, XCircle } from "lucide-react";
 import type { Database } from "@/types/supabase";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
 type ProofRow = Database["public"]["Tables"]["proof_of_work"]["Row"];
 
-export function DayPanel({ day, proofs }: { day: string; proofs: ProofRow[] }) {
+export async function DayPanel({ day, proofs }: { day: string; proofs: ProofRow[] }) {
+  const t = await getServerTranslator("calendar");
+  const locale = await getLocale();
   const date = new Date(day + "T00:00:00");
-  const formatted = date.toLocaleDateString("id-ID", {
+  const formatted = date.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -21,7 +25,7 @@ export function DayPanel({ day, proofs }: { day: string; proofs: ProofRow[] }) {
           {proofs.map((proof) => (
             <div
               key={proof.proof_id}
-              className="flex items-center justify-between rounded-xl border border-border bg-surface-card p-3"
+              className="flex items-center justify-between rounded-xl border border-border bg-bg-card p-3"
             >
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium">{proof.job_type}</p>
@@ -32,14 +36,14 @@ export function DayPanel({ day, proofs }: { day: string; proofs: ProofRow[] }) {
                 )}
               </div>
               {proof.verified ? (
-                <span className="flex items-center gap-1 text-xs text-green-600">
+                <span className="flex items-center gap-1 text-xs text-sky">
                   <CheckCircle className="size-3.5" />
-                  Terverifikasi
+                  {t("verified")}
                 </span>
               ) : (
                 <span className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Clock className="size-3.5" />
-                  Menunggu
+                  {t("pending")}
                 </span>
               )}
             </div>
@@ -48,7 +52,7 @@ export function DayPanel({ day, proofs }: { day: string; proofs: ProofRow[] }) {
       ) : (
         <div className="flex flex-col items-center justify-center py-8 text-center">
           <XCircle className="mb-2 size-8 text-muted-foreground/40" />
-          <p className="text-sm text-muted-foreground">Tidak ada pekerjaan pada hari ini.</p>
+          <p className="text-sm text-muted-foreground">{t("emptyDay")}</p>
         </div>
       )}
     </div>

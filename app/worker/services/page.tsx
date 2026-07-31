@@ -5,6 +5,7 @@ import { Plus, Pencil, Trash2, X, GripVertical, Upload, ImageIcon } from "lucide
 import { createClient } from "@/lib/supabase/client";
 import { uploadServiceImage, deleteServiceImage } from "@/lib/supabase/storage";
 import { formatPriceInput, parsePriceInput } from "@/lib/utils/currency";
+import { useTranslations } from "next-intl";
 
 type ServiceRow = {
   service_id: string;
@@ -24,17 +25,17 @@ type ServiceRow = {
 type ModalMode = "closed" | "add" | "edit";
 type FormTab = "details" | "photos";
 
-const PRICE_UNIT_LABELS: Record<string, string> = {
-  fixed: "Harga Tetap",
-  hourly: "Per Jam",
-  daily: "Per Hari",
-};
-
 function formatPrice(price: number): string {
   return `Rp ${price.toLocaleString("id-ID")}`;
 }
 
 export default function WorkerServicesPage() {
+  const t = useTranslations("workerServices");
+  const PRICE_UNIT_LABELS: Record<string, string> = {
+    fixed: t("priceUnits.fixed"),
+    hourly: t("priceUnits.hourly"),
+    daily: t("priceUnits.daily"),
+  };
   const [services, setServices] = useState<ServiceRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalMode, setModalMode] = useState<ModalMode>("closed");
@@ -163,7 +164,7 @@ export default function WorkerServicesPage() {
     if (!formName.trim()) return;
     const parsedPrice = parsePriceInput(formPrice);
     if (parsedPrice === null || parsedPrice <= 0) {
-      setPriceError("Harga harus berupa angka bulat lebih dari 0");
+      setPriceError(t("priceError"));
       return;
     }
     setSaving(true);
@@ -223,10 +224,8 @@ export default function WorkerServicesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-heading text-2xl font-medium tracking-tight">Layanan Saya</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Kelola layanan yang Anda tawarkan kepada pemberi kerja.
-          </p>
+          <h1 className="font-heading text-2xl font-medium tracking-tight">{t("title")}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
         <button
           type="button"
@@ -234,29 +233,27 @@ export default function WorkerServicesPage() {
           className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           <Plus className="size-4" />
-          Tambah Layanan
+          {t("addService")}
         </button>
       </div>
 
       {loading ? (
-        <div className="py-16 text-center text-sm text-muted-foreground">Memuat...</div>
+        <div className="py-16 text-center text-sm text-muted-foreground">{t("loading")}</div>
       ) : services.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <GripVertical className="mb-4 size-12 text-muted-foreground/40" />
-          <p className="text-sm font-medium text-muted-foreground">Belum ada layanan.</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Tambah layanan pertama Anda agar pemberi kerja dapat melihatnya.
-          </p>
+          <p className="text-sm font-medium text-muted-foreground">{t("emptyTitle")}</p>
+          <p className="mt-1 text-xs text-muted-foreground">{t("emptyDescription")}</p>
         </div>
       ) : (
         <div className="space-y-3">
           {services.map((service) => (
             <div
               key={service.service_id}
-              className="flex items-start gap-4 rounded-xl border border-border bg-surface-card p-5"
+              className="flex items-start gap-4 rounded-xl border border-border bg-bg-card p-5"
             >
               {service.thumbnail_url && (
-                <div className="size-16 shrink-0 overflow-hidden rounded-lg bg-surface-soft">
+                <div className="size-16 shrink-0 overflow-hidden rounded-lg bg-bg-alt">
                   <img src={service.thumbnail_url} alt={service.name} className="size-full object-cover" />
                 </div>
               )}
@@ -266,11 +263,11 @@ export default function WorkerServicesPage() {
                   <span
                     className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${
                       service.is_active
-                        ? "bg-green-100 text-green-700"
+                        ? "bg-sky/10 text-sky-active"
                         : "bg-muted text-muted-foreground"
                     }`}
                   >
-                    {service.is_active ? "Aktif" : "Nonaktif"}
+                    {service.is_active ? t("active") : t("inactive")}
                   </span>
                 </div>
                 {service.description && (
@@ -295,7 +292,7 @@ export default function WorkerServicesPage() {
                   type="button"
                   onClick={() => handleToggleActive(service)}
                   className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
-                  title={service.is_active ? "Nonaktifkan" : "Aktifkan"}
+                  title={service.is_active ? t("deactivate") : t("activate")}
                 >
                   <span className="size-3.5 block rounded-sm border border-current" />
                 </button>
@@ -324,7 +321,7 @@ export default function WorkerServicesPage() {
           <div className="flex max-h-[90vh] w-full max-w-lg flex-col rounded-2xl border border-border bg-background shadow-xl">
             <div className="flex items-center justify-between border-b border-border px-6 py-4">
               <h2 className="text-sm font-semibold">
-                {modalMode === "add" ? "Tambah Layanan" : "Edit Layanan"}
+                {modalMode === "add" ? t("addService") : t("editService")}
               </h2>
               <button type="button" onClick={closeModal} className="text-muted-foreground hover:text-foreground">
                 <X className="size-4" />
@@ -341,7 +338,7 @@ export default function WorkerServicesPage() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Detil Layanan
+                {t("tabs.details")}
               </button>
               <button
                 type="button"
@@ -352,7 +349,7 @@ export default function WorkerServicesPage() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Foto Layanan
+                {t("tabs.photos")}
               </button>
             </div>
 
@@ -360,30 +357,30 @@ export default function WorkerServicesPage() {
               {formTab === "details" && (
                 <div className="space-y-4">
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-muted-foreground">Nama Layanan</label>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("form.nameLabel")}</label>
                     <input
                       type="text"
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
-                      placeholder="Misal: Service AC, Pasang AC Baru"
+                      placeholder={t("form.namePlaceholder")}
                       className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-muted-foreground">Deskripsi</label>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("form.descriptionLabel")}</label>
                     <textarea
                       value={formDescription}
                       onChange={(e) => setFormDescription(e.target.value)}
                       rows={3}
-                      placeholder="Jelaskan layanan yang Anda tawarkan..."
+                      placeholder={t("form.descriptionPlaceholder")}
                       className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
 
                   <div className="flex gap-3">
                     <div className="flex-1">
-                      <label className="mb-1 block text-xs font-medium text-muted-foreground">Harga</label>
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("form.priceLabel")}</label>
                       <input
                         type="text"
                         inputMode="numeric"
@@ -392,20 +389,20 @@ export default function WorkerServicesPage() {
                           setFormPrice(formatPriceInput(e.target.value));
                           setPriceError("");
                         }}
-                        placeholder="Rp 150.000"
+                        placeholder={t("form.pricePlaceholder")}
                         className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                       />
                     </div>
                     <div className="w-32">
-                      <label className="mb-1 block text-xs font-medium text-muted-foreground">Satuan</label>
+                      <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("form.unitLabel")}</label>
                       <select
                         value={formPriceUnit}
                         onChange={(e) => setFormPriceUnit(e.target.value)}
                         className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                       >
-                        <option value="fixed">Harga Tetap</option>
-                        <option value="hourly">Per Jam</option>
-                        <option value="daily">Per Hari</option>
+                        <option value="fixed">{t("priceUnits.fixed")}</option>
+                        <option value="hourly">{t("priceUnits.hourly")}</option>
+                        <option value="daily">{t("priceUnits.daily")}</option>
                       </select>
                     </div>
                   </div>
@@ -413,21 +410,21 @@ export default function WorkerServicesPage() {
                   {priceError && <p className="text-xs text-red-600">{priceError}</p>}
 
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-muted-foreground">Kategori</label>
+                    <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("form.categoryLabel")}</label>
                     <select
                       value={formCategory}
                       onChange={(e) => setFormCategory(e.target.value)}
                       className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                     >
-                      <option value="">Pilih kategori...</option>
-                      <option value="tukang">Tukang</option>
-                      <option value="ac">Teknisi AC</option>
-                      <option value="montir">Montir</option>
-                      <option value="fotografer">Fotografer</option>
-                      <option value="guru">Guru Les</option>
-                      <option value="tata_rias">Tata Rias</option>
-                      <option value="tukang_kayu">Tukang Kayu</option>
-                      <option value="tukang_cat">Tukang Cat</option>
+                      <option value="">{t("form.categoryPlaceholder")}</option>
+                      <option value="tukang">{t("categories.tukang")}</option>
+                      <option value="ac">{t("categories.ac")}</option>
+                      <option value="montir">{t("categories.montir")}</option>
+                      <option value="fotografer">{t("categories.fotografer")}</option>
+                      <option value="guru">{t("categories.guru")}</option>
+                      <option value="tata_rias">{t("categories.tata_rias")}</option>
+                      <option value="tukang_kayu">{t("categories.tukang_kayu")}</option>
+                      <option value="tukang_cat">{t("categories.tukang_cat")}</option>
                     </select>
                   </div>
                 </div>
@@ -437,14 +434,14 @@ export default function WorkerServicesPage() {
                 <div className="space-y-6">
                   <div>
                     <label className="mb-2 block text-xs font-medium text-muted-foreground">
-                      Thumbnail <span className="text-red-500">*</span>
+                      {t("photos.thumbnailLabel")} <span className="text-red-500">*</span>
                     </label>
                     <p className="mb-3 text-[10px] text-muted-foreground">
-                      Upload foto utama untuk layanan ini.
+                      {t("photos.thumbnailHelper")}
                     </p>
                     {formThumbnail ? (
-                      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
-                        <img src={formThumbnail} alt="Thumbnail" className="size-full object-cover" />
+                      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-bg-alt">
+                        <img src={formThumbnail} alt={t("photos.thumbnailAlt")} className="size-full object-cover" />
                         <button
                           type="button"
                           onClick={async () => {
@@ -460,18 +457,18 @@ export default function WorkerServicesPage() {
                           onClick={() => thumbnailInputRef.current?.click()}
                           className="absolute bottom-2 right-2 rounded-lg bg-white/80 px-3 py-1.5 text-xs font-medium"
                         >
-                          Ganti
+                          {t("photos.replace")}
                         </button>
                       </div>
                     ) : (
                       <button
                         type="button"
                         onClick={() => thumbnailInputRef.current?.click()}
-                        className="flex aspect-video w-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-surface-soft text-muted-foreground hover:border-primary hover:text-primary"
+                        className="flex aspect-video w-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-bg-alt text-muted-foreground hover:border-primary hover:text-primary"
                       >
                         <div className="flex flex-col items-center gap-2">
                           <Upload className="size-6" />
-                          <span className="text-xs">Klik untuk upload</span>
+                          <span className="text-xs">{t("photos.clickToUpload")}</span>
                         </div>
                       </button>
                     )}
@@ -486,15 +483,15 @@ export default function WorkerServicesPage() {
 
                   <div>
                     <label className="mb-2 block text-xs font-medium text-muted-foreground">
-                      Galeri
+                      {t("photos.galleryLabel")}
                     </label>
                     <p className="mb-3 text-[10px] text-muted-foreground">
-                      Upload hingga 5 foto tambahan.
+                      {t("photos.galleryHelper")}
                     </p>
                     <div className="grid grid-cols-3 gap-3">
                       {formImages.map((url) => (
-                        <div key={url} className="relative aspect-square overflow-hidden rounded-lg bg-surface-soft">
-                          <img src={url} alt="Gallery" className="size-full object-cover" />
+                        <div key={url} className="relative aspect-square overflow-hidden rounded-lg bg-bg-alt">
+                          <img src={url} alt={t("photos.galleryAlt")} className="size-full object-cover" />
                           <button
                             type="button"
                             onClick={() => removeGalleryImage(url)}
@@ -509,11 +506,11 @@ export default function WorkerServicesPage() {
                           type="button"
                           onClick={() => galleryInputRef.current?.click()}
                           disabled={uploading}
-                          className="flex aspect-square items-center justify-center rounded-lg border-2 border-dashed border-border bg-surface-soft text-muted-foreground hover:border-primary hover:text-primary"
+                          className="flex aspect-square items-center justify-center rounded-lg border-2 border-dashed border-border bg-bg-alt text-muted-foreground hover:border-primary hover:text-primary"
                         >
                           <div className="flex flex-col items-center gap-1">
                             <ImageIcon className="size-5" />
-                            <span className="text-[10px]">Tambah</span>
+                            <span className="text-[10px]">{t("photos.add")}</span>
                           </div>
                         </button>
                       )}
@@ -527,7 +524,7 @@ export default function WorkerServicesPage() {
                       onChange={handleGalleryUpload}
                     />
                     {uploading && (
-                      <p className="mt-2 text-xs text-muted-foreground">Mengupload...</p>
+                      <p className="mt-2 text-xs text-muted-foreground">{t("photos.uploading")}</p>
                     )}
                   </div>
                 </div>
@@ -541,7 +538,7 @@ export default function WorkerServicesPage() {
                   onClick={closeModal}
                   className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-medium hover:bg-muted"
                 >
-                  Batal
+                  {t("cancel")}
                 </button>
                 <button
                   type="button"
@@ -549,7 +546,7 @@ export default function WorkerServicesPage() {
                   disabled={!formName.trim() || !formPrice.trim() || !formThumbnail || saving}
                   className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {saving ? "Menyimpan..." : "Simpan"}
+                  {saving ? t("form.saving") : t("form.save")}
                 </button>
               </div>
             </div>
@@ -560,9 +557,9 @@ export default function WorkerServicesPage() {
       {deletingId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="w-full max-w-sm rounded-2xl border border-border bg-background p-6 shadow-xl">
-            <h2 className="text-sm font-semibold">Hapus Layanan</h2>
+            <h2 className="text-sm font-semibold">{t("deleteTitle")}</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Apakah Anda yakin ingin menghapus layanan ini? Tindakan ini tidak dapat dibatalkan.
+              {t("deleteConfirm")}
             </p>
             <div className="mt-6 flex items-center gap-2">
               <button
@@ -570,14 +567,14 @@ export default function WorkerServicesPage() {
                 onClick={() => setDeletingId(null)}
                 className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-medium hover:bg-muted"
               >
-                Batal
+                {t("cancel")}
               </button>
               <button
                 type="button"
                 onClick={() => handleDelete(deletingId)}
                 className="flex-1 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-red-700"
               >
-                Hapus
+                {t("delete")}
               </button>
             </div>
           </div>

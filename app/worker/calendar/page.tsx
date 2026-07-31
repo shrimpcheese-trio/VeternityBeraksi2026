@@ -5,6 +5,7 @@ import { listAgreements } from "@/lib/repositories/agreement.repo";
 import { MonthGrid } from "@/components/calendar/month-grid";
 import { DayPanel } from "@/components/calendar/day-panel";
 import { ActivePanel } from "@/components/calendar/active-panel";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 export default async function WorkerCalendarPage({
   searchParams,
@@ -12,6 +13,7 @@ export default async function WorkerCalendarPage({
   searchParams: Promise<{ month?: string; day?: string }>;
 }) {
   const { month, day } = await searchParams;
+  const t = await getServerTranslator("workerCalendar");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -47,10 +49,10 @@ export default async function WorkerCalendarPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-heading text-2xl font-medium tracking-tight">
-          Kalender
+          {t("title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Riwayat pekerjaan dan jadwal aktif Anda.
+          {t("subtitle")}
         </p>
       </div>
 

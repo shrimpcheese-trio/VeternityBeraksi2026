@@ -13,7 +13,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-64 flex-col border-r border-border bg-surface-card">
+    <aside className="flex w-64 flex-col border-r border-border bg-bg-card">
       <div className="flex h-14 items-center border-b border-border px-5">
         <Link href="/" className="text-sm font-semibold">Admin Panel</Link>
       </div>
@@ -26,8 +26,8 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 active
-                  ? "bg-primary text-on-primary"
-                  : "text-muted-foreground hover:bg-surface-soft hover:text-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-bg-alt hover:text-foreground"
               }`}
             >
               <item.icon className="size-4" />

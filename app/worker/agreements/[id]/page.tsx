@@ -9,6 +9,7 @@ import { AgreementDetail } from "@/components/agreements/agreement-detail";
 import { ReceivedReview } from "@/components/reviews/received-review";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 export default async function WorkerAgreementDetailPage({
   params,
@@ -16,6 +17,7 @@ export default async function WorkerAgreementDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const t = await getServerTranslator("agreement");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -42,7 +44,7 @@ export default async function WorkerAgreementDetailPage({
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
-        Kembali ke daftar
+        {t("list.backToList")}
       </Link>
 
       <AgreementDetail
@@ -57,7 +59,7 @@ export default async function WorkerAgreementDetailPage({
           rating={review.rating}
           comment={review.comment}
           photoUrls={review.photo_urls}
-          employerName={agreement.employer_profiles?.company_name ?? "Pemberi Kerja"}
+          employerName={agreement.employer_profiles?.company_name ?? t("detail.employerFallback")}
           createdAt={review.created_at}
         />
       )}

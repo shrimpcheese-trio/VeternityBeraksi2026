@@ -12,6 +12,8 @@ import { NegotiationHistory } from "@/components/agreements/negotiation-history"
 import { EmployerActions } from "@/components/agreements/employer-actions";
 import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Star, Camera } from "lucide-react";
 import Link from "next/link";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
 export default async function EmployerAgreementDetailPage({
   params,
@@ -19,6 +21,8 @@ export default async function EmployerAgreementDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const t = await getServerTranslator("agreement");
+  const locale = await getLocale();
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -30,7 +34,7 @@ export default async function EmployerAgreementDetailPage({
   if (agreement.employer_id !== user.id) notFound();
 
   const worker = agreement.worker_profiles;
-  const workerName = worker?.full_name ?? "Pekerja";
+  const workerName = worker?.full_name ?? t("detail.workerFallback");
 
   const admin = createAdminClient();
   const proof = await getProofOfWorkByAgreement(admin, id);
@@ -39,7 +43,7 @@ export default async function EmployerAgreementDetailPage({
   const existingReview = await getReviewByAgreement(admin, id);
   const showReviewForm = agreement.status === "completed";
   const negotiations = await listNegotiationsByAgreement(admin, id);
-  const employerName = agreement.employer_profiles?.company_name ?? "Pemberi Kerja";
+  const employerName = agreement.employer_profiles?.company_name ?? t("detail.employerFallback");
 
   return (
     <div className="space-y-6">
@@ -48,7 +52,7 @@ export default async function EmployerAgreementDetailPage({
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
-        Kembali ke daftar
+        {t("list.backToList")}
       </Link>
 
       <Card className="rounded-2xl">
@@ -56,10 +60,10 @@ export default async function EmployerAgreementDetailPage({
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="font-heading text-xl font-medium">
-                Detail Pekerjaan
+                {t("detail.title")}
               </CardTitle>
               <p className="mt-1 text-sm text-muted-foreground">
-                Informasi lengkap tentang perjanjian kerja ini.
+                {t("detail.subtitle")}
               </p>
             </div>
             <StatusBadge status={agreement.status} />
@@ -76,7 +80,7 @@ export default async function EmployerAgreementDetailPage({
               {worker?.trust_score !== undefined && (
                 <p className="mt-0.5 flex items-center gap-1 text-xs text-amber-600">
                   <Star className="size-3" />
-                  Skor Kepercayaan: {worker.trust_score.toFixed(2)}
+                  {t("detail.trustScore", { score: worker.trust_score.toFixed(2) })}
                 </p>
               )}
             </div>
@@ -116,8 +120,8 @@ export default async function EmployerAgreementDetailPage({
             <Calendar className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
             <div>
               <p className="text-sm">
-                Dibuat:{" "}
-                {new Date(agreement.created_at).toLocaleDateString("id-ID", {
+                {t("detail.createdAt")}{" "}
+                {new Date(agreement.created_at).toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
@@ -147,7 +151,7 @@ export default async function EmployerAgreementDetailPage({
             <div className="flex items-center gap-2">
               <Camera className="size-4 text-muted-foreground" />
               <CardTitle className="font-heading text-lg font-medium">
-                Foto Bukti Pekerjaan
+                {t("detail.proofPhotosTitle")}
               </CardTitle>
             </div>
           </CardHeader>
@@ -156,12 +160,12 @@ export default async function EmployerAgreementDetailPage({
               {proof?.photo_before_url && (
                 <div className="space-y-2">
                   <p className="text-xs font-medium text-muted-foreground">
-                    Foto Sebelum
+                    {t("detail.photoBefore")}
                   </p>
-                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
+                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-bg-alt">
                     <img
                       src={proof.photo_before_url}
-                      alt="Foto sebelum pekerjaan"
+                      alt={t("detail.photoBeforeAlt")}
                       className="size-full object-cover"
                     />
                   </div>
@@ -170,12 +174,12 @@ export default async function EmployerAgreementDetailPage({
               {proof?.photo_after_url && (
                 <div className="space-y-2">
                   <p className="text-xs font-medium text-muted-foreground">
-                    Foto Sesudah
+                    {t("detail.photoAfter")}
                   </p>
-                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
+                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-bg-alt">
                     <img
                       src={proof.photo_after_url}
-                      alt="Foto sesudah pekerjaan"
+                      alt={t("detail.photoAfterAlt")}
                       className="size-full object-cover"
                     />
                   </div>
@@ -192,7 +196,7 @@ export default async function EmployerAgreementDetailPage({
             <div className="flex items-center gap-2">
               <Star className="size-4 text-amber-400" />
               <CardTitle className="font-heading text-lg font-medium">
-                {existingReview ? "Ulasan Anda" : "Nilai Pekerjaan"}
+                {existingReview ? t("detail.yourReview") : t("detail.rateJob")}
               </CardTitle>
             </div>
           </CardHeader>

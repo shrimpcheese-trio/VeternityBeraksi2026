@@ -2,8 +2,10 @@
 import * as React from "react";
 import { Hammer, ShieldAlert, Smartphone } from "lucide-react";
 import { BlurReveal, CardReveal, StaggerTextContainer, SplitText } from "@/components/ui/motion";
+import { useTranslations } from "next-intl";
 
 export function InsightSection() {
+  const t = useTranslations("insight");
   return (
     <section id="tentang" className="bg-bg-alt py-24 md:py-32 lg:py-40 border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px]">
@@ -11,12 +13,12 @@ export function InsightSection() {
         {/* Header Section */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <StaggerTextContainer delayChildren={0.1} className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-heading font-semibold text-navy leading-[1.1] tracking-tight mb-6">
-            <SplitText text="Reputasimu Tidak Boleh Hilang Bersama Nomor WhatsApp yang Berganti." />
+            <SplitText text={t("headline")} />
           </StaggerTextContainer>
           
           <BlurReveal delay={0.2}>
             <p className="text-base sm:text-lg text-text-muted leading-relaxed">
-              Selama ini, kepercayaan pekerja informal disimpan di ingatan pelanggan lama, grup Facebook, atau chat WhatsApp yang bisa hilang kapan saja. Tidak ada yang mencatat kerja kerasmu.
+              {t("description")}
             </p>
           </BlurReveal>
         </div>
@@ -31,15 +33,15 @@ export function InsightSection() {
           >
             <div className="inline-flex self-start items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/80 bg-bg-alt/50 mb-10">
               <Hammer className="w-3.5 h-3.5 text-text-muted" />
-              <span className="text-[11px] font-medium text-text-muted tracking-wide">Kerja Keras</span>
+              <span className="text-[11px] font-medium text-text-muted tracking-wide">{t("cards.hardWork.badge")}</span>
             </div>
             
             <h3 className="text-[3.5rem] sm:text-[5rem] font-heading font-semibold text-navy leading-none tracking-tighter mb-auto">
-              120+
+              {t("cards.hardWork.value")}
             </h3>
             
             <p className="text-sm text-text-muted leading-relaxed mt-12">
-              Pekerjaan yang telah diselesaikan dengan baik, tepat waktu, dan jujur selama kamu bekerja, namun tidak ada buktinya.
+              {t("cards.hardWork.description")}
             </p>
           </CardReveal>
 
@@ -50,15 +52,15 @@ export function InsightSection() {
           >
             <div className="inline-flex self-start items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/80 bg-bg-alt/50 mb-10">
               <ShieldAlert className="w-3.5 h-3.5 text-text-muted" />
-              <span className="text-[11px] font-medium text-text-muted tracking-wide">Reputasi</span>
+              <span className="text-[11px] font-medium text-text-muted tracking-wide">{t("cards.reputation.badge")}</span>
             </div>
             
             <h3 className="text-[3.5rem] sm:text-[5rem] font-heading font-semibold text-navy leading-none tracking-tighter mb-auto">
-              0
+              {t("cards.reputation.value")}
             </h3>
             
             <p className="text-sm text-text-muted leading-relaxed mt-12">
-              Catatan permanen yang bisa dibuktikan ke pelanggan baru. Saat mencari kerja baru, kamu selalu mulai dari nol lagi.
+              {t("cards.reputation.description")}
             </p>
           </CardReveal>
 
@@ -69,15 +71,15 @@ export function InsightSection() {
           >
             <div className="inline-flex self-start items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/80 bg-bg-alt/50 mb-10">
               <Smartphone className="w-3.5 h-3.5 text-text-muted" />
-              <span className="text-[11px] font-medium text-text-muted tracking-wide">Risiko</span>
+              <span className="text-[11px] font-medium text-text-muted tracking-wide">{t("cards.risk.badge")}</span>
             </div>
             
             <h3 className="text-[3.5rem] sm:text-[5rem] font-heading font-semibold text-navy leading-none tracking-tighter mb-auto">
-              100%
+              {t("cards.risk.value")}
             </h3>
             
             <p className="text-sm text-text-muted leading-relaxed mt-12">
-              Bergantung penuh pada chat WhatsApp atau Facebook Group yang sangat rawan hilang, terhapus, atau berganti akun.
+              {t("cards.risk.description")}
             </p>
           </CardReveal>
 

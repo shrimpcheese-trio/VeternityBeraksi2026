@@ -8,7 +8,7 @@ import { getListingById } from "@/lib/services/listings";
 import { resolveAvatarUrl } from "@/lib/avatar";
 
 const statusConfig: Record<string, { key: string; dot: string }> = {
-  tersedia: { key: "browse.statusAvailable", dot: "bg-green-500" },
+  tersedia: { key: "browse.statusAvailable", dot: "bg-sky" },
   dalam_proyek: { key: "browse.statusInProgress", dot: "bg-amber-500" },
   segera: { key: "browse.statusSoon", dot: "bg-blue-500" },
 };
@@ -27,7 +27,7 @@ async function ServiceDetailPage({ listingId, serviceId, userId, userRole, t }: 
     <div className="mx-auto max-w-5xl space-y-8">
       <div className="grid gap-8 lg:grid-cols-5">
         <div className="lg:col-span-3 space-y-6">
-          <div className="aspect-video w-full overflow-hidden rounded-2xl bg-surface-soft">
+          <div className="aspect-video w-full overflow-hidden rounded-2xl bg-bg-alt">
             {listing.imageUrl ? (
               <img src={listing.imageUrl} alt={listing.title} className="size-full object-cover" />
             ) : (
@@ -40,14 +40,14 @@ async function ServiceDetailPage({ listingId, serviceId, userId, userRole, t }: 
           {allImages.length > 1 && (
             <div className="grid grid-cols-4 gap-3">
               {allImages.map((url, idx) => (
-                <div key={idx} className="aspect-video overflow-hidden rounded-lg bg-surface-soft">
+                <div key={idx} className="aspect-video overflow-hidden rounded-lg bg-bg-alt">
                   <img src={url} alt="" className="size-full object-cover" />
                 </div>
               ))}
             </div>
           )}
 
-          <div className="rounded-xl border border-border bg-surface-card p-6">
+          <div className="rounded-xl border border-border bg-bg-card p-6">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold">{listing.title}</h1>
@@ -75,7 +75,7 @@ async function ServiceDetailPage({ listingId, serviceId, userId, userRole, t }: 
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-3 gap-4 rounded-xl bg-surface-soft p-4">
+            <div className="mt-6 grid grid-cols-3 gap-4 rounded-xl bg-bg-alt p-4">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t("browse.commissionModal.trustScore")}</p>
                 <p className="mt-1 text-lg font-bold">{listing.trustScore.toFixed(1)}</p>
@@ -95,7 +95,7 @@ async function ServiceDetailPage({ listingId, serviceId, userId, userRole, t }: 
         </div>
 
         <div className="lg:col-span-2">
-          <div className="sticky top-6 rounded-xl border border-border bg-surface-card p-6">
+          <div className="sticky top-6 rounded-xl border border-border bg-bg-card p-6">
             <h2 className="mb-6 text-sm font-semibold">{t("browse.commissionModal.title")}</h2>
             <CommissionForm
               workerId={listing.id}

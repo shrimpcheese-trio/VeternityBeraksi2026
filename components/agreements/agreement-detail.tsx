@@ -4,10 +4,11 @@ import { StatusBadge } from "@/components/agreements/status-badge";
 import { AgreementActions } from "@/components/agreements/agreement-actions";
 import { ProofUpload } from "@/components/agreements/proof-upload";
 import { NegotiationHistory } from "@/components/agreements/negotiation-history";
+import { getServerTranslator } from "@/lib/i18n-server";
 import type { AgreementWithEmployer } from "@/lib/repositories/agreement.repo";
 import type { NegotiationRowType } from "@/lib/repositories/negotiation.repo";
 
-export function AgreementDetail({
+export async function AgreementDetail({
   agreement,
   proofComplete,
   showProofUpload,
@@ -18,6 +19,7 @@ export function AgreementDetail({
   showProofUpload?: boolean;
   negotiations?: NegotiationRowType[];
 }) {
+  const t = await getServerTranslator("agreement");
   const employer = agreement.employer_profiles;
 
   return (
@@ -27,10 +29,10 @@ export function AgreementDetail({
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="font-heading text-xl font-medium">
-                Detail Pekerjaan
+                {t("detail.title")}
               </CardTitle>
               <p className="mt-1 text-sm text-muted-foreground">
-                Informasi lengkap tentang perjanjian kerja ini.
+                {t("detail.subtitle")}
               </p>
             </div>
             <StatusBadge status={agreement.status} />
@@ -41,7 +43,7 @@ export function AgreementDetail({
             <Building2 className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
             <div>
               <p className="text-sm font-medium">
-                {employer?.company_name ?? "Pemberi Kerja"}
+                {employer?.company_name ?? t("detail.employerFallback")}
               </p>
               {employer?.city && (
                 <p className="text-xs text-muted-foreground">{employer.city}</p>
@@ -83,7 +85,7 @@ export function AgreementDetail({
             <Calendar className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
             <div>
               <p className="text-sm">
-                Dibuat:{" "}
+                {t("detail.createdAt")}{" "}
                 {new Date(agreement.created_at).toLocaleDateString("id-ID", {
                   day: "numeric",
                   month: "long",
@@ -97,13 +99,13 @@ export function AgreementDetail({
 
       <NegotiationHistory
         negotiations={negotiations ?? []}
-        employerName={employer?.company_name ?? "Pemberi Kerja"}
+        employerName={employer?.company_name ?? t("detail.employerFallback")}
         viewerRole="worker"
       />
 
       <Card className="rounded-2xl">
         <CardHeader>
-          <CardTitle className="font-heading text-lg font-medium">Tindakan</CardTitle>
+          <CardTitle className="font-heading text-lg font-medium">{t("detail.actionsTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
           {showProofUpload && (

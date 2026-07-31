@@ -1,8 +1,10 @@
 import { Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 
-export function ReceivedReview({
+export async function ReceivedReview({
   rating,
   comment,
   photoUrls,
@@ -15,13 +17,15 @@ export function ReceivedReview({
   employerName: string;
   createdAt: string;
 }) {
+  const t = await getServerTranslator("reviews");
+  const locale = await getLocale();
   return (
     <Card className="rounded-2xl">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Star className="size-4 text-amber-400" />
           <CardTitle className="font-heading text-lg font-medium">
-            Ulasan Pemberi Kerja
+            {t("received.title")}
           </CardTitle>
         </div>
       </CardHeader>
@@ -29,7 +33,7 @@ export function ReceivedReview({
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium">{employerName}</p>
           <span className="text-xs text-muted-foreground">
-            {new Date(createdAt).toLocaleDateString("id-ID", {
+            {new Date(createdAt).toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
               day: "numeric",
               month: "long",
               year: "numeric",
@@ -45,12 +49,12 @@ export function ReceivedReview({
                 "size-4",
                 index < rating
                   ? "fill-amber-400 text-amber-400"
-                  : "text-muted-soft",
+                  : "text-muted-foreground",
               )}
             />
           ))}
           <span className="ml-2 text-sm text-muted-foreground">
-            {rating} dari 5
+            {t("received.score", { rating })}
           </span>
         </div>
 
@@ -63,11 +67,11 @@ export function ReceivedReview({
             {photoUrls.map((photoUrl) => (
               <div
                 key={photoUrl}
-                className="aspect-video overflow-hidden rounded-xl bg-surface-soft"
+                className="aspect-video overflow-hidden rounded-xl bg-bg-alt"
               >
                 <img
                   src={photoUrl}
-                  alt="Foto ulasan"
+                  alt={t("received.photoAlt")}
                   className="size-full object-cover"
                 />
               </div>

@@ -1,128 +1,388 @@
 {
+  "common": {
+    "monthsShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  },
   "navbar": {
-    "browse": "Browse",
-    "plans": "Plans",
     "about": "About",
-    "faq": "FAQ",
-    "contact": "Contact",
+    "howItWorks": "How It Works",
+    "workers": "Workers",
+    "employers": "Employers",
+    "mobileWorkers": "For Workers",
+    "mobileEmployers": "For Employers",
+    "languageLabel": "Language",
     "login": "Log In",
-    "joinUs": "Join Us"
+    "register": "Sign Up",
+    "registerNow": "Sign Up Now"
   },
   "hero": {
-    "headline": "Find Trusted Workers for Your Needs",
-    "subHeadline": "Professional Reputation Platform for Indonesian Informal Workers",
-    "description": "From handymen to photographers, find experienced workers with verified reputations. We help informal workers build trust and earn fair wages.",
-    "searchPlaceholder": "Search for services...",
-    "searchButtonText": "Search",
-    "searchHelperText": "Search based on service, city, or specialization"
+    "headlinePart1": "Turn Every Job Into",
+    "headlinePart2": "Permanent Reputation.",
+    "subHeadline": "Leave the old ways behind. Upahku turns your hard work into a verified Trust Score - opening the door to fairer wages and bigger jobs.",
+    "primaryCta": "Start Tracking Jobs",
+    "secondaryCta": "Find Workers",
+    "dashboard": {
+      "workerName": "Budi Santoso",
+      "workerBadge": "Top 5% Worker",
+      "trustScoreLabel": "Global Trust Score",
+      "recentProofsTitle": "Latest Proof of Work",
+      "viewDetails": "View Details",
+      "jobTitle": "Split AC Cleaning & Pipe Repair",
+      "jobMeta": "Completed 2 days ago in South Jakarta",
+      "statusConfirmed": "Confirmed by Customer",
+      "statusDetail": "5/5 rating & verified positive reviews.",
+      "wageLabel": "Wage Estimate",
+      "wageValue": "Meets Standard",
+      "workerStatusLabel": "Worker Status",
+      "workerStatusValue": "Verified"
+    }
   },
-  "promo": {
-    "badge": "Business Offer",
-    "title": "Boost Your Business Visibility",
-    "description": "Get top spots, better matches, and premium verification for your business. Starting from Rp 150,000/month.",
-    "cta": "Learn About Business Plans"
+  "insight": {
+    "headline": "Your Reputation Should Not Disappear When Your WhatsApp Number Changes.",
+    "description": "So far, an informal worker's trust lives in the memories of old customers, Facebook groups, or WhatsApp chats that can vanish at any time. No one records your hard work.",
+    "cards": {
+      "hardWork": {
+        "badge": "Hard Work",
+        "value": "120+",
+        "description": "Jobs completed well, on time, and honestly throughout your career - yet none of it is proven."
+      },
+      "reputation": {
+        "badge": "Reputation",
+        "value": "0",
+        "description": "A permanent record you can prove to new customers. When you look for new work, you always start from zero again."
+      },
+      "risk": {
+        "badge": "Risk",
+        "value": "100%",
+        "description": "Fully dependent on WhatsApp chats or Facebook Groups that can easily be lost, deleted, or have their accounts changed."
+      }
+    }
   },
-  "trending": {
-    "title": "Trending Services Right Now",
-    "services": [
-      { "name": "Handyman", "description": "Home renovation, roof repairs, tile installation", "workers": 245 },
-      { "name": "Car Mechanic", "description": "Routine service, engine repair, oil change", "workers": 189 },
-      { "name": "Photographer", "description": "Wedding, event, portrait, product photography", "workers": 156 }
-    ]
+  "scrollStatement": {
+    "headline": "Upahku unites <w1>proof of work</w1>, <w2>community verification</w2>, and <w3>fair wages</w3> into one trustworthy reputation.",
+    "photoBeforeAlt": "Before",
+    "photoAfterAlt": "After",
+    "workerAlt": "Worker",
+    "avatarAlt": "Avatar",
+    "photoCountBadge": "120 Result Photos",
+    "completionBadge": "100% Complete",
+    "projectLocationLabel": "Project Location",
+    "projectLocationValue": "Kebayoran Baru",
+    "verifier1Name": "Pak RT Budi",
+    "verifier1Role": "Neighborhood Leader",
+    "verifier2Name": "Bu Siti",
+    "verifier2Role": "Shop Owner",
+    "mandorBadge": "Verified by Mandor",
+    "trustedResidentsBadge": "Trusted by 50+ Residents",
+    "wageValue": "Rp 250k",
+    "wageCaption": "Fair wage estimate matching your city's standard",
+    "wageDeltaBadge": "12% above average",
+    "transparentSchemeTitle": "Transparent Scheme",
+    "transparentSchemeSubtitle": "No hidden fees",
+    "regionalStandardBadge": "Meets Regional Standard",
+    "securePaymentLabel": "Secure Payment"
   },
-  "stories": {
-    "title": "Success Stories",
-    "stories": [
-      { "name": "Budi Santoso", "role": "Handyman, Jakarta", "quote": "Thanks to this platform, I got home renovation projects across South Jakarta. My reputation is built from every completed job." },
-      { "name": "Siti Rahmawati", "role": "Mechanic, Bandung", "quote": "I used to rely only on regular customers. Now new customers come to me after seeing my work portfolio." },
-      { "name": "Ahmad Fauzi", "role": "Photographer, Surabaya", "quote": "This platform helped me prove my work quality. Now I often get orders from corporate clients." }
-    ]
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "subheadline": "Complete answers about the platform, verification, and how Upahku works.",
-    "items": [
+  "howItWorks": {
+    "title": "How proof of work becomes lasting trust.",
+    "steps": [
       {
-        "question": "What is Upahku?",
-        "answer": "Upahku is a platform that helps Indonesian informal workers (handymen, technicians, mechanics, photographers, etc.) build verified professional reputations. We connect quality workers with customers who need their services."
+        "title": "Work & Document",
+        "desc": "Complete the job as usual. Take before and after photos, and record the job type and date right from the app."
       },
       {
-        "question": "Is the platform free?",
-        "answer": "Registration and basic platform usage are completely free. We offer paid business packages for companies that want to increase visibility and get premium features like top search spots."
+        "title": "Customer Confirms",
+        "desc": "A job only counts as proof of work after the customer confirms it. This protects the Trust Score from one-sided claims."
       },
       {
-        "question": "How does reputation verification work?",
-        "answer": "Every completed job is recorded as proof of work with before/after photos and customer confirmation. Plus community verification from local leaders. All this contributes to a transparent trust score."
+        "title": "Trust Score Is Built",
+        "desc": "The system calculates your Trust Score from your confirmed work history, community verifications, and reviews."
+      }
+    ],
+    "preview0": {
+      "uploadButton": "Upload Proof",
+      "photoBefore": "Before Photo",
+      "photoAfter": "After Photo"
+    },
+    "preview1": {
+      "title": "Job Approved",
+      "description": "The customer has verified your proof of work. This result will be recorded permanently into your reputation.",
+      "statusLabel": "Validation Status",
+      "statusVerified": "Verified",
+      "pointsLabel": "Reputation Points",
+      "pointsValue": "+15 Points"
+    },
+    "preview2": {
+      "scoreLabel": "Global Trust Score",
+      "topBadge": "Top 5% Worker"
+    }
+  },
+  "community": {
+    "badge": "Verified Community",
+    "label": "Upahku Signature Feature",
+    "heading1": "Recognized by",
+    "heading2": "your community.",
+    "description": "Turn real-world social trust into a permanent digital reputation that every potential employer can see.",
+    "photoAlt": "Photo of {name}",
+    "cta": "Request Community Verification",
+    "benefits": [
+      "RT Endorsement",
+      "Mandor Verification",
+      "Local Business Owners",
+      "Trusted work history"
+    ],
+    "testimonials": [
+      {
+        "quote": "Made has worked as an electrician in our neighborhood for 4 years. Honest, punctual, and his work is neat. Highly recommended.",
+        "name": "Pak Wayan",
+        "role": "Banjar Leader",
+        "location": "Ubud",
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop"
       },
       {
-        "question": "What if there's a problem with the work?",
-        "answer": "We have a transparent rating and review system. If issues arise, customers can report through our dispute resolution feature. Our team will help mediate between both parties."
+        "quote": "Kadek always handles pipe repairs very professionally. Transparent pricing and satisfying results. Neighbors always call him.",
+        "name": "Bu Nyoman",
+        "role": "Local Business Owner",
+        "location": "Denpasar",
+        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&auto=format&fit=crop"
       },
       {
-        "question": "How do I register as a worker?",
-        "answer": "Simply register with email or phone number, complete your profile, and you're ready to receive jobs. We'll help you verify your skills and experience."
+        "quote": "Budi is a highly dependable mandor. Coordination with other workers is always smooth, and projects finish on time without issues.",
+        "name": "Pak Surya",
+        "role": "RT Leader",
+        "location": "Kuta",
+        "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&h=150&auto=format&fit=crop"
+      },
+      {
+        "quote": "Thanks to the RT Leader's endorsement, I am now trusted more often by the neighboring complex. A feature that truly changed my career.",
+        "name": "Bu Siti",
+        "role": "Private Tutor",
+        "location": "Jakarta",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop"
+      },
+      {
+        "quote": "Finding new customers used to be hard. After being validated by the workshop owner where I work, orders come in almost every day.",
+        "name": "Pak Agus",
+        "role": "Mobile Mechanic",
+        "location": "Surabaya",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop"
       }
     ]
   },
-  "about": {
-    "label": "About Us",
-    "title": "Reputation Platform for Indonesian Workers",
-    "subheadline": "Upahku helps informal workers build better careers and income through verified reputation.",
-    "description1": "Upahku was born from one simple question: how can Indonesian informal workers — handymen, AC technicians, mechanics, photographers, tutors — build better careers and income?",
-    "description2": "We believe every completed job is proof. Every proof builds trust. And trust opens doors to fairer wages and bigger projects."
+  "coreFeatures": {
+    "eyebrow": "The Engine of Fairness",
+    "heading1": "Designed to build",
+    "heading2": "your reputation and income.",
+    "trustScore": {
+      "heading1": "Scoring System",
+      "heading2": "Anti-Manipulation",
+      "description": "Your Trust Score is built from various validated factors, not from a single fake review. Our system ensures your reputation grows fairly and accurately.",
+      "scoreCaption": "Trust Score",
+      "verifiedBadge": "Verified",
+      "factors": ["Proof of Work", "Verification", "On-Time", "Completed", "Reviews"]
+    },
+    "wageEstimator": {
+      "heading1": "Fair Wage",
+      "heading2": "Estimator",
+      "description": "Know the market rate for your services. Real data analytics help you set fair prices without being undersold.",
+      "inputs": [
+        { "label": "Job Category", "value": "AC Technician" },
+        { "label": "Service Area", "value": "South Jakarta" },
+        { "label": "Experience Level", "value": "3-5 Years" }
+      ],
+      "querying": "Querying...",
+      "resultLabel": "Fair Wage Estimate",
+      "resultCaption": "per average visit",
+      "accurateBadge": "Accurate Data"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "heading1": "Real stories",
+    "heading2": "from our users.",
+    "description": "Hear directly how Upahku is building a fairer and more transparent informal work ecosystem.",
+    "items": [
+      {
+        "type": "Employer",
+        "before": "I used to struggle to find a truly trustworthy handyman. With Upahku, the search became ",
+        "highlight": "much easier",
+        "after": " because every worker has a clear history.",
+        "name": "Rudi Hartono",
+        "role": "SME Owner",
+        "location": "Denpasar",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["User since 2024", "Verified profile"]
+      },
+      {
+        "type": "Worker",
+        "before": "When I used to change my phone number, I had to start from zero looking for customers. Now, my Upahku profile is my main asset for ",
+        "highlight": "building a long-term career.",
+        "after": "",
+        "name": "Siti Aminah",
+        "role": "Private Tutor",
+        "location": "Surabaya",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["45 jobs completed", "Rating 4.9/5"]
+      },
+      {
+        "type": "Worker",
+        "before": "The wage estimator is very helpful. Now I know what the going rate for tiling in Bandung is, ",
+        "highlight": "no more guessing or underselling.",
+        "after": "",
+        "name": "Asep Mulyana",
+        "role": "Construction Worker",
+        "location": "Bandung",
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["User since 2023", "128 jobs completed"]
+      },
+      {
+        "type": "Employer",
+        "before": "This platform changed how we operate. Community verification from the RT or mandor ",
+        "highlight": "truly filters workers",
+        "after": " extremely well.",
+        "name": "Budi Santoso",
+        "role": "Civil Contractor",
+        "location": "Jakarta",
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Verified Employer", "Employed 30+ people"]
+      },
+      {
+        "type": "Worker",
+        "before": "I feel more professionally valued. Customer reviews and the anti-manipulation system ",
+        "highlight": "let me work with peace of mind",
+        "after": " at a high standard.",
+        "name": "Dian Pratama",
+        "role": "Technician",
+        "location": "Medan",
+        "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&h=150&auto=format&fit=crop",
+        "metadata": ["Rating 5.0/5", "Verified profile"]
+      }
+    ]
+  },
+  "employers": {
+    "eyebrow": "For Employers",
+    "heading1": "Find workers based on",
+    "headingHighlight": "proof",
+    "heading2": ", not just promises.",
+    "description": "Every worker on Upahku has a verified project history. You no longer have to guess the quality of their work.",
+    "workflowLabel": "How Upahku Works",
+    "steps": ["Find Candidates", "See Real Proof", "Hire with Confidence", "Done"],
+    "searchPlaceholder": "Type a job type...",
+    "searchValue": "Carpenter, Jakarta...",
+    "candidates": [
+      { "name": "Wawan Subianto", "role": "Carpenter" },
+      { "name": "Rizky Pratama", "role": "Mechanic" },
+      { "name": "Ahmad Fauzi", "role": "Painter" }
+    ],
+    "scoreLabel": "Score",
+    "city": "Jakarta",
+    "trustScoreLabel": "Trust Score",
+    "verifiedBadge": "Verified Resident",
+    "beforeLabel": "BEFORE",
+    "afterLabel": "AFTER",
+    "wageLabel": "Est. Wage",
+    "wagePerHour": "/hr",
+    "selectCta": "Select Worker",
+    "successHeading": "Worker Selected!",
+    "successDescription": "Your request was instantly approved by <strong>{name}</strong>.",
+    "hiredBadge": "Hired",
+    "summary": {
+      "dailyWageLabel": "Daily Wage",
+      "dailyWageValue": "Rp 250,000",
+      "scheduleLabel": "Schedule",
+      "scheduleValue": "Starting Tomorrow"
+    },
+    "contractLink": "View Contract Details"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "titleStart": "Still have",
+    "titleAccent": "questions?",
+    "subheadline": "We have prepared answers to the things our users ask most often.",
+    "helpPrompt": "Still haven't found your answer?",
+    "contactLink": "Contact the Upahku team",
+    "items": [
+      {
+        "question": "What is Upahku?",
+        "answer": "A platform that helps Indonesian informal workers turn completed jobs into verifiable reputation, so they earn fairer wages and land bigger jobs."
+      },
+      {
+        "question": "How is proof of work verified so it cannot be faked?",
+        "answer": "Every proof of work needs before/after photos, a date, a job type, and direct confirmation from the customer. The system also flags suspicious patterns such as reused photos."
+      },
+      {
+        "question": "Who can give a Community Verification?",
+        "answer": "Mandor, RT leaders, banjar leaders, shop owners, or anyone else who knows a person's work history directly in their community."
+      },
+      {
+        "question": "Why doesn't my wage estimate show up?",
+        "answer": "Wage estimates only appear when enough data is available for your city, job type, and experience combination. We never show a guessed number without real data."
+      },
+      {
+        "question": "Can one good review boost my Trust Score?",
+        "answer": "No. The Trust Score is designed so that no single source - one review, one verifier, or one customer - can dominate the number on its own."
+      },
+      {
+        "question": "How do I register as a worker?",
+        "answer": "Create an account, complete your basic profile (name, city, job type), then start recording your first job as proof of work."
+      }
+    ]
   },
   "cta": {
-    "headline": "Ready to Build Your Professional Reputation?",
-    "subHeadline": "Join thousands of workers and customers who already trust our platform.",
-    "button": "Sign Up Free"
+    "badge": "Start Now",
+    "headlinePart1": "Build your reputation.",
+    "headlinePart2": "Unlock new opportunities.",
+    "subHeadline": "Join thousands of informal workers who have turned their hard work into a trusted career.",
+    "button": "Try Upahku for Free",
+    "cards": [
+      "Server-Side Trust Score",
+      "Community Verified",
+      "Validated Proof of Work",
+      "Regional Wage Estimate"
+    ]
   },
-  "pricing": {
-    "title": "Plans for Businesses",
-    "subheadline": "Choose the plan that fits your business needs. All plans can be cancelled anytime.",
-    "free": {
-      "name": "Free",
-      "price": "Rp 0",
-      "period": "",
-      "priceSub": "",
-      "description": "Start finding trusted workers.",
-      "features": [
-        "Browse worker profiles",
-        "Search by service & city",
-        "3 job listings per month",
-        "Email support"
-      ],
-      "cta": "Sign Up Free"
-    },
-    "pro": {
-      "name": "Pro",
-      "price": "Rp 79,000",
-      "period": "/mo",
-      "priceSub": "",
-      "description": "Recruit workers more efficiently.",
-      "features": [
-        "All Free features",
-        "Unlimited job listings",
-        "Contact workers directly",
-        "Priority verification",
-        "Priority chat support"
-      ],
-      "cta": "Get Pro"
-    },
-    "enterprise": {
-      "name": "Enterprise",
-      "price": "Custom",
-      "period": "",
-      "priceSub": "billing",
-      "description": "Complete solution for companies with custom billing.",
-      "features": [
-        "All Pro features",
-        "Team & multi-branch management",
-        "API access",
-        "Dedicated account manager",
-        "Custom branding & SLA"
-      ],
-      "cta": "Contact Us"
-    }
+  "trustScore": {
+    "heading1": "Scoring System",
+    "heading2": "Anti-Manipulation",
+    "description": "Your Trust Score is built from various validated factors, not from a single fake review. Our system ensures your reputation grows fairly and accurately.",
+    "scoreLabel": "Trust Score",
+    "verifiedBadge": "Verified",
+    "factors": ["Proof of Work", "Verification", "On-Time", "Completed", "Reviews"]
+  },
+  "wageEstimator": {
+    "heading1": "Fair Wage",
+    "heading2": "Estimator",
+    "description": "Know the market rate for your services. Real data analytics help you set fair prices without being undersold.",
+    "inputs": [
+      { "label": "Job Category", "value": "AC Technician" },
+      { "label": "Service Area", "value": "South Jakarta" },
+      { "label": "Experience Level", "value": "3-5 Years" }
+    ],
+    "querying": "Querying...",
+    "resultLabel": "Fair Wage Estimate",
+    "resultCaption": "per average visit",
+    "accurateBadge": "Accurate Data"
+  },
+  "footer": {
+    "tagline": "A reputation platform that turns real proof of work into valuable trust.",
+    "productTitle": "Product",
+    "companyTitle": "Company",
+    "legalTitle": "Legal",
+    "contactTitle": "Contact",
+    "productHowItWorks": "How It Works",
+    "productWorkers": "For Workers",
+    "productEmployers": "For Employers",
+    "productWageEstimate": "Wage Estimate",
+    "companyAbout": "About Us",
+    "companyBlog": "Blog",
+    "companyCareers": "Careers",
+    "legalPrivacy": "Privacy Policy",
+    "legalTerms": "Terms & Conditions",
+    "legalCookies": "Cookie Policy",
+    "legalFaq": "FAQ",
+    "contactEmail": "halo@upahku.id",
+    "contactHelpCenter": "Help Center",
+    "location": "Jakarta, Indonesia",
+    "copyright": "© {year} Upahku. Built in Indonesia.",
+    "backToTop": "Back to top"
   },
   "auth": {
     "login": {
@@ -191,7 +451,7 @@
     "priceMax": "Rp Maximum price",
     "more": "More",
     "browseLink": "Browse",
-  "allCategories": "All Categories",
+    "allCategories": "All Categories",
     "completedProjects": "Projects Completed",
     "startingPrice": "Starting from",
     "noImage": "No image",
@@ -221,7 +481,8 @@
       "successDescription": "The worker will review your order.",
       "viewAgreements": "View My Orders",
       "loginPrompt": "Log in as an employer to order this service",
-      "loginLink": "Log In"
+      "loginLink": "Log In",
+      "submitError": "Failed to submit the order."
     },
     "serviceImages": {
       "tabLabel": "Service Photos",
@@ -262,30 +523,70 @@
       "submitting": "Sending...",
       "submitCounter": "Submit Counter",
       "submitRevise": "Submit New Price",
-      "submitError": "Failed to send the offer."
+      "submitError": "Failed to send the offer.",
+      "markComplete": "Mark Complete",
+      "reportIssue": "Report Issue",
+      "completeHint": "Upload before and after photos to mark this job complete.",
+      "alreadyCompleted": "This job is already completed.",
+      "inDispute": "This job is in dispute status.",
+      "transitionFailed": "Failed to update the status",
+      "genericError": "Something went wrong. Please try again."
+    },
+    "proof": {
+      "uploadFailed": "Failed to upload the photo. Please try again.",
+      "genericError": "Something went wrong. Please try again.",
+      "replace": "Replace",
+      "uploading": "Uploading...",
+      "heading": "Proof of Work Photos",
+      "helper": "Upload before and after photos of the job to complete this work.",
+      "beforeLabel": "Before Photo",
+      "beforeUpload": "Upload a photo before the job",
+      "afterLabel": "After Photo",
+      "afterUpload": "Upload a photo after the job",
+      "complete": "Before and after photos are complete."
+    },
+    "detail": {
+      "title": "Job Details",
+      "subtitle": "Complete information about this work agreement.",
+      "employerFallback": "Employer",
+      "workerFallback": "Worker",
+      "trustScore": "Trust Score: {score}",
+      "createdAt": "Created:",
+      "proofPhotosTitle": "Proof of Work Photos",
+      "photoBefore": "Before Photo",
+      "photoAfter": "After Photo",
+      "photoBeforeAlt": "Photo before the job",
+      "photoAfterAlt": "Photo after the job",
+      "yourReview": "Your Review",
+      "rateJob": "Rate Job",
+      "actionsTitle": "Actions"
+    },
+    "status": {
+      "draft": "Offer",
+      "active": "Active",
+      "completed": "Completed",
+      "disputed": "Disputed"
+    },
+    "list": {
+      "title": "My Jobs",
+      "workerSubtitle": "Manage your job offers and active agreements.",
+      "employerSubtitle": "A list of jobs you have posted.",
+      "tabAll": "All",
+      "tabDraft": "Offers",
+      "tabActive": "Active",
+      "tabCompleted": "Completed",
+      "tabDisputed": "Disputed",
+      "emptyAll": "No jobs yet.",
+      "emptyDraftWorker": "No job offers yet.",
+      "emptyDraftEmployer": "No new offers.",
+      "emptyActive": "No active jobs.",
+      "emptyCompleted": "No completed jobs.",
+      "emptyDisputed": "No disputes.",
+      "emptyDraftHintWorker": "Offers from employers will appear here.",
+      "emptyGenericHint": "Status changes will appear automatically.",
+      "backToList": "Back to list",
+      "counterBadge": "Countered {price}"
     }
-  },
-  "contact": {
-    "title": "Contact Us",
-    "name": "Name",
-    "namePlaceholder": "Your full name",
-    "email": "Email",
-    "emailPlaceholder": "Your email address",
-    "subject": "Subject",
-    "subjectPlaceholder": "Subject of your message",
-    "message": "Message",
-    "messagePlaceholder": "Write your message here...",
-    "send": "Send Message",
-    "orEmail": "Or send directly to:"
-  },
-  "footer": {
-    "slogan": "Building trust, earning fair wages — for every Indonesian worker.",
-    "about": "About Us",
-    "whyUs": "Why Us",
-    "forBusiness": "For Businesses",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "copyright": "Copyright {year} Upahku. All rights reserved."
   },
   "profile": {
     "sidebar": {
@@ -314,7 +615,24 @@
     "overview": {
       "activityChart": "Job Activity",
       "recentActivity": "Recent Activity",
-      "noActivity": "No recent activity."
+      "noActivity": "No recent activity.",
+      "companyInfo": "Company Information",
+      "employerRole": "Employer",
+      "memberSince": "Joined {date}",
+      "jobSummary": "Job Summary",
+      "posted": "Posted",
+      "completed": "Completed",
+      "spending": "Spending",
+      "recentJobs": "Recent Jobs",
+      "jobFallback": "Job",
+      "noJobs": "No jobs yet.",
+      "statusDraft": "Offer",
+      "statusActive": "Active",
+      "statusCompleted": "Completed",
+      "statusDisputed": "Disputed",
+      "legendHigh": "High",
+      "legendMedium": "Medium",
+      "legendLow": "Low"
     },
     "services": {
       "price": "Rp {price}",
@@ -332,6 +650,8 @@
       "reviewer": "Reviewer",
       "givenTitle": "Reviews Given"
     },
+    "nameFallback": "User",
+    "roleEmployer": "Employer",
     "notFound": "Profile not found."
   },
   "settings": {
@@ -353,6 +673,18 @@
       "email": "Email",
       "emailHelper": "Email is used for login and notifications.",
       "phone": "Phone Number",
+      "phonePlaceholder": "+62 xxx xxxx xxxx",
+      "city": "City",
+      "cityPlaceholder": "South Jakarta",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself...",
+      "locationVisible": "Show location",
+      "locationVisibleHelper": "Let customers see your city on your public profile",
+      "saved": "Data saved successfully.",
+      "saving": "Saving...",
+      "save": "Save Changes",
+      "viewPublicProfile": "View public profile",
+      "saveError": "Something went wrong. Please try again.",
       "avatar": "Profile Photo",
       "upload": "Upload Photo",
       "remove": "Remove",
@@ -370,7 +702,16 @@
       "address": "Address",
       "uploadDocument": "Upload Document",
       "industry": "Industry/Sector",
-      "industryPlaceholder": "Select industry..."
+      "industryPlaceholder": "Select industry...",
+      "industryOptions": {
+        "construction": "Construction & Building",
+        "automotive": "Automotive",
+        "photography": "Photography",
+        "education": "Education",
+        "technology": "Technology",
+        "cleaning": "Cleaning",
+        "other": "Other"
+      }
     },
     "verification": {
       "title": "Verification & Trust",
@@ -378,13 +719,29 @@
       "id": "Identity Verification",
       "company": "Company Verification",
       "bank": "Bank Verification",
-      "trustExplainer": "Your trust score is calculated based on completed verifications, work history, and customer confirmations. The more complete your verifications, the higher your trust score."
+      "trustExplainer": "Your trust score is calculated based on completed verifications, work history, and customer confirmations. The more complete your verifications, the higher your trust score.",
+      "statusVerified": "Verified",
+      "statusPending": "Pending",
+      "statusNone": "Not started",
+      "actionView": "View",
+      "actionResend": "Resend",
+      "actionVerify": "Verify",
+      "docLicense": "Business License",
+      "docTaxId": "Tax ID"
     },
     "payment": {
       "title": "Payment & Payout",
       "description": "Manage payment methods and payout schedules.",
       "addBank": "Add New Bank Account",
-      "payoutSchedule": "Payout Schedule"
+      "payoutSchedule": "Payout Schedule",
+      "payoutOptions": {
+        "manual": "Manual - Withdraw manually",
+        "weekly": "Weekly - Every Monday",
+        "biweekly": "Biweekly - 1st & 15th",
+        "monthly": "Monthly - 1st"
+      },
+      "active": "Active",
+      "inactive": "Inactive"
     },
     "notifications": {
       "title": "Notifications",
@@ -406,12 +763,22 @@
       "confirmPassword": "Confirm Password",
       "updatePassword": "Update Password",
       "sessions": "Active Sessions",
-      "revoke": "Revoke"
+      "revoke": "Revoke",
+      "googleAccountInfo": "This account uses Google to sign in. The password is managed by Google and cannot be changed here.",
+      "passwordUpdated": "Password updated successfully.",
+      "updating": "Updating...",
+      "passwordError": "Something went wrong. Please try again.",
+      "noSessions": "No active sessions.",
+      "currentSession": "Current"
     },
     "dangerZone": {
       "title": "Danger Zone",
       "description": "This action cannot be undone. This will permanently delete your account data including profile, work history, and documents.",
-      "deleteAccount": "Delete Account"
+      "deleteAccount": "Delete Account",
+      "confirmText": "Are you sure you want to delete your account? All data will be lost and cannot be restored.",
+      "confirming": "Deleting...",
+      "confirm": "Yes, delete my account",
+      "cancel": "Cancel"
     }
   },
   "dashboard": {
@@ -445,6 +812,269 @@
     },
     "header": {
       "searchPlaceholder": "Search dashboard..."
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "workers": "Workers",
+      "title": "Admin Panel",
+      "backToHome": "Back to home"
+    },
+    "workerForm": {
+      "fullName": "Full Name",
+      "city": "City",
+      "jobCategory": "Job Category",
+      "yearsExperience": "Experience (years)",
+      "bio": "Bio",
+      "locationVisible": "Show location on profile",
+      "save": "Save"
+    },
+    "workers": {
+      "title": "Manage Workers",
+      "subtitle": "{count} registered workers",
+      "filterCity": "Filter by city...",
+      "filterCategory": "Filter by category...",
+      "search": "Search",
+      "reset": "Reset",
+      "listTitle": "Worker List",
+      "tableName": "Name",
+      "tableCity": "City",
+      "tableCategory": "Category",
+      "tableExperience": "Experience",
+      "tableScore": "Score",
+      "yearsShort": "{years} yrs",
+      "detail": "Details",
+      "empty": "No workers found"
+    },
+    "workerDetail": {
+      "editProfile": "Edit Profile",
+      "summary": "Summary",
+      "trustScore": "Trust Score",
+      "experience": "{years} years",
+      "locationVisible": "Visible Location",
+      "yes": "Yes",
+      "no": "No",
+      "memberSince": "Joined"
+    }
+  },
+  "reviews": {
+    "form": {
+      "maxPhotos": "Maximum 3 photos per review.",
+      "uploadFailed": "Failed to upload the photo. Please try again.",
+      "genericError": "Something went wrong. Please try again.",
+      "submitFailed": "Failed to submit the review. Please try again.",
+      "updated": "Review updated.",
+      "submitted": "Review submitted.",
+      "editTitle": "Update Your Review",
+      "newTitle": "Write a Review",
+      "helper": "Rate this worker's job performance after the work is done.",
+      "rating": "Rating",
+      "starAria": "{star} stars",
+      "score": "{rating} out of 5",
+      "notRated": "Not rated",
+      "commentLabel": "Comment (optional)",
+      "commentPlaceholder": "Tell us about your experience with this worker...",
+      "photoLabel": "Photos (maximum 3)",
+      "photoAlt": "Review photo",
+      "removePhoto": "Remove photo",
+      "uploading": "Uploading...",
+      "addPhoto": "Add photo",
+      "submitting": "Submitting...",
+      "updateButton": "Update Review",
+      "submitButton": "Submit Review"
+    },
+    "received": {
+      "title": "Employer Review",
+      "score": "{rating} out of 5",
+      "photoAlt": "Review photo"
+    }
+  },
+  "workerDashboard": {
+    "greeting": "Welcome back, {name}!",
+    "subtitle": "A summary of your activity and job performance.",
+    "seeAll": "See All",
+    "newJob": "Create New Job",
+    "fallbackName": "Worker",
+    "trendNoData": "No data yet",
+    "trendNewData": "New data available",
+    "trendUp": "+{pct}% from last period",
+    "trendDown": "{pct}% from last period",
+    "newOfferReminder": "New Job Offers",
+    "newOfferCount": "{count} offers waiting",
+    "kpiTrustScore": "Trust Score",
+    "trustScoreValue": "{score} out of 100",
+    "trustScoreNotComputed": "Not computed yet",
+    "kpiCompleted": "Completed Projects",
+    "kpiRevenue": "Total Income",
+    "revenueValue": "Rp {million}M",
+    "chartTitle": "Jobs per Month",
+    "recentActivity": "Recent Activity"
+  },
+  "workerCalendar": {
+    "title": "Calendar",
+    "subtitle": "Your job history and active schedule."
+  },
+  "workerServices": {
+    "title": "My Services",
+    "subtitle": "Manage the services you offer to employers.",
+    "addService": "Add Service",
+    "editService": "Edit Service",
+    "loading": "Loading...",
+    "emptyTitle": "No services yet.",
+    "emptyDescription": "Add your first service so employers can see it.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "priceError": "Price must be a whole number greater than 0",
+    "tabs": {
+      "details": "Service Details",
+      "photos": "Service Photos"
+    },
+    "form": {
+      "nameLabel": "Service Name",
+      "namePlaceholder": "e.g. AC Service, Install New AC",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Describe the service you offer...",
+      "priceLabel": "Price",
+      "pricePlaceholder": "Rp 150,000",
+      "unitLabel": "Unit",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Select category...",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "priceUnits": {
+      "fixed": "Fixed Price",
+      "hourly": "Per Hour",
+      "daily": "Per Day"
+    },
+    "categories": {
+      "tukang": "Handyman",
+      "ac": "AC Technician",
+      "montir": "Mechanic",
+      "fotografer": "Photographer",
+      "guru": "Tutor",
+      "tata_rias": "Makeup Artist",
+      "tukang_kayu": "Carpenter",
+      "tukang_cat": "Painter"
+    },
+    "photos": {
+      "thumbnailLabel": "Thumbnail",
+      "thumbnailHelper": "Upload the main photo for this service.",
+      "thumbnailAlt": "Thumbnail",
+      "replace": "Replace",
+      "clickToUpload": "Click to upload",
+      "galleryLabel": "Gallery",
+      "galleryHelper": "Upload up to 5 additional photos.",
+      "galleryAlt": "Gallery",
+      "add": "Add",
+      "uploading": "Uploading..."
+    },
+    "cancel": "Cancel",
+    "deleteTitle": "Delete Service",
+    "deleteConfirm": "Are you sure you want to delete this service? This action cannot be undone.",
+    "delete": "Delete"
+  },
+  "profileSetup": {
+    "nameHeading": "What is your name?",
+    "nameHelper": "Name as written on your ID or official identity",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Budi Santoso",
+    "cityLabel": "City",
+    "cityPlaceholder": "South Jakarta",
+    "cityHelper": "The city where you work or live",
+    "roleHeading": "What do you want to register as?",
+    "roleHelper": "Choose the role that fits you",
+    "roleWorker": "Worker",
+    "roleWorkerDesc": "I look for projects and want to build a reputation",
+    "roleEmployer": "Employer",
+    "roleEmployerDesc": "I look for trusted workers for my projects",
+    "skillHeading": "What is your area of expertise?",
+    "skillHelper": "Choose the category that matches your skills",
+    "categoryLabel": "Job Category",
+    "categoryExamples": ["Construction Worker", "Car Mechanic", "Photographer", "AC Technician", "Tutor"],
+    "categoryExampleText": "Examples: {examples}",
+    "experienceLabel": "Experience",
+    "experiencePlaceholder": "5",
+    "experienceHelper": "Years of experience",
+    "companyHeading": "About your company?",
+    "companyHelper": "This information will be shown on your profile",
+    "companyNameLabel": "Company Name",
+    "companyNamePlaceholder": "CV. Karya Mandiri",
+    "companyNameHelper": "Your business or company name (optional)",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+62 812-3456-7890",
+    "phoneHelper": "A number customers can reach (optional)",
+    "back": "Back",
+    "continue": "Continue",
+    "saving": "Saving...",
+    "save": "Save"
+  },
+  "calendar": {
+    "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "verified": "Verified",
+    "pending": "Pending",
+    "emptyDay": "No jobs on this day.",
+    "activeJobs": "Active Jobs",
+    "emptyActive": "No active jobs.",
+    "employerFallback": "Employer",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month"
+  },
+  "employerDashboard": {
+    "greeting": "Welcome back, {firstName}!",
+    "subtitle": "A summary of your activity and job listings.",
+    "fallbackName": "Employer",
+    "viewAll": "See All",
+    "findWorker": "Find Workers",
+    "kpis": {
+      "jobsPosted": "Jobs Posted",
+      "jobsCompleted": "Jobs Completed",
+      "totalSpend": "Total Spending",
+      "totalSpendValue": "Rp {million}M"
+    },
+    "chartTitle": "Jobs per Month",
+    "reminders": {
+      "title": "Needs Attention",
+      "actionLabel": "See All",
+      "jobFallback": "Job",
+      "newOfferTitle": "There are new offers to review",
+      "newOfferSubtitle": "{count} jobs waiting for confirmation",
+      "dateSubtitle": "{status} - {date}"
+    },
+    "trends": {
+      "noData": "No data yet",
+      "newData": "New data available",
+      "up": "+{pct}% from last period",
+      "down": "{pct}% from last period"
+    },
+    "status": {
+      "draft": "Offer",
+      "active": "Active",
+      "completed": "Completed",
+      "disputed": "Disputed"
+    }
+  },
+  "employerCalendar": {
+    "title": "Calendar",
+    "subtitle": "History of the jobs you posted."
+  },
+  "calendarEmployer": {
+    "dayPanel": {
+      "fallbackWorkerName": "Worker",
+      "emptyState": "No jobs on this day."
+    },
+    "activePanel": {
+      "title": "Active Jobs",
+      "fallbackWorkerName": "Worker",
+      "emptyState": "No active jobs."
+    },
+    "monthGrid": {
+      "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "prevMonthAria": "Previous month",
+      "nextMonthAria": "Next month"
     }
   }
 }

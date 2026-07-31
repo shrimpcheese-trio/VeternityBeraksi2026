@@ -27,11 +27,11 @@ export function SearchBar({ placeholder, defaultQuery }: { placeholder: string; 
         type="text"
         defaultValue={defaultQuery}
         placeholder={placeholder}
-        className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-soft"
+        className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
       />
       <button
         type="submit"
-        className="inline-flex h-10 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-on-primary hover:bg-primary-active"
+        className="inline-flex h-10 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-sky-active"
       >
         <Search size={16} />
       </button>

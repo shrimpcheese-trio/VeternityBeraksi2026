@@ -70,7 +70,7 @@ export function ProfileSidebar({
         {profile.bio || t("noBio")}
       </p>
 
-      <div className="flex justify-around rounded-xl bg-surface-card py-3">
+      <div className="flex justify-around rounded-xl bg-bg-card py-3">
         {userRole === "employer" ? (
           <>
             <div className="text-center">

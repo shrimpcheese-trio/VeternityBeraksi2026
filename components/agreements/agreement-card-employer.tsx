@@ -1,17 +1,21 @@
 import Link from "next/link";
 import { MapPin, User, Calendar } from "lucide-react";
 import { StatusBadge } from "@/components/agreements/status-badge";
+import { getServerTranslator } from "@/lib/i18n-server";
+import { getLocale } from "@/lib/i18n";
 import type { AgreementWithProfiles } from "@/lib/repositories/agreement.repo";
 import type { NegotiationRowType } from "@/lib/repositories/negotiation.repo";
 
-export function AgreementCardEmployer({
+export async function AgreementCardEmployer({
   agreement,
   latestCounter,
 }: {
   agreement: AgreementWithProfiles;
   latestCounter?: NegotiationRowType | null;
 }) {
-  const workerName = agreement.worker_profiles?.full_name ?? "Pekerja";
+  const t = await getServerTranslator("agreement");
+  const locale = await getLocale();
+  const workerName = agreement.worker_profiles?.full_name ?? t("detail.workerFallback");
 
   return (
     <Link
@@ -35,7 +39,7 @@ export function AgreementCardEmployer({
           )}
           <span className="flex items-center gap-1">
             <Calendar className="size-3" />
-            {new Date(agreement.created_at).toLocaleDateString("id-ID", {
+            {new Date(agreement.created_at).toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
               day: "numeric",
               month: "short",
               year: "numeric",
@@ -51,7 +55,7 @@ export function AgreementCardEmployer({
       <div className="flex flex-col items-end gap-2">
         {latestCounter?.role === "worker" && (
           <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
-            Menawar Rp {latestCounter.price.toLocaleString("id-ID")}
+            {t("list.counterBadge", { price: `Rp ${latestCounter.price.toLocaleString("id-ID")}` })}
           </span>
         )}
         <StatusBadge status={agreement.status} />

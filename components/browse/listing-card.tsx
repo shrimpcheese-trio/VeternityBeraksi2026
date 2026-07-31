@@ -10,9 +10,9 @@ const statusConfig: Record<
   ListingResult["status"],
   { key: string; dot: string }
 > = {
-  tersedia: { key: "statusAvailable", dot: "bg-green-500" },
-  dalam_proyek: { key: "statusInProgress", dot: "bg-amber-500" },
-  segera: { key: "statusSoon", dot: "bg-blue-500" },
+  tersedia: { key: "statusAvailable", dot: "bg-sky" },
+  dalam_proyek: { key: "statusInProgress", dot: "bg-navy" },
+  segera: { key: "statusSoon", dot: "bg-sky-active" },
 };
 
 export function ListingCard({ listing }: { listing: ListingResult }) {
@@ -27,7 +27,7 @@ export function ListingCard({ listing }: { listing: ListingResult }) {
       className="flex flex-col overflow-hidden rounded-xl border border-border bg-card cursor-pointer transition-shadow hover:shadow-md"
       onClick={() => router.push(`/browse/${listing.id}?service=${listing.serviceId}`)}
     >
-      <div className="relative aspect-[4/3] bg-surface-soft">
+      <div className="relative aspect-[4/3] bg-bg-alt">
         {listing.imageUrl ? (
           <img
             src={listing.imageUrl}
@@ -35,7 +35,7 @@ export function ListingCard({ listing }: { listing: ListingResult }) {
             className="size-full object-cover"
           />
         ) : null}
-        <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-wider text-ink shadow-sm backdrop-blur-sm">
+        <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-wider text-navy shadow-sm backdrop-blur-sm">
           <span className={`size-1.5 rounded-full ${cfg.dot}`} />
           {t(cfg.key)}
         </div>
@@ -57,12 +57,12 @@ export function ListingCard({ listing }: { listing: ListingResult }) {
             <h3 className="text-sm font-semibold">{listing.title}</h3>
             <p className="text-xs text-muted-foreground">{listing.code}</p>
           </div>
-          <span className="rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-medium text-green-700">
+          <span className="rounded-full bg-sky/10 px-2 py-0.5 text-[10px] font-medium text-sky-active">
             {listing.trustScore.toFixed(1)}
           </span>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg bg-surface-soft px-2 py-2 sm:gap-3 sm:px-3 sm:py-2.5">
+        <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg bg-bg-alt px-2 py-2 sm:gap-3 sm:px-3 sm:py-2.5">
           <div>
             <p className="text-[0.625rem] font-medium uppercase tracking-wider text-muted-foreground">
               {t("completedProjects")}

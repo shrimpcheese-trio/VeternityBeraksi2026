@@ -93,7 +93,7 @@ export function AdminWorkerEditForm({ worker }: { worker: WorkerRow }) {
 
       <button
         type="submit"
-        className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-on-primary hover:bg-primary-active"
+        className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-sky-active"
       >
         Simpan
       </button>

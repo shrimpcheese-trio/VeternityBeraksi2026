@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import { listAgreements } from "@/lib/repositories/agreement.repo";
 import { AgreementCard } from "@/components/agreements/agreement-card";
 import { Briefcase, Inbox, CheckCircle, AlertTriangle } from "lucide-react";
+import { getServerTranslator } from "@/lib/i18n-server";
 
 const tabs = [
-  { key: "all", label: "Semua", icon: Briefcase },
-  { key: "draft", label: "Penawaran", icon: Inbox },
-  { key: "active", label: "Aktif", icon: CheckCircle },
-  { key: "completed", label: "Selesai", icon: CheckCircle },
-  { key: "disputed", label: "Sengketa", icon: AlertTriangle },
+  { key: "all", icon: Briefcase },
+  { key: "draft", icon: Inbox },
+  { key: "active", icon: CheckCircle },
+  { key: "completed", icon: CheckCircle },
+  { key: "disputed", icon: AlertTriangle },
 ] as const;
 
 export default async function WorkerAgreementsPage({
@@ -18,12 +19,29 @@ export default async function WorkerAgreementsPage({
   searchParams: Promise<{ status?: string }>;
 }) {
   const { status } = await searchParams;
+  const t = await getServerTranslator("agreement");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) notFound();
 
-  const activeTab = tabs.find((t) => t.key === status)?.key ?? "all";
+  const activeTab = tabs.find((tab) => tab.key === status)?.key ?? "all";
+
+  const tabLabels: Record<string, string> = {
+    all: t("list.tabAll"),
+    draft: t("list.tabDraft"),
+    active: t("list.tabActive"),
+    completed: t("list.tabCompleted"),
+    disputed: t("list.tabDisputed"),
+  };
+
+  const emptyState: Record<string, string> = {
+    all: t("list.emptyAll"),
+    draft: t("list.emptyDraftWorker"),
+    active: t("list.emptyActive"),
+    completed: t("list.emptyCompleted"),
+    disputed: t("list.emptyDisputed"),
+  };
 
   const agreements = await listAgreements(supabase, {
     workerId: user.id,
@@ -34,10 +52,10 @@ export default async function WorkerAgreementsPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-heading text-2xl font-medium tracking-tight">
-          Pekerjaan Saya
+          {t("list.title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Kelola penawaran pekerjaan dan perjanjian aktif Anda.
+          {t("list.workerSubtitle")}
         </p>
       </div>
 
@@ -58,7 +76,7 @@ export default async function WorkerAgreementsPage({
               }`}
             >
               <Icon className="size-4" />
-              {tab.label}
+              {tabLabels[tab.key]}
               {tab.key === "draft" && (
                 <span className="flex size-5 items-center justify-center rounded-full bg-amber-500/10 text-[10px] font-bold text-amber-600">
                   {agreements.length}
@@ -79,16 +97,12 @@ export default async function WorkerAgreementsPage({
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <Briefcase className="mb-4 size-12 text-muted-foreground/40" />
           <p className="text-sm font-medium text-muted-foreground">
-            {activeTab === "all" && "Belum ada pekerjaan."}
-            {activeTab === "draft" && "Belum ada penawaran pekerjaan."}
-            {activeTab === "active" && "Tidak ada pekerjaan aktif."}
-            {activeTab === "completed" && "Belum ada pekerjaan selesai."}
-            {activeTab === "disputed" && "Tidak ada sengketa."}
+            {emptyState[activeTab]}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {activeTab === "draft"
-              ? "Penawaran dari pemberi kerja akan muncul di sini."
-              : "Perubahan status akan muncul secara otomatis."}
+              ? t("list.emptyDraftHintWorker")
+              : t("list.emptyGenericHint")}
           </p>
         </div>
       )}

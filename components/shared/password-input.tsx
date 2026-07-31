@@ -27,7 +27,10 @@ export function PasswordInput({
         {label}
       </label>
       <div className="relative">
-        <Lock size={18} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+        <Lock
+          size={18}
+          className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+        />
         <input
           id={name}
           name={name}

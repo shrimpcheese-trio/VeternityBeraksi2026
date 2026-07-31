@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { ArrowRight, ShieldCheck, CheckCircle2, Star, TrendingUp } from "lucide-react";
 import { SplitText } from "@/components/ui/motion";
+import { useTranslations } from "next-intl";
 
 export function HeroSection() {
+  const t = useTranslations("hero");
   const scoreValue = useMotionValue(0);
   const roundedScore = useTransform(scoreValue, (latest) => Math.floor(latest));
   const decimalScore = useTransform(scoreValue, (latest) => {
@@ -60,8 +62,8 @@ export function HeroSection() {
             viewport={{ once: true }}
             className="text-4xl sm:text-[4.25rem] lg:text-[5.25rem] font-heading font-bold text-navy leading-[1.1] sm:leading-[1.05] tracking-[-0.03em]"
           >
-            <SplitText text="Ubah Setiap Pekerjaan Menjadi" /> <span className="text-sky relative inline-block">
-              <SplitText text="Reputasi Permanen." />
+            <SplitText text={t("headlinePart1")} /> <span className="text-sky relative inline-block">
+              <SplitText text={t("headlinePart2")} />
               <svg className="absolute w-full h-3 -bottom-1 lg:-bottom-2 left-0 text-sky/20" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round" /></svg>
             </span>
           </motion.h1>
@@ -74,7 +76,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg md:text-xl text-text-muted leading-relaxed max-w-[700px] font-medium"
           >
-            Tinggalkan cara lama. Upahku mendokumentasikan kerja keras Anda menjadi Trust Score terverifikasi — membuka jalan untuk upah yang lebih adil dan pekerjaan yang lebih besar.
+            {t("subHeadline")}
           </motion.p>
           
           {/* CTAs */}
@@ -87,13 +89,13 @@ export function HeroSection() {
           >
             <Button size="lg" className="h-14 rounded-full shadow-[0_10px_40px_-10px_rgba(14,165,233,0.4)] hover:shadow-[0_20px_40px_-10px_rgba(14,165,233,0.5)] hover:-translate-y-1 transition-all bg-sky text-white hover:bg-sky-active px-8 font-bold text-base group w-full sm:w-auto relative overflow-hidden">
               <span className="relative z-10 flex items-center">
-                Mulai Catat Pekerjaan
+                {t("primaryCta")}
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-sky-300/0 via-white/20 to-sky-300/0 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             </Button>
             <Button variant="outline" size="lg" className="h-14 rounded-full bg-white/50 backdrop-blur-xl text-navy border-border/60 hover:bg-white hover:border-border px-8 font-bold text-base shadow-sm hover:shadow-md transition-all w-full sm:w-auto">
-              Cari Pekerja
+              {t("secondaryCta")}
             </Button>
           </motion.div>
         </div>
@@ -140,14 +142,14 @@ export function HeroSection() {
                            initial={{ scale: 0, opacity: 0 }}
                            animate={{ scale: 1, opacity: 1 }}
                            transition={{ duration: 0.5, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                           className="absolute -bottom-1.5 -right-1.5 bg-[#10b981] p-1 rounded-full border-[2px] border-white shadow-sm"
+                           className="absolute -bottom-1.5 -right-1.5 bg-sky p-1 rounded-full border-[2px] border-white shadow-sm"
                         >
                            <CheckCircle2 className="w-3 h-3 text-white" />
                         </motion.div>
                      </div>
                      <div className="flex flex-col z-10">
-                        <span className="font-heading font-bold text-navy text-xl leading-tight">Budi Santoso</span>
-                        <span className="text-sky font-semibold text-xs mt-0.5 bg-sky/10 w-fit px-2 py-0.5 rounded-md">Top 5% Pekerja</span>
+                        <span className="font-heading font-bold text-navy text-xl leading-tight">{t("dashboard.workerName")}</span>
+                        <span className="text-sky font-semibold text-xs mt-0.5 bg-sky/10 w-fit px-2 py-0.5 rounded-md">{t("dashboard.workerBadge")}</span>
                      </div>
                   </motion.div>
 
@@ -205,7 +207,7 @@ export function HeroSection() {
 
                      <div className="relative z-10 flex items-center gap-2 mb-4">
                         <ShieldCheck className="w-5 h-5 text-sky" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-sky">Trust Score Global</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-sky">{t("dashboard.trustScoreLabel")}</span>
                      </div>
 
                      <div className="relative z-10 flex items-end gap-3 mt-auto">
@@ -218,7 +220,7 @@ export function HeroSection() {
                               initial={{ opacity: 0, scale: 0.8 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
-                              className="flex items-center gap-1 text-green-400 text-xs font-bold bg-green-400/10 px-2 py-1 rounded-md border border-green-400/20"
+                              className="flex items-center gap-1 text-sky text-xs font-bold bg-sky/10 px-2 py-1 rounded-md border border-sky/20"
                            >
                               <TrendingUp className="w-3 h-3" /> +12%
                            </motion.span>
@@ -235,8 +237,8 @@ export function HeroSection() {
                      transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
                      className="flex items-center justify-between px-2"
                   >
-                     <h3 className="text-sm font-bold text-navy uppercase tracking-widest">Bukti Kerja Terbaru</h3>
-                     <span className="text-xs text-sky font-bold hover:underline cursor-pointer">Lihat Detail &rarr;</span>
+                     <h3 className="text-sm font-bold text-navy uppercase tracking-widest">{t("dashboard.recentProofsTitle")}</h3>
+                     <span className="text-xs text-sky font-bold hover:underline cursor-pointer">{t("dashboard.viewDetails")} &rarr;</span>
                   </motion.div>
 
                   {/* Job Card */}
@@ -249,8 +251,8 @@ export function HeroSection() {
                   >
                      <div className="flex justify-between items-start">
                         <div className="flex flex-col gap-1">
-                           <span className="font-heading font-bold text-navy text-xl">Cuci AC Split & Perbaikan Pipa</span>
-                           <span className="text-xs font-semibold text-text-muted">Diselesaikan 2 hari lalu di Jakarta Selatan</span>
+                           <span className="font-heading font-bold text-navy text-xl">{t("dashboard.jobTitle")}</span>
+                           <span className="text-xs font-semibold text-text-muted">{t("dashboard.jobMeta")}</span>
                         </div>
                         <div className="text-right">
                            <span className="font-bold text-navy text-lg">Rp 150.000</span>
@@ -270,18 +272,18 @@ export function HeroSection() {
                      </div>
 
                      {/* Verification Status */}
-                     <div className="bg-[#10b981]/10 border border-[#10b981]/20 rounded-xl p-3.5 flex items-center gap-3 mt-auto">
+                     <div className="bg-sky/10 border border-sky/20 rounded-xl p-3.5 flex items-center gap-3 mt-auto">
                         <motion.div 
                            initial={{ scale: 0 }}
                            animate={{ scale: 1 }}
                            transition={{ duration: 0.5, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                           className="w-8 h-8 rounded-full bg-[#10b981] flex items-center justify-center shrink-0 shadow-sm border-[2px] border-white"
+                           className="w-8 h-8 rounded-full bg-sky flex items-center justify-center shrink-0 shadow-sm border-[2px] border-white"
                         >
                            <Star className="w-4 h-4 text-white fill-white" />
                         </motion.div>
                         <div className="flex flex-col">
-                           <span className="text-[13px] font-bold text-[#065f46]">Dikonfirmasi Pelanggan</span>
-                           <span className="text-[11px] font-medium text-[#065f46]/80 mt-0.5">Rating 5/5 & Ulasan positif diverifikasi.</span>
+                           <span className="text-[13px] font-bold text-sky-active">{t("dashboard.statusConfirmed")}</span>
+                           <span className="text-[11px] font-medium text-sky-active/80 mt-0.5">{t("dashboard.statusDetail")}</span>
                         </div>
                      </div>
                   </motion.div>
@@ -305,8 +307,8 @@ export function HeroSection() {
                   <span className="text-lg">💰</span>
                </div>
                <div className="flex flex-col pr-2">
-                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">Estimasi Upah</span>
-                  <span className="text-navy font-bold text-sm">Sesuai Standar</span>
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">{t("dashboard.wageLabel")}</span>
+                  <span className="text-navy font-bold text-sm">{t("dashboard.wageValue")}</span>
                </div>
              </motion.div>
           </motion.div>
@@ -326,8 +328,8 @@ export function HeroSection() {
                   <ShieldCheck className="w-5 h-5 text-sky" />
                </div>
                <div className="flex flex-col pr-2">
-                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">Status Pekerja</span>
-                  <span className="text-navy font-bold text-sm">Terverifikasi</span>
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">{t("dashboard.workerStatusLabel")}</span>
+                  <span className="text-navy font-bold text-sm">{t("dashboard.workerStatusValue")}</span>
                </div>
              </motion.div>
           </motion.div>
