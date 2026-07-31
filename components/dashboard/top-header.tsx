@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import {
   Search,
   Bell,
@@ -158,20 +159,20 @@ export function TopHeader({
                   {userEmail}
                 </p>
               </div>
-              <a
+              <Link
                 href="/profile"
                 className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
               >
                 <User className="size-4" />
                 View Profile
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/settings"
                 className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-surface-soft hover:text-foreground"
               >
                 <Settings className="size-4" />
                 Settings
-              </a>
+              </Link>
               <div className="my-1 border-t border-border" />
               <button
                 type="button"
