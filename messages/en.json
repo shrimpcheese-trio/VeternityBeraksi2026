@@ -385,6 +385,10 @@
       "avatar": "Profile Photo",
       "upload": "Upload Photo",
       "remove": "Remove",
+      "avatarUploading": "Uploading...",
+      "avatarError": "Failed to upload photo. Use a PNG, JPG, or WebP file.",
+      "avatarSizeError": "Photo must be 2MB or smaller.",
+      "avatarRemoveError": "Failed to remove photo.",
       "userType": "Account Type"
     },
     "company": {

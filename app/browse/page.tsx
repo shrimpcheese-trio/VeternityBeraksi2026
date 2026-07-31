@@ -7,6 +7,7 @@ import { SearchBar } from "@/components/browse/search-bar";
 import { FilterSidebar } from "@/components/browse/filter-sidebar";
 import { ListingGrid } from "@/components/browse/listing-grid";
 import { getListings } from "@/lib/services/listings";
+import { resolveAvatarUrl } from "@/lib/avatar";
 
 const CATEGORY_LABELS: Record<string, string> = {
   tukang: "Tukang",
@@ -110,7 +111,7 @@ export default async function BrowsePage({
   if (user) {
     const fullName = user.user_metadata?.full_name ?? (user.email ?? "User");
     const userEmail = user.email ?? "";
-    const avatarUrl = user.user_metadata?.avatar_url;
+    const avatarUrl = resolveAvatarUrl(user);
     const role = user.user_metadata?.role === "employer" ? "employer" : "worker";
 
     return (
