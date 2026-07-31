@@ -25,7 +25,7 @@ Core user value: turn finished jobs into verifiable proof, turn proof into trust
 
 ## Repository Structure
 
-```
+```text
 app/                  — Next.js App Router (routes, pages, API routes)
   api/                — REST API routes, thin wrappers over lib/services
 components/           — UI components (Atomic Design)
@@ -95,13 +95,13 @@ npm run dev
 - Foreign keys always explicit with `ON DELETE CASCADE` or `ON DELETE SET NULL`.
 - JSONB for flexible fields (`verification_sources`, `job_metadata`).
 - RLS (Row Level Security) is ON by default on every new table. No exceptions without an explicit ask-first conversation.
-- Migrations must have both `up` and `down` — always reversible.
+- Migrations must have both `up` and `down` — always reversible. Down files live in `supabase/down-migrations/`, NOT `supabase/migrations/`: the Supabase CLI treats `*.down.sql` files in the migrations folder as separate pending migrations, which trips the `db push` out-of-order guard on every push.
 
 ---
 
 ## Key Models (MVP scope)
 
-```
+```text
 Worker              — auth user with worker role; holds profile + trust_score
 Employer            — auth user with employer role
 CommunityVerification — endorsement from mandor/RT/ketua banjar/etc, linked to a Worker
@@ -230,6 +230,7 @@ CREATE TABLE agreements (
 **Default: no comments.** Code self-documents via naming.
 
 Write a comment only when:
+
 - The *why* is non-obvious and would take a reader >30 seconds to reconstruct.
 - Regex or non-trivial arithmetic (e.g. Trust Score weighting) needs plain-English context.
 - `TODO` / `FIXME` with owner + context.
@@ -283,13 +284,14 @@ npm run test
 
 Commit messages follow this format:
 
-<label>: <message>
+`<label>: <message>`
 
 Labels: feat, fix, chore, docs, refactor, test, style
 Message: imperative, lowercase, no period
 
 Examples:
-```
+
+```text
 feat: add trust score weighting for community verifications
 fix: return null when wage estimate data is missing
 chore: update tailwind config
@@ -300,6 +302,7 @@ chore: update tailwind config
 ## Error Handling
 
 ### Server-Side
+
 - All API routes wrap logic in try/catch.
 - Errors are logged via a structured logger (never `console.log`).
 - API responses use a consistent error shape:
@@ -315,6 +318,7 @@ chore: update tailwind config
 - Unexpected errors return 500 with a generic message: "Terjadi kesalahan. Silakan coba lagi."
 
 ### Client-Side
+
 - Use a shared `fetchClient` wrapper that parses errors and surfaces them as typed results.
 - UI shows errors in toast notifications or inline validation.
 - Network errors show a retry prompt.
@@ -336,17 +340,21 @@ chore: update tailwind config
 ## Deployment
 
 ### Platform
+
 Vercel (primary).
 
 ### Pipeline
+
 Before every deploy:
+
 1. `npm run lint`
 2. `npx tsc --noEmit`
 3. `npm run build`
 
 Production is deployed from the `main` branch via Vercel Git integration.
 
-### Environment Variables
+### Vercel Environment Variables
+
 All Supabase keys are set in Vercel Environment Variables, never committed.
 `NEXT_PUBLIC_*` keys are safe for client, `SUPABASE_SERVICE_ROLE_KEY` is server-only.
 
@@ -357,6 +365,7 @@ All Supabase keys are set in Vercel Environment Variables, never committed.
 To keep the codebase human-natural and avoid AI-fingerprint patterns:
 
 ### Naming
+
 - No `data`, `result`, `response`, `payload`, `value`, `item` as variable names.
 - No placeholder names: `test1`, `example`, `foo`, `bar`, `baz`.
 - Test data must use realistic Indonesian names, places, and prices.
@@ -364,11 +373,13 @@ To keep the codebase human-natural and avoid AI-fingerprint patterns:
   Bad:  `"John Doe"`, `"Test City"`, `100`
 
 ### Structure
+
 - No unnecessary abstraction layers. Write what's needed, not what an AI might extrapolate.
 - Prefer flat files over deep directory nesting. Don't create `index.ts` barrels.
 - No premature splitting of files that could live together.
 
 ### Patterns to avoid
+
 - Don't repeat the same guard clause pattern in every function — vary style naturally.
 - No "TODO: implement" or "// will be used later" stubs.
 - No overly defensive null checks on every parameter.
@@ -377,6 +388,7 @@ To keep the codebase human-natural and avoid AI-fingerprint patterns:
 - No JSDoc on trivial getters/setters — only where the *why* is non-obvious.
 
 ### Code Review
+
 - Treat perfectly uniform code as a red flag. Humans write with natural variation.
 - If two similar functions look copy-pasted, refactor or add a comment explaining why they differ.
 
