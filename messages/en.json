@@ -308,43 +308,22 @@
     },
     "tabs": {
       "overview": "Overview",
-      "listings": "Listings",
-      "contracts": "Contracts",
-      "reviews": "Reviews",
-      "documents": "Documents"
+      "services": "Services",
+      "reviews": "Reviews"
     },
     "overview": {
-      "pinnedListings": "Active Listings",
       "activityChart": "Job Activity",
       "recentActivity": "Recent Activity",
-      "noListings": "No active listings yet.",
       "noActivity": "No recent activity."
     },
-    "listings": {
-      "search": "Search listings...",
-      "filterStatus": "Status",
-      "filterType": "Type",
-      "sort": "Sort",
-      "all": "All",
-      "active": "Active",
-      "paused": "Paused",
-      "completed": "Completed",
-      "price": "Price",
-      "quantity": "Qty",
-      "datePosted": "Date",
-      "noListings": "No listings yet."
-    },
-    "contracts": {
-      "filterStatus": "Filter Status",
-      "all": "All",
-      "active": "Active",
-      "completed": "Completed",
-      "disputed": "Disputed",
-      "counterparty": "Counterparty",
-      "type": "Type",
-      "value": "Value",
-      "date": "Date",
-      "noContracts": "No contracts yet."
+    "services": {
+      "price": "Rp {price}",
+      "priceUnitFixed": "Fixed Price",
+      "priceUnitHourly": "Hour",
+      "priceUnitDaily": "Day",
+      "emptyTitle": "No services yet.",
+      "emptyDescription": "Services offered by this worker will appear here.",
+      "manageServices": "Manage services"
     },
     "reviews": {
       "averageRating": "Average Rating",
@@ -352,14 +331,6 @@
       "noReviews": "No reviews yet.",
       "reviewer": "Reviewer",
       "givenTitle": "Reviews Given"
-    },
-    "documents": {
-      "name": "Name",
-      "type": "Type",
-      "uploadDate": "Upload Date",
-      "verified": "Verified",
-      "unverified": "Unverified",
-      "noDocuments": "No documents yet."
     },
     "notFound": "Profile not found."
   },

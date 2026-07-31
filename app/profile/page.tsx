@@ -1,11 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
+import { resolveAvatarUrl } from "@/lib/avatar";
 import { redirect } from "next/navigation";
-import { createHash } from "crypto";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { ProfileLayout } from "@/components/profile/profile-layout";
 import { ProfileSidebar } from "@/components/profile/profile-sidebar";
 import { ProfileTabs } from "@/components/profile/profile-tabs";
-import { getEmptyProfile, getWorkerReviews, getEmployerReviews } from "@/lib/services/profile";
+import { getEmptyProfile, getWorkerReviews, getEmployerReviews, getWorkerServices } from "@/lib/services/profile";
 
 export default async function OwnProfilePage() {
   const supabase = await createClient();
@@ -18,8 +18,7 @@ export default async function OwnProfilePage() {
   const userNameMeta = user.user_metadata;
   const fullName = userNameMeta?.full_name ?? userNameMeta?.name ?? identities?.full_name ?? (user.email ?? "User");
   const userEmail = user.email ?? "";
-  const emailHash = createHash("md5").update(userEmail.trim().toLowerCase()).digest("hex")
-  const avatarUrl = userNameMeta?.avatar_url ?? userNameMeta?.picture ?? identities?.avatar_url ?? `https://gravatar.com/avatar/${emailHash}?s=256&d=retro`;
+  const avatarUrl = resolveAvatarUrl(user);
   const role = user.user_metadata?.role === "employer" ? "employer" : "worker";
 
   if (role === "employer") {
@@ -79,10 +78,8 @@ export default async function OwnProfilePage() {
         <ProfileLayout sidebar={<ProfileSidebar profile={profile} userRole="employer" totalSpending={totalSpending} />}>
           <ProfileTabs
             profile={profile}
-            listings={[]}
-            contracts={[]}
+            services={[]}
             reviews={reviews}
-            documents={[]}
             chartData={chartData}
             activity={[]}
             isOwn
@@ -114,6 +111,7 @@ export default async function OwnProfilePage() {
     : "-";
 
   const reviews = await getWorkerReviews(userId);
+  const services = await getWorkerServices(userId);
   const avgRating =
     reviews.length > 0
       ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
@@ -146,7 +144,7 @@ export default async function OwnProfilePage() {
   return (
     <DashboardLayout userName={fullName} userEmail={userEmail} avatarUrl={avatarUrl} role={role}>
       <ProfileLayout sidebar={<ProfileSidebar profile={profile} />}>
-        <ProfileTabs profile={profile} listings={[]} contracts={[]} reviews={reviews} documents={[]} chartData={[]} activity={[]} isOwn />
+        <ProfileTabs profile={profile} services={services} reviews={reviews} chartData={[]} activity={[]} isOwn />
       </ProfileLayout>
     </DashboardLayout>
   );

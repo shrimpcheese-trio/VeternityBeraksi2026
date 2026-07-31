@@ -3,21 +3,18 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
-import type { ProfileData, Listing, Contract, Review, Document, ChartData, ActivityGroup } from "@/lib/profile/mock-data"
+import type { ProfileData, Review, ChartData, ActivityGroup } from "@/lib/profile/mock-data"
+import type { WorkerServiceRow } from "@/lib/services/profile"
 import { OverviewTab } from "@/components/profile/overview-tab"
-import { ListingsTab } from "@/components/profile/listings-tab"
-import { ContractsTab } from "@/components/profile/contracts-tab"
+import { ServicesTab } from "@/components/profile/services-tab"
 import { ReviewsTab } from "@/components/profile/reviews-tab"
-import { DocumentsTab } from "@/components/profile/documents-tab"
 
-type TabId = "overview" | "listings" | "contracts" | "reviews" | "documents"
+type TabId = "overview" | "services" | "reviews"
 
 export function ProfileTabs({
   profile,
-  listings,
-  contracts,
+  services,
   reviews,
-  documents,
   chartData,
   activity,
   isOwn,
@@ -25,10 +22,8 @@ export function ProfileTabs({
   recentAgreements,
 }: {
   profile: ProfileData
-  listings: Listing[]
-  contracts: Contract[]
+  services: WorkerServiceRow[]
   reviews: Review[]
-  documents: Document[]
   chartData: ChartData[]
   activity: ActivityGroup[]
   isOwn: boolean
@@ -47,18 +42,14 @@ export function ProfileTabs({
       ]
     : [
         { id: "overview", label: t("overview") },
-        { id: "listings", label: t("listings"), count: listings.length },
-        { id: "contracts", label: t("contracts"), count: contracts.length },
+        { id: "services", label: t("services"), count: services.length },
         { id: "reviews", label: t("reviews"), count: reviews.length },
-        { id: "documents", label: t("documents"), count: documents.length },
       ]
-
-  const visibleTabs = isOwn ? tabs : tabs.filter((tb) => tb.id !== "contracts")
 
   return (
     <div>
       <div className="mb-6 flex border-b border-border">
-        {visibleTabs.map((tb) => (
+        {tabs.map((tb) => (
           <button
             key={tb.id}
             type="button"
@@ -92,7 +83,6 @@ export function ProfileTabs({
 
       {activeTab === "overview" && (
         <OverviewTab
-          listings={listings}
           chartData={chartData}
           activity={activity}
           userRole={userRole}
@@ -100,15 +90,13 @@ export function ProfileTabs({
           recentAgreements={recentAgreements}
         />
       )}
-      {activeTab === "listings" && <ListingsTab listings={listings} />}
-      {activeTab === "contracts" && <ContractsTab contracts={contracts} />}
+      {activeTab === "services" && <ServicesTab services={services} isOwn={isOwn} />}
       {activeTab === "reviews" && (
         <ReviewsTab
           reviews={reviews}
           direction={userRole === "employer" ? "given" : "received"}
         />
       )}
-      {activeTab === "documents" && <DocumentsTab documents={documents} />}
     </div>
   )
 }
