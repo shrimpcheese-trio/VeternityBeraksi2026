@@ -1,9 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { notFound, redirect } from "next/navigation";
 import { getAgreementById } from "@/lib/repositories/agreement.repo";
+import { getProofOfWorkByAgreement } from "@/lib/repositories/proof-of-work.repo";
+import { getReviewByAgreement } from "@/lib/repositories/review.repo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/agreements/status-badge";
-import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Star } from "lucide-react";
+import { ReviewForm } from "@/components/reviews/review-form";
+import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Star, Camera } from "lucide-react";
 import Link from "next/link";
 
 export default async function EmployerAgreementDetailPage({
@@ -24,6 +28,13 @@ export default async function EmployerAgreementDetailPage({
 
   const worker = agreement.worker_profiles;
   const workerName = worker?.full_name ?? "Pekerja";
+
+  const admin = createAdminClient();
+  const proof = await getProofOfWorkByAgreement(admin, id);
+  const hasProofPhotos = proof?.photo_before_url != null || proof?.photo_after_url != null;
+
+  const existingReview = await getReviewByAgreement(admin, id);
+  const showReviewForm = agreement.status === "completed";
 
   return (
     <div className="space-y-6">
@@ -111,6 +122,78 @@ export default async function EmployerAgreementDetailPage({
           </div>
         </CardContent>
       </Card>
+
+      {hasProofPhotos && (
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Camera className="size-4 text-muted-foreground" />
+              <CardTitle className="font-heading text-lg font-medium">
+                Foto Bukti Pekerjaan
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-4">
+              {proof?.photo_before_url && (
+                <div className="space-y-2">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    Foto Sebelum
+                  </p>
+                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
+                    <img
+                      src={proof.photo_before_url}
+                      alt="Foto sebelum pekerjaan"
+                      className="size-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+              {proof?.photo_after_url && (
+                <div className="space-y-2">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    Foto Sesudah
+                  </p>
+                  <div className="aspect-video w-full overflow-hidden rounded-xl bg-surface-soft">
+                    <img
+                      src={proof.photo_after_url}
+                      alt="Foto sesudah pekerjaan"
+                      className="size-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {showReviewForm && (
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Star className="size-4 text-amber-400" />
+              <CardTitle className="font-heading text-lg font-medium">
+                {existingReview ? "Ulasan Anda" : "Nilai Pekerjaan"}
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <ReviewForm
+              agreementId={agreement.agreement_id}
+              existingReview={
+                existingReview
+                  ? {
+                      rating: existingReview.rating,
+                      comment: existingReview.comment,
+                      photoUrls: existingReview.photo_urls,
+                    }
+                  : null
+              }
+            />
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

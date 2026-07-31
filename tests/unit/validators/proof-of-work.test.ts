@@ -54,6 +54,18 @@ describe("proofOfWorkInputSchema", () => {
     expect(parsed.success).toBe(false);
   });
 
+  it("accepts optional agreementId as UUID", () => {
+    const agreementId = "b2c3d4e5-f6a7-8901-bcde-f23456789012";
+    const parsed = proofOfWorkInputSchema.safeParse({ ...validProof, agreementId });
+    expect(parsed.success).toBe(true);
+    if (parsed.success) expect(parsed.data.agreementId).toBe(agreementId);
+  });
+
+  it("rejects non-UUID agreementId", () => {
+    const parsed = proofOfWorkInputSchema.safeParse({ ...validProof, agreementId: "ag-001" });
+    expect(parsed.success).toBe(false);
+  });
+
   it("rejects jobType shorter than 3 chars", () => {
     const parsed = proofOfWorkInputSchema.safeParse({ ...validProof, jobType: "AC" });
     expect(parsed.success).toBe(false);

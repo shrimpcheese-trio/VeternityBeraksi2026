@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Plus, Pencil, Trash2, X, GripVertical, Upload, ImageIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { uploadServiceImage, deleteServiceImage } from "@/lib/supabase/storage";
+import { formatPriceInput, parsePriceInput } from "@/lib/utils/currency";
 
 type ServiceRow = {
   service_id: string;
@@ -47,6 +48,7 @@ export default function WorkerServicesPage() {
   const [formCategory, setFormCategory] = useState("");
   const [formThumbnail, setFormThumbnail] = useState<string | null>(null);
   const [formImages, setFormImages] = useState<string[]>([]);
+  const [priceError, setPriceError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
@@ -82,6 +84,7 @@ export default function WorkerServicesPage() {
     setFormCategory("");
     setFormThumbnail(null);
     setFormImages([]);
+    setPriceError("");
     setFormTab("details");
     setModalMode("add");
   }
@@ -90,11 +93,12 @@ export default function WorkerServicesPage() {
     setEditingId(service.service_id);
     setFormName(service.name);
     setFormDescription(service.description ?? "");
-    setFormPrice(String(service.price));
+    setFormPrice(formatPriceInput(String(service.price)));
     setFormPriceUnit(service.price_unit);
     setFormCategory(service.category ?? "");
     setFormThumbnail(service.thumbnail_url);
     setFormImages(service.image_urls);
+    setPriceError("");
     setFormTab("details");
     setModalMode("edit");
   }
@@ -156,13 +160,19 @@ export default function WorkerServicesPage() {
   }
 
   async function handleSave() {
-    if (!formName.trim() || !formPrice.trim()) return;
+    if (!formName.trim()) return;
+    const parsedPrice = parsePriceInput(formPrice);
+    if (parsedPrice === null || parsedPrice <= 0) {
+      setPriceError("Harga harus berupa angka bulat lebih dari 0");
+      return;
+    }
     setSaving(true);
+    setPriceError("");
 
     const body = {
       name: formName.trim(),
       description: formDescription.trim() || null,
-      price: Number(formPrice),
+      price: parsedPrice,
       priceUnit: formPriceUnit,
       category: formCategory.trim() || null,
       thumbnailUrl: formThumbnail,
@@ -375,10 +385,14 @@ export default function WorkerServicesPage() {
                     <div className="flex-1">
                       <label className="mb-1 block text-xs font-medium text-muted-foreground">Harga</label>
                       <input
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
                         value={formPrice}
-                        onChange={(e) => setFormPrice(e.target.value)}
-                        placeholder="150000"
+                        onChange={(e) => {
+                          setFormPrice(formatPriceInput(e.target.value));
+                          setPriceError("");
+                        }}
+                        placeholder="Rp 150.000"
                         className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
                       />
                     </div>
@@ -395,6 +409,8 @@ export default function WorkerServicesPage() {
                       </select>
                     </div>
                   </div>
+
+                  {priceError && <p className="text-xs text-red-600">{priceError}</p>}
 
                   <div>
                     <label className="mb-1 block text-xs font-medium text-muted-foreground">Kategori</label>

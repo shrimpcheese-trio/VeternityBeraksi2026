@@ -34,11 +34,11 @@ npm run dev
 
 1. **Google OAuth** - Authentication → Providers → Google: enable, add Client ID + Secret
 2. **Redirect URLs** - add `http://localhost:3000/auth/callback` to Auth → URL Configuration
-3. **SQL Migrations** - run `supabase/migrations/*.sql` in SQL Editor sequentially
+3. **SQL Migrations** - apply with `npx supabase link --project-ref <ref>` then `npx supabase db push`
 
 ## Project Structure
 
-```
+```text
 app/
   (auth)/                  - login, register pages
   api/
@@ -64,13 +64,14 @@ lib/
   supabase/                - client, server, admin, proxy helpers
   validators/              - Zod schemas (5 entities)
 proxy.ts                   - Next.js 16 proxy: API auth + page route guard
-supabase/migrations/       - reversible SQL migrations
+supabase/migrations/       - up SQL migrations (push with `npx supabase db push`)
+supabase/down-migrations/   - reversible down SQL (kept out of migrations/ for CLI)
 tests/                     - Jest tests (validators, trust-engine, integration)
 ```
 
 ## Agreement State Machine
 
-```
+```text
 draft -> active -> completed
               |
               +-> disputed -> completed
@@ -79,6 +80,13 @@ draft -> active -> completed
 - **PATCH `/api/agreement/[id]`** - updates non-status fields only (rejects `status`)
 - **POST `/api/agreement/[id]/transition`** - sole entry point for status changes. Body: `{ "newStatus": "active" | "completed" | "disputed" }`. Returns 400 on invalid transition, 403 if actor is not a party.
 - Trust score recomputed on `completed` and `disputed` transitions.
+
+## Reviews
+
+- **POST `/api/review`** - submit or update the review for a completed agreement. Body: `{ "agreementId", "rating" (0-5), "comment"?, "photoUrls"? (max 3) }`. Only the employer party can review, and only after the agreement is `completed`. One review per agreement (a second submit overwrites).
+- **POST `/api/review/[id]/photo`** - multipart upload of a review photo to the `review-photos` bucket.
+- **GET `/api/review?workerId=`** - lists a worker's reviews with the employer name.
+- Submitting a review marks the agreement's proof of work as `customer_confirmed` and feeds the worker's Trust Score.
 
 ## API Routes
 

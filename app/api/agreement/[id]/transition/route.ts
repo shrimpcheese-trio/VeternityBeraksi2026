@@ -58,6 +58,15 @@ export async function POST(
         { status: 403 },
       );
     }
+    if (error instanceof Error && error.name === "ProofOfWorkRequiredError") {
+      return NextResponse.json(
+        {
+          error: "Unggah foto sebelum dan sesudah pekerjaan untuk menyelesaikan pekerjaan ini.",
+          code: "PROOF_OF_WORK_REQUIRED",
+        },
+        { status: 400 },
+      );
+    }
     console.error(error);
     return NextResponse.json(
       { error: "Terjadi kesalahan. Silakan coba lagi.", code: "INTERNAL_ERROR" },

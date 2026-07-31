@@ -50,6 +50,7 @@ export type Review = {
   rating: number
   comment: string
   date: string
+  service?: string
 }
 
 export type Document = {

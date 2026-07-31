@@ -5,7 +5,7 @@ import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { ProfileLayout } from "@/components/profile/profile-layout";
 import { ProfileSidebar } from "@/components/profile/profile-sidebar";
 import { ProfileTabs } from "@/components/profile/profile-tabs";
-import { getEmptyProfile } from "@/lib/services/profile";
+import { getEmptyProfile, getWorkerReviews, getEmployerReviews } from "@/lib/services/profile";
 
 export default async function OwnProfilePage() {
   const supabase = await createClient();
@@ -72,6 +72,7 @@ export default async function OwnProfilePage() {
     };
 
     const chartData = buildMonthlyChart(agreements ?? []);
+    const reviews = await getEmployerReviews(userId);
 
     return (
       <DashboardLayout userName={fullName} userEmail={userEmail} avatarUrl={avatarUrl} role={role}>
@@ -80,7 +81,7 @@ export default async function OwnProfilePage() {
             profile={profile}
             listings={[]}
             contracts={[]}
-            reviews={[]}
+            reviews={reviews}
             documents={[]}
             chartData={chartData}
             activity={[]}
@@ -112,6 +113,12 @@ export default async function OwnProfilePage() {
       })
     : "-";
 
+  const reviews = await getWorkerReviews(userId);
+  const avgRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+      : 0;
+
   const profile = workerProfile
     ? {
         id: userId,
@@ -125,8 +132,8 @@ export default async function OwnProfilePage() {
         contact: userEmail || undefined,
         completedJobs: completedJobs ?? 0,
         activeListings: 0,
-        rating: 0,
-        reviewCount: 0,
+        rating: Math.round(avgRating * 10) / 10,
+        reviewCount: reviews.length,
         avatarUrl,
         verifications: {
           idVerified: false,
@@ -139,7 +146,7 @@ export default async function OwnProfilePage() {
   return (
     <DashboardLayout userName={fullName} userEmail={userEmail} avatarUrl={avatarUrl} role={role}>
       <ProfileLayout sidebar={<ProfileSidebar profile={profile} />}>
-        <ProfileTabs profile={profile} listings={[]} contracts={[]} reviews={[]} documents={[]} chartData={[]} activity={[]} isOwn />
+        <ProfileTabs profile={profile} listings={[]} contracts={[]} reviews={reviews} documents={[]} chartData={[]} activity={[]} isOwn />
       </ProfileLayout>
     </DashboardLayout>
   );

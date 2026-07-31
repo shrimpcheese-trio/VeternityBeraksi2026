@@ -39,12 +39,12 @@ export function SiteNav({ user }: { user: boolean }) {
   return (
     <>
       <div className="flex items-center justify-between">
-        <a
+        <Link
           href="/"
           className="font-heading text-step-1 font-bold tracking-tight text-primary hover:text-primary-active"
         >
           Upahku
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (

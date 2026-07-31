@@ -212,6 +212,9 @@
       "locationPlaceholder": "Enter the work location address",
       "workHours": "Work Hours",
       "workHoursPlaceholder": "E.g. 08:00 - 17:00",
+      "priceError": "Price must be a whole number greater than 0",
+      "workHoursFormatError": "Use HH:MM - HH:MM format, e.g. 08:00 - 17:00",
+      "workHoursRangeError": "End time must be after start time",
       "submit": "Submit Order",
       "submitting": "Submitting...",
       "success": "Order submitted!",
@@ -317,7 +320,8 @@
       "averageRating": "Average Rating",
       "totalReviews": "Total Reviews",
       "noReviews": "No reviews yet.",
-      "reviewer": "Reviewer"
+      "reviewer": "Reviewer",
+      "givenTitle": "Reviews Given"
     },
     "documents": {
       "name": "Name",
