@@ -308,43 +308,22 @@
     },
     "tabs": {
       "overview": "Ringkasan",
-      "listings": "Listing",
-      "contracts": "Kontrak",
-      "reviews": "Ulasan",
-      "documents": "Dokumen"
+      "services": "Layanan",
+      "reviews": "Ulasan"
     },
     "overview": {
-      "pinnedListings": "Listing Aktif",
       "activityChart": "Aktivitas Pekerjaan",
       "recentActivity": "Aktivitas Terbaru",
-      "noListings": "Belum ada listing aktif.",
       "noActivity": "Belum ada aktivitas terbaru."
     },
-    "listings": {
-      "search": "Cari listing...",
-      "filterStatus": "Status",
-      "filterType": "Tipe",
-      "sort": "Urutkan",
-      "all": "Semua",
-      "active": "Aktif",
-      "paused": "Ditunda",
-      "completed": "Selesai",
-      "price": "Harga",
-      "quantity": "Jumlah",
-      "datePosted": "Tanggal",
-      "noListings": "Belum ada listing."
-    },
-    "contracts": {
-      "filterStatus": "Filter Status",
-      "all": "Semua",
-      "active": "Aktif",
-      "completed": "Selesai",
-      "disputed": "Sengketa",
-      "counterparty": "Mitra",
-      "type": "Tipe",
-      "value": "Nilai",
-      "date": "Tanggal",
-      "noContracts": "Belum ada kontrak."
+    "services": {
+      "price": "Rp {price}",
+      "priceUnitFixed": "Harga Tetap",
+      "priceUnitHourly": "Jam",
+      "priceUnitDaily": "Hari",
+      "emptyTitle": "Belum ada layanan.",
+      "emptyDescription": "Layanan yang ditawarkan pekerja akan tampil di sini.",
+      "manageServices": "Kelola layanan"
     },
     "reviews": {
       "averageRating": "Rating Rata-rata",
@@ -352,14 +331,6 @@
       "noReviews": "Belum ada ulasan.",
       "reviewer": "Pengulas",
       "givenTitle": "Ulasan yang Diberikan"
-    },
-    "documents": {
-      "name": "Nama",
-      "type": "Tipe",
-      "uploadDate": "Tanggal Unggah",
-      "verified": "Terverifikasi",
-      "unverified": "Belum Verifikasi",
-      "noDocuments": "Belum ada dokumen."
     },
     "notFound": "Profil tidak ditemukan."
   },
