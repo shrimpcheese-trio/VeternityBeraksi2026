@@ -19,7 +19,6 @@ export async function signUpWithEmail(
     fullName: formData.get("fullName"),
     email: formData.get("email"),
     password: formData.get("password"),
-    role: formData.get("role"),
   });
 
   if (!parsed.success) {
@@ -27,14 +26,14 @@ export async function signUpWithEmail(
     return { error: firstError, success: false };
   }
 
-  const { fullName, email, password, role } = parsed.data;
+  const { fullName, email, password } = parsed.data;
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { full_name: fullName, role },
+      data: { full_name: fullName },
     },
   });
 

@@ -78,8 +78,6 @@ export function RegisterForm() {
             />
           </div>
 
-          <input type="hidden" name="role" value="worker" />
-
           {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
           <Button type="submit" className="w-full" disabled={pending}>
