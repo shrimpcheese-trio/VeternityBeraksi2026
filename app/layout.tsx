@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { I18nProvider } from "@/lib/i18n-provider";
 import { getLocale } from "@/lib/i18n";
 import { NavigationLoader } from "@/components/shared/navigation-loader";
 
-const spaceGrotesk = Space_Grotesk({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-heading",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -40,13 +35,12 @@ export default async function RootLayout({
       lang={locale}
       className={cn(
         "h-full antialiased",
-        spaceGrotesk.variable,
+        bricolage.variable,
         inter.variable,
-        jetbrainsMono.variable,
         "font-sans",
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-bg text-text-body">
         <I18nProvider locale={locale} messages={messages}>
           <NavigationLoader />
           {children}
