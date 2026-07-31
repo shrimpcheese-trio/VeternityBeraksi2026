@@ -2,8 +2,15 @@ import Link from "next/link";
 import { MapPin, User, Calendar } from "lucide-react";
 import { StatusBadge } from "@/components/agreements/status-badge";
 import type { AgreementWithProfiles } from "@/lib/repositories/agreement.repo";
+import type { NegotiationRowType } from "@/lib/repositories/negotiation.repo";
 
-export function AgreementCardEmployer({ agreement }: { agreement: AgreementWithProfiles }) {
+export function AgreementCardEmployer({
+  agreement,
+  latestCounter,
+}: {
+  agreement: AgreementWithProfiles;
+  latestCounter?: NegotiationRowType | null;
+}) {
   const workerName = agreement.worker_profiles?.full_name ?? "Pekerja";
 
   return (
@@ -41,7 +48,14 @@ export function AgreementCardEmployer({ agreement }: { agreement: AgreementWithP
           </p>
         )}
       </div>
-      <StatusBadge status={agreement.status} />
+      <div className="flex flex-col items-end gap-2">
+        {latestCounter?.role === "worker" && (
+          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
+            Menawar Rp {latestCounter.price.toLocaleString("id-ID")}
+          </span>
+        )}
+        <StatusBadge status={agreement.status} />
+      </div>
     </Link>
   );
 }

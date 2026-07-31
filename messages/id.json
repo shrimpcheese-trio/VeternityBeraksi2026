@@ -235,6 +235,36 @@
       "required": "Wajib diisi"
     }
   },
+  "agreement": {
+    "negotiation": {
+      "historyTitle": "Riwayat Negosiasi",
+      "employerOffer": "Penawaran {name}: {price}",
+      "youCounter": "Anda menawar {price}",
+      "workerCounter": "Pekerja menawar {price}",
+      "counterSummary": "Anda menawar {price}",
+      "workerCounterPending": "Pekerja menawar {price}. Terima atau ajukan harga baru.",
+      "pendingNote": "Menunggu respons pemberi kerja.",
+      "waitingNote": "Menunggu respons pekerja.",
+      "actionsTitle": "Tindakan",
+      "accept": "Terima Penawaran",
+      "acceptCounter": "Terima Penawaran Pekerja",
+      "placeCounter": "Ajukan Harga Balik",
+      "updateCounter": "Perbarui Tawaran",
+      "reviseOffer": "Ajukan Harga Baru",
+      "processing": "Memproses...",
+      "cancel": "Batal",
+      "yourPrice": "Harga yang Anda usulkan",
+      "revisePrice": "Harga baru",
+      "reason": "Alasan",
+      "reasonPlaceholder": "Contoh: biaya material naik, jarak tempuh, volume pekerjaan...",
+      "priceError": "Harga harus berupa angka bulat lebih dari 0",
+      "reasonRequired": "Alasan wajib diisi",
+      "submitting": "Mengirim...",
+      "submitCounter": "Kirim Penawaran",
+      "submitRevise": "Kirim Harga Baru",
+      "submitError": "Gagal mengirim penawaran."
+    }
+  },
   "contact": {
     "title": "Hubungi Kami",
     "name": "Nama",

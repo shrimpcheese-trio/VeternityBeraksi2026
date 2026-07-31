@@ -4,9 +4,12 @@ import { notFound, redirect } from "next/navigation";
 import { getAgreementById } from "@/lib/repositories/agreement.repo";
 import { getProofOfWorkByAgreement } from "@/lib/repositories/proof-of-work.repo";
 import { getReviewByAgreement } from "@/lib/repositories/review.repo";
+import { listNegotiationsByAgreement } from "@/lib/repositories/negotiation.repo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/agreements/status-badge";
 import { ReviewForm } from "@/components/reviews/review-form";
+import { NegotiationHistory } from "@/components/agreements/negotiation-history";
+import { EmployerActions } from "@/components/agreements/employer-actions";
 import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Star, Camera } from "lucide-react";
 import Link from "next/link";
 
@@ -35,6 +38,8 @@ export default async function EmployerAgreementDetailPage({
 
   const existingReview = await getReviewByAgreement(admin, id);
   const showReviewForm = agreement.status === "completed";
+  const negotiations = await listNegotiationsByAgreement(admin, id);
+  const employerName = agreement.employer_profiles?.company_name ?? "Pemberi Kerja";
 
   return (
     <div className="space-y-6">
@@ -122,6 +127,19 @@ export default async function EmployerAgreementDetailPage({
           </div>
         </CardContent>
       </Card>
+
+      <NegotiationHistory
+        negotiations={negotiations}
+        employerName={employerName}
+        viewerRole="employer"
+      />
+
+      {agreement.status === "draft" && (
+        <EmployerActions
+          agreementId={agreement.agreement_id}
+          negotiations={negotiations}
+        />
+      )}
 
       {hasProofPhotos && (
         <Card className="rounded-2xl">

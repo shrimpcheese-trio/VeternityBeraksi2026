@@ -1,11 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { notFound } from "next/navigation";
 import { listAgreements } from "@/lib/repositories/agreement.repo";
+import { listLatestNegotiationsByAgreementIds } from "@/lib/repositories/negotiation.repo";
 import { AgreementCardEmployer } from "@/components/agreements/agreement-card-employer";
-import { Briefcase, CheckCircle, AlertTriangle } from "lucide-react";
+import { Briefcase, CheckCircle, AlertTriangle, MessageSquare } from "lucide-react";
 
 const tabs = [
   { key: "all", label: "Semua", icon: Briefcase },
+  { key: "draft", label: "Penawaran", icon: MessageSquare },
   { key: "active", label: "Aktif", icon: CheckCircle },
   { key: "completed", label: "Selesai", icon: CheckCircle },
   { key: "disputed", label: "Sengketa", icon: AlertTriangle },
@@ -24,10 +27,21 @@ export default async function EmployerAgreementsPage({
 
   const activeTab = tabs.find((t) => t.key === status)?.key ?? "all";
 
-  const agreements = await listAgreements(supabase, {
-    employerId: user.id,
-    ...(activeTab !== "all" ? { status: activeTab } : {}),
-  });
+  const allAgreements = await listAgreements(supabase, { employerId: user.id });
+  const agreements =
+    activeTab === "all"
+      ? allAgreements
+      : allAgreements.filter((agreement) => agreement.status === activeTab);
+  const draftCount = allAgreements.filter(
+    (agreement) => agreement.status === "draft",
+  ).length;
+
+  const admin = createAdminClient();
+  const draftAgreementIds = allAgreements
+    .filter((agreement) => agreement.status === "draft")
+    .map((agreement) => agreement.agreement_id);
+  const latestNegotiations =
+    await listLatestNegotiationsByAgreementIds(admin, draftAgreementIds);
 
   return (
     <div className="space-y-6">
@@ -58,6 +72,11 @@ export default async function EmployerAgreementsPage({
             >
               <Icon className="size-4" />
               {tab.label}
+              {tab.key === "draft" && draftCount > 0 && (
+                <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">
+                  {draftCount}
+                </span>
+              )}
             </a>
           );
         })}
@@ -66,7 +85,11 @@ export default async function EmployerAgreementsPage({
       {agreements.length > 0 ? (
         <div className="space-y-3">
           {agreements.map((agreement) => (
-            <AgreementCardEmployer key={agreement.agreement_id} agreement={agreement} />
+            <AgreementCardEmployer
+              key={agreement.agreement_id}
+              agreement={agreement}
+              latestCounter={latestNegotiations[agreement.agreement_id]}
+            />
           ))}
         </div>
       ) : (
@@ -74,6 +97,7 @@ export default async function EmployerAgreementsPage({
           <Briefcase className="mb-4 size-12 text-muted-foreground/40" />
           <p className="text-sm font-medium text-muted-foreground">
             {activeTab === "all" && "Belum ada pekerjaan."}
+            {activeTab === "draft" && "Tidak ada penawaran baru."}
             {activeTab === "active" && "Tidak ada pekerjaan aktif."}
             {activeTab === "completed" && "Belum ada pekerjaan selesai."}
             {activeTab === "disputed" && "Tidak ada sengketa."}
