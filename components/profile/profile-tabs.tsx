@@ -68,7 +68,7 @@ export function ProfileTabs({
                   "flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[11px]",
                   activeTab === tb.id
                     ? "bg-primary/10 text-primary"
-                    : "bg-muted text-muted-foreground"
+                    : "bg-slate-100 text-slate-500"
                 )}
               >
                 {tb.count}

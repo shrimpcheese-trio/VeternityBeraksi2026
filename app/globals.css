@@ -43,15 +43,6 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-heading), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  /* Spacing */
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-section-mobile: 64px;
-  --spacing-section-desktop: 96px;
-
   /* Shadcn standard overrides (mapped to Upahku tokens) */
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text-body);

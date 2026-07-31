@@ -101,29 +101,29 @@ export default async function WorkerDashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl font-medium tracking-tight">
+          <h1 className="font-heading text-3xl font-bold tracking-tight text-navy">
             Selamat datang, {fullName.split(" ")[0]}!
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm font-medium text-slate-500">
             Ringkasan aktivitas dan performa pekerjaan Anda.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-1.5">
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="sm" className="gap-1.5 rounded-full border-slate-200 text-navy hover:bg-slate-50 font-semibold px-4">
             <List className="size-4" />
             Lihat Semua
           </Button>
-          <Button size="sm" className="gap-1.5">
+          <Button size="sm" className="gap-1.5 rounded-full bg-navy text-white hover:bg-navy/90 hover:shadow-[0_8px_15px_-5px_rgba(10,37,64,0.3)] font-semibold px-4 transition-all">
             <Plus className="size-4" />
             Buat Pekerjaan Baru
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         <KpiCard
           label="Skor Kepercayaan"
           value={scoreDisplay}
@@ -145,7 +145,7 @@ export default async function WorkerDashboard() {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <ChartWidget title="Pekerjaan per Bulan" data={chartData} />
         </div>

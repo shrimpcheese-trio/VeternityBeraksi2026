@@ -16,7 +16,7 @@ export function GoogleAuthButton() {
     <Button
       type="button"
       variant="outline"
-      className="w-full"
+      className="w-full rounded-full py-6 text-base font-semibold border-slate-200 text-navy hover:bg-slate-50 transition-colors"
       onClick={handleClick}
     >
       <svg className="mr-2 size-4" viewBox="0 0 24 24" fill="none" stroke="none">
