@@ -60,6 +60,28 @@ describe("agreementInputSchema", () => {
     const parsed = agreementInputSchema.safeParse({ ...validAgreement, workerId: "bad" });
     expect(parsed.success).toBe(false);
   });
+
+  it("accepts null workHours", () => {
+    const parsed = agreementInputSchema.safeParse({ ...validAgreement, workHours: null });
+    expect(parsed.success).toBe(true);
+  });
+
+  it("rejects malformed workHours format", () => {
+    for (const workHours of ["random", "8-5", "08.00 - 17.00", "25:00 - 26:00"]) {
+      const parsed = agreementInputSchema.safeParse({ ...validAgreement, workHours });
+      expect(parsed.success).toBe(false);
+    }
+  });
+
+  it("rejects workHours with end before start", () => {
+    const parsed = agreementInputSchema.safeParse({ ...validAgreement, workHours: "17:00 - 08:00" });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("rejects decimal price", () => {
+    const parsed = agreementInputSchema.safeParse({ ...validAgreement, price: 150000.5 });
+    expect(parsed.success).toBe(false);
+  });
 });
 
 describe("agreementUpdateSchema", () => {
@@ -93,6 +115,11 @@ describe("agreementPatchSchema", () => {
 
   it("rejects workerId", () => {
     const parsed = agreementPatchSchema.safeParse({ workerId: validAgreement.workerId });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("rejects invalid workHours", () => {
+    const parsed = agreementPatchSchema.safeParse({ workHours: "sembarang" });
     expect(parsed.success).toBe(false);
   });
 });

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { formatPriceInput, parsePriceInput } from "@/lib/utils/currency";
+import { workHoursSchema } from "@/lib/validators/agreement";
 
 interface CommissionFormProps {
   workerId: string;
@@ -13,16 +15,41 @@ interface CommissionFormProps {
 export function CommissionForm({ workerId, price, userId, userRole }: CommissionFormProps) {
   const t = useTranslations("browse");
   const [jobDescription, setJobDescription] = useState("");
-  const [offerPrice, setOfferPrice] = useState(String(price));
+  const [offerPrice, setOfferPrice] = useState(formatPriceInput(String(price)));
   const [location, setLocation] = useState("");
   const [workHours, setWorkHours] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [workHoursError, setWorkHoursError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!userId || userRole !== "employer") return;
+
+    const parsedPrice = parsePriceInput(offerPrice);
+
+    if (parsedPrice === null || parsedPrice <= 0) {
+      setPriceError(t("commissionModal.priceError"));
+      return;
+    }
+    setPriceError("");
+
+    if (workHours) {
+      const workHoursResult = workHoursSchema.safeParse(workHours);
+      if (!workHoursResult.success) {
+        const [issue] = workHoursResult.error.issues;
+        setWorkHoursError(
+          issue?.code === "custom"
+            ? t("commissionModal.workHoursRangeError")
+            : t("commissionModal.workHoursFormatError")
+        );
+        return;
+      }
+    }
+    setWorkHoursError("");
+
     setSubmitting(true);
     setError("");
 
@@ -32,7 +59,7 @@ export function CommissionForm({ workerId, price, userId, userRole }: Commission
       body: JSON.stringify({
         workerId,
         employerId: userId,
-        price: Number(offerPrice),
+        price: parsedPrice,
         location: location || null,
         workHours: workHours || null,
         jobDescription: jobDescription || null,
@@ -95,11 +122,17 @@ export function CommissionForm({ workerId, price, userId, userRole }: Commission
           {t("commissionModal.offerPrice")}
         </label>
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
           value={offerPrice}
-          onChange={(e) => setOfferPrice(e.target.value)}
+          onChange={(e) => {
+            setOfferPrice(formatPriceInput(e.target.value));
+            setPriceError("");
+          }}
+          placeholder="Rp 150.000"
           className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
         />
+        {priceError && <p className="mt-1 text-xs text-red-600">{priceError}</p>}
       </div>
 
       <div>
@@ -122,10 +155,14 @@ export function CommissionForm({ workerId, price, userId, userRole }: Commission
         <input
           type="text"
           value={workHours}
-          onChange={(e) => setWorkHours(e.target.value)}
+          onChange={(e) => {
+            setWorkHours(e.target.value);
+            setWorkHoursError("");
+          }}
           placeholder={t("commissionModal.workHoursPlaceholder")}
           className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
         />
+        {workHoursError && <p className="mt-1 text-xs text-red-600">{workHoursError}</p>}
       </div>
 
       {error && <p className="text-xs text-red-600">{error}</p>}
