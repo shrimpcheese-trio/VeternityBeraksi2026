@@ -127,6 +127,15 @@ async function seed() {
     if (scoreError) {
       console.error(`Failed to create trust score for ${w.full_name}:`, scoreError.message);
     }
+
+    const { error: mirrorError } = await admin
+      .from("worker_profiles")
+      .update({ trust_score: w.score })
+      .eq("worker_id", id);
+
+    if (mirrorError) {
+      console.error(`Failed to mirror trust score for ${w.full_name}:`, mirrorError.message);
+    }
   }
 
   console.log(`Created ${userIds.length} worker accounts`);
