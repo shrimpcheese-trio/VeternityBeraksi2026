@@ -1,8 +1,8 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { createHash } from "crypto";
+import { resolveAvatarUrl } from "@/lib/avatar";
 import { getLocale } from "@/lib/i18n";
-import { getWorkerReviews } from "@/lib/services/profile";
+import { getWorkerReviews, getWorkerServices } from "@/lib/services/profile";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { SiteNav } from "@/components/shared/site-nav";
 import { ProfileLayout } from "@/components/profile/profile-layout";
@@ -43,9 +43,7 @@ export default async function PublicProfilePage({
       })
     : "-";
 
-  const emailHash = createHash("md5").update((user?.email ?? "").trim().toLowerCase()).digest("hex");
-
-  const reviews = await getWorkerReviews(id);
+  const reviews = await getWorkerReviews(id);  const services = await getWorkerServices(id);
   const avgRating =
     reviews.length > 0
       ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
@@ -65,7 +63,7 @@ export default async function PublicProfilePage({
     activeListings: 0,
     rating: Math.round(avgRating * 10) / 10,
     reviewCount: reviews.length,
-    avatarUrl: user?.user_metadata?.avatar_url ?? user?.user_metadata?.picture ?? `https://gravatar.com/avatar/${emailHash}?s=256&d=retro`,
+    avatarUrl: resolveAvatarUrl(user),
     verifications: {
       idVerified: false,
       companyVerified: false,
@@ -78,7 +76,7 @@ export default async function PublicProfilePage({
   if (user) {
     const fullName = user.user_metadata?.full_name ?? (user.email ?? "User");
     const userEmail = user.email ?? "";
-    const avatarUrl = user.user_metadata?.avatar_url ?? user.user_metadata?.picture;
+    const avatarUrl = resolveAvatarUrl(user);
     const role = user.user_metadata?.role === "employer" ? "employer" : "worker";
 
     return (
@@ -86,10 +84,8 @@ export default async function PublicProfilePage({
         <ProfileLayout sidebar={<ProfileSidebar profile={profile} />}>
           <ProfileTabs
             profile={profile}
-            listings={[]}
-            contracts={[]}
+            services={services}
             reviews={reviews}
-            documents={[]}
             chartData={[]}
             activity={[]}
             isOwn={false}
@@ -107,10 +103,8 @@ export default async function PublicProfilePage({
           <ProfileLayout sidebar={<ProfileSidebar profile={profile} />}>
             <ProfileTabs
               profile={profile}
-              listings={[]}
-              contracts={[]}
+              services={services}
               reviews={reviews}
-              documents={[]}
               chartData={[]}
               activity={[]}
               isOwn={false}

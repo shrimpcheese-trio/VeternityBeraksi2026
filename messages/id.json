@@ -235,6 +235,36 @@
       "required": "Wajib diisi"
     }
   },
+  "agreement": {
+    "negotiation": {
+      "historyTitle": "Riwayat Negosiasi",
+      "employerOffer": "Penawaran {name}: {price}",
+      "youCounter": "Anda menawar {price}",
+      "workerCounter": "Pekerja menawar {price}",
+      "counterSummary": "Anda menawar {price}",
+      "workerCounterPending": "Pekerja menawar {price}. Terima atau ajukan harga baru.",
+      "pendingNote": "Menunggu respons pemberi kerja.",
+      "waitingNote": "Menunggu respons pekerja.",
+      "actionsTitle": "Tindakan",
+      "accept": "Terima Penawaran",
+      "acceptCounter": "Terima Penawaran Pekerja",
+      "placeCounter": "Ajukan Harga Balik",
+      "updateCounter": "Perbarui Tawaran",
+      "reviseOffer": "Ajukan Harga Baru",
+      "processing": "Memproses...",
+      "cancel": "Batal",
+      "yourPrice": "Harga yang Anda usulkan",
+      "revisePrice": "Harga baru",
+      "reason": "Alasan",
+      "reasonPlaceholder": "Contoh: biaya material naik, jarak tempuh, volume pekerjaan...",
+      "priceError": "Harga harus berupa angka bulat lebih dari 0",
+      "reasonRequired": "Alasan wajib diisi",
+      "submitting": "Mengirim...",
+      "submitCounter": "Kirim Penawaran",
+      "submitRevise": "Kirim Harga Baru",
+      "submitError": "Gagal mengirim penawaran."
+    }
+  },
   "contact": {
     "title": "Hubungi Kami",
     "name": "Nama",
@@ -278,43 +308,22 @@
     },
     "tabs": {
       "overview": "Ringkasan",
-      "listings": "Listing",
-      "contracts": "Kontrak",
-      "reviews": "Ulasan",
-      "documents": "Dokumen"
+      "services": "Layanan",
+      "reviews": "Ulasan"
     },
     "overview": {
-      "pinnedListings": "Listing Aktif",
       "activityChart": "Aktivitas Pekerjaan",
       "recentActivity": "Aktivitas Terbaru",
-      "noListings": "Belum ada listing aktif.",
       "noActivity": "Belum ada aktivitas terbaru."
     },
-    "listings": {
-      "search": "Cari listing...",
-      "filterStatus": "Status",
-      "filterType": "Tipe",
-      "sort": "Urutkan",
-      "all": "Semua",
-      "active": "Aktif",
-      "paused": "Ditunda",
-      "completed": "Selesai",
-      "price": "Harga",
-      "quantity": "Jumlah",
-      "datePosted": "Tanggal",
-      "noListings": "Belum ada listing."
-    },
-    "contracts": {
-      "filterStatus": "Filter Status",
-      "all": "Semua",
-      "active": "Aktif",
-      "completed": "Selesai",
-      "disputed": "Sengketa",
-      "counterparty": "Mitra",
-      "type": "Tipe",
-      "value": "Nilai",
-      "date": "Tanggal",
-      "noContracts": "Belum ada kontrak."
+    "services": {
+      "price": "Rp {price}",
+      "priceUnitFixed": "Harga Tetap",
+      "priceUnitHourly": "Jam",
+      "priceUnitDaily": "Hari",
+      "emptyTitle": "Belum ada layanan.",
+      "emptyDescription": "Layanan yang ditawarkan pekerja akan tampil di sini.",
+      "manageServices": "Kelola layanan"
     },
     "reviews": {
       "averageRating": "Rating Rata-rata",
@@ -322,14 +331,6 @@
       "noReviews": "Belum ada ulasan.",
       "reviewer": "Pengulas",
       "givenTitle": "Ulasan yang Diberikan"
-    },
-    "documents": {
-      "name": "Nama",
-      "type": "Tipe",
-      "uploadDate": "Tanggal Unggah",
-      "verified": "Terverifikasi",
-      "unverified": "Belum Verifikasi",
-      "noDocuments": "Belum ada dokumen."
     },
     "notFound": "Profil tidak ditemukan."
   },
@@ -355,6 +356,10 @@
       "avatar": "Foto Profil",
       "upload": "Unggah Foto",
       "remove": "Hapus",
+      "avatarUploading": "Mengunggah...",
+      "avatarError": "Gagal mengunggah foto. Gunakan file PNG, JPG, atau WebP.",
+      "avatarSizeError": "Ukuran foto maksimal 2MB.",
+      "avatarRemoveError": "Gagal menghapus foto.",
       "userType": "Tipe Akun"
     },
     "company": {

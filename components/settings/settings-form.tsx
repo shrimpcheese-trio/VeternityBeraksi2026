@@ -170,6 +170,60 @@ export function SettingsForm({
 
   const [documents, setDocuments] = useState<Record<string, string>>({})
 
+  const avatarInputRef = useRef<HTMLInputElement | null>(null)
+  const [avatar, setAvatar] = useState(avatarUrl)
+  const [avatarUploading, setAvatarUploading] = useState(false)
+  const [avatarError, setAvatarError] = useState<string | null>(null)
+
+  async function uploadAvatarFile(file: File | null) {
+    if (!file) return
+    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
+      setAvatarError(t("account.avatarError"))
+      return
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      setAvatarError(t("account.avatarSizeError"))
+      return
+    }
+    setAvatarUploading(true)
+    setAvatarError(null)
+    try {
+      const body = new FormData()
+      body.append("file", file)
+      const res = await fetch("/api/avatar", { method: "POST", body })
+      if (!res.ok) {
+        const parsed = await res.json().catch(() => null)
+        setAvatarError(parsed?.error ?? t("account.avatarError"))
+        return
+      }
+      const parsed = await res.json()
+      setAvatar(parsed.url)
+      router.refresh()
+    } catch {
+      setAvatarError(t("account.avatarError"))
+    } finally {
+      setAvatarUploading(false)
+    }
+  }
+
+  async function removeAvatar() {
+    setAvatarUploading(true)
+    setAvatarError(null)
+    try {
+      const res = await fetch("/api/avatar", { method: "DELETE" })
+      if (!res.ok) {
+        setAvatarError(t("account.avatarRemoveError"))
+        return
+      }
+      setAvatar(undefined)
+      router.refresh()
+    } catch {
+      setAvatarError(t("account.avatarRemoveError"))
+    } finally {
+      setAvatarUploading(false)
+    }
+  }
+
   const [verifications] = useState<VerificationItem[]>([
     {
       key: "id",
@@ -338,18 +392,36 @@ export function SettingsForm({
                 <div>
                   <label className="mb-1.5 block text-sm font-medium">{t("account.avatar")}</label>
                   <div className="flex items-center gap-4">
-                    {avatarUrl ? (
-                      <img src={avatarUrl} alt={userName} className="size-16 rounded-full object-cover" />
+                    {avatar ? (
+                      <img src={avatar} alt={userName} className="size-16 rounded-full object-cover" />
                     ) : (
                       <div className="flex size-16 items-center justify-center rounded-full bg-primary/10 text-xl font-semibold text-primary">
                         {userName.charAt(0).toUpperCase()}
                       </div>
                     )}
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" type="button">{t("account.upload")}</Button>
-                      <Button variant="ghost" size="sm" type="button">{t("account.remove")}</Button>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm" type="button" disabled={avatarUploading} onClick={() => avatarInputRef.current?.click()}>
+                        {avatarUploading ? t("account.avatarUploading") : t("account.upload")}
+                      </Button>
+                      <Button variant="ghost" size="sm" type="button" disabled={avatarUploading} onClick={removeAvatar}>
+                        {t("account.remove")}
+                      </Button>
                     </div>
+                    <input
+                      ref={avatarInputRef}
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      className="hidden"
+                      onChange={(e) => {
+                        const selected = e.target.files?.[0] ?? null
+                        e.target.value = ""
+                        uploadAvatarFile(selected)
+                      }}
+                    />
                   </div>
+                  {avatarError && (
+                    <p className="mt-2 text-xs text-destructive">{avatarError}</p>
+                  )}
                 </div>
 
                 {role === "worker" && (

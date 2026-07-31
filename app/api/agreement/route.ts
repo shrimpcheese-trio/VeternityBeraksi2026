@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { agreementInputSchema } from "@/lib/validators/agreement";
-import { createAgreement, listAgreements } from "@/lib/repositories/agreement.repo";
+import { createAgreementOffer } from "@/lib/services/negotiation";
+import { listAgreements } from "@/lib/repositories/agreement.repo";
 import { getWorkerById } from "@/lib/repositories/worker.repo";
 import { getEmployerById } from "@/lib/repositories/employer.repo";
 
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const agreement = await createAgreement(supabase, parsed.data);
+    const agreement = await createAgreementOffer(supabase, parsed.data, user.id);
     return NextResponse.json(agreement, { status: 201 });
   } catch (error) {
     console.error(error);

@@ -22,26 +22,6 @@ export type ProfileData = {
   }
 }
 
-export type Listing = {
-  id: string
-  name: string
-  status: "active" | "paused" | "completed"
-  type: string
-  price: number
-  quantity: number
-  datePosted: string
-  tags: string[]
-}
-
-export type Contract = {
-  id: string
-  counterparty: string
-  type: string
-  value: number
-  status: "active" | "completed" | "disputed"
-  date: string
-}
-
 export type Review = {
   id: string
   reviewerAvatar?: string
@@ -51,14 +31,6 @@ export type Review = {
   comment: string
   date: string
   service?: string
-}
-
-export type Document = {
-  id: string
-  name: string
-  type: string
-  uploadDate: string
-  verified: boolean
 }
 
 export type ActivityEntry = {
@@ -141,39 +113,6 @@ const profiles: Record<string, ProfileData> = {
   },
 }
 
-const listingsData: Record<string, Listing[]> = {
-  "user_1": [
-    { id: "l1", name: "Renovasi Rumah 2 Lantai", status: "active", type: "Renovasi", price: 25000000, quantity: 1, datePosted: "2025-06-15", tags: ["Renovasi", "Rumah"] },
-    { id: "l2", name: "Pemasangan Keramik Kamar Mandi", status: "active", type: "Pemasangan", price: 3500000, quantity: 2, datePosted: "2025-06-20", tags: ["Keramik", "Kamar Mandi"] },
-    { id: "l3", name: "Perbaikan Atap Bocor", status: "paused", type: "Perbaikan", price: 1500000, quantity: 1, datePosted: "2025-05-10", tags: ["Atap", "Perbaikan"] },
-    { id: "l4", name: "Cat Ulang Rumah", status: "completed", type: "Pengecatan", price: 8000000, quantity: 1, datePosted: "2025-04-01", tags: ["Cat", "Rumah"] },
-  ],
-  "user_2": [
-    { id: "l5", name: "Servis Rutin Mobil Avanza", status: "active", type: "Servis", price: 500000, quantity: 10, datePosted: "2025-06-18", tags: ["Servis", "Mobil"] },
-    { id: "l6", name: "Ganti Oli & Filter", status: "active", type: "Servis", price: 350000, quantity: 15, datePosted: "2025-06-22", tags: ["Oli", "Filter"] },
-    { id: "l7", name: "Overhaul Mesin", status: "completed", type: "Perbaikan", price: 5000000, quantity: 1, datePosted: "2025-05-05", tags: ["Mesin", "Overhaul"] },
-  ],
-  "user_3": [
-    { id: "l8", name: "Paket Foto Pernikahan Premium", status: "active", type: "Fotografi", price: 15000000, quantity: 3, datePosted: "2025-06-10", tags: ["Pernikahan", "Premium"] },
-    { id: "l9", name: "Sesi Foto Portrait", status: "active", type: "Fotografi", price: 500000, quantity: 20, datePosted: "2025-06-25", tags: ["Portrait", "Individu"] },
-    { id: "l10", name: "Dokumentasi Event Korporat", status: "paused", type: "Fotografi", price: 8000000, quantity: 2, datePosted: "2025-05-15", tags: ["Event", "Korporat"] },
-  ],
-}
-
-const contractsData: Record<string, Contract[]> = {
-  "user_1": [
-    { id: "c1", counterparty: "PT Griya Indah", type: "Renovasi", value: 25000000, status: "active", date: "2025-06-15" },
-    { id: "c2", counterparty: "Ibu Ratna", type: "Pemasangan", value: 3500000, status: "active", date: "2025-06-20" },
-    { id: "c3", counterparty: "Pak Surya", type: "Perbaikan", value: 1500000, status: "completed", date: "2025-05-10" },
-    { id: "c4", counterparty: "Bapak Hendra", type: "Pengecatan", value: 8000000, status: "completed", date: "2025-04-01" },
-  ],
-  "user_2": [
-    { id: "c5", counterparty: "PT Transport Jaya", type: "Servis Rutin", value: 5000000, status: "active", date: "2025-06-18" },
-    { id: "c6", counterparty: "Taksi Biru", type: "Ganti Oli", value: 5250000, status: "active", date: "2025-06-22" },
-    { id: "c7", counterparty: "Pak Dodi", type: "Overhaul", value: 5000000, status: "completed", date: "2025-05-05" },
-  ],
-}
-
 const reviewsData: Record<string, Review[]> = {
   "user_1": [
     { id: "r1", reviewerInitials: "HR", reviewerName: "Hendra", rating: 5, comment: "Pengerjaan rapi dan tepat waktu. Sangat merekomendasikan!", date: "2025-06-10" },
@@ -188,23 +127,6 @@ const reviewsData: Record<string, Review[]> = {
     { id: "r6", reviewerInitials: "AN", reviewerName: "Anindya", rating: 5, comment: "Foto pernikahan kami luar biasa! Hasil editnya memukau.", date: "2025-06-12" },
     { id: "r7", reviewerInitials: "BS", reviewerName: "Budi S.", rating: 5, comment: "Sesi portrait profesional, hasil sesuai ekspektasi.", date: "2025-05-20" },
     { id: "r8", reviewerInitials: "KP", reviewerName: "Korporat Pro", rating: 4, comment: "Dokumentasi event perusahaan berjalan lancar.", date: "2025-05-01" },
-  ],
-}
-
-const documentsData: Record<string, Document[]> = {
-  "user_1": [
-    { id: "d1", name: "KTP", type: "ID", uploadDate: "2025-01-15", verified: true },
-    { id: "d2", name: "SIUP Bangun Bersama", type: "Company License", uploadDate: "2025-02-01", verified: true },
-    { id: "d3", name: "Sertifikat Pelatihan Konstruksi", type: "Certificate", uploadDate: "2025-03-10", verified: true },
-    { id: "d4", name: "NPWP", type: "Tax ID", uploadDate: "2025-01-20", verified: false },
-  ],
-  "user_2": [
-    { id: "d5", name: "KTP", type: "ID", uploadDate: "2025-03-01", verified: true },
-    { id: "d6", name: "Tanda Daftar Bengkel", type: "Company License", uploadDate: "2025-03-15", verified: true },
-  ],
-  "user_3": [
-    { id: "d7", name: "KTP", type: "ID", uploadDate: "2025-02-01", verified: true },
-    { id: "d8", name: "Portfolio Fotografi", type: "Certificate", uploadDate: "2025-02-10", verified: false },
   ],
 }
 
@@ -303,20 +225,8 @@ export function getAllProfileIds(): string[] {
   return Object.keys(profiles)
 }
 
-export function getListings(id: string): Listing[] {
-  return listingsData[id] ?? []
-}
-
-export function getContracts(id: string): Contract[] {
-  return contractsData[id] ?? []
-}
-
 export function getReviews(id: string): Review[] {
   return reviewsData[id] ?? []
-}
-
-export function getDocuments(id: string): Document[] {
-  return documentsData[id] ?? []
 }
 
 export function getChartData(id: string): ChartData[] {

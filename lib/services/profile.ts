@@ -4,7 +4,10 @@ import {
   listReviewsByWorker,
   listReviewsByEmployer,
 } from "@/lib/repositories/review.repo"
-import type { ProfileData, Listing, Contract, Review, Document, ChartData, ActivityEntry } from "@/lib/profile/mock-data"
+import { listServicesByWorker } from "@/lib/repositories/worker-service.repo"
+import { resolveAvatarUrl } from "@/lib/avatar"
+import type { ProfileData, Review } from "@/lib/profile/mock-data"
+import type { Database } from "@/types/supabase"
 
 export async function getWorkerProfile(userId: string): Promise<ProfileData | null> {
   const supabase = await createClient()
@@ -52,7 +55,7 @@ export async function getWorkerProfile(userId: string): Promise<ProfileData | nu
       })
     : "-"
 
-  const avatarUrl = user?.user_metadata?.avatar_url ?? undefined
+  const avatarUrl = resolveAvatarUrl(user)
 
   return {
     id: userId,
@@ -99,12 +102,11 @@ export function getEmptyProfile(userId: string, fullName: string): ProfileData {
   }
 }
 
-export async function getWorkerListings(userId: string): Promise<Listing[]> {
-  return []
-}
+export type WorkerServiceRow = Database["public"]["Tables"]["worker_services"]["Row"];
 
-export async function getWorkerContracts(userId: string): Promise<Contract[]> {
-  return []
+export async function getWorkerServices(userId: string, activeOnly = true): Promise<WorkerServiceRow[]> {
+  const admin = createAdminClient()
+  return listServicesByWorker(admin, userId, activeOnly)
 }
 
 export async function getWorkerReviews(userId: string): Promise<Review[]> {
@@ -163,16 +165,4 @@ export async function getEmployerReviews(userId: string): Promise<Review[]> {
       service: review.agreements?.job_description ?? undefined,
     }
   })
-}
-
-export async function getWorkerDocuments(userId: string): Promise<Document[]> {
-  return []
-}
-
-export async function getWorkerChartData(userId: string): Promise<ChartData[]> {
-  return []
-}
-
-export async function getWorkerActivity(userId: string): Promise<ActivityEntry[]> {
-  return []
 }

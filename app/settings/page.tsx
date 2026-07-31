@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { resolveAvatarUrl } from "@/lib/avatar";
 import { redirect } from "next/navigation";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { SettingsForm } from "@/components/settings/settings-form";
@@ -48,7 +49,7 @@ export default async function SettingsPage() {
   const userNameMeta = user.user_metadata;
   const fullName = userNameMeta?.full_name ?? userNameMeta?.name ?? identities?.full_name ?? (user.email ?? "User");
   const userEmail = user.email ?? "";
-  const avatarUrl = userNameMeta?.avatar_url ?? userNameMeta?.picture ?? identities?.avatar_url;
+  const avatarUrl = resolveAvatarUrl(user);
   const role = user.user_metadata?.role === "employer" ? "employer" : "worker";
 
   let phone = "";

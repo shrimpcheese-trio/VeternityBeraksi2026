@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl"
 import {
   CheckCircle,
-  Clock,
   MessageSquare,
   Star,
   FileText,
@@ -11,58 +10,14 @@ import {
   MapPin,
   Calendar,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import type { ProfileData, Listing, ChartData, ActivityGroup } from "@/lib/profile/mock-data"
+import type { ProfileData, ChartData, ActivityGroup } from "@/lib/profile/mock-data"
 
 const activityIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   CheckCircle,
   MessageSquare,
   Star,
   FileText,
-}
-
-function ListingCard({ listing }: { listing: Listing }) {
-  return (
-    <div className="rounded-xl border border-border bg-background p-4">
-      <div className="mb-2 flex items-start justify-between gap-2">
-        <p className="font-medium text-sm">{listing.name}</p>
-        <Badge
-          variant={
-            listing.status === "active"
-              ? "default"
-              : listing.status === "paused"
-                ? "secondary"
-                : "outline"
-          }
-          className="shrink-0 text-[11px]"
-        >
-          {listing.status}
-        </Badge>
-      </div>
-      <div className="flex items-center gap-3 text-xs text-muted-foreground">
-        <span className="flex items-center gap-1">
-          <span
-            className={cn(
-              "size-1.5 rounded-full",
-              listing.type === "Renovasi" && "bg-blue-500",
-              listing.type === "Pemasangan" && "bg-green-500",
-              listing.type === "Perbaikan" && "bg-orange-500",
-              listing.type === "Servis" && "bg-purple-500",
-              listing.type === "Fotografi" && "bg-pink-500"
-            )}
-          />
-          {listing.type}
-        </span>
-        <span className="flex items-center gap-1">
-          Rp {listing.price.toLocaleString("id-ID")}
-        </span>
-        {listing.quantity > 1 && (
-          <span className="flex items-center gap-1">x{listing.quantity}</span>
-        )}
-      </div>
-    </div>
-  )
 }
 
 function BarChart({ data }: { data: ChartData[] }) {
@@ -89,14 +44,12 @@ function BarChart({ data }: { data: ChartData[] }) {
 }
 
 export function OverviewTab({
-  listings,
   chartData,
   activity,
   userRole,
   profile,
   recentAgreements,
 }: {
-  listings: Listing[]
   chartData: ChartData[]
   activity: ActivityGroup[]
   userRole?: "worker" | "employer"
@@ -104,7 +57,6 @@ export function OverviewTab({
   recentAgreements?: Array<{ job_description: string | null; price: number | null; status: string; created_at: string }>
 }) {
   const t = useTranslations("profile.overview")
-  const activeListings = listings.filter((l) => l.status === "active")
 
   if (userRole === "employer") {
     const totalJobs = profile?.activeListings ?? 0
@@ -200,19 +152,6 @@ export function OverviewTab({
 
   return (
     <div className="space-y-8">
-      <section>
-        <h3 className="mb-3 text-sm font-semibold">{t("pinnedListings")}</h3>
-        {activeListings.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3">
-            {activeListings.map((l) => (
-              <ListingCard key={l.id} listing={l} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted-foreground">{t("noListings")}</p>
-        )}
-      </section>
-
       <section>
         <h3 className="mb-3 text-sm font-semibold">{t("activityChart")}</h3>
         <div className="rounded-xl border border-border bg-background p-5">

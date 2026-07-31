@@ -235,6 +235,36 @@
       "required": "Required"
     }
   },
+  "agreement": {
+    "negotiation": {
+      "historyTitle": "Negotiation History",
+      "employerOffer": "{name}'s offer: {price}",
+      "youCounter": "You countered: {price}",
+      "workerCounter": "Worker countered: {price}",
+      "counterSummary": "You countered: {price}",
+      "workerCounterPending": "Worker countered {price}. Accept or submit a new price.",
+      "pendingNote": "Waiting for the employer's response.",
+      "waitingNote": "Waiting for the worker's response.",
+      "actionsTitle": "Actions",
+      "accept": "Accept Offer",
+      "acceptCounter": "Accept Worker's Counter",
+      "placeCounter": "Counter Offer",
+      "updateCounter": "Update Counter",
+      "reviseOffer": "Submit New Price",
+      "processing": "Processing...",
+      "cancel": "Cancel",
+      "yourPrice": "Your proposed price",
+      "revisePrice": "New price",
+      "reason": "Reason",
+      "reasonPlaceholder": "e.g. material costs rose, travel distance, workload...",
+      "priceError": "Price must be a whole number greater than 0",
+      "reasonRequired": "Reason is required",
+      "submitting": "Sending...",
+      "submitCounter": "Submit Counter",
+      "submitRevise": "Submit New Price",
+      "submitError": "Failed to send the offer."
+    }
+  },
   "contact": {
     "title": "Contact Us",
     "name": "Name",
@@ -278,43 +308,22 @@
     },
     "tabs": {
       "overview": "Overview",
-      "listings": "Listings",
-      "contracts": "Contracts",
-      "reviews": "Reviews",
-      "documents": "Documents"
+      "services": "Services",
+      "reviews": "Reviews"
     },
     "overview": {
-      "pinnedListings": "Active Listings",
       "activityChart": "Job Activity",
       "recentActivity": "Recent Activity",
-      "noListings": "No active listings yet.",
       "noActivity": "No recent activity."
     },
-    "listings": {
-      "search": "Search listings...",
-      "filterStatus": "Status",
-      "filterType": "Type",
-      "sort": "Sort",
-      "all": "All",
-      "active": "Active",
-      "paused": "Paused",
-      "completed": "Completed",
-      "price": "Price",
-      "quantity": "Qty",
-      "datePosted": "Date",
-      "noListings": "No listings yet."
-    },
-    "contracts": {
-      "filterStatus": "Filter Status",
-      "all": "All",
-      "active": "Active",
-      "completed": "Completed",
-      "disputed": "Disputed",
-      "counterparty": "Counterparty",
-      "type": "Type",
-      "value": "Value",
-      "date": "Date",
-      "noContracts": "No contracts yet."
+    "services": {
+      "price": "Rp {price}",
+      "priceUnitFixed": "Fixed Price",
+      "priceUnitHourly": "Hour",
+      "priceUnitDaily": "Day",
+      "emptyTitle": "No services yet.",
+      "emptyDescription": "Services offered by this worker will appear here.",
+      "manageServices": "Manage services"
     },
     "reviews": {
       "averageRating": "Average Rating",
@@ -322,14 +331,6 @@
       "noReviews": "No reviews yet.",
       "reviewer": "Reviewer",
       "givenTitle": "Reviews Given"
-    },
-    "documents": {
-      "name": "Name",
-      "type": "Type",
-      "uploadDate": "Upload Date",
-      "verified": "Verified",
-      "unverified": "Unverified",
-      "noDocuments": "No documents yet."
     },
     "notFound": "Profile not found."
   },
@@ -355,6 +356,10 @@
       "avatar": "Profile Photo",
       "upload": "Upload Photo",
       "remove": "Remove",
+      "avatarUploading": "Uploading...",
+      "avatarError": "Failed to upload photo. Use a PNG, JPG, or WebP file.",
+      "avatarSizeError": "Photo must be 2MB or smaller.",
+      "avatarRemoveError": "Failed to remove photo.",
       "userType": "Account Type"
     },
     "company": {
